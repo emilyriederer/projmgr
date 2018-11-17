@@ -3,4 +3,5 @@
 ^CREDITS\.md$
 ^tidytracker\.Rproj$
 ^\.Rproj\.user$
-^R\draft\*
+^R\draft
+^vignettes

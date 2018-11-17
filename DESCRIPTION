@@ -18,8 +18,10 @@ Imports:
     dplyr,
     tidyr,
     purrr,
-    httr
+    httr,
+    tibble
 Suggests: 
     knitr,
     rmarkdown
 VignetteBuilder: knitr
+RoxygenNote: 6.1.1
