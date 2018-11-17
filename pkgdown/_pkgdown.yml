@@ -1,0 +1,64 @@
+navbar:
+  title: "tidytracker"
+  left:
+    - text: "Tutorials & Demos"
+      href: articles/index.html
+    - text: "Function Documentation"
+      href: reference/index.html
+    - text: "News & Updates"
+      href: news/index.html
+  right:
+   - icon: fa-github
+     href: https://github.kdc.capitalone.com/srz549/tidytracker/
+
+articles:
+  - title: "Project Management Framework"
+    desc: >
+      Opinionated conventions to facilitate analytics team planning and project management via GitHub
+    contents:
+    - project-management-framework
+  - title: "GitHub"
+    desc: >
+      Tutotials related to with sending and receiving information with GitHub Enterprise
+    contents:
+    - creating-github-authentication-token
+    - getting-and-plotting-github-issues
+    - creating-new-github-issues
+
+reference:
+- title: Create functions
+  desc: "Functions that create useful local objects"
+  contents:
+  - starts_with("create")
+- title: Retrieval functions
+  desc: "Functions that receive data from API (GET)"
+  contents:
+  - starts_with("get")
+- title: Submission functions
+  desc: "Functions that sent data to API (PUT)"
+  contents:
+  - starts_with("post")
+- title: Parse functions
+  desc: "Functions that parse data received from API as dataframe"
+  contents:
+  - starts_with("parse")
+- title: Visualization functions
+  desc: "Functions that visualize parsed data"
+  contents:
+  - starts_with("viz")
+- title: Example data documentation
+  desc: "Documentation for example data embedded in package"
+  contents:
+  - loyalty_slv
+  - tidytrends_sample
+- title: Miscellaneous functions
+  desc: "Functions that make life a little bit easier"
+  contents:
+  - -starts_with("create")
+  - -starts_with("get")
+  - -starts_with("post")
+  - -starts_with("parse")
+  - -starts_with("viz")
+  - -tidytracker
+  - -loyalty_slv
+  - -tidytrends_sample

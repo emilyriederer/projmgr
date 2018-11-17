@@ -1,0 +1,25 @@
+Package: tidytracker
+Title: Tidy task tracking with GitHub
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Emily",
+           family = "Riederer",
+           role = c("aut", "cre"),
+           email = "emilyriederer@gmail.com")
+Description: Provides a highly abstracted wrapper for the GitHub API with a focus on project management.
+    For example, key functionality includes setting up issues and milestones and reporting the progress
+    of those events. It should be useful for those using GitHub in personal, professional, or academic
+    settings with an emphasis on usage for data analysis projects.
+License: CC0
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    ggplot2,
+    dplyr,
+    tidyr,
+    purrr,
+    httr
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
