@@ -2,12 +2,14 @@
 % Please edit documentation in R/post.R
 \name{post_issue}
 \alias{post_issue}
-\title{Issue title (required)}
+\title{Post issue to GitHub repository}
 \usage{
 post_issue(ref, title, ...)
 }
 \arguments{
 \item{ref}{Repository reference (list) created by \code{tidytracker::create_repo_ref}}
+
+\item{title}{Issue title (required)}
 
 \item{...}{Additional user-defined body parameters}
 }

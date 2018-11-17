@@ -2,12 +2,14 @@
 % Please edit documentation in R/post.R
 \name{post_milestone}
 \alias{post_milestone}
-\title{Milestone title (required)}
+\title{Post milestone to GitHub repository}
 \usage{
 post_milestone(ref, title, ...)
 }
 \arguments{
 \item{ref}{Repository reference (list) created by \code{tidytracker::create_repo_ref}}
+
+\item{title}{Milestone title (required)}
 
 \item{...}{Additional user-defined body parameters}
 }

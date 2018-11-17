@@ -1,7 +1,7 @@
 #' Post issue to GitHub repository
 #'
 #' @inherit post_engine return params
-#' @title Issue title (required)
+#' @param title Issue title (required)
 #' @export
 #' @family post, issues
 #'
@@ -30,7 +30,7 @@ post_issue <- function(ref, title, ...){
 #' Post milestone to GitHub repository
 #'
 #' @inherit post_engine return params
-#' @title Milestone title (required)
+#' @param title Milestone title (required)
 #' @export
 #' @family post, milestones
 #'

@@ -3,5 +3,7 @@
 ^CREDITS\.md$
 ^tidytracker\.Rproj$
 ^\.Rproj\.user$
-^R\draft
+^pkgdown
+^docs
 ^vignettes
+^R\draft
