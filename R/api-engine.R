@@ -74,3 +74,26 @@ post_engine <- function(api_endpoint, ref, ...){
   res
 
 }
+
+#' Core code for all PATCH calls
+#'
+#' @param api_endpoint API endpoint
+#' @param ref Repository reference (list) created by \code{tidytracker::create_repo_ref}
+#' @param ... Additional user-defined body parameters
+#'
+#' @keywords internal
+#' @return Content of PATCH request as list
+
+patch_engine <- function(api_endpoint, ref, ...){
+
+  req <-
+    httr::PATCH(
+      paste0(ref$base_url, api_endpoint),
+      body = list(...),
+      config = httr::authenticate(Sys.getenv(ref$id), Sys.getenv(ref$pw)),
+      encode = "json")
+
+  res <- httr::content(req)
+  res
+
+}
