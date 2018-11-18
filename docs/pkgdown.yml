@@ -1,0 +1,8 @@
+pandoc: 1.19.2.1
+pkgdown: 1.1.0
+pkgdown_sha: ~
+articles:
+  building-custom-plans: building-custom-plans.html
+  creating-a-github-personal-authentication-token: creating-a-github-personal-authentication-token.html
+  git-github-introduction: git-github-introduction.html
+

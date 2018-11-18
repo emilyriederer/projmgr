@@ -1,0 +1,34 @@
+---
+title: "Introduction to Git and GitHub"
+author: "Emily Riederer"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to Git and GitHub}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Using git for version control and GitHub for project managmenet and collaboration can massively improve your data workflow. If you are new to these tools, here are some great resources to get started. 
+
+## Learning Git
+
+Software Carpentry's self-paced [Version Control with Git](http://swcarpentry.github.io/git-novice/) website with reading, exercises
+
+DataCamp's free, interactive [Introduction to Git for Data Science](https://www.datacamp.com/courses/introduction-to-git-for-data-science) course
+
+Jenny Bryan's course website [Happy Git and GitHub for the useR](http://happygitwithr.com/)
+
+## Learning GitHub
+
+GitHub's [webcast on Project Management](https://www.youtube.com/watch?v=6fByt0o4UYs) *(Note: this is from 2015 so some information on feature may be outdated. However, it remains a good high-level overview.)*
+
+GitHub's [Learning Lab](http://happygitwithr.com/) with guided exercises for different features of its platform
+

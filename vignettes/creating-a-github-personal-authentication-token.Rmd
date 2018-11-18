@@ -1,0 +1,53 @@
+---
+title: "Creating a GitHub Personal Authentication Token"
+author: "Emily Riederer"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Creating a GitHub Personal Authentication Token}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Many functions in `tidytracker` require authentication to interface with external services. Specifically, any functions pulling information from GitHub (e.g. `get_issues`) or sending information to GitHub (e.g. `post_issue`) require authentication. Just like logging in on the website, this preserves the security of information within repositories and prevents outsides from altering said information. 
+
+However, there are many reasons you won't want to send your username and password through these functions. First of all, it's inconvenient to type your credentials over and over. More critically, you might accidentally end up sharing a script that has your password in it. 
+
+This vignette describes a better approach to authentication that is both easier and safer: the personal access token (PAT). At a high level, this is a random string of characters GitHub assigns to you and you alone. By saving this in your R environment, `tidytracker` can automatically provide this variable to GitHub instead of your login for better safety and efficiency. 
+
+## Getting a PAT
+
+Getting a PAT from GitHub is easy! 
+
+1. Go to GitHub
+2. Click on your username and/or profile picture
+3. Choose **Settings**
+4. Choose **Developer Settings**
+5. In the left sidebar, choose **Personal access tokens**
+6. Choose **Generate new token**
+7. Provide a name and description for your token. This doesn't really matter very much.
+8. Choose **Generate token**
+9. Copy the token you are given to your clipboard.
+
+## Setting your PAT in RStudio
+
+On you've gotten your random character string, setting your PAT in R is easy. Run the following command to open your R environment file:
+
+```{r eval = FALSE}
+usethis::edit_r_environ()
+```
+
+This will pop out your `.Renviron` file. In it you can simply add a new line with:
+
+```{r}
+GITHUB_PAT = 'asj382058235u0sdij0486jj205270d'
+```
+
+with the character string above replaced with the one you received from GitHub (but you **do** need to keep the quotes!)

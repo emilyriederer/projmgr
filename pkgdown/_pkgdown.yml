@@ -12,18 +12,26 @@ navbar:
      href: https://github.kdc.capitalone.com/srz549/tidytracker/
 
 articles:
-  - title: "Project Management Framework"
-    desc: >
-      Opinionated conventions to facilitate analytics team planning and project management via GitHub
+  - title: "Introduction to GitHub and Project Management"
+    desc: Opinionated conventions to facilitate analytics team planning and project management via GitHub
     contents:
-    - project-management-framework
-  - title: "GitHub"
-    desc: >
-      Tutotials related to with sending and receiving information with GitHub Enterprise
+    - git-github-introduction
+  - title: "Interacting with GitHub Repos"
+    desc: Tutotials related to with sending and receiving information with GitHub
     contents:
-    - creating-github-authentication-token
+    - creating-a-github-personal-authentication-token
     - getting-and-plotting-github-issues
     - creating-new-github-issues
+    - build-custom-plans
+  - title: "Use Cases"
+    desc: Demo of possible applications for personal projects, academia, and industry
+    contents:
+    - large-analysis-projects
+    - reporting-bugs
+    - tracking-KPIs
+    - projmgmt-and-productivity
+    - hackathon-coordination
+    - working-offline
 
 reference:
 - title: Create functions
