@@ -2,6 +2,8 @@
 
 Throughout development of this package, I learned a lot both through great blog posts / resources and also by digging into the source code of some great pre-existing API wrapper packages. This section gives kudos to those resources and their creators.
 
+The only caveat is that I'm sure this is an incredibly incomplete list. As we all know, it takes a village to build an R package.
+
 ## Using APIs in R
 
 Before you write an API wrapper, you have to learn the basics of APIs. Here are a few great talks on using the `httr` R package:

@@ -7,6 +7,8 @@ navbar:
       href: reference/index.html
     - text: "News & Updates"
       href: news/index.html
+    - text: "Credits"
+      href: CREDITS.html
   right:
    - icon: fa-github
      href: https://github.kdc.capitalone.com/srz549/tidytracker/
