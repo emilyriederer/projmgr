@@ -13,6 +13,14 @@
 #'   body = 'this is my issue's body',
 #'   labels = c('priority:high', 'bug'))
 #' }
+#' \dontrun{
+#' # can be used in conjunction with reprex pkg
+#' # example assumes code for reprex is on clipboard
+#' reprex(venue = "gh")
+#' post_issue(tidytracker,
+#'             title = "something is broken",
+#'             body = paste( clipr::read_clip(), collapse = "\n") )
+#' }
 
 post_issue <- function(ref, title, ...){
 
