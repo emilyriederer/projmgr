@@ -4,24 +4,18 @@
 \alias{post_plan}
 \title{Post plan (milestones + issues) to GitHub repository}
 \usage{
-post_plan(ref, plan_tbl)
+post_plan(ref, plan)
 }
 \arguments{
 \item{ref}{Repository reference (list) created by \code{tidytracker::create_repo_ref}}
 
-\item{plan_tbl}{\code{tibble} of plan as created with \code{read_plan_yaml}}
+\item{plan}{Plan list as read with \code{tidytracker::read_plan_yaml}}
 }
 \value{
 Content of POST request as list
 }
 \description{
 Post plan (milestones + issues) to GitHub repository
-}
-\examples{
-\dontrun{
-plan_tbl <- read_plan_yaml("ext/my_project_plan.yaml")
-post_plan(plan_tbl)
-}
 }
 \seealso{
 Other plan: \code{\link{read_plan_yaml}}

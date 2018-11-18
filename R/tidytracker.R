@@ -10,7 +10,8 @@
 NULL
 
 globalVars <- c(
-  # from tidytracker
+  # from tidytracker plan
+  "issue", "milestone",
   # from tidyverse
   ".")
 

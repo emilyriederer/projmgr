@@ -9,15 +9,17 @@
 #' @param filepath Filepath of YAML file. Either this or \code{chars} is required.
 #' @param chars Character object containing YAML. Either this or \code{chars} in required.
 #'
-#' @return \code{tibble} containing plan compatible with \code{tidytracker::post_plan}
+#' @return List containing plan compatible with \code{tidytracker::post_plan}
 #' @export
 #'
 #' @family plan
 #'
 #' @examples
 #' \dontrun{
-#' plan_tbl <- read_plan_yaml("ext/my_project_plan.yaml")
-#' post_plan(plan_tbl)
+#' # This example uses example file included in pkg. You should be able to run example as-is
+#' file_path <- system.file("extdata", "plan_yaml.txt", package = "tidytracker", mustWork = TRUE)
+#' my_plan <- read_plan_yaml("ext/my_project_plan.yaml")
+#' post_plan(my_plan)
 #' }
 
 read_plan_yaml <- function(filepath = NA, chars = NA){
@@ -47,48 +49,56 @@ read_plan_yaml <- function(filepath = NA, chars = NA){
                                         handlers = list(expr = function(x) eval(parse(text = x))))
   }
 
-  # convert yaml to tibble
-  plan_tbl <- purrr::map_df(plan_parsed, tibble::as.tibble)
-
-  return(plan_tbl)
+  return(plan_parsed)
 
 }
 
 #' Post plan (milestones + issues) to GitHub repository
 #'
-#' @inherit post_engine return params
-#' @param plan_tbl \code{tibble} of plan as created with \code{read_plan_yaml}
+#' @inherit post_engine return params examples
+#' @param plan Plan list as read with \code{tidytracker::read_plan_yaml}
 #' @export
 #'
 #' @family plan
+#' @importFrom dplyr distinct mutate pull select transmute
 #'
 #' @examples
 #' \dontrun{
-#' plan_tbl <- read_plan_yaml("ext/my_project_plan.yaml")
-#' post_plan(plan_tbl)
+#' # This example uses example file included in pkg. You should be able to run example as-is
+#' file_path <- system.file("extdata", "plan_yaml.txt", package = "tidytracker", mustWork = TRUE)
+#' my_plan <- read_plan_yaml("ext/my_project_plan.yaml")
+#' post_plan(my_plan)
 #' }
 
-post_plan <- function(ref, plan_tbl){
+
+post_plan <- function(ref, plan){
 
   # create milestones
-  milestone_req <-
-    plan_tbl %>%
-    select(-issue) %>%
-    distinct() %>%
-    pmap(., ~post_milestone(ref, ...))
+  req_milestones <-
+    parsed %>%
+    purrr::map(~purrr::list_modify(., "issue" = NULL)) %>%
+    purrr::map(., ~purrr::pmap(., ~post_milestone(ref, ...)))
+
+  # wrangle issues
+  milestone_ids <-
+    purrr::modify_depth(req_milestones, .f = "number", .depth = 2) %>% unlist()
+  num_issues_by_milestone <-
+    parsed %>% purrr::map("issue") %>% purrr::map(length)
+  milestone_nums <- purrr::map2(milestone_ids, num_isses_by_milestone, rep) %>% unlist() %>% as.integer()
 
   # create issues
-  issues_req <-
-    plan_tbl %>%
-    tidyr::nest(issue, .key = "issue") %>%
-    mutate(milestone = unlist(purrr::map_dbl(milestones_req, "number"))) %>%
-    select(milestone, issue) %>%
-    tidyr::unnest() %>%
-    transmute(issue = map2(milestone, issue, ~c(milestone = .x, .y))) %>%
-    pull(issue) %>%
-    purrr::map(~purrr::modify_at(., c("assignees", "labels"), ~if(length(.) == 1){c(.,.)}else{.})) %>%
-    purrr::map(~purrr::modify_at(., c("assignees", "labels"), list)) %>%
-    purrr::map(., ~purrr::pmap(., ~post_issue(ref, ...)))
+  req_issues <-
+    parsed %>%
+    purrr::map("issue") %>%
+    purrr::flatten %>%
+    purrr::map2(milestone_nums, ~c(.x, milestone = .y)) %>%
+    purrr:map(~purrr::modify_at(.,
+                                .at = c("assignees", "labels"),
+                                ~if(length(.) == 1){c(.,.)}else{.})) %>%
+    purrr::map(~purrr::modify_at(.,
+                                 .at = c('assignees', 'labels'),
+                                 .f = list)) %>%
+    purrr::map(~purrr::pmap(., ~post_issue(ref, ...)))
 
   return(issues_req)
 

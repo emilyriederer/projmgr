@@ -12,7 +12,7 @@ read_plan_yaml(filepath = NA, chars = NA)
 \item{chars}{Character object containing YAML. Either this or \code{chars} in required.}
 }
 \value{
-\code{tibble} containing plan compatible with \code{tidytracker::post_plan}
+List containing plan compatible with \code{tidytracker::post_plan}
 }
 \description{
 This function reads a carefully constructed YAML file representing a project plan of
@@ -24,8 +24,10 @@ Please see the "Building Custom Plans" vignette for more details.s
 }
 \examples{
 \dontrun{
-plan_tbl <- read_plan_yaml("ext/my_project_plan.yaml")
-post_plan(plan_tbl)
+# This example uses example file included in pkg. You should be able to run example as-is
+file_path <- system.file("extdata", "plan_yaml.txt", package = "tidytracker", mustWork = TRUE)
+my_plan <- read_plan_yaml("ext/my_project_plan.yaml")
+post_plan(my_plan)
 }
 }
 \seealso{
