@@ -5,3 +5,6 @@ inst/doc
 R/draft
 vignettes
 docs
+inst/extdata/plan.json
+inst/extdata/todo.json
+TODO.md

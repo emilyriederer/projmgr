@@ -19,14 +19,14 @@
 #' \dontrun{
 #' # This example uses example file included in pkg
 #' # You should be able to run example as-is after creating your own repo reference
-#' file_path <- system.file("extdata", "plan_yaml.txt", package = "tidytracker", mustWork = TRUE)
+#' file_path <- system.file("extdata", "plan.yaml", package = "tidytracker", mustWork = TRUE)
 #' my_plan <- read_plan_todo_yaml(file_path)
 #' post_plan(ref, my_plan)
 #' }
 #' \dontrun{
 #' # This example uses example file included in pkg
 #' # You should be able to run example as-is after creating your own repo reference
-#' file_path <- system.file("extdata", "plan_yaml.txt", package = "tidytracker", mustWork = TRUE)
+#' file_path <- system.file("extdata", "todo.yaml.txt", package = "tidytracker", mustWork = TRUE)
 #' my_todo <- read_plan_todo_yaml(file_path)
 #' post_todo(ref, my_todo)
 #' }
@@ -64,6 +64,9 @@ read_plan_todo_yaml <- function(filepath = NA, chars = NA){
 
 #' Post plan (milestones + issues) to GitHub repository
 #'
+#' Post custom plans (i.e. create milestons and issues) based on yaml read in by
+#' \code{read_plan_todo_yaml}. Please see the "Building Custom Plans" vignette for details.
+#'
 #' @inherit post_engine return params
 #' @inherit read_plan_todo_yaml examples
 #' @param plan Plan list as read with \code{tidytracker::read_plan_yaml}
@@ -87,13 +90,13 @@ post_plan <- function(ref, plan){
     purrr::modify_depth(req_milestones, .f = "number", .depth = 2) %>% unlist()
   num_issues_by_milestone <-
     plan %>% purrr::map("issue") %>% purrr::map(length)
-  milestone_nums <- purrr::map2(milestone_ids, num_isses_by_milestone, rep) %>% unlist() %>% as.integer()
+  milestone_nums <- purrr::map2(milestone_ids, num_issues_by_milestone, rep) %>% unlist() %>% as.integer()
 
   # create issues
   req_issues <-
     plan %>%
     purrr::map("issue") %>%
-    purrr::flatten %>%
+    purrr::flatten() %>%
     purrr::map2(milestone_nums, ~c(.x, milestone = .y)) %>%
     purrr::map(~purrr::modify_at(.,
                                 .at = c("assignees", "labels"),
@@ -103,11 +106,16 @@ post_plan <- function(ref, plan){
                                  .f = list)) %>%
     purrr::map(~purrr::pmap(., ~post_issue(ref, ...)))
 
-  return(issues_req)
+  return(req_issues)
 
 }
 
 #' Post plan (milestones + issues) to GitHub repository
+#'
+#' Post custom to-do lists (i.e. issues) based on yaml read in by \code{read_plan_todo_yaml}.
+#' Please see the "Building Custom Plans" vignette for details.
+#'
+#' Currently has know bug in that cannot be used to introduce new labels.
 #'
 #' @inherit post_engine return params
 #' @inherit read_plan_todo_yaml examples
@@ -131,6 +139,6 @@ post_todo <- function(ref, todo){
                                  .f = list)) %>%
     purrr::map(~purrr::pmap(., ~post_issue(ref, ...)))
 
-  return(issues_req)
+  return(req_issues)
 
 }

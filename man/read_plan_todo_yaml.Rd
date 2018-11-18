@@ -27,14 +27,14 @@ Please see the "Building Custom Plans" vignette for more details.
 \dontrun{
 # This example uses example file included in pkg
 # You should be able to run example as-is after creating your own repo reference
-file_path <- system.file("extdata", "plan_yaml.txt", package = "tidytracker", mustWork = TRUE)
+file_path <- system.file("extdata", "plan.yaml", package = "tidytracker", mustWork = TRUE)
 my_plan <- read_plan_todo_yaml(file_path)
 post_plan(ref, my_plan)
 }
 \dontrun{
 # This example uses example file included in pkg
 # You should be able to run example as-is after creating your own repo reference
-file_path <- system.file("extdata", "plan_yaml.txt", package = "tidytracker", mustWork = TRUE)
+file_path <- system.file("extdata", "todo.yaml.txt", package = "tidytracker", mustWork = TRUE)
 my_todo <- read_plan_todo_yaml(file_path)
 post_todo(ref, my_todo)
 }

@@ -13,16 +13,14 @@
 
 get_issues <- function(ref, ...){
 
-  user_input <- list(...)
-
-  validate_inputs(user_input,
+  validate_inputs(list(...),
                   allowed_vars = c("milestone", "state", "assignee",
                                    "creator", "mentioned", "labels",
                                    "sort", "direction", "since"))
 
   get_engine(api_endpoint = "/issues",
              ref = ref,
-             user_input)
+             ...)
 
 }
 
@@ -41,13 +39,11 @@ get_issues <- function(ref, ...){
 
 get_milestones <- function(ref, ...){
 
-  user_input <- list(...)
-
-  validate_inputs(user_input,
+  validate_inputs(list(...),
                   allowed_vars = c("state", "sort", "direction"))
 
   get_engine(api_endpoint = "/milestones",
              ref = ref,
-             user_input)
+             ...)
 
 }

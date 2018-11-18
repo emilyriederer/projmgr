@@ -1,7 +1,7 @@
 Package: tidytracker
 Title: Task tracking the tidy way
 Version: 0.0.0.9000
-Authors@R: 
+Authors@R:
     person(given = "Emily",
            family = "Riederer",
            role = c("cre", "aut"),
@@ -15,17 +15,20 @@ Description: Provides a highly abstracted wrapper for the GitHub
 License: CC0
 URL: https://github.com/emilyriederer/tidytracker
 BugReports: https://github.com/emilyriederer/tidytracker/issues
-Imports: 
+Imports:
     curl,
+    dplyr,
     httr,
     jsonlite,
-    purrr,
     magrittr,
+    purrr,
     tibble,
-    tidyr,
-    dplyr
+    tidyr
+Suggests:
+    reprex,
+    spelling,
+    yaml
 Encoding: UTF-8
+Language: en-US
 LazyData: true
 RoxygenNote: 6.1.1
-Suggests: 
-    yaml

@@ -3,8 +3,8 @@ issue1:
   body: >
     This name is unneccesarily long and hence
      it is very hard and annoying to type
-  assignees: [srz549, oec527]
-  labels: [design]
+  assignees: [emilyriederer]
+  labels: [low]
 
 issue2:
   title: Make sure documentation links right pages of API docs
