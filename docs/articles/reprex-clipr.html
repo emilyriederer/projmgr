@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Introduction to Git and GitHub • tidytracker</title>
+<title>Working with reprex and clipr • tidytracker</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
-<meta property="og:title" content="Introduction to Git and GitHub">
+<meta property="og:title" content="Working with reprex and clipr">
 <meta property="og:description" content="">
 <meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
@@ -69,31 +69,47 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Introduction to Git and GitHub</h1>
+      <h1>Working with reprex and clipr</h1>
                         <h4 class="author">Emily Riederer</h4>
             
             <h4 class="date">2018-11-18</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/emilyriederer/tidytracker/blob/master/vignettes/git-github-introduction.Rmd"><code>vignettes/git-github-introduction.Rmd</code></a></small>
-      <div class="hidden name"><code>git-github-introduction.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/emilyriederer/tidytracker/blob/master/vignettes/reprex-clipr.Rmd"><code>vignettes/reprex-clipr.Rmd</code></a></small>
+      <div class="hidden name"><code>reprex-clipr.Rmd</code></div>
 
     </div>
 
     
     
-<p>Using git for version control and GitHub for project managmenet and collaboration can massively improve your data workflow. If you are new to these tools, here are some great resources to get started.</p>
-<div id="learning-git" class="section level2">
+<p><a href="https://www.tidyverse.org/help/"><code>reprex</code></a> is a great package to help package users and developers communicate by allowing for the sharing of reproducible examples.</p>
+<p><code>tidytracker</code> can play along with <code>reprex</code> by facilitating posting reprexes to repos as well as pulling them back down to evaluate them.</p>
+<div id="posting-reprexes" class="section level2">
 <h2 class="hasAnchor">
-<a href="#learning-git" class="anchor"></a>Learning Git</h2>
-<p>Software Carpentry’s self-paced <a href="http://swcarpentry.github.io/git-novice/">Version Control with Git</a> website with reading, exercises</p>
-<p>DataCamp’s free, interactive <a href="https://www.datacamp.com/courses/introduction-to-git-for-data-science">Introduction to Git for Data Science</a> course</p>
-<p>Jenny Bryan’s course website <a href="http://happygitwithr.com/">Happy Git and GitHub for the useR</a></p>
+<a href="#posting-reprexes" class="anchor"></a>Posting reprexes</h2>
+<p>Much like other types of issues, <code>tidytracker</code> make it easy to post issues containing reprexes to GitHub.</p>
+<p>For example, suppose you have the problematic code on your clipboard, open in a file, or somewhere that <code>reprex</code> can find it (refer to the <code>reprex</code> package documentation for details). You could post this as the body of an issue with the following code:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">reprex<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/reprex/topics/reprex">reprex</a></span>(<span class="dt">venue =</span> <span class="st">"gh"</span>)
+<span class="kw"><a href="../reference/post_issue.html">post_issue</a></span>(tidytracker,
+           <span class="dt">title =</span> <span class="st">"this is a descriptive title of my issue"</span>,
+           <span class="dt">body =</span> <span class="kw">paste</span>( clipr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/clipr/topics/read_clip">read_clip</a></span>(), <span class="dt">collapse =</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>) )</code></pre></div>
 </div>
-<div id="learning-github" class="section level2">
+<div id="getting-and-running-reprexes" class="section level2">
 <h2 class="hasAnchor">
-<a href="#learning-github" class="anchor"></a>Learning GitHub</h2>
-<p>GitHub’s <a href="https://www.youtube.com/watch?v=6fByt0o4UYs">webcast on Project Management</a> <em>(Note: this is from 2015 so some information on feature may be outdated. However, it remains a good high-level overview.)</em></p>
-<p>GitHub’s <a href="http://happygitwithr.com/">Learning Lab</a> with guided exercises for different features of its platform</p>
+<a href="#getting-and-running-reprexes" class="anchor"></a>Getting and running reprexes</h2>
+<p>Suppose you see on GitHub that a user posted an issue, say number 82, with a reprex. Admittedly, you could just copy this directly from GitHub like a sane person. However, should you wish to do this with <code>tidytracker</code>, you can!</p>
+<p>For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+<span class="co"># get issue in question from repo</span>
+experigit &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_repo_ref.html">create_repo_ref</a></span>(<span class="st">'emilyriederer'</span>, <span class="st">'experigit'</span>)
+issue &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_issues.html">get_issues</a></span>(experigit, <span class="dt">number =</span> <span class="dv">82</span>)
+
+<span class="co"># extract the body containing the reprex (code + output as markdown)</span>
+issue[[<span class="dv">1</span>]][[<span class="st">"body"</span>]] <span class="op">%&gt;%</span><span class="st"> </span>clipr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/clipr/topics/write_clip">write_clip</a></span>()
+
+<span class="co"># strip markdown formatting to revert to initial state</span>
+<span class="kw">reprex_invert</span>()
+
+<span class="co"># then paste to console</span></code></pre></div>
 </div>
   </div>
 
@@ -102,8 +118,8 @@
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#learning-git">Learning Git</a></li>
-      <li><a href="#learning-github">Learning GitHub</a></li>
+<li><a href="#posting-reprexes">Posting reprexes</a></li>
+      <li><a href="#getting-and-running-reprexes">Getting and running reprexes</a></li>
       </ul>
 </div>
       </div>

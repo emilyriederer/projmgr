@@ -1,0 +1,56 @@
+---
+title: "Working with reprex and clipr"
+author: "Emily Riederer"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Working with reprex and clipr}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+[`reprex`](https://www.tidyverse.org/help/) is a great package to help package users and developers communicate by allowing for the sharing of reproducible examples. 
+
+`tidytracker` can play along with `reprex` by facilitating posting reprexes to repos as well as pulling them back down to evaluate them.
+
+## Posting reprexes
+
+Much like other types of issues, `tidytracker` make it easy to post issues containing reprexes to GitHub.
+
+For example, suppose you have the problematic code on your clipboard, open in a file, or somewhere that `reprex` can find it (refer to the `reprex` package documentation for details). You could post this as the body of an issue with the following code:
+
+```{r eval = FALSE}
+reprex::reprex(venue = "gh")
+post_issue(tidytracker,
+           title = "this is a descriptive title of my issue",
+           body = paste( clipr::read_clip(), collapse = "\n") )
+```
+
+## Getting and running reprexes
+
+Suppose you see on GitHub that a user posted an issue, say number 82, with a reprex. Admittedly, you could just copy this directly from GitHub like a sane person. However, should you wish to do this with `tidytracker`, you can!
+
+For example:
+
+```{r eval = FALSE}
+
+# get issue in question from repo
+experigit <- create_repo_ref('emilyriederer', 'experigit')
+issue <- get_issues(experigit, number = 82)
+
+# extract the body containing the reprex (code + output as markdown)
+issue[[1]][["body"]] %>% clipr::write_clip()
+
+# strip markdown formatting to revert to initial state
+reprex_invert()
+
+# then paste to console
+```
+

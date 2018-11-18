@@ -1,10 +1,10 @@
 ---
-title: "Building Custom Plans"
+title: "Building custom plans and to-do lists"
 author: "Emily Riederer"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Building Custom Plans}
+  %\VignetteIndexEntry{Building custom plans and to-do lists}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -12,173 +12,93 @@ vignette: >
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  eval = FALSE,
   comment = "#>"
 )
 
-library(yaml)
-library(dplyr)
-library(purrr)
-library(tibble)
-library(tidyr)
+library(tidytracker)
 ```
 
-For larger projects, GitHub milestones provide a convenient way to organize tasks (issues) into broader overarching goals. Sometimes, for projects you do frequently or have a clear plan for analysis, you may wish to *proactively* create issues and organize them into milestones at the beginning of your project instead of *reactively* collecting issues as you work through your project. `tidytracker` helps facilitate this with the notion of a project plan. 
+In many cases, it can be useful to automate bulk posting of issues or milestones to GitHub. `tidytracker` helps facilitate this with the notion of plans and to-do lists.
 
-## Project Plans
+**Plans** are a collection of milestones and issues assigned to them. In general, these issues are going to be created *proactively* as foreseen key steps in a project (versus the more common *reactive* usage of GitHub issues to report bugs and request enhancements.) Plans can serve as a roadmap or framework for tackling a large chunk of work.
 
-## Creating a Project Plan in R
+**To-do lists** are simply collections of issues. These might just be many bugs, feature enhancements, or ideas you jotted down while working offline or while not wanting to get on GitHub to log them. Alternatively, they also could be created proactively as with plans.
 
-## Creating a Project Plan with YAML
+To reduce the manual effort of bulk creation of plans and to-do lists, `tidytracker` offers functionality to read, interpret, and post milestones and issues encoded in [YAML](http://yaml.org/), a light-weight markup language.
 
-```{r}
-plan_yaml <- "
-milestone1:
-  title: Data cleaning and validation
-  description: >
-    We will conduct data quality checks,
-    resolve issues with data quality, and
-    document this process
-  due_on: 2018-12-31Z12:59:59Z
-  issue:
-    - title: Define data quality standards
-      body: List out decision rules to check data quality
-      assignees: [emilyriederer]
-      labels: [a, b, c]
-    - title: Assess data quality
-      body: Use assertthat to test decision rules on dataset
-      labels: [low]
-    - title: Resolve data quality issues
-      body: Conduct needed research to resolve any issues
+## Creating a Plan with YAML
 
-milestone2:
-  title: Exploratory data analysis
-  description: >
-    Create basic statistics and views to better
-    understand dataset and relationships
-  issue:
-    - title: Summary statistics
-      body: Calculate summary statistics 
-    - title: Visualizations
-      body: Create univariate and bivariate plots
-"
+YAML can be used to specify milestones and issues with all the same fields as are accepted into `post_milestone()` and `post_issue()`. Consider the following YAML file as an example:
 
-parsed <- 
-  yaml::yaml.load(plan_yaml, 
-                  handlers = list(expr = function(x) eval(parse(text = x))))
-df <- map_df(parsed, as.tibble)
+```{r comment='', echo = FALSE}
+plan_path <- system.file("extdata", "plan.yaml", package = "tidytracker", mustWork = TRUE)
+cat(readLines(plan_path), sep = '\n')
 ```
 
-```{r}
+The `read_my_plan_todo_yaml()` function reads in either plan or to-do YAML files. We will continue to work with the example plan embedded in the package.
 
+```{r}
+plan_path <- system.file("extdata", "plan.yaml", package = "tidytracker", mustWork = TRUE)
+my_plan <- read_plan_todo_yaml(plan_path)
 ```
 
+This function converts YAML to an R list. You can sanity check the structure of this output with base R `str()` function which shows the structure of a list:
+
 ```{r}
-# create milestones
-req <-
-  df %>%
-  select(-issue) %>%
-  distinct() %>%
-  pmap(., ~post_milestone(ref, ...))
-
-# add milestone ids
-df_issues <-
-  df %>%
-  nest(issue, .key = "issue") %>%
-  mutate(milestone = unlist(map_dbl(req, "number"))) %>%
-  select(milestone, issue) %>%
-  unnest() 
-
-# create issues
-df %>%
-    nest(issue, .key = "issue") %>%
-    mutate(milestone = unlist(map_dbl(req, "number"))) %>%
-    select(milestone, issue) %>%
-    unnest() %>%
-    transmute(issue = map2(milestone, issue, ~c(milestone = .x, .y))) %>%
-    pull(issue) %>%
-    map(~modify_at(., c("assignees", "labels"), ~if(length(.) == 1){c(.,.)}else{.})) %>%
-    map(~modify_at(., c("assignees", "labels"), list)) %>%
-    map(., ~pmap(., ~post_issue(ref, ...)))
-  
+str(my_plan)
 ```
 
+Finally, this collection of milestones and associated issues can be posted to GitHub with the `post_plan()` function.
 
-
-```{r}
-issues <- map_df(df$issue, as.tibble)
-issues <- issues %>% group_by(title, body) %>% nest()
-df_final <- bind_cols( select(df, -issue), issues)
+```{r, eval = FALSE}
+experigit <- create_repo_ref("emilyriederer", "experigit")
+post_plan(experigit, my_plan)
 ```
 
-```{r}
-map_chr(parsed, "title")
-map_chr(parsed, "description")
-map_chr(1:length(parsed), ~parsed[[.]]$issue)
-map_chr(1:length(parsed), ~parsed[[.]]$body)
-map_chr(1:length(parsed), ~parsed[[.]]$assignee)
+The result of this command would be the creation of two milestones created in the `experigit` repo. The first has three issues and the second has two issues.
+
+## Create a To-Do List with YAML
+
+The workflow for posting to-do lists is very similar to that of plans. Consider the following YAML file as an example:
+
+```{r comment='', echo = FALSE}
+todo_path <- system.file("extdata", "todo.yaml", package = "tidytracker", mustWork = TRUE)
+cat(readLines(todo_path), sep = '\n')
 ```
 
+The same `read_my_plan_todo_yaml()` function reads in a to-do YAML file and converts it to an R list:
+
 ```{r}
-# works
-pmap_df(parsed[[1]]$issue[[1]], ~post_issue(ref, ...))
-map_df(parsed[[1]]$issue, 
-    .f = ~pmap_df(.x, ~post_issue(ref, ... ))
-        )
-
-# works
-df$issue[[1]] %>% modify_if(~length(.)>1, list) %>% as.tibble()
-df %>% mutate(issue = map(issue, ~modify_if(., ~length(.)>1, list)))
-
-parsed[[1]]$issue[[1]] %>% modify_if(~length(.)>1, list)
-parsed[[1]]$issue %>% map(~modify_if(., ~length(.)>1, list))
-parsed %>% map("issue") %>% map(~modify_if(., ~length(.)>1, list))
-# doesn't: parsed %>% map("issue") %>% map(~modify_at(., c("assignees", "labels"), list))
-
-pmap_df(list_modify(parsed[[1]], "issue" = NULL), ~post_milestone(ref, .))
-
-parsed %>% 
-    map(~list_modify(., "issue" = NULL)) %>%
-    map(~pmap_df(., ~post_milestone(ref, .)))
+todo_path <- system.file("extdata", "todo.yaml", package = "tidytracker", mustWork = TRUE)
+my_todo <- read_plan_todo_yaml(todo_path)
+str(my_todo)
 ```
 
+This collection of issues can be posted to a GitHub with the `post_todo()` function.
 
-## Creating a To-Do List
-
-```{r}
-todo_yaml <- "
-issue1:
-  title: Consider renaming my_very_long_function_name
-  body: >
-    This name is unneccesarily long and hence
-    it is very hard and annoying to type
-  assignees: [srz549, oec527]
-  labels: [design]
-
-issue2:
-  title: Make sure documentation links right pages of API docs
-"
-
-todo_parsed <- 
-  yaml::yaml.load(todo_yaml, 
-                  handlers = list(expr = function(x) eval(parse(text = x))))
-todo_df <- map_df(todo_parsed, as.tibble)
+```{r, eval = FALSE}
+experigit <- create_repo_ref("emilyriederer", "experigit")
+post_todo(experigit, my_todo)
 ```
 
-```{r}
-# works
-res <-
-todo_df %>%
-    group_by(title) %>%
-    mutate_at(vars(one_of("assignees", "labels")), list) %>%
-    distinct(title, .keep_all = TRUE) %>%
-    mutate_at(vars(one_of("assignees", "labels")), 
-              ~map(., ~if(length(.x) == 1){c(.x,.x)}else{.x})) %>%
-    pmap(~post_issue(ref, ...))
+## Create a Plan or To-Do List with R
 
-# works
-# todo_parsed[[1]] %>% modify_at(c("assignees", "labels"), list)
-# todo_parsed %>% map(., ~modify_at(., c("assignees", "labels"), list) )
+Of course, `tidytracker`'s YAML-parsing functionalities are only provided as a convenience. Users are also welcome to create their own plans and to-do lists simply with base R's `list()` function. For example, the following code creates an analog to the second milestone in the YAML above.
+
+```{r}
+milestone <-
+list(
+  title = "Exporatory data analysis",
+  description = "Create basic statistics and views",
+  issue = list(
+    list(title = "Summary statistics",
+         body = "Calculate summary statistics"),
+    list(title = "Visualizations",
+         body = "Create univariate and bivariate plots")
+    )
+)
+
+str(milestone)
 ```
 
 

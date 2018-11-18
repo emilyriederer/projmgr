@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Building Custom Plans • tidytracker</title>
+<title>Building custom plans and to-do lists • tidytracker</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
-<meta property="og:title" content="Building Custom Plans">
+<meta property="og:title" content="Building custom plans and to-do lists">
 <meta property="og:description" content="">
 <meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
@@ -38,13 +38,13 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../articles/index.html">Tutorials &amp; Demos</a>
+  <a href="../articles/index.html">Articles</a>
 </li>
 <li>
-  <a href="../reference/index.html">Function Documentation</a>
+  <a href="../reference/index.html">Documentation</a>
 </li>
 <li>
-  <a href="../news/index.html">News &amp; Updates</a>
+  <a href="../news/index.html">News</a>
 </li>
 <li>
   <a href="../CREDITS.html">Credits</a>
@@ -52,7 +52,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.kdc.capitalone.com/srz549/tidytracker/">
+  <a href="https://github.com/emilyriederer/tidytracker/">
     <span class="fa fa-github"></span>
      
   </a>
@@ -69,7 +69,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Building Custom Plans</h1>
+      <h1>Building custom plans and to-do lists</h1>
                         <h4 class="author">Emily Riederer</h4>
             
             <h4 class="date">2018-11-18</h4>
@@ -81,142 +81,137 @@
 
     
     
-<p>For larger projects, GitHub milestones provide a convenient way to organize tasks (issues) into broader overarching goals. Sometimes, for projects you do frequently or have a clear plan for analysis, you may wish to <em>proactively</em> create issues and organize them into milestones at the beginning of your project instead of <em>reactively</em> collecting issues as you work through your project. <code>tidytracker</code> helps facilitate this with the notion of a project plan.</p>
-<div id="project-plans" class="section level2">
+<p>In many cases, it can be useful to automate bulk posting of issues or milestones to GitHub. <code>tidytracker</code> helps facilitate this with the notion of plans and to-do lists.</p>
+<p><strong>Plans</strong> are a collection of milestones and issues assigned to them. In general, these issues are going to be created <em>proactively</em> as foreseen key steps in a project (versus the more common <em>reactive</em> usage of GitHub issues to report bugs and request enhancements.) Plans can serve as a roadmap or framework for tackling a large chunk of work.</p>
+<p><strong>To-do lists</strong> are simply collections of issues. These might just be many bugs, feature enhancements, or ideas you jotted down while working offline or while not wanting to get on GitHub to log them. Alternatively, they also could be created proactively as with plans.</p>
+<p>To reduce the manual effort of bulk creation of plans and to-do lists, <code>tidytracker</code> offers functionality to read, interpret, and post milestones and issues encoded in <a href="http://yaml.org/">YAML</a>, a light-weight markup language.</p>
+<div id="creating-a-plan-with-yaml" class="section level2">
 <h2 class="hasAnchor">
-<a href="#project-plans" class="anchor"></a>Project Plans</h2>
+<a href="#creating-a-plan-with-yaml" class="anchor"></a>Creating a Plan with YAML</h2>
+<p>YAML can be used to specify milestones and issues with all the same fields as are accepted into <code><a href="../reference/post_milestone.html">post_milestone()</a></code> and <code><a href="../reference/post_issue.html">post_issue()</a></code>. Consider the following YAML file as an example:</p>
+<pre><code>milestone1:
+  title: Data cleaning and validation
+  description: &gt;
+    We will conduct data quality checks,
+    resolve issues with data quality, and
+    document this process
+  due_on: 2018-12-31Z12:59:59Z
+  issue:
+    - title: Define data quality standards
+      body: List out decision rules to check data quality
+      assignees: [emilyriederer]
+      labels: [a, b, c]
+    - title: Assess data quality
+      body: Use assertthat to test decision rules on dataset
+      labels: [low]
+    - title: Resolve data quality issues
+      body: Conduct needed research to resolve any issues
+
+milestone2:
+  title: Exploratory data analysis
+  description: &gt;
+    Create basic statistics and views to better
+    understand dataset and relationships
+  issue:
+    - title: Summary statistics
+      body: Calculate summary statistics
+    - title: Visualizations
+      body: Create univariate and bivariate plots</code></pre>
+<p>The <code>read_my_plan_todo_yaml()</code> function reads in either plan or to-do YAML files. We will continue to work with the example plan embedded in the package.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plan_path &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata"</span>, <span class="st">"plan.yaml"</span>, <span class="dt">package =</span> <span class="st">"tidytracker"</span>, <span class="dt">mustWork =</span> <span class="ot">TRUE</span>)
+my_plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/read_plan_todo_yaml.html">read_plan_todo_yaml</a></span>(plan_path)</code></pre></div>
+<p>This function converts YAML to an R list. You can sanity check the structure of this output with base R <code>str()</code> function which shows the structure of a list:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(my_plan)
+<span class="co">#&gt; List of 2</span>
+<span class="co">#&gt;  $ milestone1:List of 4</span>
+<span class="co">#&gt;   ..$ title      : chr "Data cleaning and validation"</span>
+<span class="co">#&gt;   ..$ description: chr "We will conduct data quality checks, resolve issues with data quality, and document this process\n"</span>
+<span class="co">#&gt;   ..$ due_on     : chr "2018-12-31Z12:59:59Z"</span>
+<span class="co">#&gt;   ..$ issue      :List of 3</span>
+<span class="co">#&gt;   .. ..$ :List of 4</span>
+<span class="co">#&gt;   .. .. ..$ title    : chr "Define data quality standards"</span>
+<span class="co">#&gt;   .. .. ..$ body     : chr "List out decision rules to check data quality"</span>
+<span class="co">#&gt;   .. .. ..$ assignees: chr "emilyriederer"</span>
+<span class="co">#&gt;   .. .. ..$ labels   : chr [1:3] "a" "b" "c"</span>
+<span class="co">#&gt;   .. ..$ :List of 3</span>
+<span class="co">#&gt;   .. .. ..$ title : chr "Assess data quality"</span>
+<span class="co">#&gt;   .. .. ..$ body  : chr "Use assertthat to test decision rules on dataset"</span>
+<span class="co">#&gt;   .. .. ..$ labels: chr "low"</span>
+<span class="co">#&gt;   .. ..$ :List of 2</span>
+<span class="co">#&gt;   .. .. ..$ title: chr "Resolve data quality issues"</span>
+<span class="co">#&gt;   .. .. ..$ body : chr "Conduct needed research to resolve any issues"</span>
+<span class="co">#&gt;  $ milestone2:List of 3</span>
+<span class="co">#&gt;   ..$ title      : chr "Exploratory data analysis"</span>
+<span class="co">#&gt;   ..$ description: chr "Create basic statistics and views to better understand dataset and relationships\n"</span>
+<span class="co">#&gt;   ..$ issue      :List of 2</span>
+<span class="co">#&gt;   .. ..$ :List of 2</span>
+<span class="co">#&gt;   .. .. ..$ title: chr "Summary statistics"</span>
+<span class="co">#&gt;   .. .. ..$ body : chr "Calculate summary statistics"</span>
+<span class="co">#&gt;   .. ..$ :List of 2</span>
+<span class="co">#&gt;   .. .. ..$ title: chr "Visualizations"</span>
+<span class="co">#&gt;   .. .. ..$ body : chr "Create univariate and bivariate plots"</span></code></pre></div>
+<p>Finally, this collection of milestones and associated issues can be posted to GitHub with the <code><a href="../reference/post_plan.html">post_plan()</a></code> function.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">experigit &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_repo_ref.html">create_repo_ref</a></span>(<span class="st">"emilyriederer"</span>, <span class="st">"experigit"</span>)
+<span class="kw"><a href="../reference/post_plan.html">post_plan</a></span>(experigit, my_plan)</code></pre></div>
+<p>The result of this command would be the creation of two milestones created in the <code>experigit</code> repo. The first has three issues and the second has two issues.</p>
 </div>
-<div id="creating-a-project-plan-in-r" class="section level2">
+<div id="create-a-to-do-list-with-yaml" class="section level2">
 <h2 class="hasAnchor">
-<a href="#creating-a-project-plan-in-r" class="anchor"></a>Creating a Project Plan in R</h2>
+<a href="#create-a-to-do-list-with-yaml" class="anchor"></a>Create a To-Do List with YAML</h2>
+<p>The workflow for posting to-do lists is very similar to that of plans. Consider the following YAML file as an example:</p>
+<pre><code>issue1:
+  title: Consider renaming my_very_long_function_name
+  body: &gt;
+    This name is unneccesarily long and hence
+     it is very hard and annoying to type
+  assignees: [emilyriederer]
+  labels: [low]
+
+issue2:
+  title: Make sure documentation links right pages of API docs</code></pre>
+<p>The same <code>read_my_plan_todo_yaml()</code> function reads in a to-do YAML file and converts it to an R list:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">todo_path &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata"</span>, <span class="st">"todo.yaml"</span>, <span class="dt">package =</span> <span class="st">"tidytracker"</span>, <span class="dt">mustWork =</span> <span class="ot">TRUE</span>)
+my_todo &lt;-<span class="st"> </span><span class="kw"><a href="../reference/read_plan_todo_yaml.html">read_plan_todo_yaml</a></span>(todo_path)
+<span class="kw">str</span>(my_todo)
+<span class="co">#&gt; List of 2</span>
+<span class="co">#&gt;  $ issue1:List of 4</span>
+<span class="co">#&gt;   ..$ title    : chr "Consider renaming my_very_long_function_name"</span>
+<span class="co">#&gt;   ..$ body     : chr "This name is unneccesarily long and hence\n it is very hard and annoying to type\n"</span>
+<span class="co">#&gt;   ..$ assignees: chr "emilyriederer"</span>
+<span class="co">#&gt;   ..$ labels   : chr "low"</span>
+<span class="co">#&gt;  $ issue2:List of 1</span>
+<span class="co">#&gt;   ..$ title: chr "Make sure documentation links right pages of API docs"</span></code></pre></div>
+<p>This collection of issues can be posted to a GitHub with the <code><a href="../reference/post_todo.html">post_todo()</a></code> function.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">experigit &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_repo_ref.html">create_repo_ref</a></span>(<span class="st">"emilyriederer"</span>, <span class="st">"experigit"</span>)
+<span class="kw"><a href="../reference/post_todo.html">post_todo</a></span>(experigit, my_todo)</code></pre></div>
 </div>
-<div id="creating-a-project-plan-with-yaml" class="section level2">
+<div id="create-a-plan-or-to-do-list-with-r" class="section level2">
 <h2 class="hasAnchor">
-<a href="#creating-a-project-plan-with-yaml" class="anchor"></a>Creating a Project Plan with YAML</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plan_yaml &lt;-<span class="st"> "</span>
-<span class="st">milestone1:</span>
-<span class="st">  title: Data cleaning and validation</span>
-<span class="st">  description: &gt;</span>
-<span class="st">    We will conduct data quality checks,</span>
-<span class="st">    resolve issues with data quality, and</span>
-<span class="st">    document this process</span>
-<span class="st">  due_on: 2018-12-31Z12:59:59Z</span>
-<span class="st">  issue:</span>
-<span class="st">    - title: Define data quality standards</span>
-<span class="st">      body: List out decision rules to check data quality</span>
-<span class="st">      assignees: [emilyriederer]</span>
-<span class="st">      labels: [a, b, c]</span>
-<span class="st">    - title: Assess data quality</span>
-<span class="st">      body: Use assertthat to test decision rules on dataset</span>
-<span class="st">      labels: [low]</span>
-<span class="st">    - title: Resolve data quality issues</span>
-<span class="st">      body: Conduct needed research to resolve any issues</span>
+<a href="#create-a-plan-or-to-do-list-with-r" class="anchor"></a>Create a Plan or To-Do List with R</h2>
+<p>Of course, <code>tidytracker</code>’s YAML-parsing functionalities are only provided as a convenience. Users are also welcome to create their own plans and to-do lists simply with base R’s <code>list()</code> function. For example, the following code creates an analog to the second milestone in the YAML above.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">milestone &lt;-
+<span class="kw">list</span>(
+  <span class="dt">title =</span> <span class="st">"Exporatory data analysis"</span>,
+  <span class="dt">description =</span> <span class="st">"Create basic statistics and views"</span>,
+  <span class="dt">issue =</span> <span class="kw">list</span>(
+    <span class="kw">list</span>(<span class="dt">title =</span> <span class="st">"Summary statistics"</span>,
+         <span class="dt">body =</span> <span class="st">"Calculate summary statistics"</span>),
+    <span class="kw">list</span>(<span class="dt">title =</span> <span class="st">"Visualizations"</span>,
+         <span class="dt">body =</span> <span class="st">"Create univariate and bivariate plots"</span>)
+    )
+)
 
-<span class="st">milestone2:</span>
-<span class="st">  title: Exploratory data analysis</span>
-<span class="st">  description: &gt;</span>
-<span class="st">    Create basic statistics and views to better</span>
-<span class="st">    understand dataset and relationships</span>
-<span class="st">  issue:</span>
-<span class="st">    - title: Summary statistics</span>
-<span class="st">      body: Calculate summary statistics </span>
-<span class="st">    - title: Visualizations</span>
-<span class="st">      body: Create univariate and bivariate plots</span>
-<span class="st">"</span>
-
-parsed &lt;-<span class="st"> </span>
-<span class="st">  </span>yaml<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/yaml/topics/yaml.load">yaml.load</a></span>(plan_yaml, 
-                  <span class="dt">handlers =</span> <span class="kw">list</span>(<span class="dt">expr =</span> <span class="cf">function</span>(x) <span class="kw">eval</span>(<span class="kw">parse</span>(<span class="dt">text =</span> x))))
-df &lt;-<span class="st"> </span><span class="kw">map_df</span>(parsed, as.tibble)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create milestones</span>
-req &lt;-
-<span class="st">  </span>df <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>issue) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">distinct</span>() <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">pmap</span>(., <span class="op">~</span><span class="kw"><a href="../reference/post_milestone.html">post_milestone</a></span>(ref, ...))
-
-<span class="co"># add milestone ids</span>
-df_issues &lt;-
-<span class="st">  </span>df <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">nest</span>(issue, <span class="dt">.key =</span> <span class="st">"issue"</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">milestone =</span> <span class="kw">unlist</span>(<span class="kw">map_dbl</span>(req, <span class="st">"number"</span>))) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">select</span>(milestone, issue) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">unnest</span>() 
-
-<span class="co"># create issues</span>
-df <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">nest</span>(issue, <span class="dt">.key =</span> <span class="st">"issue"</span>) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">milestone =</span> <span class="kw">unlist</span>(<span class="kw">map_dbl</span>(req, <span class="st">"number"</span>))) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">select</span>(milestone, issue) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">unnest</span>() <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">transmute</span>(<span class="dt">issue =</span> <span class="kw">map2</span>(milestone, issue, <span class="op">~</span><span class="kw">c</span>(<span class="dt">milestone =</span> .x, .y))) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">pull</span>(issue) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">map</span>(<span class="op">~</span><span class="kw">modify_at</span>(., <span class="kw">c</span>(<span class="st">"assignees"</span>, <span class="st">"labels"</span>), <span class="op">~</span><span class="cf">if</span>(<span class="kw">length</span>(.) <span class="op">==</span><span class="st"> </span><span class="dv">1</span>){<span class="kw">c</span>(.,.)}<span class="cf">else</span>{.})) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">map</span>(<span class="op">~</span><span class="kw">modify_at</span>(., <span class="kw">c</span>(<span class="st">"assignees"</span>, <span class="st">"labels"</span>), list)) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">map</span>(., <span class="op">~</span><span class="kw">pmap</span>(., <span class="op">~</span><span class="kw"><a href="../reference/post_issue.html">post_issue</a></span>(ref, ...)))
-  </code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">issues &lt;-<span class="st"> </span><span class="kw">map_df</span>(df<span class="op">$</span>issue, as.tibble)
-issues &lt;-<span class="st"> </span>issues <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(title, body) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">nest</span>()
-df_final &lt;-<span class="st"> </span><span class="kw">bind_cols</span>( <span class="kw">select</span>(df, <span class="op">-</span>issue), issues)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map_chr</span>(parsed, <span class="st">"title"</span>)
-<span class="kw">map_chr</span>(parsed, <span class="st">"description"</span>)
-<span class="kw">map_chr</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(parsed), <span class="op">~</span>parsed[[.]]<span class="op">$</span>issue)
-<span class="kw">map_chr</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(parsed), <span class="op">~</span>parsed[[.]]<span class="op">$</span>body)
-<span class="kw">map_chr</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(parsed), <span class="op">~</span>parsed[[.]]<span class="op">$</span>assignee)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># works</span>
-<span class="kw">pmap_df</span>(parsed[[<span class="dv">1</span>]]<span class="op">$</span>issue[[<span class="dv">1</span>]], <span class="op">~</span><span class="kw"><a href="../reference/post_issue.html">post_issue</a></span>(ref, ...))
-<span class="kw">map_df</span>(parsed[[<span class="dv">1</span>]]<span class="op">$</span>issue, 
-    <span class="dt">.f =</span> <span class="op">~</span><span class="kw">pmap_df</span>(.x, <span class="op">~</span><span class="kw"><a href="../reference/post_issue.html">post_issue</a></span>(ref, ... ))
-        )
-
-<span class="co"># works</span>
-df<span class="op">$</span>issue[[<span class="dv">1</span>]] <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">modify_if</span>(<span class="op">~</span><span class="kw">length</span>(.)<span class="op">&gt;</span><span class="dv">1</span>, list) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.tibble</span>()
-df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">issue =</span> <span class="kw">map</span>(issue, <span class="op">~</span><span class="kw">modify_if</span>(., <span class="op">~</span><span class="kw">length</span>(.)<span class="op">&gt;</span><span class="dv">1</span>, list)))
-
-parsed[[<span class="dv">1</span>]]<span class="op">$</span>issue[[<span class="dv">1</span>]] <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">modify_if</span>(<span class="op">~</span><span class="kw">length</span>(.)<span class="op">&gt;</span><span class="dv">1</span>, list)
-parsed[[<span class="dv">1</span>]]<span class="op">$</span>issue <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">map</span>(<span class="op">~</span><span class="kw">modify_if</span>(., <span class="op">~</span><span class="kw">length</span>(.)<span class="op">&gt;</span><span class="dv">1</span>, list))
-parsed <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">map</span>(<span class="st">"issue"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">map</span>(<span class="op">~</span><span class="kw">modify_if</span>(., <span class="op">~</span><span class="kw">length</span>(.)<span class="op">&gt;</span><span class="dv">1</span>, list))
-<span class="co"># doesn't: parsed %&gt;% map("issue") %&gt;% map(~modify_at(., c("assignees", "labels"), list))</span>
-
-<span class="kw">pmap_df</span>(<span class="kw">list_modify</span>(parsed[[<span class="dv">1</span>]], <span class="st">"issue"</span> =<span class="st"> </span><span class="ot">NULL</span>), <span class="op">~</span><span class="kw"><a href="../reference/post_milestone.html">post_milestone</a></span>(ref, .))
-
-parsed <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">map</span>(<span class="op">~</span><span class="kw">list_modify</span>(., <span class="st">"issue"</span> =<span class="st"> </span><span class="ot">NULL</span>)) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">map</span>(<span class="op">~</span><span class="kw">pmap_df</span>(., <span class="op">~</span><span class="kw"><a href="../reference/post_milestone.html">post_milestone</a></span>(ref, .)))</code></pre></div>
-</div>
-<div id="creating-a-to-do-list" class="section level2">
-<h2 class="hasAnchor">
-<a href="#creating-a-to-do-list" class="anchor"></a>Creating a To-Do List</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">todo_yaml &lt;-<span class="st"> "</span>
-<span class="st">issue1:</span>
-<span class="st">  title: Consider renaming my_very_long_function_name</span>
-<span class="st">  body: &gt;</span>
-<span class="st">    This name is unneccesarily long and hence</span>
-<span class="st">    it is very hard and annoying to type</span>
-<span class="st">  assignees: [srz549, oec527]</span>
-<span class="st">  labels: [design]</span>
-
-<span class="st">issue2:</span>
-<span class="st">  title: Make sure documentation links right pages of API docs</span>
-<span class="st">"</span>
-
-todo_parsed &lt;-<span class="st"> </span>
-<span class="st">  </span>yaml<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/yaml/topics/yaml.load">yaml.load</a></span>(todo_yaml, 
-                  <span class="dt">handlers =</span> <span class="kw">list</span>(<span class="dt">expr =</span> <span class="cf">function</span>(x) <span class="kw">eval</span>(<span class="kw">parse</span>(<span class="dt">text =</span> x))))
-todo_df &lt;-<span class="st"> </span><span class="kw">map_df</span>(todo_parsed, as.tibble)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># works</span>
-res &lt;-
-todo_df <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">group_by</span>(title) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">mutate_at</span>(<span class="kw">vars</span>(<span class="kw">one_of</span>(<span class="st">"assignees"</span>, <span class="st">"labels"</span>)), list) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">distinct</span>(title, <span class="dt">.keep_all =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">mutate_at</span>(<span class="kw">vars</span>(<span class="kw">one_of</span>(<span class="st">"assignees"</span>, <span class="st">"labels"</span>)), 
-              <span class="op">~</span><span class="kw">map</span>(., <span class="op">~</span><span class="cf">if</span>(<span class="kw">length</span>(.x) <span class="op">==</span><span class="st"> </span><span class="dv">1</span>){<span class="kw">c</span>(.x,.x)}<span class="cf">else</span>{.x})) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">pmap</span>(<span class="op">~</span><span class="kw"><a href="../reference/post_issue.html">post_issue</a></span>(ref, ...))
-
-<span class="co"># works</span>
-<span class="co"># todo_parsed[[1]] %&gt;% modify_at(c("assignees", "labels"), list)</span>
-<span class="co"># todo_parsed %&gt;% map(., ~modify_at(., c("assignees", "labels"), list) )</span></code></pre></div>
+<span class="kw">str</span>(milestone)
+<span class="co">#&gt; List of 3</span>
+<span class="co">#&gt;  $ title      : chr "Exporatory data analysis"</span>
+<span class="co">#&gt;  $ description: chr "Create basic statistics and views"</span>
+<span class="co">#&gt;  $ issue      :List of 2</span>
+<span class="co">#&gt;   ..$ :List of 2</span>
+<span class="co">#&gt;   .. ..$ title: chr "Summary statistics"</span>
+<span class="co">#&gt;   .. ..$ body : chr "Calculate summary statistics"</span>
+<span class="co">#&gt;   ..$ :List of 2</span>
+<span class="co">#&gt;   .. ..$ title: chr "Visualizations"</span>
+<span class="co">#&gt;   .. ..$ body : chr "Create univariate and bivariate plots"</span></code></pre></div>
 </div>
   </div>
 
@@ -225,10 +220,9 @@ todo_df <span class="op">%&gt;%</span>
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#project-plans">Project Plans</a></li>
-      <li><a href="#creating-a-project-plan-in-r">Creating a Project Plan in R</a></li>
-      <li><a href="#creating-a-project-plan-with-yaml">Creating a Project Plan with YAML</a></li>
-      <li><a href="#creating-a-to-do-list">Creating a To-Do List</a></li>
+<li><a href="#creating-a-plan-with-yaml">Creating a Plan with YAML</a></li>
+      <li><a href="#create-a-to-do-list-with-yaml">Create a To-Do List with YAML</a></li>
+      <li><a href="#create-a-plan-or-to-do-list-with-r">Create a Plan or To-Do List with R</a></li>
       </ul>
 </div>
       </div>

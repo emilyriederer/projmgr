@@ -12,7 +12,7 @@ Description: Provides a highly abstracted wrapper for the GitHub
     the progress of those events. It should be useful for those using
     GitHub in personal, professional, or academic settings with an
     emphasis on usage for data analysis projects.
-License: CC0
+License: MIT + file LICENSE
 URL: https://github.com/emilyriederer/tidytracker
 BugReports: https://github.com/emilyriederer/tidytracker/issues
 Imports:

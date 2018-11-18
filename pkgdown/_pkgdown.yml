@@ -1,30 +1,30 @@
 navbar:
   title: "tidytracker"
   left:
-    - text: "Tutorials & Demos"
+    - text: "Articles"
       href: articles/index.html
-    - text: "Function Documentation"
+    - text: "Documentation"
       href: reference/index.html
-    - text: "News & Updates"
+    - text: "News"
       href: news/index.html
     - text: "Credits"
       href: CREDITS.html
   right:
    - icon: fa-github
-     href: https://github.kdc.capitalone.com/srz549/tidytracker/
+     href: https://github.com/emilyriederer/tidytracker/
 
 articles:
   - title: "Introduction to GitHub and Project Management"
     desc: Opinionated conventions to facilitate analytics team planning and project management via GitHub
     contents:
     - git-github-introduction
-  - title: "Interacting with GitHub Repos"
+    - reproducible-workflow
+    - creating-a-github-personal-authentication-token
+  - title: "Interacting with GitHub Repositories"
     desc: Tutotials related to with sending and receiving information with GitHub
     contents:
-    - creating-a-github-personal-authentication-token
-    - getting-and-plotting-github-issues
-    - creating-new-github-issues
-    - build-custom-plans
+    - building-custom-plans
+    - reprex-clipr
   - title: "Use Cases"
     desc: Demo of possible applications for personal projects, academia, and industry
     contents:
