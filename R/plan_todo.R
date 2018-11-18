@@ -13,25 +13,25 @@
 #' @return List containing plan compatible with \code{tidytracker::post_plan} or |code{tidytracker::post_todo}
 #' @export
 #'
-#' @family plan
+#' @family plans and todos
 #'
 #' @examples
 #' \dontrun{
 #' # This example uses example file included in pkg
 #' # You should be able to run example as-is after creating your own repo reference
 #' file_path <- system.file("extdata", "plan_yaml.txt", package = "tidytracker", mustWork = TRUE)
-#' my_plan <- read_yaml(file_path)
+#' my_plan <- read_plan_todo_yaml(file_path)
 #' post_plan(ref, my_plan)
 #' }
 #' \dontrun{
 #' # This example uses example file included in pkg
 #' # You should be able to run example as-is after creating your own repo reference
 #' file_path <- system.file("extdata", "plan_yaml.txt", package = "tidytracker", mustWork = TRUE)
-#' my_todo <- read_yaml(file_path)
+#' my_todo <- read_plan_todo_yaml(file_path)
 #' post_todo(ref, my_todo)
 #' }
 
-read_yaml <- function(filepath = NA, chars = NA){
+read_plan_todo_yaml <- function(filepath = NA, chars = NA){
 
   # check if yaml package installed
   if (!requireNamespace("yaml", quietly = TRUE)) {
@@ -64,27 +64,21 @@ read_yaml <- function(filepath = NA, chars = NA){
 
 #' Post plan (milestones + issues) to GitHub repository
 #'
-#' @inherit post_engine return params examples
+#' @inherit post_engine return params
+#' @inherit read_plan_todo_yaml examples
 #' @param plan Plan list as read with \code{tidytracker::read_plan_yaml}
 #' @export
 #'
-#' @family plan
+#' @family plans and todos
 #' @importFrom dplyr distinct mutate pull select transmute
-#'
-#' @examples
-#' \dontrun{
-#' # This example uses example file included in pkg. You should be able to run example as-is
-#' file_path <- system.file("extdata", "plan_yaml.txt", package = "tidytracker", mustWork = TRUE)
-#' my_plan <- read_plan_yaml("ext/my_project_plan.yaml")
-#' post_plan(my_plan)
-#' }
+
 
 
 post_plan <- function(ref, plan){
 
   # create milestones
   req_milestones <-
-    parsed %>%
+    plan %>%
     purrr::map(~purrr::list_modify(., "issue" = NULL)) %>%
     purrr::map(., ~purrr::pmap(., ~post_milestone(ref, ...)))
 
@@ -92,16 +86,44 @@ post_plan <- function(ref, plan){
   milestone_ids <-
     purrr::modify_depth(req_milestones, .f = "number", .depth = 2) %>% unlist()
   num_issues_by_milestone <-
-    parsed %>% purrr::map("issue") %>% purrr::map(length)
+    plan %>% purrr::map("issue") %>% purrr::map(length)
   milestone_nums <- purrr::map2(milestone_ids, num_isses_by_milestone, rep) %>% unlist() %>% as.integer()
 
   # create issues
   req_issues <-
-    parsed %>%
+    plan %>%
     purrr::map("issue") %>%
     purrr::flatten %>%
     purrr::map2(milestone_nums, ~c(.x, milestone = .y)) %>%
-    purrr:map(~purrr::modify_at(.,
+    purrr::map(~purrr::modify_at(.,
+                                .at = c("assignees", "labels"),
+                                ~if(length(.) == 1){c(.,.)}else{.})) %>%
+    purrr::map(~purrr::modify_at(.,
+                                 .at = c('assignees', 'labels'),
+                                 .f = list)) %>%
+    purrr::map(~purrr::pmap(., ~post_issue(ref, ...)))
+
+  return(issues_req)
+
+}
+
+#' Post plan (milestones + issues) to GitHub repository
+#'
+#' @inherit post_engine return params
+#' @inherit read_plan_todo_yaml examples
+#' @param todo To-do R list structure as read with \code{tidytracker::read_plan_yaml}
+#' @export
+#'
+#' @family plans and todos
+#' @importFrom dplyr distinct mutate pull select transmute
+
+
+post_todo <- function(ref, todo){
+
+  # create issues
+  req_issues <-
+    todo %>%
+    purrr::map(~purrr::modify_at(.,
                                 .at = c("assignees", "labels"),
                                 ~if(length(.) == 1){c(.,.)}else{.})) %>%
     purrr::map(~purrr::modify_at(.,
