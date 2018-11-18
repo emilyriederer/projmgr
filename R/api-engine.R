@@ -41,7 +41,7 @@ get_engine <- function(api_endpoint, ref, ...){
 
   req <-
     httr::GET(
-      url = paste0(ref$base_url, api_endpoint),
+      paste0(ref$base_url, ref$repo_path, api_endpoint),
       query = list(...),
       config = httr::authenticate(Sys.getenv(ref$id), Sys.getenv(ref$pw)),
       encode = "json"
@@ -65,7 +65,7 @@ post_engine <- function(api_endpoint, ref, ...){
 
   req <-
     httr::POST(
-      paste0(ref$base_url, api_endpoint),
+      paste0(ref$base_url, ref$repo_path, api_endpoint),
       body = list(...),
       config = httr::authenticate(Sys.getenv(ref$id), Sys.getenv(ref$pw)),
       encode = "json")
@@ -88,7 +88,7 @@ patch_engine <- function(api_endpoint, ref, ...){
 
   req <-
     httr::PATCH(
-      paste0(ref$base_url, api_endpoint),
+      paste0(ref$base_url, ref$repo_path, api_endpoint),
       body = list(...),
       config = httr::authenticate(Sys.getenv(ref$id), Sys.getenv(ref$pw)),
       encode = "json")

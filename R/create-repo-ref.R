@@ -66,13 +66,12 @@ create_repo_ref <-
     }
 
     # assign base url ----
-    url_suffix <- paste("repos", repo_owner, repo_name, sep = "/")
 
     if(!is_enterprise){
-      base_url <- paste0("https://api.github.com/", url_suffix)
+      base_url <- "https://api.github.com/"
     }
     else if(is_enterprise & length(hostname)>0){
-      base_url <- paste0("https://",hostname,"/api/v3/", url_suffix)
+      base_url <- paste0("https://",hostname,"/api/v3/")
     }
     else if(is_enterprise){
       stop("hostname argument must be provided",
@@ -89,7 +88,8 @@ create_repo_ref <-
       repo_name = repo_name,
       id = id_sys_var,
       pw = pw_sys_var,
-      base_url = base_url
+      base_url = base_url,
+      repo_path = paste("repos", repo_owner, repo_name, sep = "/")
     )
 
     # return repo reference ----
