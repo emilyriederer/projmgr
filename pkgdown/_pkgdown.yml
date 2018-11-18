@@ -42,15 +42,9 @@ reference:
   desc: "Functions that parse data received from API as dataframe"
   contents:
   - starts_with("parse")
-- title: Visualization functions
-  desc: "Functions that visualize parsed data"
-  contents:
-  - starts_with("viz")
-- title: Example data documentation
-  desc: "Documentation for example data embedded in package"
-  contents:
-  - loyalty_slv
-  - tidytrends_sample
+- title: Read functions
+  desc: "Functions that read data from other formats"
+  contents: starts_with("read")
 - title: Miscellaneous functions
   desc: "Functions that make life a little bit easier"
   contents:
@@ -59,6 +53,5 @@ reference:
   - -starts_with("post")
   - -starts_with("parse")
   - -starts_with("viz")
+  - -starts_with("read")
   - -tidytracker
-  - -loyalty_slv
-  - -tidytrends_sample
