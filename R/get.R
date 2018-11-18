@@ -16,7 +16,8 @@ get_issues <- function(ref, ...){
   validate_inputs(list(...),
                   allowed_vars = c("milestone", "state", "assignee",
                                    "creator", "mentioned", "labels",
-                                   "sort", "direction", "since"))
+                                   "number", "sort", "direction",
+                                   "since"))
 
   get_engine(api_endpoint = "/issues",
              ref = ref,

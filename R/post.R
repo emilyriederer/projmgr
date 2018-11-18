@@ -16,7 +16,7 @@
 #' \dontrun{
 #' # can be used in conjunction with reprex pkg
 #' # example assumes code for reprex is on clipboard
-#' reprex(venue = "gh")
+#' reprex::reprex(venue = "gh")
 #' post_issue(tidytracker,
 #'             title = "something is broken",
 #'             body = paste( clipr::read_clip(), collapse = "\n") )
