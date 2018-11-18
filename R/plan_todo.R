@@ -1,28 +1,37 @@
-#' Read plan from YAML
+#' Read plan or to-do list from YAML
 #'
-#' This function reads a carefully constructed YAML file representing a project plan of
-#' milestones and issues. YAML is converted into a \code{tibble} data structure which can
-#' be passed to \code{tidytracker::post_plan} to buidl repository infrastrucuture.
+#' This function reads a carefully constructed YAML file representing a project plan (of
+#' milestones and issues) or a to-do list (of issues). YAML is converted into an R list
+#' structure which can then be passed to \code{tidytracker::post_plan} or \code{tidytracker::post_todo}
+#' to build infrastructure for your repository.
 #'
-#' Please see the "Building Custom Plans" vignette for more details.s
+#' Please see the "Building Custom Plans" vignette for more details.
 #'
 #' @param filepath Filepath of YAML file. Either this or \code{chars} is required.
 #' @param chars Character object containing YAML. Either this or \code{chars} in required.
 #'
-#' @return List containing plan compatible with \code{tidytracker::post_plan}
+#' @return List containing plan compatible with \code{tidytracker::post_plan} or |code{tidytracker::post_todo}
 #' @export
 #'
 #' @family plan
 #'
 #' @examples
 #' \dontrun{
-#' # This example uses example file included in pkg. You should be able to run example as-is
+#' # This example uses example file included in pkg
+#' # You should be able to run example as-is after creating your own repo reference
 #' file_path <- system.file("extdata", "plan_yaml.txt", package = "tidytracker", mustWork = TRUE)
-#' my_plan <- read_plan_yaml("ext/my_project_plan.yaml")
-#' post_plan(my_plan)
+#' my_plan <- read_yaml(file_path)
+#' post_plan(ref, my_plan)
+#' }
+#' \dontrun{
+#' # This example uses example file included in pkg
+#' # You should be able to run example as-is after creating your own repo reference
+#' file_path <- system.file("extdata", "plan_yaml.txt", package = "tidytracker", mustWork = TRUE)
+#' my_todo <- read_yaml(file_path)
+#' post_todo(ref, my_todo)
 #' }
 
-read_plan_yaml <- function(filepath = NA, chars = NA){
+read_yaml <- function(filepath = NA, chars = NA){
 
   # check if yaml package installed
   if (!requireNamespace("yaml", quietly = TRUE)) {
