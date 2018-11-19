@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Read plan or to-do list from YAML — read_plan_todo_yaml • tidytracker</title>
+<title>Check internet connection — check_internet • tidytracker</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -32,12 +32,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Read plan or to-do list from YAML — read_plan_todo_yaml" />
+<meta property="og:title" content="Check internet connection — check_internet" />
 
-<meta property="og:description" content="This function reads a carefully constructed YAML file representing a project plan (of
-milestones and issues) or a to-do list (of issues). YAML is converted into an R list
-structure which can then be passed to tidytracker::post_plan or tidytracker::post_todo
-to build infrastructure for your repository." />
+<meta property="og:description" content="Basic wrapper around curl::has_internet()" />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -107,69 +104,38 @@ to build infrastructure for your repository." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Read plan or to-do list from YAML</h1>
-    <small class="dont-index">Source: <a href='https://github.com/emilyriederer/tidytracker/blob/master/R/plan-todo.R'><code>R/plan-todo.R</code></a></small>
-    <div class="hidden name"><code>read_plan_todo_yaml.Rd</code></div>
+    <h1>Check internet connection</h1>
+    <small class="dont-index">Source: <a href='https://github.com/emilyriederer/tidytracker/blob/master/R/check.R'><code>R/check.R</code></a></small>
+    <div class="hidden name"><code>check_internet.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>This function reads a carefully constructed YAML file representing a project plan (of
-milestones and issues) or a to-do list (of issues). YAML is converted into an R list
-structure which can then be passed to <code><a href='post_plan.html'>tidytracker::post_plan</a></code> or <code><a href='post_todo.html'>tidytracker::post_todo</a></code>
-to build infrastructure for your repository.</p>
+    <p>Basic wrapper around <code><a href='http://www.rdocumentation.org/packages/curl/topics/nslookup'>curl::has_internet()</a></code></p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>read_plan_todo_yaml</span>(<span class='no'>input</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>input</th>
-      <td><p>Either filepath to YAML file or character string. Assumes filepath if ends in ".yaml"
-and assumes string otherwise.</p></td>
-    </tr>
-    </table>
-    
+    <pre class="usage"><span class='fu'>check_internet</span>()</pre>
+        
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>List containing plan compatible with <code><a href='post_plan.html'>tidytracker::post_plan</a></code> or <code><a href='post_todo.html'>tidytracker::post_todo</a></code></p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>Please see the "Building Custom Plans" vignette for more details.</p>
+    <p>Returns TRUE is connected to internet and false otherwise</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other plans and todos: <code><a href='post_plan.html'>post_plan</a></code>,
-  <code><a href='post_todo.html'>post_todo</a></code></p></div>
+    <div class='dont-index'><p>Other check: <code><a href='check_rate_limit.html'>check_rate_limit</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'># This example uses example file included in pkg</span>
-<span class='co'># You should be able to run example as-is after creating your own repo reference</span>
-<span class='no'>file_path</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='st'>"plan.yaml"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"tidytracker"</span>, <span class='kw'>mustWork</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='no'>my_plan</span> <span class='kw'>&lt;-</span> <span class='fu'>read_plan_todo_yaml</span>(<span class='no'>file_path</span>)
-<span class='fu'><a href='post_plan.html'>post_plan</a></span>(<span class='no'>ref</span>, <span class='no'>my_plan</span>)
-<span class='co'># }</span><span class='co'># NOT RUN {</span>
-<span class='co'># This example uses example file included in pkg</span>
-<span class='co'># You should be able to run example as-is after creating your own repo reference</span>
-<span class='no'>file_path</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='st'>"todo.yaml"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"tidytracker"</span>, <span class='kw'>mustWork</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='no'>my_todo</span> <span class='kw'>&lt;-</span> <span class='fu'>read_plan_todo_yaml</span>(<span class='no'>file_path</span>)
-<span class='fu'><a href='post_todo.html'>post_todo</a></span>(<span class='no'>ref</span>, <span class='no'>my_todo</span>)
+<span class='fu'>check_internet</span>()
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
       

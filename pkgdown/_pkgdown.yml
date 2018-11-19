@@ -36,7 +36,7 @@ articles:
     - working-offline
 
 reference:
-- title: Create functions
+- title: Creation functions
   desc: "Functions that create useful local objects"
   contents:
   - starts_with("create")
@@ -55,8 +55,11 @@ reference:
 - title: Read functions
   desc: "Functions that read data from other formats"
   contents: starts_with("read")
-- title: Miscellaneous functions
-  desc: "Functions that make life a little bit easier"
+- title: Check functions
+  desc: "Test and diagnose common impediments"
+  contents: starts_with("check")
+- title: Misc functions
+  desc: "Miscellaneous functions that make life a little bit easier"
   contents:
   - -starts_with("create")
   - -starts_with("get")
@@ -64,4 +67,5 @@ reference:
   - -starts_with("parse")
   - -starts_with("viz")
   - -starts_with("read")
+  - -starts_with("check")
   - -tidytracker
