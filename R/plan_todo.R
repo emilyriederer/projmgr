@@ -142,3 +142,34 @@ post_todo <- function(ref, todo){
   return(req_issues)
 
 }
+
+#' @export
+print.plan <- function(x){
+
+  milestones <- purrr::map(x, "title")
+  n_issues <- purrr::map(plan, ~length(.[["issue"]]))
+
+  out <- "Plan: \n"
+  for(i in 1:length(milestones)){
+    out <-
+      paste0(out, i, ". ", milestones[i], " (",n_issues[i]," issues) \n")
+  }
+
+  writeLines(out)
+
+}
+
+#' @export
+print.todo <- function(x){
+
+  issues <- purrr::map(x, "title")
+
+  out <- "To Do: \n"
+  for(i in 1:length(milestones)){
+    out <-
+      paste0(out, i, ". ", issues[i], "\n")
+  }
+
+  writeLines(out)
+
+}
