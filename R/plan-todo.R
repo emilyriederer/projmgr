@@ -7,10 +7,10 @@
 #'
 #' Please see the "Building Custom Plans" vignette for more details.
 #'
-#' @param filepath Filepath of YAML file. Either this or \code{chars} is required.
-#' @param chars Character object containing YAML. Either this or \code{chars} in required.
+#' @param input Either filepath to YAML file or character string. Assumes filepath if ends in ".yaml"
+#'     and assumes string otherwise.
 #'
-#' @return List containing plan compatible with \code{tidytracker::post_plan} or |code{tidytracker::post_todo}
+#' @return List containing plan compatible with \code{tidytracker::post_plan} or \code{tidytracker::post_todo}
 #' @export
 #'
 #' @family plans and todos
@@ -26,12 +26,12 @@
 #' \dontrun{
 #' # This example uses example file included in pkg
 #' # You should be able to run example as-is after creating your own repo reference
-#' file_path <- system.file("extdata", "todo.yaml.txt", package = "tidytracker", mustWork = TRUE)
+#' file_path <- system.file("extdata", "todo.yaml", package = "tidytracker", mustWork = TRUE)
 #' my_todo <- read_plan_todo_yaml(file_path)
 #' post_todo(ref, my_todo)
 #' }
 
-read_plan_todo_yaml <- function(filepath = NA, chars = NA){
+read_plan_todo_yaml <- function(input){
 
   # check if yaml package installed
   if (!requireNamespace("yaml", quietly = TRUE)) {
@@ -39,23 +39,17 @@ read_plan_todo_yaml <- function(filepath = NA, chars = NA){
          call. = FALSE)
   }
 
+  # determine input type
+  stub <- substring( trimws(input), nchar(trimws(input)) - 4)
+
   # check if at least one of filepath or chars in not NA
-  if(is.na(filepath) & is.na(chars)){
-    stop("Please provide either a filepath or a character vector of YAML.",
-         call. = FALSE)
-  }
-  else if(!is.na(filepath) & !is.na(chars)){
-    message("Both filepath and chars provided. Default is to use filepath.")
-    plan_parsed <- yaml::yaml.load_file(filepath,
+  if(stub == ".yaml"){
+    plan_parsed <- yaml::yaml.load_file(input,
                                         handlers = list(expr = function(x) eval(parse(text = x))))
   }
-  else if(!is.na(chars)){
-    plan_parsed <- yaml::yaml.load(chars,
+  else{
+    plan_parsed <- yaml::yaml.load(input,
                                    handlers = list(expr = function(x) eval(parse(text = x))))
-  }
-  else{ # => !is.na(filepath)
-    plan_parsed <- yaml::yaml.load_file(filepath,
-                                        handlers = list(expr = function(x) eval(parse(text = x))))
   }
 
   return(plan_parsed)

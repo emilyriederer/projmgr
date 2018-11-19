@@ -157,6 +157,26 @@ my_plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rea
 <div class="figure">
 <img src="post_plan.PNG" alt="Milestones posted on GitHub"><p class="caption">Milestones posted on GitHub</p>
 </div>
+<p>Note that you can also pass in YAML directly as a character string:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plan_yaml_vbl &lt;-<span class="st"> "</span>
+<span class="st">milestone1:</span>
+<span class="st">  title: First draft</span>
+<span class="st">  body: Complete the first draft of this paper for review</span>
+
+<span class="st">milestone2:</span>
+<span class="st">  title: Make revisions</span>
+<span class="st">  body: Repsond to feedback from reviewers</span>
+<span class="st">"</span>
+
+plan_from_vbl &lt;-<span class="st"> </span><span class="kw"><a href="../reference/read_plan_todo_yaml.html">read_plan_todo_yaml</a></span>(plan_yaml_vbl)
+<span class="kw">str</span>(plan_from_vbl)
+<span class="co">#&gt; List of 2</span>
+<span class="co">#&gt;  $ milestone1:List of 2</span>
+<span class="co">#&gt;   ..$ title: chr "First draft"</span>
+<span class="co">#&gt;   ..$ body : chr "Complete the first draft of this paper for review"</span>
+<span class="co">#&gt;  $ milestone2:List of 2</span>
+<span class="co">#&gt;   ..$ title: chr "Make revisions"</span>
+<span class="co">#&gt;   ..$ body : chr "Repsond to feedback from reviewers"</span></code></pre></div>
 </div>
 <div id="create-a-to-do-list-with-yaml" class="section level2">
 <h2 class="hasAnchor">

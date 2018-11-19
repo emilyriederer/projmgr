@@ -59,6 +59,23 @@ The result of this command would be the creation of two milestones created in th
 
 ![Milestones posted on GitHub](post_plan.PNG)
 
+Note that you can also pass in YAML directly as a character string:
+
+```{r}
+plan_yaml_vbl <- "
+milestone1:
+  title: First draft
+  body: Complete the first draft of this paper for review
+
+milestone2:
+  title: Make revisions
+  body: Repsond to feedback from reviewers
+"
+
+plan_from_vbl <- read_plan_todo_yaml(plan_yaml_vbl)
+str(plan_from_vbl)
+```
+
 ## Create a To-Do List with YAML
 
 The workflow for posting to-do lists is very similar to that of plans. Consider the following YAML file as an example:
