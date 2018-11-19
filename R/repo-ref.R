@@ -100,19 +100,3 @@ create_repo_ref <-
     return(ref)
 
   }
-
-
-#' @export
-print.repo_ref <- function(x){
-
-  writeLines(
-    paste0(
-      "+ Repository Owner: ", x$repo_owner, "\n",
-      "+ Repository: ", x$repo_name, "\n",
-      "+ From URL: ", x$base_url, "\n",
-      "+ Authenticating with: ", x$id, "\n"
-    )
-  )
-  invisible(x)
-
-}

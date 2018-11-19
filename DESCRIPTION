@@ -16,14 +16,12 @@ License: MIT + file LICENSE
 URL: https://github.com/emilyriederer/tidytracker
 BugReports: https://github.com/emilyriederer/tidytracker/issues
 Imports:
-    curl,
     dplyr,
-    httr,
-    jsonlite,
     magrittr,
     purrr,
     tibble,
-    tidyr
+    tidyr,
+    gh
 Suggests:
     reprex,
     spelling,
