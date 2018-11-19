@@ -39,16 +39,14 @@ validate_inputs <- function(input, allowed_vars){
 
 get_engine <- function(api_endpoint, ref, ...){
 
-  req <-
-    httr::GET(
-      paste0(ref$base_url, ref$repo_path, api_endpoint),
-      query = list(...),
-      config = httr::authenticate(Sys.getenv(ref$id), Sys.getenv(ref$pw)),
-      encode = "json"
-    )
-
-  res <- httr::content(req)
-  res
+  gh::gh(
+    endpoint = paste0(ref$base_url, ref$repo_path, api_endpoint),
+    ...,
+    .token = Sys.getenv(ref$id),
+    .method = "GET",
+    .limit = Inf,
+    .send_headers = c("User-Agent" = "https://github.com/emilyriederer/tidytracker")
+  )
 
 }
 
@@ -63,15 +61,14 @@ get_engine <- function(api_endpoint, ref, ...){
 
 post_engine <- function(api_endpoint, ref, ...){
 
-  req <-
-    httr::POST(
-      paste0(ref$base_url, ref$repo_path, api_endpoint),
-      body = list(...),
-      config = httr::authenticate(Sys.getenv(ref$id), Sys.getenv(ref$pw)),
-      encode = "json")
-
-  res <- httr::content(req)
-  res
+  gh::gh(
+    endpoint = paste0(ref$base_url, ref$repo_path, api_endpoint),
+    ...,
+    .token = Sys.getenv(ref$id),
+    .method = "POST",
+    .limit = Inf,
+    .send_headers = c("User-Agent" = "https://github.com/emilyriederer/tidytracker")
+  )
 
 }
 
@@ -86,14 +83,13 @@ post_engine <- function(api_endpoint, ref, ...){
 
 patch_engine <- function(api_endpoint, ref, ...){
 
-  req <-
-    httr::PATCH(
-      paste0(ref$base_url, ref$repo_path, api_endpoint),
-      body = list(...),
-      config = httr::authenticate(Sys.getenv(ref$id), Sys.getenv(ref$pw)),
-      encode = "json")
-
-  res <- httr::content(req)
-  res
+  gh::gh(
+    endpoint = paste0(ref$base_url, ref$repo_path, api_endpoint),
+    ...,
+    .token = Sys.getenv(ref$id),
+    .method = "PATCH",
+    .limit = Inf,
+    .send_headers = c("User-Agent" = "https://github.com/emilyriederer/tidytracker")
+  )
 
 }
