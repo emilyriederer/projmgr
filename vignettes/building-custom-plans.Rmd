@@ -68,7 +68,7 @@ todo_path <- system.file("extdata", "todo.yaml", package = "tidytracker", mustWo
 cat(readLines(todo_path), sep = '\n')
 ```
 
-The same `read_my_plan_todo_yaml()` function reads in a to-do YAML file and converts it to an R list:
+The same `read_plan_todo_yaml()` function reads in a to-do YAML file and converts it to an R list:
 
 ```{r}
 todo_path <- system.file("extdata", "todo.yaml", package = "tidytracker", mustWork = TRUE)

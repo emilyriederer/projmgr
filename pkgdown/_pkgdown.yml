@@ -14,8 +14,8 @@ navbar:
      href: https://github.com/emilyriederer/tidytracker/
 
 articles:
-  - title: "Introduction to GitHub and Project Management"
-    desc: Opinionated conventions to facilitate analytics team planning and project management via GitHub
+  - title: "Getting Started"
+    desc: Introduction to tools, set-up, and design
     contents:
     - git-github-introduction
     - reproducible-workflow

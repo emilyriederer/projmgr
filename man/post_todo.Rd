@@ -2,7 +2,7 @@
 % Please edit documentation in R/plan_todo.R
 \name{post_todo}
 \alias{post_todo}
-\title{Post plan (milestones + issues) to GitHub repository}
+\title{Post to-do list (issues) to GitHub repository}
 \usage{
 post_todo(ref, todo)
 }

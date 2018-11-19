@@ -110,7 +110,7 @@ post_plan <- function(ref, plan){
 
 }
 
-#' Post plan (milestones + issues) to GitHub repository
+#' Post to-do list (issues) to GitHub repository
 #'
 #' Post custom to-do lists (i.e. issues) based on yaml read in by \code{read_plan_todo_yaml}.
 #' Please see the "Building Custom Plans" vignette for details.
