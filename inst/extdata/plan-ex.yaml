@@ -1,0 +1,23 @@
+milestone1:
+  title: Enter a short, informative title of your goal
+  description: >
+    Enter a longer description of the objectives
+  due_on: 2018-12-31Z12:59:59Z
+  issue:
+    - title: Title of task 1 to complete
+      body: Describe this step
+      assignees: [emilyriederer]
+      labels: [a, b, c]
+    - title: Title of task 2 to comple
+      body: Describe this step
+      labels: [low]
+
+milestone2:
+  title: Enter another short, informative title of your goal
+  description: >
+    Enter a longer description of the objectives
+  issue:
+    - title: Title of task 1 to complete
+      body: Describe this step
+    - title: Title of task 2 to complete
+      body: Describe this step

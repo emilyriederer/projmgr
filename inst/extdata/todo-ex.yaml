@@ -1,0 +1,9 @@
+issue1:
+  title: Informative title
+  body: >
+    Longer description of issue
+  assignees: [emilyriederer]
+  labels: [low]
+
+issue2:
+  title: Another informative title - body not required!
