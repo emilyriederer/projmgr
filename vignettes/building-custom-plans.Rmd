@@ -57,6 +57,8 @@ post_plan(experigit, my_plan)
 
 The result of this command would be the creation of two milestones created in the `experigit` repo. The first has three issues and the second has two issues.
 
+![Milestones posted on GitHub](post_plan.PNG)
+
 ## Create a To-Do List with YAML
 
 The workflow for posting to-do lists is very similar to that of plans. Consider the following YAML file as an example:
