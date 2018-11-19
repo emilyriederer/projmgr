@@ -92,7 +92,28 @@ create_repo_ref <-
       repo_path = paste("repos", repo_owner, repo_name, sep = "/")
     )
 
+
+    # add repo-ref class ----
+    class(ref) <- c("repo_ref", "list")
+
     # return repo reference ----
     return(ref)
 
   }
+
+
+#' @export
+
+print.repo_ref <- function(x){
+
+  writeLines(
+    paste0(
+      "+ Repository Owner: ", x$repo_owner, "\n",
+      "+ Repository: ", x$repo_name, "\n",
+      "+ From URL: ", x$base_url, "\n",
+      "+ Authenticating with: ", x$id, "\n"
+    )
+  )
+  invisible(x)
+
+}
