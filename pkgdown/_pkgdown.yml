@@ -37,24 +37,28 @@ articles:
 
 reference:
 - title: Creation functions
-  desc: "Functions that create useful local objects"
+  desc: "Create useful local objects"
   contents:
   - starts_with("create")
 - title: Retrieval functions
-  desc: "Functions that receive data from API (GET)"
+  desc: "Receive data from API (GET)"
   contents:
   - starts_with("get")
 - title: Submission functions
-  desc: "Functions that sent data to API (PUT)"
+  desc: "Send data to API (PUT)"
   contents:
   - starts_with("post")
 - title: Parse functions
-  desc: "Functions that parse data received from API as dataframe"
+  desc: "Parse data received from API as dataframe"
   contents:
   - starts_with("parse")
 - title: Read functions
-  desc: "Functions that read data from other formats"
+  desc: "Read data from other formats"
   contents: starts_with("read")
+- title: Visualization functions
+  desc: "Visualize data for public consumption"
+  contents:
+  - starts_with("viz")
 - title: Check functions
   desc: "Test and diagnose common impediments"
   contents: starts_with("check")

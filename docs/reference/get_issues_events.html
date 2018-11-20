@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Features • tidytracker</title>
+<title>Get issues events from GitHub repository — get_issues_events • tidytracker</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -25,14 +25,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
-<link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script>
+<link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script>
 
 
 
-  <link href="extra.css" rel="stylesheet">
+  <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Features" />
+<meta property="og:title" content="Get issues events from GitHub repository — get_issues_events" />
+
+<meta property="og:description" content="Get issues events from GitHub repository" />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -51,7 +53,7 @@
   </head>
 
   <body>
-    <div class="container template-title-body">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -62,7 +64,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">tidytracker</a>
+        <a class="navbar-link" href="../index.html">tidytracker</a>
         <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9000</span>
       </span>
     </div>
@@ -70,16 +72,16 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="articles/index.html">Articles</a>
+  <a href="../articles/index.html">Articles</a>
 </li>
 <li>
-  <a href="reference/index.html">Documentation</a>
+  <a href="../reference/index.html">Documentation</a>
 </li>
 <li>
-  <a href="news/index.html">News</a>
+  <a href="../news/index.html">News</a>
 </li>
 <li>
-  <a href="CREDITS.html">Credits</a>
+  <a href="../CREDITS.html">Credits</a>
 </li>
       </ul>
       
@@ -100,89 +102,58 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Features</h1>
+    <h1>Get issues events from GitHub repository</h1>
+    <small class="dont-index">Source: <a href='https://github.com/emilyriederer/tidytracker/blob/master/R/get.R'><code>R/get.R</code></a></small>
+    <div class="hidden name"><code>get_issues_events.Rd</code></div>
     </div>
 
+    <div class="ref-description">
+    
+    <p>Get issues events from GitHub repository</p>
+    
+    </div>
 
-<div id="features" class="section level1">
+    <pre class="usage"><span class='fu'>get_issues_events</span>(<span class='no'>ref</span>, <span class='no'>...</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>ref</th>
+      <td><p>Repository reference (list) created by <code><a href='create_repo_ref.html'>tidytracker::create_repo_ref</a></code></p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Additional user-defined query parameters</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-<ul>
-<li>read plans and issues from JSON in addition to YAML</li>
-<li>reprex integration</li>
-<li>viz_gantt functions</li>
-<li>more viz functions</li>
-<li>better support for user working w api (knowing which params)</li>
-<li>sample data</li>
-<li>update functions</li>
-<li>defining better standards around labels, etc.</li>
-<li>decide what all get and post functions should return</li>
-<li>attach plan/todo class labels in read_…_yaml so print methods work + update vignette</li>
-</ul>
-</div>
-<div id="infrastructure-improvements" class="section level1">
-<h1 class="hasAnchor">
-<a href="#infrastructure-improvements" class="anchor"></a>Infrastructure improvements</h1>
-<ul>
-<li>figure out which can’t create new label name w post_todo</li>
-<li>testing</li>
-<li>checking code parameters before running</li>
-</ul>
-</div>
-<div id="research" class="section level1">
-<h1 class="hasAnchor">
-<a href="#research" class="anchor"></a>Research</h1>
-<ul>
-<li>ggplot2 wrapper packages (<code>ggpubr</code>, <code>ggcorrplot</code>)</li>
-<li>pkg testing and API testing</li>
-</ul>
-<p><em>semi-resolved if stick with gh backend</em></p>
-<ul>
-<li>API stuff (see how <code>gh</code>, <code>ghclass</code> handle this) =&gt; REWRITE W <code>gh</code> backend</li>
-<li>rate limiting</li>
-<li>pagination</li>
-</ul>
-</div>
-<div id="writing" class="section level1">
-<h1 class="hasAnchor">
-<a href="#writing" class="anchor"></a>Writing</h1>
-<ul>
-<li>Vignettes:</li>
-<li>working reprodcibly</li>
-<li>getting starts / creating repo ref</li>
-<li>getting and viz-ing issues</li>
-<li>posting single and multiple issues</li>
-<li>working offline</li>
-<li><p>integration with other packages</p></li>
-<li>Applications / Use Cases</li>
-<li>hackathon management</li>
-<li>business setting / team mgmt &amp; reporting</li>
-<li>Mine paper / pkg on GH in classroom</li>
-<li>Lucy D’Ag McG pkgdblog on disertation</li>
-<li>Working offline / deep work / avoiding distraction / personal to-do list</li>
-<li>Comparisons</li>
-<li>
-<code>gh</code>: maximal vs minimal, abstraction</li>
-<li>
-<code>ghapiv3</code> : proj mgmt, juggling multiple PATs and URLs (ent vs open)</li>
-<li>
-<code>ghclass</code> : possible complement but this one too focused on classroom; mine is about stuff w/in repo</li>
-<li>Integration</li>
-<li><code>reprex</code></li>
-<li>
-<code>naniar</code>-style shadow matrix</li>
-<li>
-<code>usethis</code> : same concept of not interrupting the “flow”</li>
-<li><p>KPI tracking</p></li>
-</ul>
-</div>
+    <p>Content of GET request as list</p>
+    
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='no'>tidytracker</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='create_repo_ref.html'>create_repo_ref</a></span>(<span class='st'>'emilyriederer'</span>, <span class='st'>'tidytracker'</span>)
+<span class='no'>tt_issues_res</span> <span class='kw'>&lt;-</span> <span class='fu'>get_issues_events</span>(<span class='no'>tidytracker</span>)
+<span class='no'>tt_issues</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='parse_issues_events.html'>parse_issues_events</a></span>(<span class='no'>tt_issues_res</span>)
+<span class='co'># }</span></pre>
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
-
 </div>
-
 
       <footer>
       <div class="copyright">

@@ -117,7 +117,7 @@
       <tr>
         <th colspan="2">
           <h2 id="section-creation-functions" class="hasAnchor"><a href="#section-creation-functions" class="anchor"></a>Creation functions</h2>
-          <p class="section-desc"><p>Functions that create useful local objects</p></p>
+          <p class="section-desc"><p>Create useful local objects</p></p>
         </th>
       </tr>
       <tr>
@@ -131,7 +131,7 @@
       <tr>
         <th colspan="2">
           <h2 id="section-retrieval-functions" class="hasAnchor"><a href="#section-retrieval-functions" class="anchor"></a>Retrieval functions</h2>
-          <p class="section-desc"><p>Functions that receive data from API (GET)</p></p>
+          <p class="section-desc"><p>Receive data from API (GET)</p></p>
         </th>
       </tr>
       <tr>
@@ -143,6 +143,12 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="get_issues_events.html">get_issues_events()</a></code> </p>
+        </td>
+        <td><p>Get issues events from GitHub repository</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="get_milestones.html">get_milestones()</a></code> </p>
         </td>
         <td><p>Get milestones from GitHub repository</p></td>
@@ -151,7 +157,7 @@
       <tr>
         <th colspan="2">
           <h2 id="section-submission-functions" class="hasAnchor"><a href="#section-submission-functions" class="anchor"></a>Submission functions</h2>
-          <p class="section-desc"><p>Functions that sent data to API (PUT)</p></p>
+          <p class="section-desc"><p>Send data to API (PUT)</p></p>
         </th>
       </tr>
       <tr>
@@ -183,7 +189,7 @@
       <tr>
         <th colspan="2">
           <h2 id="section-parse-functions" class="hasAnchor"><a href="#section-parse-functions" class="anchor"></a>Parse functions</h2>
-          <p class="section-desc"><p>Functions that parse data received from API as dataframe</p></p>
+          <p class="section-desc"><p>Parse data received from API as dataframe</p></p>
         </th>
       </tr>
       <tr>
@@ -195,6 +201,12 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="parse_issues_events.html">parse_issues_events()</a></code> </p>
+        </td>
+        <td><p>Parse issues events from <code>get_issues_events</code></p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="parse_milestones.html">parse_milestones()</a></code> </p>
         </td>
         <td><p>Parse milestones from <code>get_milestones</code></p></td>
@@ -203,7 +215,7 @@
       <tr>
         <th colspan="2">
           <h2 id="section-read-functions" class="hasAnchor"><a href="#section-read-functions" class="anchor"></a>Read functions</h2>
-          <p class="section-desc"><p>Functions that read data from other formats</p></p>
+          <p class="section-desc"><p>Read data from other formats</p></p>
         </th>
       </tr>
       <tr>
@@ -212,6 +224,32 @@
           <p><code><a href="read_plan_todo_yaml.html">read_plan_todo_yaml()</a></code> </p>
         </td>
         <td><p>Read plan or to-do list from YAML</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-visualization-functions" class="hasAnchor"><a href="#section-visualization-functions" class="anchor"></a>Visualization functions</h2>
+          <p class="section-desc"><p>Visualize data for public consumption</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="viz_gantt.html">viz_gantt()</a></code> </p>
+        </td>
+        <td><p>Visualize issues by opened/closed date</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="viz_gantt_closed.html">viz_gantt_closed()</a></code> </p>
+        </td>
+        <td><p>Visualized closed issues by open date</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="viz_gantt_open.html">viz_gantt_open()</a></code> </p>
+        </td>
+        <td><p>Visualized open issues by opened/closed date</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -259,6 +297,7 @@
       <li><a href="#section-submission-functions">Submission functions</a></li>
       <li><a href="#section-parse-functions">Parse functions</a></li>
       <li><a href="#section-read-functions">Read functions</a></li>
+      <li><a href="#section-visualization-functions">Visualization functions</a></li>
       <li><a href="#section-check-functions">Check functions</a></li>
       <li><a href="#section-misc-functions">Misc functions</a></li>
     </ul>
