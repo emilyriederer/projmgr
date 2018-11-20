@@ -29,7 +29,8 @@ Suggests:
     knitr,
     reprex,
     rmarkdown,
-    yaml
+    yaml,
+    usethis
 VignetteBuilder: 
     knitr
 Encoding: UTF-8

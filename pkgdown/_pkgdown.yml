@@ -1,6 +1,8 @@
 navbar:
   title: "tidytracker"
   left:
+    - icon: fa-home
+      href: index.html
     - text: "Articles"
       href: articles/index.html
     - text: "Documentation"

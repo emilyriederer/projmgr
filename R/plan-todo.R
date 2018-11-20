@@ -136,3 +136,29 @@ post_todo <- function(ref, todo){
   return(req_issues)
 
 }
+
+#' Print YAML template to console
+#'
+#' Prints YAML templates for either a plan or to-do list to the console as an example
+#' for developing your own custom plans and to-do lists.
+#'
+#' @param template One of \code{"plan"} or \code{"todo"} denoting template desired
+#'
+#' @return Prints template to console
+#' @export
+#'
+#' @examples
+
+template_plan_todo_yaml <- function(template = c('plan', 'todo')) {
+
+  template <- match.arg(template)
+
+  path <- system.file("extdata",
+                      paste0(template, "-ex.yaml"),
+                      package = "tidytracker",
+                      mustWork = TRUE)
+
+  cat(readLines(path), sep = '\n')
+
+}
+

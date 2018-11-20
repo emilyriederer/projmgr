@@ -38,6 +38,9 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
+  <a href="../index.html">Home</a>
+</li>
+<li>
   <a href="../articles/index.html">Articles</a>
 </li>
 <li>
@@ -72,7 +75,7 @@
       <h1>Building custom plans and to-do lists</h1>
                         <h4 class="author">Emily Riederer</h4>
             
-            <h4 class="date">2018-11-20</h4>
+            <h4 class="date">2018-11-22</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/emilyriederer/tidytracker/blob/master/vignettes/building-custom-plans.Rmd"><code>vignettes/building-custom-plans.Rmd</code></a></small>
       <div class="hidden name"><code>building-custom-plans.Rmd</code></div>
@@ -177,6 +180,31 @@ plan_from_vbl &lt;-<span class="st"> </span><span class="kw"><a href="../referen
 <span class="co">#&gt;  $ milestone2:List of 2</span>
 <span class="co">#&gt;   ..$ title: chr "Make revisions"</span>
 <span class="co">#&gt;   ..$ body : chr "Repsond to feedback from reviewers"</span></code></pre></div>
+<p>Should you ever forget exactly what this YAML should look like, the <code><a href="../reference/template_plan_todo_yaml.html">template_plan_todo_yaml()</a></code> function is here to help. It prints a template example to your console:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/template_plan_todo_yaml.html">template_plan_todo_yaml</a></span>(<span class="st">"plan"</span>)
+<span class="co">#&gt; milestone1:</span>
+<span class="co">#&gt;   title: Enter a short, informative title of your goal</span>
+<span class="co">#&gt;   description: &gt;</span>
+<span class="co">#&gt;     Enter a longer description of the objectives</span>
+<span class="co">#&gt;   due_on: 2018-12-31Z12:59:59Z</span>
+<span class="co">#&gt;   issue:</span>
+<span class="co">#&gt;     - title: Title of task 1 to complete</span>
+<span class="co">#&gt;       body: Describe this step</span>
+<span class="co">#&gt;       assignees: [emilyriederer]</span>
+<span class="co">#&gt;       labels: [a, b, c]</span>
+<span class="co">#&gt;     - title: Title of task 2 to comple</span>
+<span class="co">#&gt;       body: Describe this step</span>
+<span class="co">#&gt;       labels: [low]</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; milestone2:</span>
+<span class="co">#&gt;   title: Enter another short, informative title of your goal</span>
+<span class="co">#&gt;   description: &gt;</span>
+<span class="co">#&gt;     Enter a longer description of the objectives</span>
+<span class="co">#&gt;   issue:</span>
+<span class="co">#&gt;     - title: Title of task 1 to complete</span>
+<span class="co">#&gt;       body: Describe this step</span>
+<span class="co">#&gt;     - title: Title of task 2 to complete</span>
+<span class="co">#&gt;       body: Describe this step</span></code></pre></div>
 </div>
 <div id="create-a-to-do-list-with-yaml" class="section level2">
 <h2 class="hasAnchor">
@@ -207,6 +235,17 @@ my_todo &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rea
 <p>This collection of issues can be posted to a GitHub with the <code><a href="../reference/post_todo.html">post_todo()</a></code> function.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">experigit &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_repo_ref.html">create_repo_ref</a></span>(<span class="st">"emilyriederer"</span>, <span class="st">"experigit"</span>)
 <span class="kw"><a href="../reference/post_todo.html">post_todo</a></span>(experigit, my_todo)</code></pre></div>
+<p>Just like with plans, you can also pass a character string instead of a file and use <code><a href="../reference/template_plan_todo_yaml.html">template_plan_todo_yaml()</a></code> to remind yourself of the required format:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/template_plan_todo_yaml.html">template_plan_todo_yaml</a></span>(<span class="st">"todo"</span>)
+<span class="co">#&gt; issue1:</span>
+<span class="co">#&gt;   title: Informative title</span>
+<span class="co">#&gt;   body: &gt;</span>
+<span class="co">#&gt;     Longer description of issue</span>
+<span class="co">#&gt;   assignees: [emilyriederer]</span>
+<span class="co">#&gt;   labels: [low]</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; issue2:</span>
+<span class="co">#&gt;   title: Another informative title - body not required!</span></code></pre></div>
 </div>
 <div id="create-a-plan-or-to-do-list-with-r" class="section level2">
 <h2 class="hasAnchor">

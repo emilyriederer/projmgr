@@ -76,6 +76,13 @@ plan_from_vbl <- read_plan_todo_yaml(plan_yaml_vbl)
 str(plan_from_vbl)
 ```
 
+Should you ever forget exactly what this YAML should look like, the `template_plan_todo_yaml()` function is here to help. It prints a template example to your console:
+
+```{r}
+template_plan_todo_yaml("plan")
+```
+
+
 ## Create a To-Do List with YAML
 
 The workflow for posting to-do lists is very similar to that of plans. Consider the following YAML file as an example:
@@ -98,6 +105,12 @@ This collection of issues can be posted to a GitHub with the `post_todo()` funct
 ```{r, eval = FALSE}
 experigit <- create_repo_ref("emilyriederer", "experigit")
 post_todo(experigit, my_todo)
+```
+
+Just like with plans, you can also pass a character string instead of a file and use `template_plan_todo_yaml()` to remind yourself of the required format: 
+
+```{r}
+template_plan_todo_yaml("todo")
 ```
 
 ## Create a Plan or To-Do List with R

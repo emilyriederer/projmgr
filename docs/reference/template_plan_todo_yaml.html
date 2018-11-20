@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Validate that all user-defined inputs (GET query, POST body, etc.) are valid — validate_inputs • tidytracker</title>
+<title>Print YAML template to console — template_plan_todo_yaml • tidytracker</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -32,9 +32,10 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Validate that all user-defined inputs (GET query, POST body, etc.) are valid — validate_inputs" />
+<meta property="og:title" content="Print YAML template to console — template_plan_todo_yaml" />
 
-<meta property="og:description" content="Validate that all user-defined inputs (GET query, POST body, etc.) are valid" />
+<meta property="og:description" content="Prints YAML templates for either a plan or to-do list to the console as an example
+for developing your own custom plans and to-do lists." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -107,39 +108,32 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Validate that all user-defined inputs (GET query, POST body, etc.) are valid</h1>
-    <small class="dont-index">Source: <a href='https://github.com/emilyriederer/tidytracker/blob/master/R/api-engine.R'><code>R/api-engine.R</code></a></small>
-    <div class="hidden name"><code>validate_inputs.Rd</code></div>
+    <h1>Print YAML template to console</h1>
+    <small class="dont-index">Source: <a href='https://github.com/emilyriederer/tidytracker/blob/master/R/plan-todo.R'><code>R/plan-todo.R</code></a></small>
+    <div class="hidden name"><code>template_plan_todo_yaml.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Validate that all user-defined inputs (GET query, POST body, etc.) are valid</p>
+    <p>Prints YAML templates for either a plan or to-do list to the console as an example
+for developing your own custom plans and to-do lists.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>validate_inputs</span>(<span class='no'>input</span>, <span class='no'>allowed_vars</span>)</pre>
+    <pre class="usage"><span class='fu'>template_plan_todo_yaml</span>(<span class='kw'>template</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"plan"</span>, <span class='st'>"todo"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
-      <td><p>List of user-provided input parameters</p></td>
-    </tr>
-    <tr>
-      <th>allowed_vars</th>
-      <td><p>Character vector of allowed but not required variables</p></td>
-    </tr>
-    <tr>
-      <th>required_vars</th>
-      <td><p>Character vector of required variables</p></td>
+      <th>template</th>
+      <td><p>One of <code>"plan"</code> or <code>"todo"</code> denoting template desired</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>No return. Throws errors if user-defined inputs are invalid.</p>
+    <p>Prints template to console</p>
     
 
   </div>
