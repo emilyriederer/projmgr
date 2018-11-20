@@ -37,6 +37,37 @@ parse_issues <- function(res){
 
 }
 
+#' Parse issues events from \code{get_issues_events}
+#'
+#' @inheritParams parse_issues
+#' @return \code{tibble} datasets with one record / issue-event
+#' @export
+#'
+#' @family parse, issues, events
+#'
+#' @examples
+#' \dontrun{
+#' tidytracker <- create_repo_reference('emilyriederer', 'tidytracker')
+#' tt_issues_res <- get_issues(tidytracker)
+#' tt_issues <- parse_issues(tt_issues_res)
+#' }
+
+parse_issues_events <- function(res){
+
+  purrr::map_df(1:length(res),
+         ~tibble::tibble(
+           id = res[[.]]$id,
+           actor = res[[.]]$actor$login,
+           event = res[[.]]$event,
+           created_at = res[[.]]$created_at %>% substring(1,10),
+           label = res[[.]]$label$name %||% NA,
+           issue_number = res[[.]]$issue$number,
+           issue_title = res[[.]]$issue$title
+         )
+  )
+
+}
+
 #' Parse milestones from \code{get_milestones}
 #'
 #' @inheritParams parse_issues

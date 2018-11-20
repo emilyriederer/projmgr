@@ -25,6 +25,27 @@ get_issues <- function(ref, ...){
 
 }
 
+#' Get issues events from GitHub repository
+#'
+#' @inherit get_engine return params
+#' @export
+#' @family get, issues, events
+#'
+#' @examples
+#' \dontrun{
+#' tidytracker <- create_repo_ref('emilyriederer', 'tidytracker')
+#' tt_issues_res <- get_issues_events(tidytracker)
+#' tt_issues <- parse_issues_events(tt_issues_res)
+#' }
+
+get_issues_events <- function(ref, ...){
+
+  get_engine(api_endpoint = "/issues/events",
+             ref = ref,
+             ...)
+
+}
+
 #' Get milestones from GitHub repository
 #'
 #' @inherit get_engine return params
