@@ -17,6 +17,7 @@ URL: https://github.com/emilyriederer/tidytracker
 BugReports: https://github.com/emilyriederer/tidytracker/issues
 Imports:
     dplyr,
+    ggplot2,
     gh,
     magrittr,
     purrr,
@@ -24,11 +25,11 @@ Imports:
     tidyr
 Suggests:
     clipr,
+    curl,
     knitr,
     reprex,
     rmarkdown,
-    yaml,
-    curl
+    yaml
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
