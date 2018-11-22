@@ -73,7 +73,10 @@ for developing your own custom plans and to-do lists." />
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">Home</a>
+  <a href="../index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
 </li>
 <li>
   <a href="../articles/index.html">Articles</a>
@@ -136,6 +139,30 @@ for developing your own custom plans and to-do lists.</p>
     <p>Prints template to console</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>template_plan_todo_yaml</span>(<span class='st'>'plan'</span>)</div><div class='output co'>#&gt; milestone1:
+#&gt;   title: Enter a short, informative title of your goal
+#&gt;   description: &gt;
+#&gt;     Enter a longer description of the objectives
+#&gt;   due_on: 2018-12-31Z12:59:59Z
+#&gt;   issue:
+#&gt;     - title: Title of task 1 to complete
+#&gt;       body: Describe this step
+#&gt;       assignees: [emilyriederer]
+#&gt;       labels: [a, b, c]
+#&gt;     - title: Title of task 2 to comple
+#&gt;       body: Describe this step
+#&gt;       labels: [low]
+#&gt; 
+#&gt; milestone2:
+#&gt;   title: Enter another short, informative title of your goal
+#&gt;   description: &gt;
+#&gt;     Enter a longer description of the objectives
+#&gt;   issue:
+#&gt;     - title: Title of task 1 to complete
+#&gt;       body: Describe this step
+#&gt;     - title: Title of task 2 to complete
+#&gt;       body: Describe this step</div><div class='input'><span class='fu'>tempalte_plan_todo_yaml</span>(<span class='st'>'todo'</span>)</div><div class='output co'>#&gt; <span class='error'>Error in tempalte_plan_todo_yaml("todo"): could not find function "tempalte_plan_todo_yaml"</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -143,7 +170,9 @@ for developing your own custom plans and to-do lists.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
