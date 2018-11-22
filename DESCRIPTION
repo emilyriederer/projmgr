@@ -21,6 +21,7 @@ Imports:
     gh,
     magrittr,
     purrr,
+    rlang (>= 0.1.2),
     tibble,
     tidyr
 Suggests:
@@ -29,8 +30,10 @@ Suggests:
     knitr,
     reprex,
     rmarkdown,
+    roxygen2,
+    usethis,
     yaml,
-    usethis
+    stringr
 VignetteBuilder: 
     knitr
 Encoding: UTF-8

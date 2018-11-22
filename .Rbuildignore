@@ -8,3 +8,4 @@
 ^vignettes
 ^R\draft
 ^TODO\.md$
+^\.travis\.yml$
