@@ -37,14 +37,13 @@ validate_inputs <- function(input, allowed_vars){
 #' @keywords internal
 #' @return Content of GET request as list
 
-get_engine <- function(api_endpoint, ref, ...){
+get_engine <- function(api_endpoint, ref, .limit = Inf, ...){
 
   gh::gh(
     endpoint = paste0(ref$base_url, ref$repo_path, api_endpoint),
     ...,
     .token = Sys.getenv(ref$id),
     .method = "GET",
-    .limit = Inf,
     .send_headers = c("User-Agent" = "https://github.com/emilyriederer/tidytracker")
   )
 
