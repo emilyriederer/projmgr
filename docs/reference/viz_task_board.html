@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Print YAML template to console — template_plan_todo_yaml • tidytracker</title>
+<title>Visualize Agile-style task board of issue status — viz_task_board • tidytracker</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -32,10 +32,12 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Print YAML template to console — template_plan_todo_yaml" />
+<meta property="og:title" content="Visualize Agile-style task board of issue status — viz_task_board" />
 
-<meta property="og:description" content="Prints YAML templates for either a plan or to-do list to the console as an example
-for developing your own custom plans and to-do lists." />
+<meta property="og:description" content="Produces three column task board of all issues categorized as &quot;Not Started&quot;, &quot;In Progress&quot;,
+or &quot;Done&quot;. When interativitity is enabled (by changing the  .interactive parameter
+from its default of FALSE), a tooltip is enabled to show the created_at date
+for each issue." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -111,66 +113,53 @@ for developing your own custom plans and to-do lists." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Print YAML template to console</h1>
-    <small class="dont-index">Source: <a href='https://github.com/emilyriederer/tidytracker/blob/master/R/plan-todo.R'><code>R/plan-todo.R</code></a></small>
-    <div class="hidden name"><code>template_plan_todo_yaml.Rd</code></div>
+    <h1>Visualize Agile-style task board of issue status</h1>
+    <small class="dont-index">Source: <a href='https://github.com/emilyriederer/tidytracker/blob/master/R/viz-task-board.R'><code>R/viz-task-board.R</code></a></small>
+    <div class="hidden name"><code>viz_task_board.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Prints YAML templates for either a plan or to-do list to the console as an example
-for developing your own custom plans and to-do lists.</p>
+    <p>Produces three column task board of all issues categorized as "Not Started", "In Progress",
+or "Done". When interativitity is enabled (by changing the  <code>.interactive</code> parameter
+from its default of <code>FALSE</code>), a tooltip is enabled to show the <code>created_at</code> date
+for each issue.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>template_plan_todo_yaml</span>(<span class='kw'>template</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"plan"</span>, <span class='st'>"todo"</span>))</pre>
+    <pre class="usage"><span class='fu'>viz_task_board</span>(<span class='no'>issues</span>, <span class='kw'>.interactive</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>template</th>
-      <td><p>One of <code>"plan"</code> or <code>"todo"</code> denoting template desired</p></td>
+      <th>issues</th>
+      <td><p>Issues dataset as produced by <code><a href='parse_issues.html'>parse_issues()</a></code></p></td>
+    </tr>
+    <tr>
+      <th>.interactive</th>
+      <td><p>If true, uses <code>ggplotly</code> to add interative tooltip with issue created date</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Prints template to console</p>
+    <p>ggplot object</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The following logic is used to determine the status of each issue:</p><ul>
+<li><p>Not Started: <code>closed_at</code> is NA and no <code>in-progress</code> label</p></li>
+<li><p>In Progress: <code>closed_at</code> is NA but <code>in-progress</code> label exists</p></li>
+<li><p>Done: <code>closed_at</code> is not NA</p></li>
+</ul>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>template_plan_todo_yaml</span>(<span class='st'>'plan'</span>)</div><div class='output co'>#&gt; milestone1:
-#&gt;   title: Enter a short, informative title of your goal
-#&gt;   description: &gt;
-#&gt;     Enter a longer description of the objectives
-#&gt;   due_on: 2018-12-31Z12:59:59Z
-#&gt;   issue:
-#&gt;     - title: Title of task 1 to complete
-#&gt;       body: Describe this step
-#&gt;       assignees: [emilyriederer]
-#&gt;       labels: [a, b, c]
-#&gt;     - title: Title of task 2 to comple
-#&gt;       body: Describe this step
-#&gt;       labels: [low]
-#&gt; 
-#&gt; milestone2:
-#&gt;   title: Enter another short, informative title of your goal
-#&gt;   description: &gt;
-#&gt;     Enter a longer description of the objectives
-#&gt;   issue:
-#&gt;     - title: Title of task 1 to complete
-#&gt;       body: Describe this step
-#&gt;     - title: Title of task 2 to complete
-#&gt;       body: Describe this step</div><div class='input'><span class='fu'>template_plan_todo_yaml</span>(<span class='st'>'todo'</span>)</div><div class='output co'>#&gt; issue1:
-#&gt;   title: Informative title
-#&gt;   body: &gt;
-#&gt;     Longer description of issue
-#&gt;   assignees: [emilyriederer]
-#&gt;   labels: [low]
-#&gt; 
-#&gt; issue2:
-#&gt;   title: Another informative title - body not required!</div></pre>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='no'>tidytracker_issues</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_issues.html'>get_issues</a></span>(<span class='no'>tidytracker</span>, <span class='kw'>milestone</span> <span class='kw'>=</span> <span class='fl'>1</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='parse_issues.html'>parse_issues</a></span>()
+<span class='fu'>viz_task_board</span>(<span class='no'>tidytracker_issues</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -178,6 +167,8 @@ for developing your own custom plans and to-do lists.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

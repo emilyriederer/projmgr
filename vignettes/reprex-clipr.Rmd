@@ -49,7 +49,7 @@ issue <- get_issues(experigit, number = 82)
 issue[[1]][["body"]] %>% clipr::write_clip()
 
 # strip markdown formatting to revert to initial state
-reprex_invert()
+reprex::reprex_invert()
 
 # then paste to console
 ```
