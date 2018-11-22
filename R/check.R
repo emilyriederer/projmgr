@@ -51,7 +51,7 @@ check_authentication <- function(ref){
 }
 
 
-#' Check internet connection
+#' Check internet connection (re-export of curl::has_internet())
 #'
 #' Basic wrapper around \code{curl::has_internet()}
 #'

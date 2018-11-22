@@ -2,27 +2,34 @@
 % Please edit documentation in R/viz-gantt.R
 \name{viz_gantt_closed}
 \alias{viz_gantt_closed}
-\title{Visualized closed issues by open date}
+\title{Visualize Gannt-style chart of closed issues}
 \usage{
-viz_gantt_closed(issues)
+viz_gantt_closed(issues, start = created_at, end = closed_at)
 }
 \arguments{
-\item{issues}{Issues dataset from output of \code{tidytracker::parse_issues}}
+\item{issues}{Issues dataset as produced by \code{parse_issues()}}
+
+\item{start}{Unquoted variable name denoting issue start date}
+
+\item{end}{Unquoted variable name denoting issue end date}
 }
 \value{
-Gantt style \code{ggplot2} object with one row / issue
+ggplot object
 }
 \description{
-Creates Gannt-style chart showing var for length of time each issue was opened.
-Issues are colored by duration of time open.
+Produces plot of all closed issues from start date to end date, based on output of
+issues from \code{tidytracker::get_issues} and \code{tidytracker::parse_issues}. Plot
+has one row per issues spanning from \code{start} to \code{end}.
+}
+\details{
+By default, the start date is the issue's \code{created_at} date, and the end date is
+the issue's \code{closed_at} date. However, either of these can be altered via the
+\code{start} and \code{end} parameters since these dates might not be reflective of the
+true timeframe (e.g. if issues are posted well in advance of work beginning.)
 }
 \examples{
 \dontrun{
-dplyr <- create_repo_ref('tidyverse', 'dplyr')
-dplyr_issues_raw <- get_issues(dplyr, milestone = 1, state = "all")
-dplyr_issues <- parse_issues(dplyr_issues_raw)
-dplyr_issues \%>\%
- mutate_at(vars(created_at, closed_at), lubridate::as_date ) \%>\%
- viz_gantt_closed()
+tidytracker_issues <- get_issues(tidytracker, state = "closed") \%>\% parse_issues()
+viz_gantt_closed(tidytracker_issues)
 }
 }

@@ -148,6 +148,8 @@ post_todo <- function(ref, todo){
 #' @export
 #'
 #' @examples
+#' template_plan_todo_yaml('plan')
+#' template_plan_todo_yaml('todo')
 
 template_plan_todo_yaml <- function(template = c('plan', 'todo')) {
 

@@ -16,3 +16,7 @@ Prints template to console
 Prints YAML templates for either a plan or to-do list to the console as an example
 for developing your own custom plans and to-do lists.
 }
+\examples{
+template_plan_todo_yaml('plan')
+template_plan_todo_yaml('todo')
+}

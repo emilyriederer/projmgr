@@ -2,7 +2,7 @@
 % Please edit documentation in R/check.R
 \name{check_internet}
 \alias{check_internet}
-\title{Check internet connection}
+\title{Check internet connection (re-export of curl::has_internet())}
 \usage{
 check_internet()
 }

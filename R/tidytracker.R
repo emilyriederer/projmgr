@@ -12,6 +12,8 @@ NULL
 globalVars <- c(
   # from tidytracker plan
   "issue", "milestone",
+  # from tidytracker viz gantt
+  "created_at", "closed_at", "state", "id", "title", "id_label",
   # from tidyverse
   ".")
 
