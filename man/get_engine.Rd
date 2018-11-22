@@ -4,7 +4,7 @@
 \alias{get_engine}
 \title{Core code for all GET calls}
 \usage{
-get_engine(api_endpoint, ref, ...)
+get_engine(api_endpoint, ref, .limit = Inf, ...)
 }
 \arguments{
 \item{api_endpoint}{API endpoint}
