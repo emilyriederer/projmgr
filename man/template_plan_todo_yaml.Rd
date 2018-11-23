@@ -20,3 +20,9 @@ for developing your own custom plans and to-do lists.
 template_plan_todo_yaml('plan')
 template_plan_todo_yaml('todo')
 }
+\seealso{
+Other plans and todos: \code{\link{post_plan}},
+  \code{\link{post_todo}},
+  \code{\link{read_plan_todo_yaml}}
+}
+\concept{plans and todos}

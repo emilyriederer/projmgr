@@ -28,4 +28,11 @@ post_milestone(tidytracker,
   due_on = '2018-12-31T12:59:59z')
 }
 }
-\concept{post, milestones}
+\seealso{
+Other post: \code{\link{post_issue}}
+
+Other milestones: \code{\link{get_milestones}},
+  \code{\link{parse_milestones}}
+}
+\concept{milestones}
+\concept{post}

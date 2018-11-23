@@ -24,4 +24,15 @@ tt_issues_res <- get_issues(tidytracker)
 tt_issues <- parse_issues(tt_issues_res)
 }
 }
-\concept{get, issues}
+\seealso{
+Other get: \code{\link{get_issues_events}},
+  \code{\link{get_milestones}}
+
+Other issues: \code{\link{get_issues_events}},
+  \code{\link{parse_issues_events}},
+  \code{\link{parse_issues}}, \code{\link{post_issue}},
+  \code{\link{viz_gantt_closed}},
+  \code{\link{viz_task_board}}
+}
+\concept{get}
+\concept{issues}

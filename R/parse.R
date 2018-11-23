@@ -4,7 +4,8 @@
 #' @return \code{tibble} datasets with one record / issue
 #' @export
 #'
-#' @family parse, issues
+#' @family parse
+#' @family issues
 #'
 #' @examples
 #' \dontrun{
@@ -43,7 +44,9 @@ parse_issues <- function(res){
 #' @return \code{tibble} datasets with one record / issue-event
 #' @export
 #'
-#' @family parse, issues, events
+#' @family parse
+#' @family issues
+#' @family events
 #'
 #' @examples
 #' \dontrun{
@@ -74,7 +77,8 @@ parse_issues_events <- function(res){
 #' @return `tibble` datasets with one record / milestone
 #' @export
 #'
-#' @family parse, milestones
+#' @family parse
+#' @family milestones
 #'
 #' @examples
 #' \dontrun{

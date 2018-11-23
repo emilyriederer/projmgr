@@ -15,6 +15,7 @@
 #'
 #' @return ggplot object
 #' @export
+#' @family issues
 #'
 #' @import ggplot2
 #'

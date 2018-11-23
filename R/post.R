@@ -3,7 +3,8 @@
 #' @inherit post_engine return params
 #' @param title Issue title (required)
 #' @export
-#' @family post, issues
+#' @family post
+#' @family issues
 #'
 #' @examples
 #' \dontrun{
@@ -40,7 +41,8 @@ post_issue <- function(ref, title, ...){
 #' @inherit post_engine return params
 #' @param title Milestone title (required)
 #' @export
-#' @family post, milestones
+#' @family post
+#' @family milestones
 #'
 #' @examples
 #' \dontrun{

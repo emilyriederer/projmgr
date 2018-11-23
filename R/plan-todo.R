@@ -146,6 +146,7 @@ post_todo <- function(ref, todo){
 #'
 #' @return Prints template to console
 #' @export
+#' @family plans and todos
 #'
 #' @examples
 #' template_plan_todo_yaml('plan')

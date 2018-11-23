@@ -34,3 +34,11 @@ tidytracker_issues <- get_issues(tidytracker, milestone = 1) \%>\% parse_issues(
 viz_task_board(tidytracker_issues)
 }
 }
+\seealso{
+Other issues: \code{\link{get_issues_events}},
+  \code{\link{get_issues}},
+  \code{\link{parse_issues_events}},
+  \code{\link{parse_issues}}, \code{\link{post_issue}},
+  \code{\link{viz_gantt_closed}}
+}
+\concept{issues}

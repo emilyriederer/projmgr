@@ -24,4 +24,12 @@ tt_milestones_res <- get_milestones(tidytracker)
 milestones <- parse_milestones(tt_milestones_res)
 }
 }
-\concept{get, milestones}
+\seealso{
+Other get: \code{\link{get_issues_events}},
+  \code{\link{get_issues}}
+
+Other milestones: \code{\link{parse_milestones}},
+  \code{\link{post_milestone}}
+}
+\concept{get}
+\concept{milestones}

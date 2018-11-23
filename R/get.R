@@ -2,7 +2,8 @@
 #'
 #' @inherit get_engine return params
 #' @export
-#' @family get, issues
+#' @family get
+#' @family issues
 #'
 #' @examples
 #' \dontrun{
@@ -29,7 +30,10 @@ get_issues <- function(ref, ...){
 #'
 #' @inherit get_engine return params
 #' @export
-#' @family get, issues, events
+#'
+#' @family get
+#' @family issues
+#' @family events
 #'
 #' @examples
 #' \dontrun{
@@ -50,7 +54,9 @@ get_issues_events <- function(ref, ...){
 #'
 #' @inherit get_engine return params
 #' @export
-#' @family get, milestones
+#'
+#' @family get
+#' @family milestones
 #'
 #' @examples
 #' \dontrun{
