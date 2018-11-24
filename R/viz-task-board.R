@@ -29,6 +29,8 @@
 
 viz_task_board <- function(issues, .interactive = FALSE){
 
+  data <- issues
+
   # create board headers ----
   data$board_group <- "Not Started"
   data$board_group[purrr::map_lgl(data$label, ~"in-progress" %in% .)] <- "In Progress"
@@ -37,8 +39,8 @@ viz_task_board <- function(issues, .interactive = FALSE){
                              levels = c("Not Started", "In Progress", "Done"))
 
   # create position and color aesthetics ----
-  data$board_pos <- -1 * stats::ave(data$id, data$board_group, FUN = seq_along())
-  data$board_col <- sample(letters[1:20], 5, replace = TRUE)
+  data$board_pos <- -1 * stats::ave(data$id, data$board_group, FUN = seq_along)
+  data$board_col <- sample(letters[1:20], nrow(data), replace = TRUE)
 
 
   # create ggplot object of task board ----
