@@ -41,7 +41,7 @@ Other post: \code{\link{post_milestone}}
 
 Other issues: \code{\link{get_issues_events}},
   \code{\link{get_issues}},
-  \code{\link{parse_issues_events}},
+  \code{\link{parse_issue_events}},
   \code{\link{parse_issues}},
   \code{\link{viz_gantt_closed}},
   \code{\link{viz_task_board}}

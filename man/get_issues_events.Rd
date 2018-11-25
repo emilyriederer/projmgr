@@ -2,26 +2,26 @@
 % Please edit documentation in R/get.R
 \name{get_issues_events}
 \alias{get_issues_events}
-\title{Get issues events from GitHub repository}
+\title{Get events for a specific issue from GitHub repository}
 \usage{
-get_issues_events(ref, ...)
+get_issues_events(ref, number)
 }
 \arguments{
 \item{ref}{Repository reference (list) created by \code{tidytracker::create_repo_ref}}
 
-\item{...}{Additional user-defined query parameters}
+\item{number}{Number of issue}
 }
 \value{
 Content of GET request as list
 }
 \description{
-Get issues events from GitHub repository
+Get events for a specific issue from GitHub repository
 }
 \examples{
 \dontrun{
 tidytracker <- create_repo_ref('emilyriederer', 'tidytracker')
-tt_issues_res <- get_issues_events(tidytracker)
-tt_issues <- parse_issues_events(tt_issues_res)
+tt_events_res <- get_issue_events(tidytracker, number = 1)
+tt_events <- parse_issue_events(tt_events_res)
 }
 }
 \seealso{
@@ -29,12 +29,12 @@ Other get: \code{\link{get_issues}},
   \code{\link{get_milestones}}
 
 Other issues: \code{\link{get_issues}},
-  \code{\link{parse_issues_events}},
+  \code{\link{parse_issue_events}},
   \code{\link{parse_issues}}, \code{\link{post_issue}},
   \code{\link{viz_gantt_closed}},
   \code{\link{viz_task_board}}
 
-Other events: \code{\link{parse_issues_events}}
+Other events: \code{\link{parse_issue_events}}
 }
 \concept{events}
 \concept{get}

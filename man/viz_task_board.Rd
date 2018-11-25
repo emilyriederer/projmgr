@@ -37,7 +37,7 @@ viz_task_board(tidytracker_issues)
 \seealso{
 Other issues: \code{\link{get_issues_events}},
   \code{\link{get_issues}},
-  \code{\link{parse_issues_events}},
+  \code{\link{parse_issue_events}},
   \code{\link{parse_issues}}, \code{\link{post_issue}},
   \code{\link{viz_gantt_closed}}
 }

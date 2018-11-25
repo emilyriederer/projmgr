@@ -23,7 +23,7 @@ tt_milestones <- parse_milestones(tt_milestones_res)
 }
 }
 \seealso{
-Other parse: \code{\link{parse_issues_events}},
+Other parse: \code{\link{parse_issue_events}},
   \code{\link{parse_issues}}
 
 Other milestones: \code{\link{get_milestones}},

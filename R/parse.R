@@ -38,7 +38,7 @@ parse_issues <- function(res){
 
 }
 
-#' Parse issues events from \code{get_issues_events}
+#' Parse issue events from \code{get_issues_events}
 #'
 #' @inheritParams parse_issues
 #' @return \code{tibble} datasets with one record / issue-event
@@ -50,12 +50,12 @@ parse_issues <- function(res){
 #'
 #' @examples
 #' \dontrun{
-#' tidytracker <- create_repo_reference('emilyriederer', 'tidytracker')
-#' tt_issues_res <- get_issues(tidytracker)
-#' tt_issues <- parse_issues(tt_issues_res)
+#' tidytracker <- create_repo_ref('emilyriederer', 'tidytracker')
+#' tt_events_res <- get_issue_events(tidytracker, number = 1)
+#' tt_events <- parse_issue_events(tt_events_res)
 #' }
 
-parse_issues_events <- function(res){
+parse_issue_events <- function(res){
 
   purrr::map_df(1:length(res),
          ~tibble::tibble(
