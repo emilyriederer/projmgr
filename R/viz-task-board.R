@@ -80,3 +80,65 @@ viz_task_board <- function(issues, .interactive = FALSE){
   }
 
 }
+
+#' Save SVG of Agile-style task board of issue status with links to issues
+#'
+#' This function creates the same plot as \code{viz_task_board} then edits the
+#' underlying XML so that the "cards" are linked to the corresponding issues on GitHub.
+#' It saves a file with the reuslting SVG, which can then be read into an RMarkdown
+#' HTML document as shown in the Examples.
+#'
+#' Credit goes to this Stack Overflow answer for figuring out how to do this:
+#' https://stackoverflow.com/questions/42259826/hyperlinking-text-in-a-ggplot2-visualization/42262407
+#'
+#' @inheritParams viz_task_board
+#' @param filepath Location to save resulting SVG file of ggplot2
+#'
+#' @return Writes SVG to file and also returns the body so that is can be easily put
+#'     into an RMarkdown (with use of the \code{results = 'asis'}) chunk option
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' # In R:
+#' viz_task_board_svg(issues, "my_folder/my_file")
+#'
+#' # In RMarkdown knitting to HTML:
+#' ```{r results = 'asis', echo = FALSE}
+#' cat(readLines("my_folder/my_file"), sep = "\n")
+#' ````
+#' }
+
+viz_task_board_svg <- function(issues, filepath){
+
+  if (!requireNamespace("xml2", quietly = TRUE)) {
+    message(
+      paste0("Package \"xml2\" is needed to edit SVG.",
+             "Please install \"xml2\" or use viz_task_board for the non-linked version."),
+      call. = FALSE)
+  }
+
+  # save current ggplot at svg
+  g <- viz_task_board(issues)
+  ggsave( paste0(filepath, ".svg"), g )
+
+  # update svg w links
+  links <-
+    tibble::tibble(
+      url = issues$url,
+      name =
+        paste0("#", issues$id, ": ", issues$title) %>%
+        stringr::str_wrap(width = 20) %>%
+        stringr::str_split("\\n")
+    ) %>%
+    tidyr::unnest() %>%
+    {setNames(.$url, .$name)}
+
+  xml <- xml2::read_xml(paste0(filepath, ".svg"))
+  xml %>%
+    xml2::xml_find_all(xpath="//d1:text") %>%
+    purrr::keep(xml2::xml_text(.) %in% names(links)) %>%
+    xml2::xml_add_parent("a", "xlink:href" = links[xml2::xml_text(.)], target = "_blank")
+  xml2::write_xml(xml, paste0(filepath, ".svg") )
+
+}
