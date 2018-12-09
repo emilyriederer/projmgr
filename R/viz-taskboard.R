@@ -76,27 +76,25 @@ viz_taskboard <- function(issues, .interactive = FALSE){
 #' Credit goes to this Stack Overflow answer for figuring out how to do this:
 #' https://stackoverflow.com/questions/42259826/hyperlinking-text-in-a-ggplot2-visualization/42262407
 #'
-#' @inheritParams viz_gantt_closed_linkedfile
-#' @param filepath Location to save resulting SVG file of ggplot2
-#'
-#' @return Writes SVG to file and also returns the body so that is can be easily put
-#'     into an RMarkdown (with use of the \code{results = 'asis'}) chunk option
+#' @inheritParams viz_gantt_closed_links
+#' @inherit viz_gantt_closed_links return
 #' @export
 #'
 #' @family issues
 #'
 #' @examples
 #' \dontrun{
-#' # In R:
-#' viz_taskboard_linkedfile(issues, "my_folder/my_file")
+#' # In R, to save to file:
+#' viz_taskboard_links(issues, "my_folder/my_file.svg")
 #'
-#' # In RMarkdown knitting to HTML:
+#' # In RMarkdown chunk, to print as output:
 #' ```{r results = 'asis', echo = FALSE}
-#' cat(readLines("my_folder/my_file"), sep = "\n")
+#' g <- viz_taskboard(issues)
+#' viz_taskboard_links(g)
 #' ````
 #' }
 
-viz_taskboard_linkedfile <- function(g, filepath){
+viz_taskboard_links <- function(g, filepath){
 
   if (!requireNamespace("xml2", quietly = TRUE)) {
     message(
@@ -106,7 +104,8 @@ viz_taskboard_linkedfile <- function(g, filepath){
   }
 
   # save current ggplot at svg
-  ggsave( paste0(filepath, ".svg"), g )
+  tf <- tempfile(fileext = ".svg")
+  ggsave(tf , g )
 
   # update svg w links
   links <- tibble::tibble(
@@ -119,11 +118,18 @@ viz_taskboard_linkedfile <- function(g, filepath){
     tidyr::unnest() %>%
     {setNames(.$url, .$name)}
 
-  xml <- xml2::read_xml(paste0(filepath, ".svg"))
+  xml <- xml2::read_xml(tf)
   xml %>%
     xml2::xml_find_all(xpath="//d1:text") %>%
     purrr::keep(xml2::xml_text(.) %in% names(links)) %>%
     xml2::xml_add_parent("a", "xlink:href" = links[xml2::xml_text(.)], target = "_blank")
-  xml2::write_xml(xml, paste0(filepath, ".svg") )
+
+  if(missing(filepath)){
+    cat(readLines(tf), sep = "\n")
+  }
+  else{ xml2::write_xml(xml, filepath ) }
+
+  # clean up environment
+  unlink(tf)
 
 }
