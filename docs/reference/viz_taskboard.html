@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get events for a specific issue from GitHub repository — get_issues_events • tidytracker</title>
+<title>Visualize Agile-style task board of issue status — viz_taskboard • tidytracker</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -32,9 +32,12 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Get events for a specific issue from GitHub repository — get_issues_events" />
+<meta property="og:title" content="Visualize Agile-style task board of issue status — viz_taskboard" />
 
-<meta property="og:description" content="Get events for a specific issue from GitHub repository" />
+<meta property="og:description" content="Produces three column task board of all issues categorized as &quot;Not Started&quot;, &quot;In Progress&quot;,
+or &quot;Done&quot;. When interativitity is enabled (by changing the  .interactive parameter
+from its default of FALSE), a tooltip is enabled to show the created_at date
+for each issue." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -110,55 +113,58 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get events for a specific issue from GitHub repository</h1>
-    <small class="dont-index">Source: <a href='https://github.com/emilyriederer/tidytracker/blob/master/R/get.R'><code>R/get.R</code></a></small>
-    <div class="hidden name"><code>get_issues_events.Rd</code></div>
+    <h1>Visualize Agile-style task board of issue status</h1>
+    <small class="dont-index">Source: <a href='https://github.com/emilyriederer/tidytracker/blob/master/R/viz-task-board.R'><code>R/viz-task-board.R</code></a></small>
+    <div class="hidden name"><code>viz_taskboard.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Get events for a specific issue from GitHub repository</p>
+    <p>Produces three column task board of all issues categorized as "Not Started", "In Progress",
+or "Done". When interativitity is enabled (by changing the  <code>.interactive</code> parameter
+from its default of <code>FALSE</code>), a tooltip is enabled to show the <code>created_at</code> date
+for each issue.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_issues_events</span>(<span class='no'>ref</span>, <span class='no'>number</span>)</pre>
+    <pre class="usage"><span class='fu'>viz_taskboard</span>(<span class='no'>issues</span>, <span class='kw'>.interactive</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>ref</th>
-      <td><p>Repository reference (list) created by <code><a href='create_repo_ref.html'>tidytracker::create_repo_ref</a></code></p></td>
-    </tr>
-    <tr>
-      <th>number</th>
-      <td><p>Number of issue</p></td>
+      <th>issues</th>
+      <td><p>Issues dataset as produced by <code><a href='parse_issues.html'>parse_issues()</a></code></p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Content of GET request as list</p>
+    <p>ggplot object</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The following logic is used to determine the status of each issue:</p><ul>
+<li><p>Not Started: <code>closed_at</code> is NA and no <code>in-progress</code> label</p></li>
+<li><p>In Progress: <code>closed_at</code> is NA but <code>in-progress</code> label exists</p></li>
+<li><p>Done: <code>closed_at</code> is not NA</p></li>
+</ul>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other get: <code><a href='get_issues.html'>get_issues</a></code>,
-  <code><a href='get_milestones.html'>get_milestones</a></code></p>
-<p>Other issues: <code><a href='get_issues.html'>get_issues</a></code>,
+    <div class='dont-index'><p>Other issues: <code><a href='get_issues_events.html'>get_issues_events</a></code>,
+  <code><a href='get_issues.html'>get_issues</a></code>,
   <code><a href='parse_issue_events.html'>parse_issue_events</a></code>,
   <code><a href='parse_issues.html'>parse_issues</a></code>, <code><a href='post_issue.html'>post_issue</a></code>,
   <code><a href='viz_gantt_closed_linkedfile.html'>viz_gantt_closed_linkedfile</a></code>,
   <code><a href='viz_gantt_closed.html'>viz_gantt_closed</a></code>,
-  <code><a href='viz_taskboard_linkedfile.html'>viz_taskboard_linkedfile</a></code>,
-  <code><a href='viz_taskboard.html'>viz_taskboard</a></code></p>
-<p>Other events: <code><a href='parse_issue_events.html'>parse_issue_events</a></code></p></div>
+  <code><a href='viz_taskboard_linkedfile.html'>viz_taskboard_linkedfile</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='no'>tidytracker</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='create_repo_ref.html'>create_repo_ref</a></span>(<span class='st'>'emilyriederer'</span>, <span class='st'>'tidytracker'</span>)
-<span class='no'>tt_events_res</span> <span class='kw'>&lt;-</span> <span class='fu'>get_issue_events</span>(<span class='no'>tidytracker</span>, <span class='kw'>number</span> <span class='kw'>=</span> <span class='fl'>1</span>)
-<span class='no'>tt_events</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='parse_issue_events.html'>parse_issue_events</a></span>(<span class='no'>tt_events_res</span>)
+<span class='no'>tidytracker_issues</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_issues.html'>get_issues</a></span>(<span class='no'>tidytracker</span>, <span class='kw'>milestone</span> <span class='kw'>=</span> <span class='fl'>1</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='parse_issues.html'>parse_issues</a></span>()
+<span class='fu'>viz_task_board</span>(<span class='no'>tidytracker_issues</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -167,6 +173,8 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
       
