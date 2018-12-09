@@ -78,7 +78,7 @@ viz_gantt_closed <- function(issues, start = created_at, end = closed_at){
 #' @examples
 #' \dontrun{
 #' # In R:
-#' viz_gantt_closed_linkedfile(issues, "my_folder/my_file")
+#' viz_gantt_closed_linkfile(issues, "my_folder/my_file")
 #'
 #' # In RMarkdown knitting to HTML:
 #' ```{r results = 'asis', echo = FALSE}
@@ -86,7 +86,7 @@ viz_gantt_closed <- function(issues, start = created_at, end = closed_at){
 #' ````
 #' }
 
-viz_gantt_closed_linkedfile <- function(g, filepath){
+viz_gantt_closed_linkfile <- function(g, filepath){
 
   if (!requireNamespace("xml2", quietly = TRUE)) {
     message(
@@ -99,7 +99,15 @@ viz_gantt_closed_linkedfile <- function(g, filepath){
   ggsave( paste0(filepath, ".svg"), g )
 
   # update svg w links
-  links <- setNames(g$data$url, g$data$title)
+  links <- tibble::tibble(
+    url = g$data$url,
+    name =
+      paste0("#", issues$id, ": ", issues$title) %>%
+      stringr::str_wrap(width = 30) %>%
+      stringr::str_split("\\n")
+  ) %>%
+    tidyr::unnest() %>%
+    {setNames(.$url, .$name)}
 
   xml <- xml2::read_xml(paste0(filepath, ".svg"))
   xml %>%
