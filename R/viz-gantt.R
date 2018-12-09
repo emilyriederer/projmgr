@@ -57,11 +57,56 @@ viz_gantt_closed <- function(issues, start = created_at, end = closed_at){
     guides(col = FALSE)
 }
 
-# library(dplyr)
-#
-# dplyr <- create_repo_ref("tidyverse", "dplyr")
-# dplyr_issues <- get_issues(dplyr, state = "closed", milestone = 1) %>% parse_issues()
-#
-# dplyr_issues %>%
-#   mutate_at(vars(created_at, closed_at), lubridate::as_date) %>%
-#   viz_gantt_closed()
+#' Save SVG of Gantt-style chart of closed issues with links to issues
+#'
+#' This function creates the same plot as \code{viz_gantt_closed} then edits the
+#' underlying XML so that the titles of the issues on the y-axis are linked to the
+#' actual issue on GitHub
+#'
+#' Credit goes to this Stack Overflow answer for figuring out how to do this:
+#' https://stackoverflow.com/questions/42259826/hyperlinking-text-in-a-ggplot2-visualization/42262407
+#'
+#' @param g ggplot2 object returned by \code{viz_gantt_closed()}
+#' @param filepath Location to save resulting SVG file of ggplot2
+#'
+#' @return Writes SVG to file and also returns the body so that is can be easily put
+#'     into an RMarkdown (with use of the \code{results = 'asis'}) chunk option
+#' @export
+#'
+#' @family issues
+#'
+#' @examples
+#' \dontrun{
+#' # In R:
+#' viz_gantt_closed_linkedfile(issues, "my_folder/my_file")
+#'
+#' # In RMarkdown knitting to HTML:
+#' ```{r results = 'asis', echo = FALSE}
+#' cat(readLines("my_folder/my_file"), sep = "\n")
+#' ````
+#' }
+
+viz_gantt_closed_linkedfile <- function(g, filepath){
+
+  if (!requireNamespace("xml2", quietly = TRUE)) {
+    message(
+      paste0("Package \"xml2\" is needed to edit SVG.",
+             "Please install \"xml2\" or use viz_gantt_closed for the non-linked version."),
+      call. = FALSE)
+  }
+
+  # save current ggplot at svg
+  ggsave( paste0(filepath, ".svg"), g )
+
+  # update svg w links
+  links <- setNames(g$data$url, g$data$title)
+
+  xml <- xml2::read_xml(paste0(filepath, ".svg"))
+  xml %>%
+    xml2::xml_find_all(xpath="//d1:text") %>%
+    purrr::keep(xml2::xml_text(.) %in% names(links)) %>%
+    xml2::xml_add_parent("a", "xlink:href" = links[xml2::xml_text(.)], target = "_blank")
+  xml2::write_xml(xml, paste0(filepath, ".svg") )
+
+}
+

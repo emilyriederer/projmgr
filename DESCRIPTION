@@ -34,6 +34,7 @@ Suggests:
     roxygen2,
     stringr,
     usethis,
+    xml2,
     yaml
 VignetteBuilder: 
     knitr

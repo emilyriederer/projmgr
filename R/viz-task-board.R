@@ -13,7 +13,6 @@
 #' }
 #'
 #' @inheritParams viz_gantt_closed
-#' @param .interactive If true, uses \code{ggplotly} to add interative tooltip with issue created date
 #'
 #' @return ggplot object
 #' @export
@@ -27,7 +26,7 @@
 #' viz_task_board(tidytracker_issues)
 #' }
 
-viz_task_board <- function(issues, .interactive = FALSE){
+viz_taskboard <- function(issues, .interactive = FALSE){
 
   data <- issues
 
@@ -63,27 +62,13 @@ viz_task_board <- function(issues, .interactive = FALSE){
           strip.text.x = element_text(size = 12),
           legend.position = 'none')
 
-  if(!.interactive){
-    return(g)
-  }
-  else{
-
-    if (!requireNamespace("plotly", quietly = TRUE)) {
-      message(
-        paste0("Package \"plotly\" is needed to enable interactivity.",
-               "Please install \"plotly\" and rerun if you want tooltip."),
-        call. = FALSE)
-    }
-
-    return(plotly::ggplotly(g, tooltip = "Created"))
-
-  }
+  return(g)
 
 }
 
 #' Save SVG of Agile-style task board of issue status with links to issues
 #'
-#' This function creates the same plot as \code{viz_task_board} then edits the
+#' This function creates the same plot as \code{viz_taskboard} then edits the
 #' underlying XML so that the "cards" are linked to the corresponding issues on GitHub.
 #' It saves a file with the reuslting SVG, which can then be read into an RMarkdown
 #' HTML document as shown in the Examples.
@@ -91,17 +76,19 @@ viz_task_board <- function(issues, .interactive = FALSE){
 #' Credit goes to this Stack Overflow answer for figuring out how to do this:
 #' https://stackoverflow.com/questions/42259826/hyperlinking-text-in-a-ggplot2-visualization/42262407
 #'
-#' @inheritParams viz_task_board
+#' @inheritParams viz_gantt_closed_linkedfile
 #' @param filepath Location to save resulting SVG file of ggplot2
 #'
 #' @return Writes SVG to file and also returns the body so that is can be easily put
 #'     into an RMarkdown (with use of the \code{results = 'asis'}) chunk option
 #' @export
 #'
+#' @family issues
+#'
 #' @examples
 #' \dontrun{
 #' # In R:
-#' viz_task_board_svg(issues, "my_folder/my_file")
+#' viz_taskboard_linkedfile(issues, "my_folder/my_file")
 #'
 #' # In RMarkdown knitting to HTML:
 #' ```{r results = 'asis', echo = FALSE}
@@ -109,23 +96,21 @@ viz_task_board <- function(issues, .interactive = FALSE){
 #' ````
 #' }
 
-viz_task_board_svg <- function(issues, filepath){
+viz_taskboard_linkedfile <- function(g, filepath){
 
   if (!requireNamespace("xml2", quietly = TRUE)) {
     message(
       paste0("Package \"xml2\" is needed to edit SVG.",
-             "Please install \"xml2\" or use viz_task_board for the non-linked version."),
+             "Please install \"xml2\" or use viz_taskboard for the non-linked version."),
       call. = FALSE)
   }
 
   # save current ggplot at svg
-  g <- viz_task_board(issues)
   ggsave( paste0(filepath, ".svg"), g )
 
   # update svg w links
-  links <-
-    tibble::tibble(
-      url = issues$url,
+  links <- tibble::tibble(
+      url = g$data$url,
       name =
         paste0("#", issues$id, ": ", issues$title) %>%
         stringr::str_wrap(width = 20) %>%

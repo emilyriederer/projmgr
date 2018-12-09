@@ -29,8 +29,11 @@ Other parse: \code{\link{parse_issue_events}},
 Other issues: \code{\link{get_issues_events}},
   \code{\link{get_issues}},
   \code{\link{parse_issue_events}},
-  \code{\link{post_issue}}, \code{\link{viz_gantt_closed}},
-  \code{\link{viz_task_board}}
+  \code{\link{post_issue}},
+  \code{\link{viz_gantt_closed_linkedfile}},
+  \code{\link{viz_gantt_closed}},
+  \code{\link{viz_taskboard_linkedfile}},
+  \code{\link{viz_taskboard}}
 }
 \concept{issues}
 \concept{parse}
