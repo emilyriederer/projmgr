@@ -106,22 +106,22 @@ viz_gantt_closed_links <- function(g, filepath){
   links <- tibble::tibble(
     url = g$data$url,
     name =
-      paste0("#", issues$id, ": ", issues$title) %>%
+      g$data$title %>%
       stringr::str_wrap(width = 30) %>%
       stringr::str_split("\\n")
   ) %>%
     tidyr::unnest() %>%
-    {setNames(.$url, .$name)}
+    {stats::setNames(.$url, .$name)}
 
   xml <- xml2::read_xml(tf)
   xml %>%
     xml2::xml_find_all(xpath="//d1:text") %>%
     purrr::keep(xml2::xml_text(.) %in% names(links)) %>%
     xml2::xml_add_parent("a", "xlink:href" = links[xml2::xml_text(.)], target = "_blank")
-  xml2::write_xml(xml, paste0(filepath, ".svg") )
 
   if(missing(filepath)){
-    cat(readLines(tf), sep = "\n")
+    xml2::write_xml(xml, tf)
+    cat( readLines(tf), sep = "\n" )
   }
   else{ xml2::write_xml(xml, filepath ) }
 

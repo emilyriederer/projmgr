@@ -26,7 +26,7 @@
 #' viz_task_board(tidytracker_issues)
 #' }
 
-viz_taskboard <- function(issues, .interactive = FALSE){
+viz_taskboard <- function(issues){
 
   data <- issues
 
@@ -111,12 +111,12 @@ viz_taskboard_links <- function(g, filepath){
   links <- tibble::tibble(
       url = g$data$url,
       name =
-        paste0("#", issues$id, ": ", issues$title) %>%
+        paste0("#", g$data$id, ": ", g$data$title) %>%
         stringr::str_wrap(width = 20) %>%
         stringr::str_split("\\n")
     ) %>%
     tidyr::unnest() %>%
-    {setNames(.$url, .$name)}
+    {stats::setNames(.$url, .$name)}
 
   xml <- xml2::read_xml(tf)
   xml %>%
@@ -125,6 +125,7 @@ viz_taskboard_links <- function(g, filepath){
     xml2::xml_add_parent("a", "xlink:href" = links[xml2::xml_text(.)], target = "_blank")
 
   if(missing(filepath)){
+    xml2::write_xml(xml, tf)
     cat(readLines(tf), sep = "\n")
   }
   else{ xml2::write_xml(xml, filepath ) }
