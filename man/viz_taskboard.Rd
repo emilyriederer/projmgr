@@ -4,7 +4,7 @@
 \alias{viz_taskboard}
 \title{Visualize Agile-style task board of issue status}
 \usage{
-viz_taskboard(issues, .interactive = FALSE)
+viz_taskboard(issues)
 }
 \arguments{
 \item{issues}{Issues dataset as produced by \code{parse_issues()}}
@@ -37,6 +37,7 @@ Other issues: \code{\link{get_issues_events}},
   \code{\link{get_issues}},
   \code{\link{parse_issue_events}},
   \code{\link{parse_issues}}, \code{\link{post_issue}},
+  \code{\link{report_progress}},
   \code{\link{viz_gantt_closed_links}},
   \code{\link{viz_gantt_closed}},
   \code{\link{viz_taskboard_links}}

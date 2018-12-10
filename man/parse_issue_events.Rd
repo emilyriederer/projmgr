@@ -28,7 +28,7 @@ Other parse: \code{\link{parse_issues}},
 
 Other issues: \code{\link{get_issues_events}},
   \code{\link{get_issues}}, \code{\link{parse_issues}},
-  \code{\link{post_issue}},
+  \code{\link{post_issue}}, \code{\link{report_progress}},
   \code{\link{viz_gantt_closed_links}},
   \code{\link{viz_gantt_closed}},
   \code{\link{viz_taskboard_links}},
