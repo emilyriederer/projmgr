@@ -15,7 +15,7 @@
 #' @family issues
 #'
 #' @examples
-#' /dontrun{
+#' \dontrun{
 #' In RMarkdown:
 #' ```{r}
 #' issues <- get_issues(repo, state = 'all') %>% parse_issues()
@@ -31,9 +31,9 @@ report_progress <- function(issues){
   # prep data ----
 
   df <- issues %>%
-    distinct(title, .keep_all = TRUE) %>%
-    filter(!is.na(milestone_title)) %>%
-    group_by(milestone_title) %>%
+    dplyr::distinct(title, .keep_all = TRUE) %>%
+    dplyr::filter(!is.na(milestone_title)) %>%
+    dplyr::group_by(milestone_title) %>%
     tidyr::nest()
 
   # write html ----
@@ -45,8 +45,11 @@ report_progress <- function(issues){
                   "<p>",
                   "<strong>", df$milestone_title[i], "</strong>",
                   "<i>",
-                  "(", round(100*sum(df$data[[i]]$state == 'closed')/nrow(df$data[[i]])), "% Complete - ",
-                  sum(df$data[[i]]$state == 'closed'), "/", nrow(df$data[[i]])," Issues)",
+                  "(",
+                  round(100*sum(df$data[[i]]$state == 'closed')/nrow(df$data[[i]])),
+                  "% Complete - ",
+                  sum(df$data[[i]]$state == 'closed'),"/",nrow(df$data[[i]]),
+                  " Issues)",
                   "</i>",
                   "<ul>"
     )
