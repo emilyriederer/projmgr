@@ -149,8 +149,8 @@ post_todo <- function(ref, todo){
 #' @family plans and todos
 #'
 #' @examples
-#' template_plan_todo_yaml('plan')
-#' template_plan_todo_yaml('todo')
+#' template_yaml('plan')
+#' template_yaml('todo')
 
 template_yaml <- function(template = c('plan', 'todo')) {
 
