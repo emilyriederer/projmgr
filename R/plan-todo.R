@@ -152,7 +152,7 @@ post_todo <- function(ref, todo){
 #' template_plan_todo_yaml('plan')
 #' template_plan_todo_yaml('todo')
 
-template_plan_todo_yaml <- function(template = c('plan', 'todo')) {
+template_yaml <- function(template = c('plan', 'todo')) {
 
   template <- match.arg(template)
 
@@ -164,4 +164,3 @@ template_plan_todo_yaml <- function(template = c('plan', 'todo')) {
   cat(readLines(path), sep = '\n')
 
 }
-
