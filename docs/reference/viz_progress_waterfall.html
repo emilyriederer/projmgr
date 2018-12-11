@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Save SVG of Gantt-style chart of closed issues with links to issues — viz_gantt_closed_links • tidytracker</title>
+<title>Visualize waterfall of issues opened, closed, and pend_dateing over fixed time window — viz_progress_waterfall • tidytracker</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -32,11 +32,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Save SVG of Gantt-style chart of closed issues with links to issues — viz_gantt_closed_links" />
+<meta property="og:title" content="Visualize waterfall of issues opened, closed, and pend_dateing over fixed time window — viz_progress_waterfall" />
 
-<meta property="og:description" content="This function creates the same plot as viz_gantt_closed then edits the
-underlying XML so that the titles of the issues on the y-axis are linked to the
-actual issue on GitHub" />
+<meta property="og:description" content="Visualize waterfall of issues opened, closed, and pend_dateing over fixed time window" />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -112,45 +110,48 @@ actual issue on GitHub" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Save SVG of Gantt-style chart of closed issues with links to issues</h1>
-    <small class="dont-index">Source: <a href='https://github.com/emilyriederer/tidytracker/blob/master/R/viz-gantt.R'><code>R/viz-gantt.R</code></a></small>
-    <div class="hidden name"><code>viz_gantt_closed_links.Rd</code></div>
+    <h1>Visualize waterfall of issues opened, closed, and pend_dateing over fixed time window</h1>
+    <small class="dont-index">Source: <a href='https://github.com/emilyriederer/tidytracker/blob/master/R/viz-waterfall.R'><code>R/viz-waterfall.R</code></a></small>
+    <div class="hidden name"><code>viz_progress_waterfall.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>This function creates the same plot as <code>viz_gantt_closed</code> then edits the
-underlying XML so that the titles of the issues on the y-axis are linked to the
-actual issue on GitHub</p>
+    <p>Visualize waterfall of issues opened, closed, and pend_dateing over fixed time window</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>viz_gantt_closed_links</span>(<span class='no'>g</span>, <span class='no'>filepath</span>)</pre>
+    <pre class="usage"><span class='fu'>viz_progress_waterfall</span>(<span class='no'>issues</span>, <span class='no'>start_date</span>, <span class='no'>end_date</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='no'>created_at</span>,
+  <span class='kw'>end</span> <span class='kw'>=</span> <span class='no'>closed_at</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>g</th>
-      <td><p>ggplot2 object returned by <code><a href='viz_gantt_closed.html'>viz_gantt_closed()</a></code></p></td>
+      <th>issues</th>
+      <td><p>Issues dataset as produced by <code><a href='parse_issues.html'>parse_issues()</a></code></p></td>
     </tr>
     <tr>
-      <th>filepath</th>
-      <td><p>Location to save resulting SVG file of ggplot2, if desired. Leave blank for
-function to output message precisely as needed to render in HTML RMarkdown with chunk
-option <code>results = 'asis'</code></p></td>
+      <th>start_date</th>
+      <td><p>Character string in 'YYYY-MM-DD' form for first date to be considered</p></td>
+    </tr>
+    <tr>
+      <th>end_date</th>
+      <td><p>Character string in 'YYYY-MM-DD' form for last date to be considered</p></td>
+    </tr>
+    <tr>
+      <th>start</th>
+      <td><p>Unquoted variable name denoting issue start date</p></td>
+    </tr>
+    <tr>
+      <th>end</th>
+      <td><p>Unquoted variable name denoting issue end date</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>SVG version of ggplot2 object with links to relevant GitHub issues. Either writes output
-    to file or to console (to be captured in RMarkdown) depending on existence of <code>filepath</code> argument</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>Credit goes to this Stack Overflow answer for figuring out how to do this:
-https://stackoverflow.com/questions/42259826/hyperlinking-text-in-a-ggplot2-visualization/42262407</p>
+    <p>ggplot object</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -159,24 +160,16 @@ https://stackoverflow.com/questions/42259826/hyperlinking-text-in-a-ggplot2-visu
   <code><a href='parse_issue_events.html'>parse_issue_events</a></code>,
   <code><a href='parse_issues.html'>parse_issues</a></code>, <code><a href='post_issue.html'>post_issue</a></code>,
   <code><a href='report_progress.html'>report_progress</a></code>,
+  <code><a href='viz_gantt_closed_links.html'>viz_gantt_closed_links</a></code>,
   <code><a href='viz_gantt_closed.html'>viz_gantt_closed</a></code>,
   <code><a href='viz_taskboard_links.html'>viz_taskboard_links</a></code>,
-  <code><a href='viz_taskboard.html'>viz_taskboard</a></code>,
-  <code>viz_waterfall_issues</code></p></div>
+  <code><a href='viz_taskboard.html'>viz_taskboard</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"># NOT RUN {
-# In R, to save to file:
-viz_gantt_closed_links(issues, "my_folder/my_file.svg")
-
-# In RMarkdown chunk, to print as output:
-```{r results = 'asis', echo = FALSE}
-g <- viz_gantt_closed(issues)
-viz_gantt_closed_links(g)
-````
-# }
-</pre>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='fu'>viz_progress_waterfall</span>(<span class='no'>issues</span>, <span class='st'>'2017-01-01'</span>, <span class='st'>'2017-03-31'</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -184,8 +177,6 @@ viz_gantt_closed_links(g)
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
       

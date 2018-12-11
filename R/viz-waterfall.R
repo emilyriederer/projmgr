@@ -1,4 +1,4 @@
-#' Visualize waterfall of issues opened, closed, and pend_dateing over fixed time window
+#' Visualize waterfall of issues opened, closed, and pending over timeframe
 #'
 #' @inheritParams viz_gantt_closed
 #' @param start_date Character string in 'YYYY-MM-DD' form for first date to be considered
@@ -13,7 +13,7 @@
 #' viz_progress_waterfall(issues, '2017-01-01', '2017-03-31')
 #' }
 
-viz_progress_waterfall <- function(issues,
+viz_waterfall_issues <- function(issues,
                                    start_date, end_date,
                                    start = created_at, end = closed_at){
 
