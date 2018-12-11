@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Print YAML template to console — template_yaml • tidytracker</title>
+<title>Print plan in RMarkdown friendly way — report_plan • tidytracker</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -32,10 +32,12 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Print YAML template to console — template_yaml" />
+<meta property="og:title" content="Print plan in RMarkdown friendly way — report_plan" />
 
-<meta property="og:description" content="Prints YAML templates for either a plan or to-do list to the console as an example
-for developing your own custom plans and to-do lists." />
+<meta property="og:description" content="Interprets list representation of plan, using HTML to format results in a highly readable and
+attractive way. Resulting object returned is a character vector of HTML code with the added
+class of 'knit_asis' so that when included in an RMarkdown document knitting to HTML,
+the results will be correctly rendered as HTML." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -111,73 +113,53 @@ for developing your own custom plans and to-do lists." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Print YAML template to console</h1>
-    <small class="dont-index">Source: <a href='https://github.com/emilyriederer/tidytracker/blob/master/R/plan-todo.R'><code>R/plan-todo.R</code></a></small>
-    <div class="hidden name"><code>template_yaml.Rd</code></div>
+    <h1>Print plan in RMarkdown friendly way</h1>
+    <small class="dont-index">Source: <a href='https://github.com/emilyriederer/tidytracker/blob/master/R/report.R'><code>R/report.R</code></a></small>
+    <div class="hidden name"><code>report_plan.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Prints YAML templates for either a plan or to-do list to the console as an example
-for developing your own custom plans and to-do lists.</p>
+    <p>Interprets list representation of plan, using HTML to format results in a highly readable and
+attractive way. Resulting object returned is a character vector of HTML code with the added
+class of <code>'knit_asis'</code> so that when included in an RMarkdown document knitting to HTML,
+the results will be correctly rendered as HTML.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>template_yaml</span>(<span class='kw'>template</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"plan"</span>, <span class='st'>"todo"</span>))</pre>
+    <pre class="usage"><span class='fu'>report_plan</span>(<span class='no'>plan</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>template</th>
-      <td><p>One of <code>"plan"</code> or <code>"todo"</code> denoting template desired</p></td>
+      <th>plan</th>
+      <td><p>List of project plan, as returned by <code><a href='read_plan_todo_yaml.html'>read_plan_todo_yaml()</a></code></p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Prints template to console</p>
+    <p>Returns character string of HTML with class attribute to be correctly
+    shown "as-is" in RMarkdown</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other plans and todos: <code><a href='post_plan.html'>post_plan</a></code>,
   <code><a href='post_todo.html'>post_todo</a></code>,
   <code><a href='read_plan_todo_yaml.html'>read_plan_todo_yaml</a></code>,
-  <code><a href='report_plan.html'>report_plan</a></code>, <code><a href='report_todo.html'>report_todo</a></code></p></div>
+  <code><a href='report_todo.html'>report_todo</a></code>, <code><a href='template_yaml.html'>template_yaml</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>template_yaml</span>(<span class='st'>'plan'</span>)</div><div class='output co'>#&gt; milestone1:
-#&gt;   title: Enter a short, informative title of your goal
-#&gt;   description: &gt;
-#&gt;     Enter a longer description of the objectives
-#&gt;   due_on: 2018-12-31Z12:59:59Z
-#&gt;   issue:
-#&gt;     - title: Title of task 1 to complete
-#&gt;       body: Describe this step
-#&gt;       assignees: [emilyriederer]
-#&gt;       labels: [a, b, c]
-#&gt;     - title: Title of task 2 to comple
-#&gt;       body: Describe this step
-#&gt;       labels: [low]
-#&gt; 
-#&gt; milestone2:
-#&gt;   title: Enter another short, informative title of your goal
-#&gt;   description: &gt;
-#&gt;     Enter a longer description of the objectives
-#&gt;   issue:
-#&gt;     - title: Title of task 1 to complete
-#&gt;       body: Describe this step
-#&gt;     - title: Title of task 2 to complete
-#&gt;       body: Describe this step</div><div class='input'><span class='fu'>template_yaml</span>(<span class='st'>'todo'</span>)</div><div class='output co'>#&gt; issue1:
-#&gt;   title: Informative title
-#&gt;   body: &gt;
-#&gt;     Longer description of issue
-#&gt;   assignees: [emilyriederer]
-#&gt;   labels: [low]
-#&gt; 
-#&gt; issue2:
-#&gt;   title: Another informative title - body not required!</div></pre>
+    <pre class="examples"># NOT RUN {
+In RMarkdown:
+```{r}
+my_plan <- read_plan_todo_yaml("my_plan.yaml")
+report_plan(my_plan)
+```
+# }
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

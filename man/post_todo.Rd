@@ -40,6 +40,7 @@ post_todo(ref, my_todo)
 \seealso{
 Other plans and todos: \code{\link{post_plan}},
   \code{\link{read_plan_todo_yaml}},
+  \code{\link{report_plan}}, \code{\link{report_todo}},
   \code{\link{template_yaml}}
 }
 \concept{plans and todos}
