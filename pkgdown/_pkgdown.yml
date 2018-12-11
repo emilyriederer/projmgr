@@ -38,10 +38,6 @@ articles:
     - working-offline
 
 reference:
-- title: Creation functions
-  desc: "Create useful local objects"
-  contents:
-  - starts_with("create")
 - title: Retrieval functions
   desc: "Receive data from API (GET)"
   contents:
@@ -54,9 +50,6 @@ reference:
   desc: "Parse data received from API as dataframe"
   contents:
   - starts_with("parse")
-- title: Read functions
-  desc: "Read data from other formats"
-  contents: starts_with("read")
 - title: Visualization functions
   desc: "Visualize data for public consumption"
   contents:
@@ -67,11 +60,9 @@ reference:
 - title: Misc functions
   desc: "Miscellaneous functions that make life a little bit easier"
   contents:
-  - -starts_with("create")
   - -starts_with("get")
   - -starts_with("post")
   - -starts_with("parse")
   - -starts_with("viz")
-  - -starts_with("read")
   - -starts_with("check")
   - -tidytracker
