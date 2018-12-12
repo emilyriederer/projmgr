@@ -7,7 +7,7 @@
 report_todo(todo)
 }
 \arguments{
-\item{plan}{List of to-do list, as returned by \code{read_plan_todo_yaml()}}
+\item{todo}{List of to-do list, as returned by \code{read_plan_todo_yaml()}}
 }
 \value{
 Returns character string of HTML with class attribute to be correctly

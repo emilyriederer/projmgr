@@ -37,10 +37,13 @@ viz_waterfall_issues <- function(issues,
   start_var <- enquo(start)
   end_var <- enquo(end)
 
-  issues <- mutate(issues, dummy_var = 1) %>% group_by(dummy_var, add = TRUE)
+  issues <-
+    dplyr::mutate(issues, dummy_var = 1) %>%
+    dplyr::group_by(dummy_var, add = TRUE)
+  group_vars <- dplyr::group_vars(issues)
 
   plot_data <-
-    summarize(issues,
+   dplyr::summarize(issues,
               Initial = sum(!!start_var <= start_date &
                               (!!end_var >= start_date |
                                  state == 'open'),
@@ -52,13 +55,13 @@ viz_waterfall_issues <- function(issues,
               Final = sum(!!start_var <= end_date & state == 'open',
                           na.rm = TRUE)
     ) %>%
-    dplyr::select(one_of(group_vars(issues)), Initial, Opened, Closed, Final) %>%
-    tidyr::gather(status, n, -one_of(group_vars(issues))) %>%
-    arrange_(group_vars(issues)) %>%
+    dplyr::select(dplyr::one_of(group_vars), Initial, Opened, Closed, Final) %>%
+    tidyr::gather(status, n, -dplyr::one_of(group_vars)) %>%
+    dplyr::arrange(!!!syms(group_vars)) %>%
     dplyr::mutate(
       index = 1:4 ,
       sign = c(1,1,-1,1) ,
-      base = ifelse(status != "Final", cumsum(lag(n, 1, default = 0)), 0)
+      base = ifelse(status != "Final", cumsum(dplyr::lag(n, 1, default = 0)), 0)
     )
 
   ggplot(plot_data,

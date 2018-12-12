@@ -98,7 +98,7 @@ report_plan <- function(plan){
 
   # prep data ----
 
-  milestones <- map_chr(my_plan, "title")
+  milestones <- purrr::map_chr(plan, "title")
 
   # write html ----
 
@@ -110,13 +110,13 @@ report_plan <- function(plan){
                   "<strong>", milestones[i], "</strong>",
                   "<i>",
                   "( 0 % Complete - 0 /",
-                  length(my_plan[[i]]$issue),
+                  length(plan[[i]]$issue),
                   " Issues)",
                   "</i>",
                   "<ul>"
     )
 
-    issues <- map_chr(my_plan[[i]]$issue, "title")
+    issues <- purrr::map_chr(plan[[i]]$issue, "title")
 
     for(j in 1:length(issues)){
       html <- paste(html,
@@ -141,7 +141,7 @@ report_plan <- function(plan){
 #' class of \code{'knit_asis'} so that when included in an RMarkdown document knitting to HTML,
 #' the results will be correctly rendered as HTML.
 #'
-#' @param plan List of to-do list, as returned by \code{read_plan_todo_yaml()}
+#' @param todo List of to-do list, as returned by \code{read_plan_todo_yaml()}
 #'
 #' @return Returns character string of HTML with class attribute to be correctly
 #'     shown "as-is" in RMarkdown
@@ -161,7 +161,7 @@ report_todo <- function(todo){
 
   # prep data ----
 
-  issues <- map_chr(todo, "title")
+  issues <- purrr::map_chr(todo, "title")
 
   # write html ----
 

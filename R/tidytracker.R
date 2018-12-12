@@ -16,6 +16,9 @@ globalVars <- c(
   "created_at", "closed_at", "state", "id", "title", "id_label",
   # from tidytracker viz board:
   "board_col", "board_pos",
+  # from tidytracker viz waterfall:
+  "dummy_var", "lag", "index", "base", "status",
+  "Initial", "Opened", "Closed", "Final", "n",
   # from tidyverse
   ".")
 
