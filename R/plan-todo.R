@@ -45,11 +45,13 @@ read_plan_todo_yaml <- function(input){
   # check if at least one of filepath or chars in not NA
   if(stub == ".yaml"){
     plan_parsed <- yaml::yaml.load_file(input,
-                                        handlers = list(expr = function(x) eval(parse(text = x))))
+                                        handlers =
+                                          list(expr = function(x) eval(parse(text = x))))
   }
   else{
     plan_parsed <- yaml::yaml.load(input,
-                                   handlers = list(expr = function(x) eval(parse(text = x))))
+                                   handlers =
+                                     list(expr = function(x) eval(parse(text = x))))
   }
 
   return(plan_parsed)
@@ -69,8 +71,6 @@ read_plan_todo_yaml <- function(input){
 #' @family plans and todos
 #' @importFrom dplyr distinct mutate pull select transmute
 
-
-
 post_plan <- function(ref, plan){
 
   # create milestones
@@ -82,9 +82,14 @@ post_plan <- function(ref, plan){
   # wrangle issues
   milestone_ids <-
     purrr::modify_depth(req_milestones, .f = "number", .depth = 2) %>% unlist()
+
   num_issues_by_milestone <-
     plan %>% purrr::map("issue") %>% purrr::map(length)
-  milestone_nums <- purrr::map2(milestone_ids, num_issues_by_milestone, rep) %>% unlist() %>% as.integer()
+
+  milestone_nums <-
+    purrr::map2(milestone_ids, num_issues_by_milestone, rep) %>%
+    unlist() %>%
+    as.integer()
 
   # create issues
   req_issues <-
