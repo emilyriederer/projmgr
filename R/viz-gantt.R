@@ -27,7 +27,6 @@
 
 viz_gantt_closed <- function(issues, start = created_at, end = closed_at){
 
-  # check if curl package installed
   if (!requireNamespace("stringr", quietly = TRUE)) {
     stop("Package \"stringr\" needed for this function to work. Please install it.",
          call. = FALSE)

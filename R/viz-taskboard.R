@@ -28,6 +28,11 @@
 
 viz_taskboard <- function(issues){
 
+  if (!requireNamespace("stringr", quietly = TRUE)) {
+    stop("Package \"stringr\" needed for this function to work. Please install it.",
+         call. = FALSE)
+  }
+
   data <- issues
 
   # create board headers ----
@@ -101,6 +106,11 @@ viz_taskboard_links <- function(g, filepath){
       paste0("Package \"xml2\" is needed to edit SVG.",
              "Please install \"xml2\" or use viz_taskboard for the non-linked version."),
       call. = FALSE)
+  }
+
+  if (!requireNamespace("stringr", quietly = TRUE)) {
+    stop("Package \"stringr\" needed for this function to work. Please install it.",
+         call. = FALSE)
   }
 
   # save current ggplot at svg
