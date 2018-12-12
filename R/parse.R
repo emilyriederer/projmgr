@@ -21,8 +21,8 @@ parse_issues <- function(res){
                   title = res[[.]]$title,
                   body = res[[.]]$body %||% NA,
                   state = res[[.]]$state,
-                  created_at = res[[.]]$created_at %>% substring(1,10),
-                  closed_at = substring(res[[.]]$closed_at %||% NA, 1,10),
+                  created_at = as.Date(res[[.]]$created_at %>% substring(1,10)),
+                  closed_at = as.Date(substring(res[[.]]$closed_at %||% NA, 1,10)),
                   created_by = res[[.]]$user$login,
                   n_comments = res[[.]]$comments,
                   url = res[[.]]$html_url,
@@ -62,7 +62,7 @@ parse_issue_events <- function(res){
            id = res[[.]]$id,
            actor = res[[.]]$actor$login,
            event = res[[.]]$event,
-           created_at = res[[.]]$created_at %>% substring(1,10),
+           created_at = as.Date(res[[.]]$created_at %>% substring(1,10)),
            label = res[[.]]$label$name %||% NA,
            issue_number = res[[.]]$issue$number,
            issue_title = res[[.]]$issue$title
@@ -98,10 +98,10 @@ parse_milestones <- function(res){
                   open_issues = res[[.]]$open_issues,
                   closed_issues = res[[.]]$closed_issues,
                   state = res[[.]]$state,
-                  created_at = substring(res[[.]]$created_at %||% NA, 1, 10),
-                  updated_at = substring(res[[.]]$updated_at %||% NA, 1, 10),
-                  due_on = substring(res[[.]]$due_on %||% NA,1,10),
-                  closed_at = substring(res[[.]]$closed_at %||% NA,1,10)
+                  created_at = as.Date(substring(res[[.]]$created_at %||% NA, 1, 10)),
+                  updated_at = as.Date(substring(res[[.]]$updated_at %||% NA, 1, 10)),
+                  due_on = as.Date(substring(res[[.]]$due_on %||% NA,1,10)),
+                  closed_at = as.Date(substring(res[[.]]$closed_at %||% NA,1,10))
                 ))
 
 }
