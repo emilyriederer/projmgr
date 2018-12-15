@@ -45,14 +45,14 @@ viz_waterfall_issues <- function(issues,
   plot_data <-
    dplyr::summarize(issues,
               Initial = sum(!!start_var <= start_date &
-                              (!!end_var >= start_date |
-                                 state == 'open'),
+                              (!!end_var >= start_date | state == 'open'),
                             na.rm = TRUE),
               Opened = sum(!!start_var >= start_date & !!start_var <= end_date,
                            na.rm = TRUE),
               Closed = sum(!!end_var >= start_date & !!end_var <= end_date,
                            na.rm = TRUE),
-              Final = sum(!!start_var <= end_date & state == 'open',
+              Final = sum(!!start_var <= end_date &
+                            (!!end_var >= end_date | start == 'open'),
                           na.rm = TRUE)
     ) %>%
     dplyr::select(dplyr::one_of(group_vars), Initial, Opened, Closed, Final) %>%
