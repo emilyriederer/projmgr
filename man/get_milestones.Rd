@@ -19,9 +19,9 @@ Get milestones from GitHub repository
 }
 \examples{
 \dontrun{
-tidytracker <- create_repo_ref("emilyriederer", "tidytracker")
-tt_milestones_res <- get_milestones(tidytracker)
-milestones <- parse_milestones(tt_milestones_res)
+myrepo <- create_repo_ref("emilyriederer", "myrepo")
+milestones_res <- get_milestones(myrepo)
+milestones <- parse_milestones(milestones_res)
 }
 }
 \seealso{

@@ -17,9 +17,9 @@ Parse issue events from \code{get_issues_events}
 }
 \examples{
 \dontrun{
-tidytracker <- create_repo_ref('emilyriederer', 'tidytracker')
-tt_events_res <- get_issue_events(tidytracker, number = 1)
-tt_events <- parse_issue_events(tt_events_res)
+myrepo <- create_repo_ref('emilyriederer', 'myrepo')
+events_res <- get_issue_events(myrepo, number = 1)
+events <- parse_issue_events(events_res)
 }
 }
 \seealso{

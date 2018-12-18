@@ -148,14 +148,14 @@
   <code><a href='viz_gantt_closed.html'>viz_gantt_closed</a></code>,
   <code><a href='viz_taskboard_links.html'>viz_taskboard_links</a></code>,
   <code><a href='viz_taskboard.html'>viz_taskboard</a></code>,
-  <code>viz_waterfall_issues</code></p></div>
+  <code><a href='viz_waterfall_issues.html'>viz_waterfall_issues</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='no'>tidytracker</span> <span class='kw'>&lt;-</span> <span class='fu'>create_repo_reference</span>(<span class='st'>'emilyriederer'</span>, <span class='st'>'tidytracker'</span>)
-<span class='no'>tt_issues_res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_issues.html'>get_issues</a></span>(<span class='no'>tidytracker</span>)
-<span class='no'>tt_issues</span> <span class='kw'>&lt;-</span> <span class='fu'>parse_issues</span>(<span class='no'>tt_issues_res</span>)
+<span class='no'>myrepo</span> <span class='kw'>&lt;-</span> <span class='fu'>create_repo_reference</span>(<span class='st'>'emilyriederer'</span>, <span class='st'>'myrepo'</span>)
+<span class='no'>issues_res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_issues.html'>get_issues</a></span>(<span class='no'>myrepo</span>)
+<span class='no'>issues</span> <span class='kw'>&lt;-</span> <span class='fu'>parse_issues</span>(<span class='no'>issues_res</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

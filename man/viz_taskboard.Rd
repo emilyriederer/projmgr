@@ -28,8 +28,8 @@ The following logic is used to determine the status of each issue:
 }
 \examples{
 \dontrun{
-tidytracker_issues <- get_issues(tidytracker, milestone = 1) \%>\% parse_issues()
-viz_task_board(tidytracker_issues)
+issues <- get_issues(myrepo, milestone = 1) \%>\% parse_issues()
+viz_task_board(issues)
 }
 }
 \seealso{

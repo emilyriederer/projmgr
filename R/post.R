@@ -8,8 +8,8 @@
 #'
 #' @examples
 #' \dontrun{
-#' tidytracker <- create_repo_ref('emilyriederer', 'tidytracker')
-#' post_issue(tidytracker,
+#' myrepo <- create_repo_ref('emilyriederer', 'myrepo')
+#' post_issue(myrepo,
 #'   title = 'this is my issue's title',
 #'   body = 'this is my issue's body',
 #'   labels = c('priority:high', 'bug'))
@@ -18,7 +18,7 @@
 #' # can be used in conjunction with reprex pkg
 #' # example assumes code for reprex is on clipboard
 #' reprex::reprex(venue = "gh")
-#' post_issue(tidytracker,
+#' post_issue(myrepo,
 #'             title = "something is broken",
 #'             body = paste( clipr::read_clip(), collapse = "\n") )
 #' }
@@ -46,8 +46,8 @@ post_issue <- function(ref, title, ...){
 #'
 #' @examples
 #' \dontrun{
-#' tidytracker <- create_repo_ref('emilyriederer', 'tidytracker')
-#' post_milestone(tidytracker,
+#' myrepo <- create_repo_ref('emilyriederer', 'myrepo')
+#' post_milestone(myrepo,
 #'   title = 'this is my milestone's title',
 #'   description = 'this is my milestone's description',
 #'   due_on = '2018-12-31T12:59:59z')

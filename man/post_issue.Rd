@@ -21,8 +21,8 @@ Post issue to GitHub repository
 }
 \examples{
 \dontrun{
-tidytracker <- create_repo_ref('emilyriederer', 'tidytracker')
-post_issue(tidytracker,
+myrepo <- create_repo_ref('emilyriederer', 'myrepo')
+post_issue(myrepo,
   title = 'this is my issue's title',
   body = 'this is my issue's body',
   labels = c('priority:high', 'bug'))
@@ -31,7 +31,7 @@ post_issue(tidytracker,
 # can be used in conjunction with reprex pkg
 # example assumes code for reprex is on clipboard
 reprex::reprex(venue = "gh")
-post_issue(tidytracker,
+post_issue(myrepo,
             title = "something is broken",
             body = paste( clipr::read_clip(), collapse = "\\n") )
 }

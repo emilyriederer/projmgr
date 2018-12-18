@@ -17,9 +17,9 @@ Parse milestones from \code{get_milestones}
 }
 \examples{
 \dontrun{
-tidytracker_ref <- create_repo_ref("emilyriederer", "tidytracker")
-tt_milestones_res <- get_milestones(tidytracker_ref)
-tt_milestones <- parse_milestones(tt_milestones_res)
+myrepo <- create_repo_ref("emilyriederer", "myrepo")
+milestones_res <- get_milestones(myrepo)
+milestones <- parse_milestones(milestones_res)
 }
 }
 \seealso{

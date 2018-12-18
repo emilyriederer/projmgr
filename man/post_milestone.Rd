@@ -21,8 +21,8 @@ Post milestone to GitHub repository
 }
 \examples{
 \dontrun{
-tidytracker <- create_repo_ref('emilyriederer', 'tidytracker')
-post_milestone(tidytracker,
+myrepo <- create_repo_ref('emilyriederer', 'myrepo')
+post_milestone(myrepo,
   title = 'this is my milestone's title',
   description = 'this is my milestone's description',
   due_on = '2018-12-31T12:59:59z')

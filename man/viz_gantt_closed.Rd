@@ -29,8 +29,8 @@ true timeframe (e.g. if issues are posted well in advance of work beginning.)
 }
 \examples{
 \dontrun{
-tidytracker_issues <- get_issues(tidytracker, state = "closed") \%>\% parse_issues()
-viz_gantt_closed(tidytracker_issues)
+issues <- get_issues(myrepo, state = "closed") \%>\% parse_issues()
+viz_gantt_closed(issues)
 }
 }
 \seealso{

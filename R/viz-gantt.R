@@ -21,8 +21,8 @@
 #'
 #' @examples
 #' \dontrun{
-#' tidytracker_issues <- get_issues(tidytracker, state = "closed") %>% parse_issues()
-#' viz_gantt_closed(tidytracker_issues)
+#' issues <- get_issues(myrepo, state = "closed") %>% parse_issues()
+#' viz_gantt_closed(issues)
 #' }
 
 viz_gantt_closed <- function(issues, start = created_at, end = closed_at){

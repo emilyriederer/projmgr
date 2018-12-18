@@ -19,9 +19,9 @@ Get issues from GitHub repository
 }
 \examples{
 \dontrun{
-tidytracker <- create_repo_ref('emilyriederer', 'tidytracker')
-tt_issues_res <- get_issues(tidytracker)
-tt_issues <- parse_issues(tt_issues_res)
+myrepo <- create_repo_ref('emilyriederer', 'myrepo')
+issues_res <- get_issues(myrepo)
+issues <- parse_issues(issues_res)
 }
 }
 \seealso{

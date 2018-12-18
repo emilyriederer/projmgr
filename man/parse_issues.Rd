@@ -17,9 +17,9 @@ Parse issues overview from \code{get_issues}
 }
 \examples{
 \dontrun{
-tidytracker <- create_repo_reference('emilyriederer', 'tidytracker')
-tt_issues_res <- get_issues(tidytracker)
-tt_issues <- parse_issues(tt_issues_res)
+myrepo <- create_repo_reference('emilyriederer', 'myrepo')
+issues_res <- get_issues(myrepo)
+issues <- parse_issues(issues_res)
 }
 }
 \seealso{

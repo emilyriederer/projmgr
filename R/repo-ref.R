@@ -16,7 +16,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' tidytracker <- create_repo_ref('emilyriederer', 'tidytracker')
+#' myrepo <- create_repo_ref('emilyriederer', 'myrepo')
 #' }
 #'
 

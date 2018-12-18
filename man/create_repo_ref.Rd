@@ -30,7 +30,7 @@ owner, the type (whether or not Enterprise GitHub), and potentially credentials 
 }
 \examples{
 \dontrun{
-tidytracker <- create_repo_ref('emilyriederer', 'tidytracker')
+myrepo <- create_repo_ref('emilyriederer', 'myrepo')
 }
 
 }

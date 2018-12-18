@@ -9,9 +9,9 @@
 #'
 #' @examples
 #' \dontrun{
-#' tidytracker <- create_repo_reference('emilyriederer', 'tidytracker')
-#' tt_issues_res <- get_issues(tidytracker)
-#' tt_issues <- parse_issues(tt_issues_res)
+#' myrepo <- create_repo_reference('emilyriederer', 'myrepo')
+#' issues_res <- get_issues(myrepo)
+#' issues <- parse_issues(issues_res)
 #' }
 
 parse_issues <- function(res){
@@ -50,9 +50,9 @@ parse_issues <- function(res){
 #'
 #' @examples
 #' \dontrun{
-#' tidytracker <- create_repo_ref('emilyriederer', 'tidytracker')
-#' tt_events_res <- get_issue_events(tidytracker, number = 1)
-#' tt_events <- parse_issue_events(tt_events_res)
+#' myrepo <- create_repo_ref('emilyriederer', 'myrepo')
+#' events_res <- get_issue_events(myrepo, number = 1)
+#' events <- parse_issue_events(events_res)
 #' }
 
 parse_issue_events <- function(res){
@@ -82,9 +82,9 @@ parse_issue_events <- function(res){
 #'
 #' @examples
 #' \dontrun{
-#' tidytracker_ref <- create_repo_ref("emilyriederer", "tidytracker")
-#' tt_milestones_res <- get_milestones(tidytracker_ref)
-#' tt_milestones <- parse_milestones(tt_milestones_res)
+#' myrepo <- create_repo_ref("emilyriederer", "myrepo")
+#' milestones_res <- get_milestones(myrepo)
+#' milestones <- parse_milestones(milestones_res)
 #' }
 
 parse_milestones <- function(res){

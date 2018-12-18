@@ -22,8 +22,8 @@
 #'
 #' @examples
 #' \dontrun{
-#' tidytracker_issues <- get_issues(tidytracker, milestone = 1) %>% parse_issues()
-#' viz_task_board(tidytracker_issues)
+#' issues <- get_issues(myrepo, milestone = 1) %>% parse_issues()
+#' viz_task_board(issues)
 #' }
 
 viz_taskboard <- function(issues){
