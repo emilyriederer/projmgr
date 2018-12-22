@@ -9,35 +9,34 @@ post_plan(ref, plan)
 \arguments{
 \item{ref}{Repository reference (list) created by \code{tidytracker::create_repo_ref}}
 
-\item{plan}{Plan list as read with \code{tidytracker::read_plan_yaml}}
+\item{plan}{Plan list as read with \code{read_yaml()}}
 }
 \value{
 Content of POST request as list
 }
 \description{
 Post custom plans (i.e. create milestons and issues) based on yaml read in by
-\code{read_plan_todo_yaml}. Please see the "Building Custom Plans" vignette for details.
+\code{read_yaml}. Please see the "Building Custom Plans" vignette for details.
 }
 \examples{
 \dontrun{
 # This example uses example file included in pkg
 # You should be able to run example as-is after creating your own repo reference
 file_path <- system.file("extdata", "plan.yaml", package = "tidytracker", mustWork = TRUE)
-my_plan <- read_plan_todo_yaml(file_path)
+my_plan <- read_yaml(file_path)
 post_plan(ref, my_plan)
 }
 \dontrun{
 # This example uses example file included in pkg
 # You should be able to run example as-is after creating your own repo reference
 file_path <- system.file("extdata", "todo.yaml", package = "tidytracker", mustWork = TRUE)
-my_todo <- read_plan_todo_yaml(file_path)
+my_todo <- read_yaml(file_path)
 post_todo(ref, my_todo)
 }
 }
 \seealso{
 Other plans and todos: \code{\link{post_todo}},
-  \code{\link{read_plan_todo_yaml}},
-  \code{\link{report_plan}}, \code{\link{report_todo}},
-  \code{\link{template_yaml}}
+  \code{\link{read_yaml}}, \code{\link{report_plan}},
+  \code{\link{report_todo}}, \code{\link{template_yaml}}
 }
 \concept{plans and todos}

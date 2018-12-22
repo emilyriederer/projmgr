@@ -78,7 +78,7 @@ report_progress <- function(issues){
 #' class of \code{'knit_asis'} so that when included in an RMarkdown document knitting to HTML,
 #' the results will be correctly rendered as HTML.
 #'
-#' @param plan List of project plan, as returned by \code{read_plan_todo_yaml()}
+#' @param plan List of project plan, as returned by \code{read_yaml()}
 #'
 #' @return Returns character string of HTML with class attribute to be correctly
 #'     shown "as-is" in RMarkdown
@@ -89,7 +89,7 @@ report_progress <- function(issues){
 #' \dontrun{
 #' In RMarkdown:
 #' ```{r}
-#' my_plan <- read_plan_todo_yaml("my_plan.yaml")
+#' my_plan <- read_yaml("my_plan.yaml")
 #' report_plan(my_plan)
 #' ```
 #'}
@@ -141,7 +141,7 @@ report_plan <- function(plan){
 #' class of \code{'knit_asis'} so that when included in an RMarkdown document knitting to HTML,
 #' the results will be correctly rendered as HTML.
 #'
-#' @param todo List of to-do list, as returned by \code{read_plan_todo_yaml()}
+#' @param todo List of to-do list, as returned by \code{read_yaml()}
 #'
 #' @return Returns character string of HTML with class attribute to be correctly
 #'     shown "as-is" in RMarkdown
@@ -152,7 +152,7 @@ report_plan <- function(plan){
 #' \dontrun{
 #' In RMarkdown:
 #' ```{r}
-#' my_todo <- read_plan_todo_yaml("my_todo.yaml")
+#' my_todo <- read_yaml("my_todo.yaml")
 #' report_todo(my_todo)
 #' ```
 #'}

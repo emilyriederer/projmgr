@@ -26,7 +26,7 @@ events <- parse_issue_events(events_res)
 Other parse: \code{\link{parse_issues}},
   \code{\link{parse_milestones}}
 
-Other issues: \code{\link{get_issues_events}},
+Other issues: \code{\link{get_issue_events}},
   \code{\link{get_issues}}, \code{\link{parse_issues}},
   \code{\link{post_issue}}, \code{\link{report_progress}},
   \code{\link{viz_gantt_closed_links}},
@@ -35,7 +35,7 @@ Other issues: \code{\link{get_issues_events}},
   \code{\link{viz_taskboard}},
   \code{\link{viz_waterfall_issues}}
 
-Other events: \code{\link{get_issues_events}}
+Other events: \code{\link{get_issue_events}}
 }
 \concept{events}
 \concept{issues}

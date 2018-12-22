@@ -2,7 +2,7 @@
 #'
 #' This function reads a carefully constructed YAML file representing a project plan (of
 #' milestones and issues) or a to-do list (of issues). YAML is converted into an R list
-#' structure which can then be passed to \code{tidytracker::post_plan} or \code{tidytracker::post_todo}
+#' structure which can then be passed to \code{post_plan()} or \code{post_todo()}
 #' to build infrastructure for your repository.
 #'
 #' Please see the "Building Custom Plans" vignette for more details.
@@ -10,7 +10,7 @@
 #' @param input Either filepath to YAML file or character string. Assumes filepath if ends in ".yaml"
 #'     and assumes string otherwise.
 #'
-#' @return List containing plan compatible with \code{tidytracker::post_plan} or \code{tidytracker::post_todo}
+#' @return List containing plan compatible with \code{post_plan()} or \code{post_todo()}
 #' @export
 #'
 #' @family plans and todos
@@ -20,18 +20,18 @@
 #' # This example uses example file included in pkg
 #' # You should be able to run example as-is after creating your own repo reference
 #' file_path <- system.file("extdata", "plan.yaml", package = "tidytracker", mustWork = TRUE)
-#' my_plan <- read_plan_todo_yaml(file_path)
+#' my_plan <- read_yaml(file_path)
 #' post_plan(ref, my_plan)
 #' }
 #' \dontrun{
 #' # This example uses example file included in pkg
 #' # You should be able to run example as-is after creating your own repo reference
 #' file_path <- system.file("extdata", "todo.yaml", package = "tidytracker", mustWork = TRUE)
-#' my_todo <- read_plan_todo_yaml(file_path)
+#' my_todo <- read_yaml(file_path)
 #' post_todo(ref, my_todo)
 #' }
 
-read_plan_todo_yaml <- function(input){
+read_yaml <- function(input){
 
   # check if yaml package installed
   if (!requireNamespace("yaml", quietly = TRUE)) {
@@ -61,11 +61,11 @@ read_plan_todo_yaml <- function(input){
 #' Post plan (milestones + issues) to GitHub repository
 #'
 #' Post custom plans (i.e. create milestons and issues) based on yaml read in by
-#' \code{read_plan_todo_yaml}. Please see the "Building Custom Plans" vignette for details.
+#' \code{read_yaml}. Please see the "Building Custom Plans" vignette for details.
 #'
 #' @inherit post_engine return params
-#' @inherit read_plan_todo_yaml examples
-#' @param plan Plan list as read with \code{tidytracker::read_plan_yaml}
+#' @inherit read_yaml examples
+#' @param plan Plan list as read with \code{read_yaml()}
 #' @export
 #'
 #' @family plans and todos
@@ -111,14 +111,14 @@ post_plan <- function(ref, plan){
 
 #' Post to-do list (issues) to GitHub repository
 #'
-#' Post custom to-do lists (i.e. issues) based on yaml read in by \code{read_plan_todo_yaml}.
+#' Post custom to-do lists (i.e. issues) based on yaml read in by \code{read_yaml}.
 #' Please see the "Building Custom Plans" vignette for details.
 #'
 #' Currently has know bug in that cannot be used to introduce new labels.
 #'
 #' @inherit post_engine return params
-#' @inherit read_plan_todo_yaml examples
-#' @param todo To-do R list structure as read with \code{tidytracker::read_plan_yaml}
+#' @inherit read_yaml examples
+#' @param todo To-do R list structure as read with \code{read_yaml()}
 #' @export
 #'
 #' @family plans and todos

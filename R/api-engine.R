@@ -31,7 +31,7 @@ validate_inputs <- function(input, allowed_vars){
 #' Core code for all GET calls
 #'
 #' @param api_endpoint API endpoint
-#' @param ref Repository reference (list) created by \code{tidytracker::create_repo_ref}
+#' @param ref Repository reference (list) created by \code{create_repo_ref()}
 #' @param ... Additional user-defined query parameters
 #'
 #' @keywords internal
@@ -74,7 +74,7 @@ post_engine <- function(api_endpoint, ref, ...){
 #' Core code for all PATCH calls
 #'
 #' @param api_endpoint API endpoint
-#' @param ref Repository reference (list) created by \code{tidytracker::create_repo_ref}
+#' @param ref Repository reference (list) created by \code{create_repo_ref()}
 #' @param ... Additional user-defined body parameters
 #'
 #' @keywords internal

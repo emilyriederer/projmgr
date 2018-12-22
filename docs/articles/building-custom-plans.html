@@ -78,7 +78,7 @@
       <h1>Building custom plans and to-do lists</h1>
                         <h4 class="author">Emily Riederer</h4>
             
-            <h4 class="date">2018-12-18</h4>
+            <h4 class="date">2018-12-22</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/emilyriederer/tidytracker/blob/master/vignettes/building-custom-plans.Rmd"><code>vignettes/building-custom-plans.Rmd</code></a></small>
       <div class="hidden name"><code>building-custom-plans.Rmd</code></div>
@@ -125,7 +125,7 @@ milestone2:
       body: Create univariate and bivariate plots</code></pre>
 <p>The <code>read_my_plan_todo_yaml()</code> function reads in either plan or to-do YAML files. We will continue to work with the example plan embedded in the package.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plan_path &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata"</span>, <span class="st">"plan.yaml"</span>, <span class="dt">package =</span> <span class="st">"tidytracker"</span>, <span class="dt">mustWork =</span> <span class="ot">TRUE</span>)
-my_plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/read_plan_todo_yaml.html">read_plan_todo_yaml</a></span>(plan_path)</code></pre></div>
+my_plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/read_yaml.html">read_yaml</a></span>(plan_path)</code></pre></div>
 <p>This function converts YAML to an R list. You can sanity check the structure of this output with base R <code>str()</code> function which shows the structure of a list:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(my_plan)
 <span class="co">#&gt; List of 2</span>
@@ -174,7 +174,7 @@ my_plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rea
 <span class="st">  body: Repsond to feedback from reviewers</span>
 <span class="st">"</span>
 
-plan_from_vbl &lt;-<span class="st"> </span><span class="kw"><a href="../reference/read_plan_todo_yaml.html">read_plan_todo_yaml</a></span>(plan_yaml_vbl)
+plan_from_vbl &lt;-<span class="st"> </span><span class="kw"><a href="../reference/read_yaml.html">read_yaml</a></span>(plan_yaml_vbl)
 <span class="kw">str</span>(plan_from_vbl)
 <span class="co">#&gt; List of 2</span>
 <span class="co">#&gt;  $ milestone1:List of 2</span>
@@ -223,9 +223,9 @@ plan_from_vbl &lt;-<span class="st"> </span><span class="kw"><a href="../referen
 
 issue2:
   title: Make sure documentation links right pages of API docs</code></pre>
-<p>The same <code><a href="../reference/read_plan_todo_yaml.html">read_plan_todo_yaml()</a></code> function reads in a to-do YAML file and converts it to an R list:</p>
+<p>The same <code><a href="../reference/read_yaml.html">read_yaml()</a></code> function reads in a to-do YAML file and converts it to an R list:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">todo_path &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata"</span>, <span class="st">"todo.yaml"</span>, <span class="dt">package =</span> <span class="st">"tidytracker"</span>, <span class="dt">mustWork =</span> <span class="ot">TRUE</span>)
-my_todo &lt;-<span class="st"> </span><span class="kw"><a href="../reference/read_plan_todo_yaml.html">read_plan_todo_yaml</a></span>(todo_path)
+my_todo &lt;-<span class="st"> </span><span class="kw"><a href="../reference/read_yaml.html">read_yaml</a></span>(todo_path)
 <span class="kw">str</span>(my_todo)
 <span class="co">#&gt; List of 2</span>
 <span class="co">#&gt;  $ issue1:List of 4</span>

@@ -26,7 +26,7 @@ issues <- parse_issues(issues_res)
 Other parse: \code{\link{parse_issue_events}},
   \code{\link{parse_milestones}}
 
-Other issues: \code{\link{get_issues_events}},
+Other issues: \code{\link{get_issue_events}},
   \code{\link{get_issues}},
   \code{\link{parse_issue_events}},
   \code{\link{post_issue}}, \code{\link{report_progress}},

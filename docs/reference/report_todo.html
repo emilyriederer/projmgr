@@ -134,7 +134,7 @@ the results will be correctly rendered as HTML.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>todo</th>
-      <td><p>List of to-do list, as returned by <code><a href='read_plan_todo_yaml.html'>read_plan_todo_yaml()</a></code></p></td>
+      <td><p>List of to-do list, as returned by <code><a href='read_yaml.html'>read_yaml()</a></code></p></td>
     </tr>
     </table>
     
@@ -146,8 +146,7 @@ the results will be correctly rendered as HTML.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other plans and todos: <code><a href='post_plan.html'>post_plan</a></code>,
-  <code><a href='post_todo.html'>post_todo</a></code>,
-  <code><a href='read_plan_todo_yaml.html'>read_plan_todo_yaml</a></code>,
+  <code><a href='post_todo.html'>post_todo</a></code>, <code><a href='read_yaml.html'>read_yaml</a></code>,
   <code><a href='report_plan.html'>report_plan</a></code>, <code><a href='template_yaml.html'>template_yaml</a></code></p></div>
     
 
@@ -155,7 +154,7 @@ the results will be correctly rendered as HTML.</p>
     <pre class="examples"># NOT RUN {
 In RMarkdown:
 ```{r}
-my_todo <- read_plan_todo_yaml("my_todo.yaml")
+my_todo <- read_yaml("my_todo.yaml")
 report_todo(my_todo)
 ```
 # }

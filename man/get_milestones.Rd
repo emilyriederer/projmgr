@@ -7,7 +7,7 @@
 get_milestones(ref, ...)
 }
 \arguments{
-\item{ref}{Repository reference (list) created by \code{tidytracker::create_repo_ref}}
+\item{ref}{Repository reference (list) created by \code{create_repo_ref()}}
 
 \item{...}{Additional user-defined query parameters}
 }
@@ -25,7 +25,7 @@ milestones <- parse_milestones(milestones_res)
 }
 }
 \seealso{
-Other get: \code{\link{get_issues_events}},
+Other get: \code{\link{get_issue_events}},
   \code{\link{get_issues}}
 
 Other milestones: \code{\link{parse_milestones}},

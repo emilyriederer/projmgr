@@ -39,7 +39,7 @@ The `read_my_plan_todo_yaml()` function reads in either plan or to-do YAML files
 
 ```{r}
 plan_path <- system.file("extdata", "plan.yaml", package = "tidytracker", mustWork = TRUE)
-my_plan <- read_plan_todo_yaml(plan_path)
+my_plan <- read_yaml(plan_path)
 ```
 
 This function converts YAML to an R list. You can sanity check the structure of this output with base R `str()` function which shows the structure of a list:
@@ -72,7 +72,7 @@ milestone2:
   body: Repsond to feedback from reviewers
 "
 
-plan_from_vbl <- read_plan_todo_yaml(plan_yaml_vbl)
+plan_from_vbl <- read_yaml(plan_yaml_vbl)
 str(plan_from_vbl)
 ```
 
@@ -92,11 +92,11 @@ todo_path <- system.file("extdata", "todo.yaml", package = "tidytracker", mustWo
 cat(readLines(todo_path), sep = '\n')
 ```
 
-The same `read_plan_todo_yaml()` function reads in a to-do YAML file and converts it to an R list:
+The same `read_yaml()` function reads in a to-do YAML file and converts it to an R list:
 
 ```{r}
 todo_path <- system.file("extdata", "todo.yaml", package = "tidytracker", mustWork = TRUE)
-my_todo <- read_plan_todo_yaml(todo_path)
+my_todo <- read_yaml(todo_path)
 str(my_todo)
 ```
 

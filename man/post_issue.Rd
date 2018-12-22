@@ -39,7 +39,7 @@ post_issue(myrepo,
 \seealso{
 Other post: \code{\link{post_milestone}}
 
-Other issues: \code{\link{get_issues_events}},
+Other issues: \code{\link{get_issue_events}},
   \code{\link{get_issues}},
   \code{\link{parse_issue_events}},
   \code{\link{parse_issues}},

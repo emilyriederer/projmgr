@@ -43,7 +43,7 @@ get_issues <- function(ref, ...){
 #' events <- parse_issue_events(events_res)
 #' }
 
-get_issues_events <- function(ref, number){
+get_issue_events <- function(ref, number){
 
   get_engine(api_endpoint = paste0("/issues/", number, "events"),
              ref = ref)

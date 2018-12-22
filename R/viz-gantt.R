@@ -1,7 +1,7 @@
 #' Visualize Gannt-style chart of closed issues
 #'
 #' Produces plot of all closed issues from start date to end date, based on output of
-#' issues from \code{tidytracker::get_issues} and \code{tidytracker::parse_issues}. Plot
+#' issues from \code{get_issues()} and \code{parse_issues()}. Plot
 #' has one row per issues spanning from \code{start} to \code{end}.
 #'
 #' By default, the start date is the issue's \code{created_at} date, and the end date is

@@ -9,7 +9,7 @@ patch_engine(api_endpoint, ref, ...)
 \arguments{
 \item{api_endpoint}{API endpoint}
 
-\item{ref}{Repository reference (list) created by \code{tidytracker::create_repo_ref}}
+\item{ref}{Repository reference (list) created by \code{create_repo_ref()}}
 
 \item{...}{Additional user-defined body parameters}
 }

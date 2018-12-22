@@ -7,7 +7,7 @@
 get_issues(ref, ...)
 }
 \arguments{
-\item{ref}{Repository reference (list) created by \code{tidytracker::create_repo_ref}}
+\item{ref}{Repository reference (list) created by \code{create_repo_ref()}}
 
 \item{...}{Additional user-defined query parameters}
 }
@@ -25,10 +25,10 @@ issues <- parse_issues(issues_res)
 }
 }
 \seealso{
-Other get: \code{\link{get_issues_events}},
+Other get: \code{\link{get_issue_events}},
   \code{\link{get_milestones}}
 
-Other issues: \code{\link{get_issues_events}},
+Other issues: \code{\link{get_issue_events}},
   \code{\link{parse_issue_events}},
   \code{\link{parse_issues}}, \code{\link{post_issue}},
   \code{\link{report_progress}},

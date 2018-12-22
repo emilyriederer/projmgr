@@ -18,7 +18,7 @@ ggplot object
 }
 \description{
 Produces plot of all closed issues from start date to end date, based on output of
-issues from \code{tidytracker::get_issues} and \code{tidytracker::parse_issues}. Plot
+issues from \code{get_issues()} and \code{parse_issues()}. Plot
 has one row per issues spanning from \code{start} to \code{end}.
 }
 \details{
@@ -34,7 +34,7 @@ viz_gantt_closed(issues)
 }
 }
 \seealso{
-Other issues: \code{\link{get_issues_events}},
+Other issues: \code{\link{get_issue_events}},
   \code{\link{get_issues}},
   \code{\link{parse_issue_events}},
   \code{\link{parse_issues}}, \code{\link{post_issue}},
