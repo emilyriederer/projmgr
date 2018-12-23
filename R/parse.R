@@ -59,6 +59,7 @@ parse_issue_events <- function(res){
 
   purrr::map_df(1:length(res),
                 ~tibble::tibble(
+                  number = res[[.]]$number,
                   id = res[[.]]$id,
                   actor_login = res[[.]]$actor$login,
                   event = res[[.]]$event,

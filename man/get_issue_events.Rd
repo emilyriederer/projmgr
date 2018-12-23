@@ -15,7 +15,8 @@ get_issue_events(ref, number)
 Content of GET request as list
 }
 \description{
-Get events for a specific issue from GitHub repository
+In addition to information returned by GitHub API, appends field "number" for the issue number
+to which the returned events correspond.
 }
 \examples{
 \dontrun{

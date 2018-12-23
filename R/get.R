@@ -28,6 +28,9 @@ get_issues <- function(ref, ...){
 
 #' Get events for a specific issue from GitHub repository
 #'
+#' In addition to information returned by GitHub API, appends field "number" for the issue number
+#' to which the returned events correspond.
+#'
 #' @inherit get_engine return params
 #' @param number Number of issue
 #' @export
