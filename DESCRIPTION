@@ -31,7 +31,6 @@ Suggests:
     reprex,
     rmarkdown,
     roxygen2,
-    usethis,
     xml2,
     yaml
 VignetteBuilder: knitr
