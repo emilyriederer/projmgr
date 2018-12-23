@@ -130,7 +130,7 @@ read_yaml. Please see the &quot;Building Custom Plans&quot; vignette for details
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>ref</th>
-      <td><p>Repository reference (list) created by <code><a href='create_repo_ref.html'>tidytracker::create_repo_ref</a></code></p></td>
+      <td><p>Repository reference (list) created by <code><a href='create_repo_ref.html'>create_repo_ref()</a></code></p></td>
     </tr>
     <tr>
       <th>plan</th>
@@ -153,13 +153,13 @@ read_yaml. Please see the &quot;Building Custom Plans&quot; vignette for details
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='co'># This example uses example file included in pkg</span>
 <span class='co'># You should be able to run example as-is after creating your own repo reference</span>
-<span class='no'>file_path</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='st'>"plan.yaml"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"tidytracker"</span>, <span class='kw'>mustWork</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='no'>file_path</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='st'>"plan.yml"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"tidytracker"</span>, <span class='kw'>mustWork</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 <span class='no'>my_plan</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='read_yaml.html'>read_yaml</a></span>(<span class='no'>file_path</span>)
 <span class='fu'>post_plan</span>(<span class='no'>ref</span>, <span class='no'>my_plan</span>)
 <span class='co'># }</span><span class='co'># NOT RUN {</span>
 <span class='co'># This example uses example file included in pkg</span>
 <span class='co'># You should be able to run example as-is after creating your own repo reference</span>
-<span class='no'>file_path</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='st'>"todo.yaml"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"tidytracker"</span>, <span class='kw'>mustWork</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='no'>file_path</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='st'>"todo.yml"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"tidytracker"</span>, <span class='kw'>mustWork</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 <span class='no'>my_todo</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='read_yaml.html'>read_yaml</a></span>(<span class='no'>file_path</span>)
 <span class='fu'><a href='post_todo.html'>post_todo</a></span>(<span class='no'>ref</span>, <span class='no'>my_todo</span>)
 <span class='co'># }</span></pre>

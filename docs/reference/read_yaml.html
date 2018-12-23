@@ -134,7 +134,7 @@ to build infrastructure for your repository.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>input</th>
-      <td><p>Either filepath to YAML file or character string. Assumes filepath if ends in ".yaml"
+      <td><p>Either filepath to YAML file or character string. Assumes filepath if ends in ".yml"
 and assumes string otherwise.</p></td>
     </tr>
     </table>
@@ -158,13 +158,13 @@ and assumes string otherwise.</p></td>
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='co'># This example uses example file included in pkg</span>
 <span class='co'># You should be able to run example as-is after creating your own repo reference</span>
-<span class='no'>file_path</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='st'>"plan.yaml"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"tidytracker"</span>, <span class='kw'>mustWork</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='no'>file_path</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='st'>"plan.yml"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"tidytracker"</span>, <span class='kw'>mustWork</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 <span class='no'>my_plan</span> <span class='kw'>&lt;-</span> <span class='fu'>read_yaml</span>(<span class='no'>file_path</span>)
 <span class='fu'><a href='post_plan.html'>post_plan</a></span>(<span class='no'>ref</span>, <span class='no'>my_plan</span>)
 <span class='co'># }</span><span class='co'># NOT RUN {</span>
 <span class='co'># This example uses example file included in pkg</span>
 <span class='co'># You should be able to run example as-is after creating your own repo reference</span>
-<span class='no'>file_path</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='st'>"todo.yaml"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"tidytracker"</span>, <span class='kw'>mustWork</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='no'>file_path</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='st'>"todo.yml"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"tidytracker"</span>, <span class='kw'>mustWork</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 <span class='no'>my_todo</span> <span class='kw'>&lt;-</span> <span class='fu'>read_yaml</span>(<span class='no'>file_path</span>)
 <span class='fu'><a href='post_todo.html'>post_todo</a></span>(<span class='no'>ref</span>, <span class='no'>my_todo</span>)
 <span class='co'># }</span></pre>

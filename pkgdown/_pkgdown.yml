@@ -57,6 +57,9 @@ reference:
 - title: Check functions
   desc: "Test and diagnose common impediments"
   contents: starts_with("check")
+- title: Reporting functions
+  desc: "Format status updates in HTML for reporting in RMarkdown"
+  contents: starts_with("report")
 - title: Misc functions
   desc: "Miscellaneous functions that make life a little bit easier"
   contents:

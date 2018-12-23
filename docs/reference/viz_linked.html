@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Visualize Gannt-style chart of closed issues — viz_gantt_closed • tidytracker</title>
+<title>Add GitHub links to select visualizations — viz_linked • tidytracker</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -32,11 +32,10 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Visualize Gannt-style chart of closed issues — viz_gantt_closed" />
+<meta property="og:title" content="Add GitHub links to select visualizations — viz_linked" />
 
-<meta property="og:description" content="Produces plot of all closed issues from start date to end date, based on output of
-issues from get_issues() and parse_issues(). Plot
-has one row per issues spanning from start to end." />
+<meta property="og:description" content="This function alters the internal representation of a plot to include links back to the actual
+GitHub issue. This is currently implemented for viz_taskboard() and viz_gantt()" />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -112,64 +111,59 @@ has one row per issues spanning from start to end." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Visualize Gannt-style chart of closed issues</h1>
-    <small class="dont-index">Source: <a href='https://github.com/emilyriederer/tidytracker/blob/master/R/viz-gantt.R'><code>R/viz-gantt.R</code></a></small>
-    <div class="hidden name"><code>viz_gantt_closed.Rd</code></div>
+    <h1>Add GitHub links to select visualizations</h1>
+    <small class="dont-index">Source: <a href='https://github.com/emilyriederer/tidytracker/blob/master/R/viz-linked.R'><code>R/viz-linked.R</code></a></small>
+    <div class="hidden name"><code>viz_linked.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Produces plot of all closed issues from start date to end date, based on output of
-issues from <code><a href='get_issues.html'>get_issues()</a></code> and <code><a href='parse_issues.html'>parse_issues()</a></code>. Plot
-has one row per issues spanning from <code>start</code> to <code>end</code>.</p>
+    <p>This function alters the internal representation of a plot to include links back to the actual
+GitHub issue. This is currently implemented for <code><a href='viz_taskboard.html'>viz_taskboard()</a></code> and <code>viz_gantt()</code></p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>viz_gantt_closed</span>(<span class='no'>issues</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='no'>created_at</span>, <span class='kw'>end</span> <span class='kw'>=</span> <span class='no'>closed_at</span>,
-  <span class='kw'>str_wrap_width</span> <span class='kw'>=</span> <span class='fl'>30</span>)</pre>
+    <pre class="usage"><span class='fu'>viz_linked</span>(<span class='no'>g</span>, <span class='no'>filepath</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>issues</th>
-      <td><p>Issues dataset as produced by <code><a href='parse_issues.html'>parse_issues()</a></code></p></td>
+      <th>g</th>
+      <td><p>ggplot2 object returned by <code><a href='viz_gantt_closed.html'>viz_gantt_closed()</a></code> or <code><a href='viz_taskboard.html'>viz_taskboard()</a></code></p></td>
     </tr>
     <tr>
-      <th>start</th>
-      <td><p>Unquoted variable name denoting issue start date</p></td>
-    </tr>
-    <tr>
-      <th>end</th>
-      <td><p>Unquoted variable name denoting issue end date</p></td>
-    </tr>
-    <tr>
-      <th>str_wrap_width</th>
-      <td><p>Number of characters before text of issue title begins to wrap</p></td>
+      <th>filepath</th>
+      <td><p>Location to save resulting SVG file of ggplot2, if desired. Leave blank for
+function to output message precisely as needed to render in HTML RMarkdown with chunk
+option <code>results = 'asis'</code></p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>ggplot object</p>
+    <p>SVG version of ggplot2 object with links to relevant GitHub issues. Either writes output
+    to file or to console (to be captured in RMarkdown) depending on existence of <code>filepath</code> argument</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>By default, the start date is the issue's <code>created_at</code> date, and the end date is
-the issue's <code>closed_at</code> date. However, either of these can be altered via the
-<code>start</code> and <code>end</code> parameters since these dates might not be reflective of the
-true timeframe (e.g. if issues are posted well in advance of work beginning.)</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>viz_linked</p></div>
+    <p>Credit goes to this Stack Overflow answer for figuring out how to do this:
+https://stackoverflow.com/questions/42259826/hyperlinking-text-in-a-ggplot2-visualization/42262407</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='no'>issues</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_issues.html'>get_issues</a></span>(<span class='no'>myrepo</span>, <span class='kw'>state</span> <span class='kw'>=</span> <span class='st'>"closed"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='parse_issues.html'>parse_issues</a></span>()
-<span class='fu'>viz_gantt_closed</span>(<span class='no'>issues</span>)
-<span class='co'># }</span></pre>
+    <pre class="examples"># NOT RUN {
+# In R, to save to file:
+taskboard <- viz_taskboard(issues)
+viz_linked(taskboard, "my_folder/my_file.svg")
+
+# In RMarkdown chunk, to print as output:
+```{r results = 'asis', echo = FALSE}
+gantt <- viz_gantt_closed(issues)
+viz_linked(gantt)
+````
+# }
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -179,8 +173,6 @@ true timeframe (e.g. if issues are posted well in advance of work beginning.)</p
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
-
-      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>
