@@ -37,7 +37,7 @@ viz_taskboard <- function(issues, str_wrap_width = 20){
 
   # create board headers ----
   data$board_group <- "Not Started"
-  data$board_group[purrr::map_lgl(data$label, ~"in-progress" %in% .)] <- "In Progress"
+  data$board_group[purrr::map_lgl(data$labels_name, ~"in-progress" %in% .)] <- "In Progress"
   data$board_group[!is.na(data$closed_at)] <- "Done"
   data$board_group <- factor(data$board_group,
                              levels = c("Not Started", "In Progress", "Done"))
@@ -56,7 +56,7 @@ viz_taskboard <- function(issues, str_wrap_width = 20){
            )) +
     geom_tile(aes(fill = board_col), width = 0.9, height = 0.9, size = 2) +
     geom_text(aes(label =
-                    paste0("#", id, ": ", title) %>%
+                    paste0("#", number, ": ", title) %>%
                     stringr::str_wrap(width = str_wrap_width)
     )) +
     facet_grid(. ~ board_group, drop = FALSE) +

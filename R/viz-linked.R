@@ -123,7 +123,7 @@ get_text_link_map.taskboard <- function(g){
   links <- tibble::tibble(
     url = g$data$url,
     name =
-      paste0("#", g$data$id, ": ", g$data$title) %>%
+      paste0("#", g$data$number, ": ", g$data$title) %>%
       stringr::str_wrap(width = g[['str_wrap_width']] ) %>%
       stringr::str_split("\\n")
   ) %>%

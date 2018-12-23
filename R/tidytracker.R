@@ -12,11 +12,9 @@ NULL
 globalVars <- c(
   # from plan:
   "issue", "milestone", "milestone_title",
-  # from viz gantt:
+  # from viz:
   "created_at", "closed_at", "state", "id", "title", "id_label",
-  # from viz board:
-  "board_col", "board_pos",
-  # from viz waterfall:
+  "board_col", "board_pos", "number",
   "dummy_var", "lag", "index", "base", "status",
   "Initial", "Opened", "Closed", "Final", "n",
   # from tidyverse

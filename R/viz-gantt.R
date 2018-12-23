@@ -39,7 +39,7 @@ viz_gantt_closed <- function(issues, start = created_at, end = closed_at, str_wr
   g <-
   issues %>%
     dplyr::filter(state == "closed") %>%
-    dplyr::mutate(id_label = factor(id, levels = id, labels = title)) %>%
+    dplyr::mutate(id_label = factor(number, levels = number, labels = title)) %>%
     ggplot(aes(
       x = !!start_var, xend = !!end_var,
       y = id_label, yend = id_label,
