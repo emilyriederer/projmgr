@@ -1,0 +1,36 @@
+---
+title: "Design Notes"
+author: "Emily Riederer"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Design Notes}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This vignette details some key design choices in this package with the hope that stating these explicitly will improve navigability.
+
+## API Function Parameters
+
+In general, parameters required by the GitHub API are required by the corresponding functions in this package. Any additionaly parameters not required by the GitHub API can be passed in through the `...`s. The `browse_docs()` function can be used to find out more about these optional parameters.
+
+## Get-Parse Codeflow
+
+All `get_` functions make a call to the GitHub API and return the result as an R list. The corresponding `parse_` function converts each list into a dataframe for easier wrangling and analysis. In most all cases, users will likely call `parse_` immediately after `get_` and never work with the output of `get_` directly. For example:
+
+```{r eval = FALSE}
+my_repo <- create_repo_ref('username', 'my_repo')
+issues <- get_issues(my_repo, state = 'all') %>% parse_issues()
+issue_events <- get_issue_events(my_repo, number = 7) %>% parse_issue_events()
+milestones <- get_milestones(my_repo) %>% parse_milestones()
+```
+
+However, the `get_` and `parse_` functions are provided separately for user empowerment. First, it can be interesting to see output closer to what is actually returned by the API. Second, any users who wish may forego the `parse_` function and work directly with the list. Finally, this approach provides a stop-gap solution in case the GitHub API ever change until the `parse_` functions can be updated accordingly.

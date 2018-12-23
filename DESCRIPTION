@@ -36,8 +36,7 @@ Suggests:
     usethis,
     xml2,
     yaml
-VignetteBuilder: 
-    knitr
+VignetteBuilder: knitr
 Encoding: UTF-8
 Language: en-US
 LazyData: true

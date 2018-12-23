@@ -20,8 +20,8 @@ articles:
     desc: Introduction to tools, set-up, and design
     contents:
     - git-github-introduction
-    - reproducible-workflow
     - creating-a-github-personal-authentication-token
+    - design-notes
   - title: "Interacting with GitHub Repositories"
     desc: Tutotials related to with sending and receiving information with GitHub
     contents:
