@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-This vignette details some key design choices in this package with the hope that stating these explicitly will improve navigability.
+This vignette details some key design choices in this package with the hope that stating these explicitly will improve package navigability.
 
 ## API Function Parameters
 
@@ -33,4 +33,19 @@ issue_events <- get_issue_events(my_repo, number = 7) %>% parse_issue_events()
 milestones <- get_milestones(my_repo) %>% parse_milestones()
 ```
 
-However, the `get_` and `parse_` functions are provided separately for user empowerment. First, it can be interesting to see output closer to what is actually returned by the API. Second, any users who wish may forego the `parse_` function and work directly with the list. Finally, this approach provides a stop-gap solution in case the GitHub API ever change until the `parse_` functions can be updated accordingly.
+However, the `get_` and `parse_` functions are provided separately to empower users. Some use cases where users may prefer to *not* use the provided `parse_` functions include if they:
+
+- wish to understand the type of output returned by the API
+- prefer working with lists than dataframes
+- want to access information returned by the API that is not included in the `parse`d output
+- need a stop-gap solution should the GitHub API ever change until the `parse_` functions are updated accordingly
+
+## Parse Output Variable Names
+
+As much as possible, the dataframe returned by `parse_` functions maintains the same field names as used by the GitHub API. However, there are a few key exceptions:
+
+- When the field name is ambiguous, additional information may be appended. 
+    + For example, after getting an issue, the "comments" field contains the count of comments. Since the name might otherwise suggested that the text of the comments is being returned, the `parsed_` field is instead called "n_comments"
+- When the field is nested, underscores are used to provide the hierarchy. 
+    + For example, after getting an issue, the "user" field contains multiple subfields about the issue author. Most critical is that user's login, so the field in the resulting dataframe is called "user_login". 
+    + This can provide some confusion since other non-hierarchical fields naturally contain underscores, such as the "created_at" date.

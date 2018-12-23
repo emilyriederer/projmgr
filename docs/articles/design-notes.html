@@ -87,7 +87,7 @@
 
     
     
-<p>This vignette details some key design choices in this package with the hope that stating these explicitly will improve navigability.</p>
+<p>This vignette details some key design choices in this package with the hope that stating these explicitly will improve package navigability.</p>
 <div id="api-function-parameters" class="section level2">
 <h2 class="hasAnchor">
 <a href="#api-function-parameters" class="anchor"></a>API Function Parameters</h2>
@@ -101,7 +101,31 @@
 issues &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_issues.html">get_issues</a></span>(my_repo, <span class="dt">state =</span> <span class="st">'all'</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/parse_issues.html">parse_issues</a></span>()
 issue_events &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_issue_events.html">get_issue_events</a></span>(my_repo, <span class="dt">number =</span> <span class="dv">7</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/parse_issue_events.html">parse_issue_events</a></span>()
 milestones &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_milestones.html">get_milestones</a></span>(my_repo) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/parse_milestones.html">parse_milestones</a></span>()</code></pre></div>
-<p>However, the <code>get_</code> and <code>parse_</code> functions are provided separately for user empowerment. First, it can be interesting to see output closer to what is actually returned by the API. Second, any users who wish may forego the <code>parse_</code> function and work directly with the list. Finally, this approach provides a stop-gap solution in case the GitHub API ever change until the <code>parse_</code> functions can be updated accordingly.</p>
+<p>However, the <code>get_</code> and <code>parse_</code> functions are provided separately to empower users. Some use cases where users may prefer to <em>not</em> use the provided <code>parse_</code> functions include if they:</p>
+<ul>
+<li>wish to understand the type of output returned by the API</li>
+<li>prefer working with lists than dataframes</li>
+<li>want to access information returned by the API that is not included in the <code>parse</code>d output</li>
+<li>need a stop-gap solution should the GitHub API ever change until the <code>parse_</code> functions are updated accordingly</li>
+</ul>
+</div>
+<div id="parse-output-variable-names" class="section level2">
+<h2 class="hasAnchor">
+<a href="#parse-output-variable-names" class="anchor"></a>Parse Output Variable Names</h2>
+<p>As much as possible, the dataframe returned by <code>parse_</code> functions maintains the same field names as used by the GitHub API. However, there are a few key exceptions:</p>
+<ul>
+<li>When the field name is ambiguous, additional information may be appended.
+<ul>
+<li>For example, after getting an issue, the “comments” field contains the count of comments. Since the name might otherwise suggested that the text of the comments is being returned, the <code>parsed_</code> field is instead called “n_comments”</li>
+</ul>
+</li>
+<li>When the field is nested, underscores are used to provide the hierarchy.
+<ul>
+<li>For example, after getting an issue, the “user” field contains multiple subfields about the issue author. Most critical is that user’s login, so the field in the resulting dataframe is called “user_login”.</li>
+<li>This can provide some confusion since other non-hierarchical fields naturally contain underscores, such as the “created_at” date.</li>
+</ul>
+</li>
+</ul>
 </div>
   </div>
 
@@ -112,6 +136,7 @@ milestones &lt;-<span class="st"> </span><span class="kw"><a href="../reference/
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#api-function-parameters">API Function Parameters</a></li>
       <li><a href="#get-parse-codeflow">Get-Parse Codeflow</a></li>
+      <li><a href="#parse-output-variable-names">Parse Output Variable Names</a></li>
       </ul>
 </div>
       </div>

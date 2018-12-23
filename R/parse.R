@@ -23,17 +23,17 @@ parse_issues <- function(res){
                   state = res[[.]]$state,
                   created_at = as.Date(res[[.]]$created_at %>% substring(1,10)),
                   closed_at = as.Date(substring(res[[.]]$closed_at %||% NA, 1,10)),
-                  created_by = res[[.]]$user$login,
+                  user_login = res[[.]]$user$login,
                   n_comments = res[[.]]$comments,
                   url = res[[.]]$html_url,
-                  id = res[[.]]$number,
+                  number = res[[.]]$number,
                   milestone_title = res[[.]]$milestone$title %||% NA,
                   milestone_id = res[[.]]$milestone$id %||% NA,
                   milestone_state = res[[.]]$milestone$state %||% NA,
                   due_on = substring(res[[.]]$milestone$due_on %||% NA,1,10),
-                  point_of_contact = res[[.]]$assignee$login %||% NA,
-                  assignee = list(res[[.]]$assignees %>% purrr::map_chr('login')),
-                  label = list(res[[.]]$labels %>% purrr::map_chr('name'))
+                  assignee_login = res[[.]]$assignee$login %||% NA,
+                  assignees_login = list(res[[.]]$assignees %>% purrr::map_chr('login')),
+                  labels_name = list(res[[.]]$labels %>% purrr::map_chr('name'))
                 ))
 
 }
@@ -60,10 +60,10 @@ parse_issue_events <- function(res){
   purrr::map_df(1:length(res),
                 ~tibble::tibble(
                   id = res[[.]]$id,
-                  actor = res[[.]]$actor$login,
+                  actor_login = res[[.]]$actor$login,
                   event = res[[.]]$event,
                   created_at = res[[.]]$created_at,
-                  label = res[[.]]$label$name %||% NA,
+                  label_name = res[[.]]$label$name %||% NA,
                   milestone_title = res[[.]]$milestone$title %||% NA
                 ))
 
@@ -92,9 +92,9 @@ parse_milestones <- function(res){
                   title = res[[.]]$title,
                   number = res[[.]]$number,
                   description = res[[.]]$description %||% NA,
-                  creator = res[[.]]$creator$login,
-                  open_issues = res[[.]]$open_issues,
-                  closed_issues = res[[.]]$closed_issues,
+                  creator_login = res[[.]]$creator$login,
+                  n_open_issues = res[[.]]$open_issues,
+                  n_closed_issues = res[[.]]$closed_issues,
                   state = res[[.]]$state,
                   created_at = as.Date(substring(res[[.]]$created_at %||% NA, 1, 10)),
                   updated_at = as.Date(substring(res[[.]]$updated_at %||% NA, 1, 10)),
