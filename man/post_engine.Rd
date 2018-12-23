@@ -11,7 +11,7 @@ post_engine(api_endpoint, ref, ...)
 
 \item{ref}{Repository reference (list) created by \code{create_repo_ref()}}
 
-\item{...}{Additional user-defined body parameters}
+\item{...}{Additional user-defined body parameters. Use \code{browse_docs()} to learn more.}
 }
 \value{
 Content of POST request as list

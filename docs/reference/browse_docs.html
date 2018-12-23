@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get milestones from GitHub repository — get_milestones • tidytracker</title>
+<title>View GitHub API documentation — browse_docs • tidytracker</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Get milestones from GitHub repository — get_milestones" />
+<meta property="og:title" content="View GitHub API documentation — browse_docs" />
 
-<meta property="og:description" content="Get milestones from GitHub repository" />
+<meta property="og:description" content="Read relevant parts of documentation for the GitHub API to learn more about" />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -110,49 +110,42 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get milestones from GitHub repository</h1>
-    <small class="dont-index">Source: <a href='https://github.com/emilyriederer/tidytracker/blob/master/R/get.R'><code>R/get.R</code></a></small>
-    <div class="hidden name"><code>get_milestones.Rd</code></div>
+    <h1>View GitHub API documentation</h1>
+    <small class="dont-index">Source: <a href='https://github.com/emilyriederer/tidytracker/blob/master/R/browse.R'><code>R/browse.R</code></a></small>
+    <div class="hidden name"><code>browse_docs.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Get milestones from GitHub repository</p>
+    <p>Read relevant parts of documentation for the GitHub API to learn more about</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_milestones</span>(<span class='no'>ref</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>browse_docs</span>(<span class='kw'>action</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"get"</span>, <span class='st'>"post"</span>), <span class='kw'>object</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"milestone"</span>, <span class='st'>"issue"</span>,
+  <span class='st'>"issue event"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>ref</th>
-      <td><p>Repository reference (list) created by <code><a href='create_repo_ref.html'>create_repo_ref()</a></code></p></td>
+      <th>action</th>
+      <td><p>Character string denoting action you wish to complete: "get" (list existing) or "post" (creating new)</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>Additional user-defined query parameters. Use <code>browse_docs()</code> to learn more.</p></td>
+      <th>object</th>
+      <td><p>Character string denoting object on wish you want to apply an action. Supports
+"milestone", "issue", "issue event"</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Content of GET request as list</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>Other get: <code><a href='get_issue_events.html'>get_issue_events</a></code>,
-  <code><a href='get_issues.html'>get_issues</a></code></p>
-<p>Other milestones: <code><a href='parse_milestones.html'>parse_milestones</a></code>,
-  <code><a href='post_milestone.html'>post_milestone</a></code></p></div>
+    <p>Returns URL in non-interactive session or launches browser to docs in interactive session</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='no'>myrepo</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='create_repo_ref.html'>create_repo_ref</a></span>(<span class='st'>"emilyriederer"</span>, <span class='st'>"myrepo"</span>)
-<span class='no'>milestones_res</span> <span class='kw'>&lt;-</span> <span class='fu'>get_milestones</span>(<span class='no'>myrepo</span>)
-<span class='no'>milestones</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='parse_milestones.html'>parse_milestones</a></span>(<span class='no'>milestones_res</span>)
+<span class='fu'>browse_docs</span>(<span class='st'>'get'</span>, <span class='st'>'milestone'</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -161,8 +154,6 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

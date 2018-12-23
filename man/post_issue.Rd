@@ -11,7 +11,7 @@ post_issue(ref, title, ...)
 
 \item{title}{Issue title (required)}
 
-\item{...}{Additional user-defined body parameters}
+\item{...}{Additional user-defined body parameters. Use \code{browse_docs()} to learn more.}
 }
 \value{
 Content of POST request as list

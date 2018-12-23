@@ -11,7 +11,7 @@ get_engine(api_endpoint, ref, .limit = Inf, ...)
 
 \item{ref}{Repository reference (list) created by \code{create_repo_ref()}}
 
-\item{...}{Additional user-defined query parameters}
+\item{...}{Additional user-defined query parameters. Use \code{browse_docs()} to learn more.}
 }
 \value{
 Content of GET request as list

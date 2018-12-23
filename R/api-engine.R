@@ -20,6 +20,7 @@ validate_inputs <- function(input, allowed_vars){
         "Allowed variables are: \n + ",
         paste(allowed_vars, collapse = ","), "\n",
         "Please remove unallowed fields and try again.", "\n",
+        "Use the browse_docs() function or directly visit",
         "See https://developer.github.com/v3/ for full documentation of defined fields."
       ),
       call. = FALSE
@@ -32,7 +33,7 @@ validate_inputs <- function(input, allowed_vars){
 #'
 #' @param api_endpoint API endpoint
 #' @param ref Repository reference (list) created by \code{create_repo_ref()}
-#' @param ... Additional user-defined query parameters
+#' @param ... Additional user-defined query parameters. Use \code{browse_docs()} to learn more.
 #'
 #' @keywords internal
 #' @return Content of GET request as list
@@ -53,7 +54,7 @@ get_engine <- function(api_endpoint, ref, .limit = Inf, ...){
 #'
 #' @param api_endpoint API endpoint
 #' @param ref Repository reference (list) created by \code{create_repo_ref()}
-#' @param ... Additional user-defined body parameters
+#' @param ... Additional user-defined body parameters. Use \code{browse_docs()} to learn more.
 #'
 #' @keywords internal
 #' @return Content of POST request as list
