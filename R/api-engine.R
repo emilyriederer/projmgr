@@ -20,7 +20,7 @@ validate_inputs <- function(input, allowed_vars){
         "Allowed variables are: \n + ",
         paste(allowed_vars, collapse = ","), "\n",
         "Please remove unallowed fields and try again.", "\n",
-        "Use the browse_docs() function or directly visit",
+        "Use the browse_docs() function or directly visit \n",
         "See https://developer.github.com/v3/ for full documentation of defined fields."
       ),
       call. = FALSE
