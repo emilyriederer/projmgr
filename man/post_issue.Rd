@@ -4,7 +4,7 @@
 \alias{post_issue}
 \title{Post issue to GitHub repository}
 \usage{
-post_issue(ref, title, ...)
+post_issue(ref, title, ..., distinct = TRUE)
 }
 \arguments{
 \item{ref}{Repository reference (list) created by \code{create_repo_ref()}}
@@ -12,9 +12,12 @@ post_issue(ref, title, ...)
 \item{title}{Issue title (required)}
 
 \item{...}{Additional user-defined body parameters. Use \code{browse_docs()} to learn more.}
+
+\item{distinct}{Logical value to denote whether issues with the same title
+as a current open issue should be allowed}
 }
 \value{
-Content of POST request as list
+Character string. "Duplicate" if not posted due to title conflict or "Success" if successfully posted.
 }
 \description{
 Post issue to GitHub repository
