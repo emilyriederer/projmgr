@@ -17,7 +17,7 @@ post_issue(ref, title, ..., distinct = TRUE)
 as a current open issue should be allowed}
 }
 \value{
-Character string. "Duplicate" if not posted due to title conflict or "Success" if successfully posted.
+Returns "Success" if successfully posted, otherwise emits informative error message
 }
 \description{
 Post issue to GitHub repository

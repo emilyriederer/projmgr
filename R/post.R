@@ -1,6 +1,6 @@
 #' Post issue to GitHub repository
 #'
-#' @inherit post_engine return params
+#' @inherit post_engine params
 #' @param title Issue title (required)
 #' @param distinct Logical value to denote whether issues with the same title
 #'     as a current open issue should be allowed
@@ -8,7 +8,7 @@
 #' @family post
 #' @family issues
 #'
-#' @return Character string. "Duplicate" if not posted due to title conflict or "Success" if successfully posted.
+#' @return Returns "Success" if successfully posted, otherwise emits informative error message
 #'
 #' @examples
 #' \dontrun{
@@ -29,19 +29,26 @@
 
 post_issue <- function(ref, title, ..., distinct = TRUE){
 
+  # check for unique title if desired
   if(distinct){
 
     issue_titles <- purrr::map_chr( get_issues(ref, state = 'open') , "title" )
 
     if(any(title == issue_titles)){ # when title not distinct
-          return("Duplicate")
+      return(
+        paste("New title is not distinct with current open milestones. \n",
+              "Please change title or set distinct = FALSE."),
+             call. = FALSE
+              )
       }
   }
 
+  # check that rest of inputs are valid per github api
   validate_inputs(list(...),
                   allowed_vars = c("body", "milestone",
                                    "labels", "assignees"))
 
+  # post issue and capture result or error
   post_engine(api_endpoint = "/issues",
              ref = ref,
              title = title,
@@ -53,7 +60,7 @@ post_issue <- function(ref, title, ..., distinct = TRUE){
 
 #' Post milestone to GitHub repository
 #'
-#' @inherit post_engine return params
+#' @inherit post_engine params
 #' @param title Milestone title (required)
 #' @export
 #' @family post
@@ -77,7 +84,8 @@ post_milestone <- function(ref, title, ...){
   # so not an optional as in post_issues
     milestone_titles <- purrr::map_chr( get_milestones(ref, state = 'open') , "title" )
     if(any(title == milestone_titles)){ # when title not distinct
-      return("Duplicate")
+      return("New title is not distinct with current open milestones. Please change title.",
+             call. = FALSE)
     }
 
   validate_inputs(list(...),
