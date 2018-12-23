@@ -7,7 +7,7 @@
 read_yaml(input)
 }
 \arguments{
-\item{input}{Either filepath to YAML file or character string. Assumes filepath if ends in ".yaml"
+\item{input}{Either filepath to YAML file or character string. Assumes filepath if ends in ".yml"
 and assumes string otherwise.}
 }
 \value{
@@ -26,14 +26,14 @@ Please see the "Building Custom Plans" vignette for more details.
 \dontrun{
 # This example uses example file included in pkg
 # You should be able to run example as-is after creating your own repo reference
-file_path <- system.file("extdata", "plan.yaml", package = "tidytracker", mustWork = TRUE)
+file_path <- system.file("extdata", "plan.yml", package = "tidytracker", mustWork = TRUE)
 my_plan <- read_yaml(file_path)
 post_plan(ref, my_plan)
 }
 \dontrun{
 # This example uses example file included in pkg
 # You should be able to run example as-is after creating your own repo reference
-file_path <- system.file("extdata", "todo.yaml", package = "tidytracker", mustWork = TRUE)
+file_path <- system.file("extdata", "todo.yml", package = "tidytracker", mustWork = TRUE)
 my_todo <- read_yaml(file_path)
 post_todo(ref, my_todo)
 }

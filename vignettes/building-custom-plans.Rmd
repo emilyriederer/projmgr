@@ -31,14 +31,14 @@ To reduce the manual effort of bulk creation of plans and to-do lists, `tidytrac
 YAML can be used to specify milestones and issues with all the same fields as are accepted into `post_milestone()` and `post_issue()`. Consider the following YAML file as an example:
 
 ```{r comment='', echo = FALSE}
-plan_path <- system.file("extdata", "plan.yaml", package = "tidytracker", mustWork = TRUE)
+plan_path <- system.file("extdata", "plan.yml", package = "tidytracker", mustWork = TRUE)
 cat(readLines(plan_path), sep = '\n')
 ```
 
 The `read_my_plan_todo_yaml()` function reads in either plan or to-do YAML files. We will continue to work with the example plan embedded in the package.
 
 ```{r}
-plan_path <- system.file("extdata", "plan.yaml", package = "tidytracker", mustWork = TRUE)
+plan_path <- system.file("extdata", "plan.yml", package = "tidytracker", mustWork = TRUE)
 my_plan <- read_yaml(plan_path)
 ```
 
@@ -88,14 +88,14 @@ template_yaml("plan")
 The workflow for posting to-do lists is very similar to that of plans. Consider the following YAML file as an example:
 
 ```{r comment='', echo = FALSE}
-todo_path <- system.file("extdata", "todo.yaml", package = "tidytracker", mustWork = TRUE)
+todo_path <- system.file("extdata", "todo.yml", package = "tidytracker", mustWork = TRUE)
 cat(readLines(todo_path), sep = '\n')
 ```
 
 The same `read_yaml()` function reads in a to-do YAML file and converts it to an R list:
 
 ```{r}
-todo_path <- system.file("extdata", "todo.yaml", package = "tidytracker", mustWork = TRUE)
+todo_path <- system.file("extdata", "todo.yml", package = "tidytracker", mustWork = TRUE)
 my_todo <- read_yaml(todo_path)
 str(my_todo)
 ```

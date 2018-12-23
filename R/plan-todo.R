@@ -7,7 +7,7 @@
 #'
 #' Please see the "Building Custom Plans" vignette for more details.
 #'
-#' @param input Either filepath to YAML file or character string. Assumes filepath if ends in ".yaml"
+#' @param input Either filepath to YAML file or character string. Assumes filepath if ends in ".yml"
 #'     and assumes string otherwise.
 #'
 #' @return List containing plan compatible with \code{post_plan()} or \code{post_todo()}
@@ -19,14 +19,14 @@
 #' \dontrun{
 #' # This example uses example file included in pkg
 #' # You should be able to run example as-is after creating your own repo reference
-#' file_path <- system.file("extdata", "plan.yaml", package = "tidytracker", mustWork = TRUE)
+#' file_path <- system.file("extdata", "plan.yml", package = "tidytracker", mustWork = TRUE)
 #' my_plan <- read_yaml(file_path)
 #' post_plan(ref, my_plan)
 #' }
 #' \dontrun{
 #' # This example uses example file included in pkg
 #' # You should be able to run example as-is after creating your own repo reference
-#' file_path <- system.file("extdata", "todo.yaml", package = "tidytracker", mustWork = TRUE)
+#' file_path <- system.file("extdata", "todo.yml", package = "tidytracker", mustWork = TRUE)
 #' my_todo <- read_yaml(file_path)
 #' post_todo(ref, my_todo)
 #' }
@@ -43,7 +43,7 @@ read_yaml <- function(input){
   stub <- substring( trimws(input), nchar(trimws(input)) - 4)
 
   # check if at least one of filepath or chars in not NA
-  if(stub == ".yaml"){
+  if(stub == ".yml"){
     plan_parsed <- yaml::yaml.load_file(input,
                                         handlers =
                                           list(expr = function(x) eval(parse(text = x))))
@@ -162,7 +162,7 @@ template_yaml <- function(template = c('plan', 'todo')) {
   template <- match.arg(template)
 
   path <- system.file("extdata",
-                      paste0(template, "-ex.yaml"),
+                      paste0(template, "-ex.yml"),
                       package = "tidytracker",
                       mustWork = TRUE)
 

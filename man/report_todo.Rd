@@ -23,7 +23,7 @@ the results will be correctly rendered as HTML.
 \dontrun{
 In RMarkdown:
 ```{r}
-my_todo <- read_yaml("my_todo.yaml")
+my_todo <- read_yaml("my_todo.yml")
 report_todo(my_todo)
 ```
 }

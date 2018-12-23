@@ -89,7 +89,7 @@ report_progress <- function(issues){
 #' \dontrun{
 #' In RMarkdown:
 #' ```{r}
-#' my_plan <- read_yaml("my_plan.yaml")
+#' my_plan <- read_yaml("my_plan.yml")
 #' report_plan(my_plan)
 #' ```
 #'}
@@ -152,7 +152,7 @@ report_plan <- function(plan){
 #' \dontrun{
 #' In RMarkdown:
 #' ```{r}
-#' my_todo <- read_yaml("my_todo.yaml")
+#' my_todo <- read_yaml("my_todo.yml")
 #' report_todo(my_todo)
 #' ```
 #'}
