@@ -58,16 +58,14 @@ parse_issues <- function(res){
 parse_issue_events <- function(res){
 
   purrr::map_df(1:length(res),
-         ~tibble::tibble(
-           id = res[[.]]$id,
-           actor = res[[.]]$actor$login,
-           event = res[[.]]$event,
-           created_at = as.Date(res[[.]]$created_at %>% substring(1,10)),
-           label = res[[.]]$label$name %||% NA,
-           issue_number = res[[.]]$issue$number,
-           issue_title = res[[.]]$issue$title
-         )
-  )
+                ~tibble::tibble(
+                  id = res[[.]]$id,
+                  actor = res[[.]]$actor$login,
+                  event = res[[.]]$event,
+                  created_at = res[[.]]$created_at,
+                  label = res[[.]]$label$name %||% NA,
+                  milestone_title = res[[.]]$milestone$title %||% NA
+                ))
 
 }
 

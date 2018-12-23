@@ -45,8 +45,13 @@ get_issues <- function(ref, ...){
 
 get_issue_events <- function(ref, number){
 
-  get_engine(api_endpoint = paste0("/issues/", number, "events"),
+  res <- get_engine(api_endpoint = paste0("/issues/", number, "/events"),
              ref = ref)
+
+  # append the relevant issue number to each element
+  res <- purrr::map(res, ~purrr::list_modify(., "number" = number))
+
+  res
 
 }
 

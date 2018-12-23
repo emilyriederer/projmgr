@@ -7,7 +7,7 @@
 post_milestone(ref, title, ...)
 }
 \arguments{
-\item{ref}{Repository reference (list) created by \code{tidytracker::create_repo_ref}}
+\item{ref}{Repository reference (list) created by \code{create_repo_ref()}}
 
 \item{title}{Milestone title (required)}
 

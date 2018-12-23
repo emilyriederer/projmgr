@@ -34,10 +34,6 @@ Other issues: \code{\link{get_issue_events}},
   \code{\link{get_issues}},
   \code{\link{parse_issue_events}},
   \code{\link{parse_issues}}, \code{\link{post_issue}},
-  \code{\link{report_progress}},
-  \code{\link{viz_gantt_closed_links}},
-  \code{\link{viz_gantt_closed}},
-  \code{\link{viz_taskboard_links}},
-  \code{\link{viz_taskboard}}
+  \code{\link{report_progress}}
 }
 \concept{issues}

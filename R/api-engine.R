@@ -52,7 +52,7 @@ get_engine <- function(api_endpoint, ref, .limit = Inf, ...){
 #' Core code for all POST calls
 #'
 #' @param api_endpoint API endpoint
-#' @param ref Repository reference (list) created by \code{tidytracker::create_repo_ref}
+#' @param ref Repository reference (list) created by \code{create_repo_ref()}
 #' @param ... Additional user-defined body parameters
 #'
 #' @keywords internal

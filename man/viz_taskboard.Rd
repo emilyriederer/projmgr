@@ -4,10 +4,12 @@
 \alias{viz_taskboard}
 \title{Visualize Agile-style task board of issue status}
 \usage{
-viz_taskboard(issues)
+viz_taskboard(issues, str_wrap_width = 20)
 }
 \arguments{
 \item{issues}{Issues dataset as produced by \code{parse_issues()}}
+
+\item{str_wrap_width}{Number of characters before text of issue title begins to wrap}
 }
 \value{
 ggplot object
@@ -33,14 +35,5 @@ viz_task_board(issues)
 }
 }
 \seealso{
-Other issues: \code{\link{get_issue_events}},
-  \code{\link{get_issues}},
-  \code{\link{parse_issue_events}},
-  \code{\link{parse_issues}}, \code{\link{post_issue}},
-  \code{\link{report_progress}},
-  \code{\link{viz_gantt_closed_links}},
-  \code{\link{viz_gantt_closed}},
-  \code{\link{viz_taskboard_links}},
-  \code{\link{viz_waterfall_issues}}
+viz_linked
 }
-\concept{issues}

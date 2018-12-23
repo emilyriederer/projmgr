@@ -4,7 +4,8 @@
 \alias{viz_gantt_closed}
 \title{Visualize Gannt-style chart of closed issues}
 \usage{
-viz_gantt_closed(issues, start = created_at, end = closed_at)
+viz_gantt_closed(issues, start = created_at, end = closed_at,
+  str_wrap_width = 30)
 }
 \arguments{
 \item{issues}{Issues dataset as produced by \code{parse_issues()}}
@@ -12,6 +13,8 @@ viz_gantt_closed(issues, start = created_at, end = closed_at)
 \item{start}{Unquoted variable name denoting issue start date}
 
 \item{end}{Unquoted variable name denoting issue end date}
+
+\item{str_wrap_width}{Number of characters before text of issue title begins to wrap}
 }
 \value{
 ggplot object
@@ -34,14 +37,5 @@ viz_gantt_closed(issues)
 }
 }
 \seealso{
-Other issues: \code{\link{get_issue_events}},
-  \code{\link{get_issues}},
-  \code{\link{parse_issue_events}},
-  \code{\link{parse_issues}}, \code{\link{post_issue}},
-  \code{\link{report_progress}},
-  \code{\link{viz_gantt_closed_links}},
-  \code{\link{viz_taskboard_links}},
-  \code{\link{viz_taskboard}},
-  \code{\link{viz_waterfall_issues}}
+viz_linked
 }
-\concept{issues}
