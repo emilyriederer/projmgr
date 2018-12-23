@@ -42,14 +42,14 @@ reference:
   desc: "Receive data from API (GET)"
   contents:
   - starts_with("get")
-- title: Submission functions
-  desc: "Send data to API (PUT)"
-  contents:
-  - starts_with("post")
 - title: Parse functions
   desc: "Parse data received from API as dataframe"
   contents:
   - starts_with("parse")
+- title: Submission functions
+  desc: "Send data to API (PUT)"
+  contents:
+  - starts_with("post")
 - title: Visualization functions
   desc: "Visualize data for public consumption"
   contents:
