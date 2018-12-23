@@ -28,11 +28,6 @@
 
 viz_taskboard <- function(issues, str_wrap_width = 20){
 
-  if (!requireNamespace("stringr", quietly = TRUE)) {
-    stop("Package \"stringr\" needed for this function to work. Please install it.",
-         call. = FALSE)
-  }
-
   data <- issues
 
   # create dimensions needed for aesthetics ----
@@ -54,7 +49,7 @@ viz_taskboard <- function(issues, str_wrap_width = 20){
     geom_tile(aes(fill = board_group), width = 0.9, height = 0.9, size = 2) +
     geom_text(aes(label =
                     paste0("#", number, ": ", title) %>%
-                    stringr::str_wrap(width = str_wrap_width)
+                    purrr::map(., ~paste(strwrap(., width = str_wrap_width), collapse = "\n"))
     )) +
     facet_grid(. ~ board_group, drop = FALSE) +
     theme(axis.title = element_blank(),

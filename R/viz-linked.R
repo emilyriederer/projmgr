@@ -37,11 +37,6 @@ viz_linked <- function(g, filepath){
       call. = FALSE)
   }
 
-  if (!requireNamespace("stringr", quietly = TRUE)) {
-    stop("Package \"stringr\" needed for this function to work. Please install it.",
-         call. = FALSE)
-  }
-
   # create text-link mapping
   links <- get_text_link_map(g)
 
@@ -107,8 +102,7 @@ get_text_link_map.gantt <- function(g){
     url = g$data$url,
     name =
       g$data$title %>%
-      stringr::str_wrap(width = g[['str_wrap_width']] ) %>%
-      stringr::str_split("\\n")
+      map(~strwrap(., width = g[['str_wrap_width']] ))
   ) %>%
     tidyr::unnest() %>%
     {stats::setNames(.$url, .$name)}
@@ -124,8 +118,7 @@ get_text_link_map.taskboard <- function(g){
     url = g$data$url,
     name =
       paste0("#", g$data$number, ": ", g$data$title) %>%
-      stringr::str_wrap(width = g[['str_wrap_width']] ) %>%
-      stringr::str_split("\\n")
+      map(~strwrap(., width = g[['str_wrap_width']] ))
   ) %>%
     tidyr::unnest() %>%
     {stats::setNames(.$url, .$name)}

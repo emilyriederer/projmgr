@@ -28,11 +28,6 @@
 
 viz_gantt_closed <- function(issues, start = created_at, end = closed_at, str_wrap_width = 30){
 
-  if (!requireNamespace("stringr", quietly = TRUE)) {
-    stop("Package \"stringr\" needed for this function to work. Please install it.",
-         call. = FALSE)
-  }
-
   start_var <- enquo(start)
   end_var <- enquo(end)
 
@@ -52,7 +47,8 @@ viz_gantt_closed <- function(issues, start = created_at, end = closed_at, str_wr
       title = "Closed Issues",
       x = "", y = ""
     ) +
-    scale_y_discrete(labels = function(x) stringr::str_wrap(x, width = str_wrap_width)) +
+    scale_y_discrete(labels = function(x) purrr::map(x, ~paste(strwrap(., width = str_wrap_width), collapse = "\n"))
+                     ) +
     theme_bw() +
     theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
     guides(col = FALSE)
