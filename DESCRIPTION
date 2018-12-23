@@ -28,7 +28,6 @@ Suggests:
     clipr,
     curl,
     knitr,
-    plotly,
     reprex,
     rmarkdown,
     roxygen2,
