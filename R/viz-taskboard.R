@@ -35,17 +35,14 @@ viz_taskboard <- function(issues, str_wrap_width = 20){
 
   data <- issues
 
-  # create board headers ----
+  # create dimensions needed for aesthetics ----
   data$board_group <- "Not Started"
   data$board_group[purrr::map_lgl(data$labels_name, ~"in-progress" %in% .)] <- "In Progress"
   data$board_group[!is.na(data$closed_at)] <- "Done"
   data$board_group <- factor(data$board_group,
                              levels = c("Not Started", "In Progress", "Done"))
 
-  # create position and color aesthetics ----
-  data$board_pos <- -1 * stats::ave(data$id, data$board_group, FUN = seq_along)
-  data$board_col <- sample(letters[1:20], nrow(data), replace = TRUE)
-
+  data$board_pos <- -1 * stats::ave(data$number, data$board_group, FUN = seq_along)
 
   # create ggplot object of task board ----
   g <-
@@ -54,7 +51,7 @@ viz_taskboard <- function(issues, str_wrap_width = 20){
                y = board_pos,
                Created = created_at
            )) +
-    geom_tile(aes(fill = board_col), width = 0.9, height = 0.9, size = 2) +
+    geom_tile(aes(fill = board_group), width = 0.9, height = 0.9, size = 2) +
     geom_text(aes(label =
                     paste0("#", number, ": ", title) %>%
                     stringr::str_wrap(width = str_wrap_width)
