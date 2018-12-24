@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Browse milestones for given GitHub repo — browse_milestones • tidytracker</title>
+<title>Browse a given GitHub repo — browse_repo • tidytracker</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Browse milestones for given GitHub repo — browse_milestones" />
+<meta property="og:title" content="Browse a given GitHub repo — browse_repo" />
 
-<meta property="og:description" content="Inspired by usethis functionality, opens browser to GitHub milestones for a given repo" />
+<meta property="og:description" content="Inspired by usethis functionality, opens browser to a given GitHub repo" />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -110,18 +110,18 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Browse milestones for given GitHub repo</h1>
+    <h1>Browse a given GitHub repo</h1>
     <small class="dont-index">Source: <a href='https://github.com/emilyriederer/tidytracker/blob/master/R/browse.R'><code>R/browse.R</code></a></small>
-    <div class="hidden name"><code>browse_milestones.Rd</code></div>
+    <div class="hidden name"><code>browse_repo.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Inspired by <code>usethis</code> functionality, opens browser to GitHub milestones for a given repo</p>
+    <p>Inspired by <code>usethis</code> functionality, opens browser to a given GitHub repo</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>browse_milestones</span>(<span class='no'>repo_ref</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>""</span>)</pre>
+    <pre class="usage"><span class='fu'>browse_repo</span>(<span class='no'>repo_ref</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -129,10 +129,6 @@
     <tr>
       <th>repo_ref</th>
       <td><p>Repository reference as created by <code><a href='create_repo_ref.html'>create_repo_ref()</a></code></p></td>
-    </tr>
-    <tr>
-      <th>id</th>
-      <td><p>Optional argument of milestone ID, if opening page for specific milestone is desired</p></td>
     </tr>
     </table>
     
@@ -144,7 +140,7 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='no'>my_repo</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='create_repo_ref.html'>create_repo_ref</a></span>(<span class='st'>"repo_owner"</span>, <span class='st'>"repo"</span>)
-<span class='fu'>browse_milestones</span>(<span class='no'>my_repo</span>)
+<span class='fu'>browse_repo</span>(<span class='no'>my_repo</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

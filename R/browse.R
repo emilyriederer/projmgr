@@ -1,3 +1,90 @@
+#' Browse a given GitHub repo
+#'
+#' Inspired by \code{usethis} functionality, opens browser to a given GitHub repo
+#'
+#' @param repo_ref Repository reference as created by \code{create_repo_ref()}
+#'
+#' @return Returns URL in non-interactive session or launches browser to docs in interactive session
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' my_repo <- create_repo_ref("repo_owner", "repo")
+#' browse_repo(my_repo)
+#' }
+
+browse_repo <- function(repo_ref) {
+
+  # base url varies depending on if private/ent or public
+  url_prefix <-
+    if(repo_ref$base_url != 'https://api.github.com/'){
+      repo_ref$base_url
+    }
+  else{"https://github.com/"}
+
+  view_url(url_prefix, repo_ref$repo_owner, repo_ref$repo_name)
+
+}
+
+#' Browse issues for given GitHub repo
+#'
+#' Inspired by \code{usethis} functionality, opens browser to GitHub issues for a given repo
+#'
+#' @inheritParams browse_repo
+#' @param number Optional argument of issue number, if opening page for specific issue is desired
+#'
+#' @return Returns URL in non-interactive session or launches browser to docs in interactive session
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' my_repo <- create_repo_ref("repo_owner", "repo")
+#' browse_issues(my_repo)
+#' }
+
+browse_issues <- function(repo_ref, number = "") {
+
+  # base url varies depending on if private/ent or public
+  url_prefix <-
+    if(repo_ref$base_url != 'https://api.github.com/'){
+      repo_ref$base_url
+    }
+  else{"https://github.com/"}
+
+  view_url(url_prefix, repo_ref$repo_owner, repo_ref$repo_name, "issues", number)
+
+}
+
+#' Browse milestones for given GitHub repo
+#'
+#' Inspired by \code{usethis} functionality, opens browser to GitHub milestones for a given repo
+#'
+#' @inheritParams browse_repo
+#' @param id Optional argument of milestone ID, if opening page for specific milestone is desired
+#'
+#' @return Returns URL in non-interactive session or launches browser to docs in interactive session
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' my_repo <- create_repo_ref("repo_owner", "repo")
+#' browse_milestones(my_repo)
+#' }
+
+browse_milestones <- function(repo_ref, id = "") {
+
+  # base url varies depending on if private/ent or public
+  url_prefix <-
+    if(repo_ref$base_url != 'https://api.github.com/'){
+      repo_ref$base_url
+    }
+  else{"https://github.com/"}
+
+  view_url(url_prefix, repo_ref$repo_owner, repo_ref$repo_name, "milestones", id)
+
+}
+
+
 #' View GitHub API documentation
 #'
 #' Read relevant parts of documentation for the GitHub API to learn more about
@@ -42,74 +129,17 @@ browse_docs <- function(
 
 }
 
-#' Browse issues for given GitHub repo
-#'
-#' Inspired by \code{usethis} functionality, opens browser to GitHub issues for a given repo
-#'
-#' @param repo_ref Repository reference as created by \code{create_repo_ref()}
-#'
-#' @return Returns URL in non-interactive session or launches browser to docs in interactive session
-#' @export
-#'
-#' @examples
-#' \dontrun{
-#' my_repo <- create_repo_ref("repo_owner", "repo")
-#' browse_issues(my_repo)
-#' }
-
-browse_issues <- function(repo_ref) {
-
-  # base url varies depending on if private/ent or public
-  url_prefix <-
-    if(repo_ref$base_url != 'https://api.github.com'){
-      repo_ref$base_url
-    }
-    else{"https://github.com/"}
-
-  view_url(url_prefix, repo_ref$repo_owner, repo_ref$repo_name, "issues")
-
-}
-
-#' Browse milestones for given GitHub repo
-#'
-#' Inspired by \code{usethis} functionality, opens browser to GitHub milestones for a given repo
-#'
-#' @param repo_ref Repository reference as created by \code{create_repo_ref()}
-#'
-#' @return Returns URL in non-interactive session or launches browser to docs in interactive session
-#' @export
-#'
-#' @examples
-#' \dontrun{
-#' my_repo <- create_repo_ref("repo_owner", "repo")
-#' browse_milestones(my_repo)
-#' }
-
-browse_milestones <- function(repo_ref) {
-
-  # base url varies depending on if private/ent or public
-  url_prefix <-
-    if(repo_ref$base_url != 'https://api.github.com'){
-      repo_ref$base_url
-    }
-  else{"https://github.com/"}
-
-  view_url(url_prefix, repo_ref$repo_owner, repo_ref$repo_name, "milestones")
-
-}
-
-
 # Internal function to support opening to GitHub documentation
 # Functionality and implementation inspired by usethis
 #' @keywords internal
 
 view_url <- function(..., open = interactive()) {
-url <- paste(..., sep = "/")
-if (open) {
-  cat(paste("Opening URL", url))
-  utils::browseURL(url)
-} else {
-  cat(paste("Open URL", url))
-}
-invisible(url)
+  url <- paste(..., sep = "/")
+  if (open) {
+    cat(paste("Opening URL", url))
+    utils::browseURL(url)
+  } else {
+    cat(paste("Open URL", url))
+  }
+  invisible(url)
 }
