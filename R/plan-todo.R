@@ -40,21 +40,21 @@ read_yaml <- function(input){
   }
 
   # determine input type
-  stub <- substring( trimws(input), nchar(trimws(input)) - 4)
+  stub <- substring( trimws(input), nchar(trimws(input)) - 3)
 
   # check if at least one of filepath or chars in not NA
   if(stub == ".yml"){
-    plan_parsed <- yaml::yaml.load_file(input,
+    parsed <- yaml::yaml.load_file(input,
                                         handlers =
                                           list(expr = function(x) eval(parse(text = x))))
   }
   else{
-    plan_parsed <- yaml::yaml.load(input,
+    parsed <- yaml::yaml.load(input,
                                    handlers =
                                      list(expr = function(x) eval(parse(text = x))))
   }
 
-  return(plan_parsed)
+  return(parsed)
 
 }
 
@@ -74,25 +74,22 @@ read_yaml <- function(input){
 post_plan <- function(ref, plan){
 
   # create milestones
-  req_milestones <-
+  milestone_ids <-
     plan %>%
     purrr::map(~purrr::list_modify(., "issue" = NULL)) %>%
-    purrr::map(., ~purrr::pmap(., ~post_milestone(ref, ...)))
+    purrr::map(., ~purrr::pmap(., ~post_milestone(ref, ...))) %>%
+    unlist()
 
-  # wrangle issues
-  milestone_ids <-
-    purrr::modify_depth(req_milestones, .f = "number", .depth = 2) %>% unlist()
-
-  num_issues_by_milestone <-
-    plan %>% purrr::map("issue") %>% purrr::map(length)
-
+  # wrangle issue
   milestone_nums <-
-    purrr::map2(milestone_ids, num_issues_by_milestone, rep) %>%
+    map(plan, "issue") %>%
+    map(length) %>%
+    map2(milestone_ids, ~rep(.y, .x)) %>%
     unlist() %>%
     as.integer()
 
   # create issues
-  req_issues <-
+  issues_prep <-
     plan %>%
     purrr::map("issue") %>%
     purrr::flatten() %>%
@@ -102,10 +99,10 @@ post_plan <- function(ref, plan){
                                 ~if(length(.) == 1){c(.,.)}else{.})) %>%
     purrr::map(~purrr::modify_at(.,
                                  .at = c('assignees', 'labels'),
-                                 .f = list)) %>%
-    purrr::map(~purrr::pmap(., ~post_issue(ref, ...)))
+                                 .f = list))
 
-  return(req_issues)
+    # post issues
+    res_issues <- purrr::map(issues_prep, ~purrr::pmap(., ~post_issue(ref, ...)))
 
 }
 

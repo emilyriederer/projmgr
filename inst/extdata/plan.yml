@@ -1,10 +1,9 @@
-milestone1:
-  title: Data cleaning and validation
+- title: Data cleaning and validation
   description: >
     We will conduct data quality checks,
     resolve issues with data quality, and
     document this process
-  due_on: 2018-12-31Z12:59:59Z
+  due_on: 2018-12-31T12:59:59Z
   issue:
     - title: Define data quality standards
       body: List out decision rules to check data quality
@@ -16,8 +15,7 @@ milestone1:
     - title: Resolve data quality issues
       body: Conduct needed research to resolve any issues
 
-milestone2:
-  title: Exploratory data analysis
+- title: Exploratory data analysis
   description: >
     Create basic statistics and views to better
     understand dataset and relationships
