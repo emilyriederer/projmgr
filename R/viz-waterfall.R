@@ -44,15 +44,15 @@ viz_waterfall_issues <- function(issues,
 
   plot_data <-
    dplyr::summarize(issues,
-              Initial = sum(!!start_var <= start_date &
-                              (!!end_var >= start_date | state == 'open'),
+              Initial = sum(!!start_var < start_date &
+                              (!!end_var > start_date | state == 'open'),
                             na.rm = TRUE),
               Opened = sum(!!start_var >= start_date & !!start_var <= end_date,
                            na.rm = TRUE),
               Closed = sum(!!end_var >= start_date & !!end_var <= end_date,
                            na.rm = TRUE),
-              Final = sum(!!start_var <= end_date &
-                            (!!end_var >= end_date | start == 'open'),
+              Final = sum(!!start_var < end_date &
+                            (!!end_var > end_date | start == 'open'),
                           na.rm = TRUE)
     ) %>%
     dplyr::select(dplyr::one_of(group_vars), Initial, Opened, Closed, Final) %>%
@@ -92,10 +92,3 @@ viz_waterfall_issues <- function(issues,
           strip.text.y = element_text(angle = 180),
           axis.text.y = element_blank())
 }
-
-# viz_progress_waterfall(issues, '2018-11-20', '2018-12-01') +
-#   facet_grid(milestone_title ~ .,
-#              switch = 'y',
-#              labeller = label_wrap_gen(20))
-#
-# viz_progress_waterfall(issues %>% ungroup(), '2018-11-20', '2018-12-01')
