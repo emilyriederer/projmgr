@@ -76,7 +76,7 @@ patch_engine <- function(api_endpoint, ref, ...){
 
 validate_inputs <- function(input, allowed_vars){
 
-  extra_vars <- setdiff(input_vars, allowed_vars)
+  extra_vars <- setdiff(names(input), allowed_vars)
 
   # no disallowed vars exist
   if(length(extra_vars) > 0){

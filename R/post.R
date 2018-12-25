@@ -32,16 +32,21 @@ post_issue <- function(ref, title, ..., distinct = TRUE){
   # check for unique title if desired ----
   if(distinct){
 
-    issue_titles <- purrr::map_chr( get_issues(ref, state = 'open') , "title" )
+    open_issues <- get_issues(ref, state = 'open')
 
-    if(any(title == issue_titles)){ # when title not distinct
-      stop(
-        paste("New title is not distinct with current open issues. \n",
-              "Please change title or set distinct = FALSE."),
-             call. = FALSE
-              )
+    issue_titles <-
+      if(is.list(open_issues)) {
+        purrr::map_chr( open_issues, "title" )
       }
+    else{""}
+
+    if( title %in% issue_titles ){ # when title not distinct
+      stop(
+        paste("New issue title is not distinct with current open issues. \n",
+              "Please change title or set distinct = FALSE."), call. = FALSE)
+    }
   }
+
 
   # check that rest of inputs are valid per github api ----
   args <- list(...)
@@ -49,15 +54,15 @@ post_issue <- function(ref, title, ..., distinct = TRUE){
   validate_inputs(args,
                   allowed_vars = c("body", "milestone",
                                    "labels", "assignees"))
-  if("labels" %in% names(args)){args[["labels"]] <- I(args[["labels"]])}
-  if("assignees" %in% names(args)){args[["assignees"]] <- I(args[["assignees"]])}
+  if(length(args[['labels']] == 1)){args[["labels"]] <- I(args[["labels"]])}
+  if(length(args[['assignees']] == 1)){args[["assignees"]] <- I(args[["assignees"]])}
 
   # submit request ----
   api_fx <- function(...){
     tidytracker:::post_engine(api_endpoint = "/issues",
-             ref = ref,
-             title = title,
-             ...)
+                              ref = ref,
+                              title = title,
+                              ...)
   }
 
   res <- do.call(api_fx, args)
@@ -90,19 +95,23 @@ post_milestone <- function(ref, title, ...){
   # check for duplicates before attempting to post ----
   # github automatically disallows duplicate milestone titles,
   # so not an optional as in post_issues
-    milestone_titles <- purrr::map_chr( get_milestones(ref, state = 'open') , "title" )
-    if(any(title == milestone_titles)){ # when title not distinct
-      stop("New title is not distinct with current open milestones. Please change title.",
-             call. = FALSE)
-    }
+  open_milestones <- get_milestones(ref, state = 'open')
+  milestone_titles <-       if(is.list(open_milestones)) {
+    purrr::map_chr( open_milestones , "title" )
+  }
+  else{""}
+  if(any(title == milestone_titles)){ # when title not distinct
+    stop("New milestone title is not distinct with current open milestones. Please change title.",
+         call. = FALSE)
+  }
 
   # check that rest of inputs are valid per github api ----
   validate_inputs(list(...), allowed_vars = c("state", "description", "due_on"))
 
   res <- post_engine(api_endpoint = "/milestones",
-              ref = ref,
-              title = title,
-              ...)
+                     ref = ref,
+                     title = title,
+                     ...)
 
   return( res[['number']] )
 
