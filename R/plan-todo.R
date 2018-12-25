@@ -83,9 +83,9 @@ post_plan <- function(ref, plan){
 
   # extract issue info from plan and append milestone identifiers
   milestone_num <-
-    map(plan, "issue") %>%
-    map(length) %>%
-    map2(milestone_num_dist, ~rep(.y, .x)) %>%
+    purrr::map(plan, "issue") %>%
+    purrr::map(length) %>%
+    purrr::map2(milestone_num_dist, ~rep(.y, .x)) %>%
     unlist() %>%
     as.integer()
 

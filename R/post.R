@@ -55,8 +55,7 @@ post_issue <- function(ref, title, ..., distinct = TRUE){
   if(length(args[['assignees']] == 1)){args[["assignees"]] <- I(args[["assignees"]])}
 
   # submit request ----
-  api_fx <- function(...){
-    tidytracker:::post_engine(api_endpoint = "/issues",
+  api_fx <- function(...){ post_engine(api_endpoint = "/issues",
                               ref = ref,
                               title = title,
                               ...)
