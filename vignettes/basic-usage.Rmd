@@ -49,6 +49,7 @@ viz_gantt_closed(dplyr_issues)
 ```{r}
 dplyr_issues$closed_at[1] <- NA
 dplyr_issues$closed_at[3] <- NA
+dplyr_issues$state[c(1,3)] <- "open"
 dplyr_issues$labels_name[[3]] <- c("in-progress", dplyr_issues$labels_name[[3]])
 viz_taskboard(dplyr_issues)
 ```
