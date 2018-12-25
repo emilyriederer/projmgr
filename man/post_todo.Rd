@@ -12,7 +12,7 @@ post_todo(ref, todo)
 \item{todo}{To-do R list structure as read with \code{read_yaml()}}
 }
 \value{
-Content of POST request as list
+Number (identifier) of posted issue
 }
 \description{
 Post custom to-do lists (i.e. issues) based on yaml read in by \code{read_yaml}.

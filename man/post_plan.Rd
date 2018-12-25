@@ -12,7 +12,7 @@ post_plan(ref, plan)
 \item{plan}{Plan list as read with \code{read_yaml()}}
 }
 \value{
-Content of POST request as list
+Dataframe with numbers (identifiers) of posted milestones and issues and issue title
 }
 \description{
 Post custom plans (i.e. create milestons and issues) based on yaml read in by

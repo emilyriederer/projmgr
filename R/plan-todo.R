@@ -63,10 +63,12 @@ read_yaml <- function(input){
 #' Post custom plans (i.e. create milestons and issues) based on yaml read in by
 #' \code{read_yaml}. Please see the "Building Custom Plans" vignette for details.
 #'
-#' @inherit post_engine return params
+#' @inherit post_engine params
 #' @inherit read_yaml examples
 #' @param plan Plan list as read with \code{read_yaml()}
 #' @export
+#'
+#' @return Dataframe with numbers (identifiers) of posted milestones and issues and issue title
 #'
 #' @family plans and todos
 #' @importFrom dplyr distinct mutate pull select transmute
@@ -74,35 +76,32 @@ read_yaml <- function(input){
 post_plan <- function(ref, plan){
 
   # create milestones
-  milestone_ids <-
-    plan %>%
-    purrr::map(~purrr::list_modify(., "issue" = NULL)) %>%
+  milestone_num_dist <-
+    purrr::map(plan, ~purrr::list_modify(., "issue" = NULL)) %>%
     purrr::map(., ~purrr::pmap(., ~post_milestone(ref, ...))) %>%
     unlist()
 
-  # wrangle issue
-  milestone_nums <-
+  # extract issue info from plan and append milestone identifiers
+  milestone_num <-
     map(plan, "issue") %>%
     map(length) %>%
-    map2(milestone_ids, ~rep(.y, .x)) %>%
+    map2(milestone_num_dist, ~rep(.y, .x)) %>%
     unlist() %>%
     as.integer()
 
   # create issues
   issues_prep <-
-    plan %>%
-    purrr::map("issue") %>%
+    purrr::map(plan, "issue") %>%
     purrr::flatten() %>%
-    purrr::map2(milestone_nums, ~c(.x, milestone = .y)) %>%
-    purrr::map(~purrr::modify_at(.,
-                                .at = c("assignees", "labels"),
-                                ~if(length(.) == 1){c(.,.)}else{.})) %>%
-    purrr::map(~purrr::modify_at(.,
-                                 .at = c('assignees', 'labels'),
-                                 .f = list))
+    purrr::map2(milestone_num, ~c(.x, milestone = .y))
 
-    # post issues
-    res_issues <- purrr::map(issues_prep, ~purrr::pmap(., ~post_issue(ref, ...)))
+  # post issues
+  issue_num <- purrr::map_chr(issues_prep,
+                                ~do.call(function(...) post_issue(ref, ...), .x))
+
+  return(data.frame(milestone_number = purrr::map_int(issues_prep, "milestone"),
+                      issue_number = issue_num,
+                      issue_title = purrr::map_chr(issues_prep, "title")))
 
 }
 
@@ -113,7 +112,8 @@ post_plan <- function(ref, plan){
 #'
 #' Currently has know bug in that cannot be used to introduce new labels.
 #'
-#' @inherit post_engine return params
+#' @inherit post_engine params
+#' @inherit post_issue return
 #' @inherit read_yaml examples
 #' @param todo To-do R list structure as read with \code{read_yaml()}
 #' @export
@@ -125,17 +125,9 @@ post_plan <- function(ref, plan){
 post_todo <- function(ref, todo){
 
   # create issues
-  req_issues <-
-    todo %>%
-    purrr::map(~purrr::modify_at(.,
-                                .at = c("assignees", "labels"),
-                                ~if(length(.) == 1){c(.,.)}else{.})) %>%
-    purrr::map(~purrr::modify_at(.,
-                                 .at = c('assignees', 'labels'),
-                                 .f = list)) %>%
-    purrr::map(~purrr::pmap(., ~post_issue(ref, ...)))
+  res_issues <- purrr::map(todo, ~purrr::pmap(., ~post_issue(ref, ...)))
 
-  return(req_issues)
+  return( unlist(res_issues))
 
 }
 
