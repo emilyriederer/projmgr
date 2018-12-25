@@ -14,7 +14,8 @@ Prints template to console
 }
 \description{
 Prints YAML templates for either a plan or to-do list to the console as an example
-for developing your own custom plans and to-do lists.
+for developing your own custom plans and to-do lists. Inspired by similar \code{template_}
+functions included in the \code{pkgdown} package.
 }
 \examples{
 template_yaml('plan')

@@ -17,7 +17,9 @@ browse_docs(action = c("get", "post"), object = c("milestone", "issue",
 Returns URL in non-interactive session or launches browser to docs in interactive session
 }
 \description{
-Read relevant parts of documentation for the GitHub API to learn more about
+Opens browser to relevant parts of GitHub API documentation to learn more about field
+definitions and formatting. Inspired by similar \code{browse_} functions included in
+the \code{usethis} package.
 }
 \examples{
 \dontrun{

@@ -13,7 +13,8 @@ browse_repo(repo_ref)
 Returns URL in non-interactive session or launches browser to docs in interactive session
 }
 \description{
-Inspired by \code{usethis} functionality, opens browser to a given GitHub repo
+Opens browser to a given GitHub repo. Inspired by similar \code{browse_} functions included in
+the \code{usethis} package.
 }
 \examples{
 \dontrun{

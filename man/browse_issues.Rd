@@ -15,7 +15,8 @@ browse_issues(repo_ref, number = "")
 Returns URL in non-interactive session or launches browser to docs in interactive session
 }
 \description{
-Inspired by \code{usethis} functionality, opens browser to GitHub issues for a given repo
+Opens browser to GitHub issues for a given repo. Inspired by similar \code{browse_} functions included in
+the \code{usethis} package.
 }
 \examples{
 \dontrun{

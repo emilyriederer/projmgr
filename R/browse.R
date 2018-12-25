@@ -1,6 +1,7 @@
 #' Browse a given GitHub repo
 #'
-#' Inspired by \code{usethis} functionality, opens browser to a given GitHub repo
+#' Opens browser to a given GitHub repo. Inspired by similar \code{browse_} functions included in
+#' the \code{usethis} package.
 #'
 #' @param repo_ref Repository reference as created by \code{create_repo_ref()}
 #'
@@ -28,7 +29,8 @@ browse_repo <- function(repo_ref) {
 
 #' Browse issues for given GitHub repo
 #'
-#' Inspired by \code{usethis} functionality, opens browser to GitHub issues for a given repo
+#' Opens browser to GitHub issues for a given repo. Inspired by similar \code{browse_} functions included in
+#' the \code{usethis} package.
 #'
 #' @inheritParams browse_repo
 #' @param number Optional argument of issue number, if opening page for specific issue is desired
@@ -57,7 +59,8 @@ browse_issues <- function(repo_ref, number = "") {
 
 #' Browse milestones for given GitHub repo
 #'
-#' Inspired by \code{usethis} functionality, opens browser to GitHub milestones for a given repo
+#' Opens browser to GitHub milestones for a given repo. Inspired by similar \code{browse_} functions included in
+#' the \code{usethis} package.
 #'
 #' @inheritParams browse_repo
 #' @param id Optional argument of milestone ID, if opening page for specific milestone is desired
@@ -87,7 +90,9 @@ browse_milestones <- function(repo_ref, id = "") {
 
 #' View GitHub API documentation
 #'
-#' Read relevant parts of documentation for the GitHub API to learn more about
+#' Opens browser to relevant parts of GitHub API documentation to learn more about field
+#' definitions and formatting. Inspired by similar \code{browse_} functions included in
+#' the \code{usethis} package.
 #'
 #' @param action Character string denoting action you wish to complete: "get" (list existing) or "post" (creating new)
 #' @param object Character string denoting object on wish you want to apply an action. Supports

@@ -99,9 +99,11 @@ post_plan <- function(ref, plan){
   issue_num <- purrr::map_chr(issues_prep,
                                 ~do.call(function(...) post_issue(ref, ...), .x))
 
-  return(data.frame(milestone_number = purrr::map_int(issues_prep, "milestone"),
+  return(
+    data.frame(milestone_number = purrr::map_int(issues_prep, "milestone"),
                       issue_number = issue_num,
-                      issue_title = purrr::map_chr(issues_prep, "title")))
+                      issue_title = purrr::map_chr(issues_prep, "title"))
+    )
 
 }
 
@@ -127,14 +129,15 @@ post_todo <- function(ref, todo){
   # create issues
   res_issues <- purrr::map(todo, ~purrr::pmap(., ~post_issue(ref, ...)))
 
-  return( unlist(res_issues))
+  return( unlist(res_issues) )
 
 }
 
 #' Print YAML template to console
 #'
 #' Prints YAML templates for either a plan or to-do list to the console as an example
-#' for developing your own custom plans and to-do lists.
+#' for developing your own custom plans and to-do lists. Inspired by similar \code{template_}
+#' functions included in the \code{pkgdown} package.
 #'
 #' @param template One of \code{"plan"} or \code{"todo"} denoting template desired
 #'
