@@ -20,10 +20,44 @@ This vignette illustrates codeflows of `tidytracker`'s core functionality.
 
 ## Creating a Repo Reference
 
-The first step to interacting with a GitHub repository is creating a repository reference. Much like database connection
+The first step to interacting with a GitHub repository is creating a repository reference.
+
+```{r}
+dplyr <- create_repo_ref('tidyverse', 'dplyr')
+```
 
 ## Getting Issues
 
+```{r}
+dplyr_issues_list <- get_issues(dplyr, milestone = 1, state = 'all')
+dplyr_issues <- parse_issues(dplyr_issues_list)
+head(dplyr_issues)
+```
+
 ## Visualizing Issues
+
+There are many different ways to visualize issues. 
+
+For reporting on time-to-completion, `viz_gantt_closed()` creates one horizontal bar per issue and colors issues by length of time open.
+
+```{r}
+viz_gantt_closed(dplyr_issues)
+```
+
+`viz_taskboard()` creates an Agile-like taskboard of issues open, in progress, and completed.
+
+```{r}
+dplyr_issues$closed_at[1] <- NA
+dplyr_issues$closed_at[3] <- NA
+dplyr_issues$labels_name[[3]] <- c("in-progress", dplyr_issues$labels_name[[3]])
+viz_taskboard(dplyr_issues)
+```
+
+`viz_waterfall_issues()` creates a waterfall plot showing, for a fixed time-period, the initial count of open issues, newly reported issues, closed issues, and final open count. 
+
+```{r}
+viz_waterfall_issues(dplyr_issues, '2016-01-01', '2018-01-01')
+```
+
 
 ## Posting Issues

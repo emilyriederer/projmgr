@@ -4,6 +4,8 @@
 #' @param start_date Character string in 'YYYY-MM-DD' form for first date to be considered
 #' @param end_date Character string in 'YYYY-MM-DD' form for last date to be considered
 #'
+#' @import ggplot2
+#'
 #' @return ggplot object
 #' @family issues
 #' @export
