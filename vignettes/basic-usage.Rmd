@@ -1,0 +1,29 @@
+---
+title: "Basic Usage"
+author: "Emily Riederer"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This vignette illustrates codeflows of `tidytracker`'s core functionality.
+
+## Creating a Repo Reference
+
+The first step to interacting with a GitHub repository is creating a repository reference. Much like database connection
+
+## Getting Issues
+
+## Visualizing Issues
+
+## Posting Issues

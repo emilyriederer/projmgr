@@ -25,6 +25,7 @@ articles:
   - title: "Interacting with GitHub Repositories"
     desc: Tutotials related to with sending and receiving information with GitHub
     contents:
+    - basic-usage
     - building-custom-plans
     - reprex-clipr
   - title: "Use Cases"
