@@ -71,7 +71,7 @@ viz_linked <- function(g, filepath){
 get_text_link_map <- function(g){
 
   # ensure graph data has preserved links
-  if(!any("url" == names(g$data))){
+  if(!("url" %in% names(g$data))){
     stop( paste(
       "url column was not included in dataset passed to viz funcion.",
       "Please remake the plot with this field included before passing to viz_linked.",
@@ -81,17 +81,16 @@ get_text_link_map <- function(g){
 
   # throw more readable error message if type unsupported
   supported_plots <- c("gantt", "taskboard")
-  if(length(intersect(class(g), supported_plots)) == 0) {
+  if(!(class(g) %in% supported_plots)) {
     stop( paste(
       "Object provided does not have an implementation for adding links.",
       "Supported plots types are:",
       paste(supported_plots, collapse = ", "),
-      "Please remake the plot with this field included before passing to viz_linked.",
       sep = "\n"
     ))
   }
 
-  # dispatch to method
+  # dispatch to S3 method
   UseMethod('get_text_link_map', g)
 }
 
@@ -102,7 +101,7 @@ get_text_link_map.gantt <- function(g){
     url = g$data$url,
     name =
       g$data$title %>%
-      map(~strwrap(., width = g[['str_wrap_width']] ))
+      purrr::map(~strwrap(., width = g[['str_wrap_width']] ))
   ) %>%
     tidyr::unnest() %>%
     {stats::setNames(.$url, .$name)}
@@ -118,7 +117,7 @@ get_text_link_map.taskboard <- function(g){
     url = g$data$url,
     name =
       paste0("#", g$data$number, ": ", g$data$title) %>%
-      map(~strwrap(., width = g[['str_wrap_width']] ))
+      purrr::map(~strwrap(., width = g[['str_wrap_width']] ))
   ) %>%
     tidyr::unnest() %>%
     {stats::setNames(.$url, .$name)}
