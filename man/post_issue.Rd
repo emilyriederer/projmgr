@@ -17,7 +17,7 @@ post_issue(ref, title, ..., distinct = TRUE)
 as a current open issue should be allowed}
 }
 \value{
-Returns "Success" if successfully posted, otherwise emits informative error message
+Number (identifier) of posted issue
 }
 \description{
 Post issue to GitHub repository

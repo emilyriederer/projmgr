@@ -8,7 +8,7 @@
 #' @family post
 #' @family issues
 #'
-#' @return Returns "Success" if successfully posted, otherwise emits informative error message
+#' @return Number (identifier) of posted issue
 #'
 #' @examples
 #' \dontrun{
@@ -29,32 +29,40 @@
 
 post_issue <- function(ref, title, ..., distinct = TRUE){
 
-  # check for unique title if desired
+  # check for unique title if desired ----
   if(distinct){
 
     issue_titles <- purrr::map_chr( get_issues(ref, state = 'open') , "title" )
 
     if(any(title == issue_titles)){ # when title not distinct
-      return(
-        paste("New title is not distinct with current open milestones. \n",
+      stop(
+        paste("New title is not distinct with current open issues. \n",
               "Please change title or set distinct = FALSE."),
              call. = FALSE
               )
       }
   }
 
-  # check that rest of inputs are valid per github api
-  validate_inputs(list(...),
+  # check that rest of inputs are valid per github api ----
+  args <- list(...)
+
+  validate_inputs(args,
                   allowed_vars = c("body", "milestone",
                                    "labels", "assignees"))
+  if("labels" %in% names(args)){args[["labels"]] <- I(args[["labels"]])}
+  if("assignees" %in% names(args)){args[["assignees"]] <- I(args[["assignees"]])}
 
-  # post issue and capture result or error
-  post_engine(api_endpoint = "/issues",
+  # submit request ----
+  api_fx <- function(...){
+    tidytracker:::post_engine(api_endpoint = "/issues",
              ref = ref,
              title = title,
              ...)
+  }
 
-  return("Success")
+  res <- do.call(api_fx, args)
+
+  return( res[['number']] )
 
 }
 
@@ -66,7 +74,7 @@ post_issue <- function(ref, title, ..., distinct = TRUE){
 #' @family post
 #' @family milestones
 #'
-#' @return Character string. "Duplicate" if not posted due to title conflict or "Success" if successfully posted.
+#' @return Number (identifier) of posted milestone
 #'
 #' @examples
 #' \dontrun{
@@ -79,23 +87,23 @@ post_issue <- function(ref, title, ..., distinct = TRUE){
 
 post_milestone <- function(ref, title, ...){
 
-  # check for duplicates before attempting to post
+  # check for duplicates before attempting to post ----
   # github automatically disallows duplicate milestone titles,
   # so not an optional as in post_issues
     milestone_titles <- purrr::map_chr( get_milestones(ref, state = 'open') , "title" )
     if(any(title == milestone_titles)){ # when title not distinct
-      return("New title is not distinct with current open milestones. Please change title.",
+      stop("New title is not distinct with current open milestones. Please change title.",
              call. = FALSE)
     }
 
-  validate_inputs(list(...),
-                  allowed_vars = c("state", "description", "due_on"))
+  # check that rest of inputs are valid per github api ----
+  validate_inputs(list(...), allowed_vars = c("state", "description", "due_on"))
 
-  post_engine(api_endpoint = "/milestones",
+  res <- post_engine(api_endpoint = "/milestones",
               ref = ref,
               title = title,
               ...)
 
-  return("Success")
+  return( res[['number']] )
 
 }

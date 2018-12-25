@@ -14,7 +14,7 @@ post_milestone(ref, title, ...)
 \item{...}{Additional user-defined body parameters. Use \code{browse_docs()} to learn more.}
 }
 \value{
-Character string. "Duplicate" if not posted due to title conflict or "Success" if successfully posted.
+Number (identifier) of posted milestone
 }
 \description{
 Post milestone to GitHub repository
