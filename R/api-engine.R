@@ -1,34 +1,3 @@
-#' Validate that all user-defined inputs (GET query, POST body, etc.) are valid
-#'
-#' @param input List of user-provided input parameters
-#' @param required_vars Character vector of required variables
-#' @param allowed_vars Character vector of allowed but not required variables
-#'
-#' @return No return. Throws errors if user-defined inputs are invalid.
-#' @keywords internal
-
-validate_inputs <- function(input, allowed_vars){
-
-  input_vars <- names(input)
-
-  # no disallowed vars exist
-  if(!all(input_vars %in% allowed_vars)){
-    stop(
-      paste0(
-        "The following user-inputted variables are not relevant to this API request: \n + ",
-        paste(setdiff(input_vars, allowed_vars), collapse = ","), "\n",
-        "Allowed variables are: \n + ",
-        paste(allowed_vars, collapse = ","), "\n",
-        "Please remove unallowed fields and try again.", "\n",
-        "Use the browse_docs() function or directly visit \n",
-        "See https://developer.github.com/v3/ for full documentation of defined fields."
-      ),
-      call. = FALSE
-    )
-  }
-
-}
-
 #' Core code for all GET calls
 #'
 #' @param api_endpoint API endpoint
@@ -91,5 +60,38 @@ patch_engine <- function(api_endpoint, ref, ...){
     .limit = Inf,
     .send_headers = c("User-Agent" = "https://github.com/emilyriederer/tidytracker")
   )
+
+}
+
+# internal functions focused on cleaning inputs to reduce common api errors
+
+#' Validate that all user-defined inputs (GET query, POST body, etc.) are valid
+#'
+#' @param input List of user-provided input parameters
+#' @param required_vars Character vector of required variables
+#' @param allowed_vars Character vector of allowed but not required variables
+#'
+#' @return No return. Throws errors if user-defined inputs are invalid.
+#' @keywords internal
+
+validate_inputs <- function(input, allowed_vars){
+
+  extra_vars <- setdiff(input_vars, allowed_vars)
+
+  # no disallowed vars exist
+  if(length(extra_vars) > 0){
+    stop(
+      paste0(
+        "The following user-inputted variables are not relevant to this API request: \n + ",
+        paste(extra_vars, collapse = ","), "\n",
+        "Allowed variables are: \n + ",
+        paste(allowed_vars, collapse = ","), "\n",
+        "Please remove unallowed fields and try again.", "\n",
+        "Use the browse_docs() function or \n",
+        "visit https://developer.github.com/v3/ for full API documentation."
+      ),
+      call. = FALSE
+    )
+  }
 
 }
