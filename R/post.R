@@ -50,10 +50,7 @@ post_issue <- function(ref, title, ..., distinct = TRUE){
 
   # check that rest of inputs are valid per github api ----
   args <- list(...)
-
-  validate_inputs(args,
-                  allowed_vars = c("body", "milestone",
-                                   "labels", "assignees"))
+  validate_inputs(args, allowed_vars = c("body", "milestone","labels", "assignees"))
   if(length(args[['labels']] == 1)){args[["labels"]] <- I(args[["labels"]])}
   if(length(args[['assignees']] == 1)){args[["assignees"]] <- I(args[["assignees"]])}
 
