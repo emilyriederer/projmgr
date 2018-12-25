@@ -18,9 +18,25 @@ knitr::opts_chunk$set(
 
 This vignette details some key design choices in this package with the hope that stating these explicitly will improve package navigability.
 
-## API Function Parameters
+## Repo as First Class Citizen
 
-In general, parameters required by the GitHub API are required by the corresponding functions in this package. Any additionaly parameters not required by the GitHub API can be passed in through the `...`s. The `browse_docs()` function can be used to find out more about these optional parameters.
+Repositories are treated as "first class" citizens. The first step to accessing or sending information is to create a repository reference using the `create_repo_ref()` function. The resulting object is the first element passed into all `get_` and `post_` functions.
+
+For users that work with databases in R with the `DBI` package, this codeflow is analogous to querying from a database. In this case, users first create a database connection object with `dbConnect()` which is passed into subsequent functions such as `dbGetQuery`.
+
+This decision was made under the assumption that working with a single repository would be the most common use case for individual users. Sometimes, users might instead wish for a view further up in the hierarchy, e.g. an organization object versus a repository object. Hopefully, it should be possible to achieve the same results as this would provide by mapping over a set of repositories.
+
+## Function Naming
+
+Functions generally conform to the popular `<verb>_<details>` convention, which is popular across many R packages. For functions interaction with the GitHub API, the `<verb>` component is the HTTP method invoked (e.g. GET, POST, DELETE). 
+
+To users unfamiliar with APIs, verbs like "post" might seem less intuitive than a synonym like "create" or "submit". However, this convention describes the function's action most precisely and ideally also serves to raise awareness of HTTP methods.
+
+## Function Parameters
+
+Functions that interact with GitHub's API demure to the naming conventions of that API. This ideally empowers users for future, direct work with the API or allows for easier maintenance.
+
+More specifically, parameters required by the GitHub API are required by the corresponding functions in this package. Any additionaly parameters not required by the GitHub API can be passed in through the `...`s. The `browse_docs()` function can be used to find out more about these optional parameters.
 
 ## Get-Parse Codeflow
 
@@ -42,7 +58,7 @@ However, the `get_` and `parse_` functions are provided separately to empower us
 
 ## Parse Output Variable Names
 
-As much as possible, the dataframe returned by `parse_` functions maintains the same field names as used by the GitHub API. However, there are a few key exceptions:
+In keeping with the [Function Parameters], the dataframe returned by `parse_` functions attempt to maintain the same field names as used by the GitHub API. However, there are a few key exceptions:
 
 - When the field name is ambiguous, additional information may be appended. 
     + For example, after getting an issue, the "comments" field contains the count of comments. Since the name might otherwise suggested that the text of the comments is being returned, the `parsed_` field is instead called "n_comments"

@@ -78,7 +78,7 @@
       <h1>Design Notes</h1>
                         <h4 class="author">Emily Riederer</h4>
             
-            <h4 class="date">2018-12-23</h4>
+            <h4 class="date">2018-12-25</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/emilyriederer/tidytracker/blob/master/vignettes/design-notes.Rmd"><code>vignettes/design-notes.Rmd</code></a></small>
       <div class="hidden name"><code>design-notes.Rmd</code></div>
@@ -88,10 +88,24 @@
     
     
 <p>This vignette details some key design choices in this package with the hope that stating these explicitly will improve package navigability.</p>
-<div id="api-function-parameters" class="section level2">
+<div id="repo-as-first-class-citizen" class="section level2">
 <h2 class="hasAnchor">
-<a href="#api-function-parameters" class="anchor"></a>API Function Parameters</h2>
-<p>In general, parameters required by the GitHub API are required by the corresponding functions in this package. Any additionaly parameters not required by the GitHub API can be passed in through the <code>...</code>s. The <code><a href="../reference/browse_docs.html">browse_docs()</a></code> function can be used to find out more about these optional parameters.</p>
+<a href="#repo-as-first-class-citizen" class="anchor"></a>Repo as First Class Citizen</h2>
+<p>Repositories are treated as “first class” citizens. The first step to accessing or sending information is to create a repository reference using the <code><a href="../reference/create_repo_ref.html">create_repo_ref()</a></code> function. The resulting object is the first element passed into all <code>get_</code> and <code>post_</code> functions.</p>
+<p>For users that work with databases in R with the <code>DBI</code> package, this codeflow is analogous to querying from a database. In this case, users first create a database connection object with <code>dbConnect()</code> which is passed into subsequent functions such as <code>dbGetQuery</code>.</p>
+<p>This decision was made under the assumption that working with a single repository would be the most common use case for individual users. Sometimes, users might instead wish for a view further up in the hierarchy, e.g. an organization object versus a repository object. Hopefully, it should be possible to achieve the same results as this would provide by mapping over a set of repositories.</p>
+</div>
+<div id="function-naming" class="section level2">
+<h2 class="hasAnchor">
+<a href="#function-naming" class="anchor"></a>Function Naming</h2>
+<p>Functions generally conform to the popular <code>&lt;verb&gt;_&lt;details&gt;</code> convention, which is popular across many R packages. For functions interaction with the GitHub API, the <code>&lt;verb&gt;</code> component is the HTTP method invoked (e.g. GET, POST, DELETE).</p>
+<p>To users unfamiliar with APIs, verbs like “post” might seem less intuitive than a synonym like “create” or “submit”. However, this convention describes the function’s action most precisely and ideally also serves to raise awareness of HTTP methods.</p>
+</div>
+<div id="function-parameters" class="section level2">
+<h2 class="hasAnchor">
+<a href="#function-parameters" class="anchor"></a>Function Parameters</h2>
+<p>Functions that interact with GitHub’s API demure to the naming conventions of that API. This ideally empowers users for future, direct work with the API or allows for easier maintenance.</p>
+<p>More specifically, parameters required by the GitHub API are required by the corresponding functions in this package. Any additionaly parameters not required by the GitHub API can be passed in through the <code>...</code>s. The <code><a href="../reference/browse_docs.html">browse_docs()</a></code> function can be used to find out more about these optional parameters.</p>
 </div>
 <div id="get-parse-codeflow" class="section level2">
 <h2 class="hasAnchor">
@@ -112,7 +126,7 @@ milestones &lt;-<span class="st"> </span><span class="kw"><a href="../reference/
 <div id="parse-output-variable-names" class="section level2">
 <h2 class="hasAnchor">
 <a href="#parse-output-variable-names" class="anchor"></a>Parse Output Variable Names</h2>
-<p>As much as possible, the dataframe returned by <code>parse_</code> functions maintains the same field names as used by the GitHub API. However, there are a few key exceptions:</p>
+<p>In keeping with the <a href="#function-parameters">Function Parameters</a>, the dataframe returned by <code>parse_</code> functions attempt to maintain the same field names as used by the GitHub API. However, there are a few key exceptions:</p>
 <ul>
 <li>When the field name is ambiguous, additional information may be appended.
 <ul>
@@ -134,7 +148,9 @@ milestones &lt;-<span class="st"> </span><span class="kw"><a href="../reference/
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#api-function-parameters">API Function Parameters</a></li>
+<li><a href="#repo-as-first-class-citizen">Repo as First Class Citizen</a></li>
+      <li><a href="#function-naming">Function Naming</a></li>
+      <li><a href="#function-parameters">Function Parameters</a></li>
       <li><a href="#get-parse-codeflow">Get-Parse Codeflow</a></li>
       <li><a href="#parse-output-variable-names">Parse Output Variable Names</a></li>
       </ul>
