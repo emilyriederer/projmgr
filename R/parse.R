@@ -16,6 +16,8 @@
 
 parse_issues <- function(res){
 
+  if(res == ""){stop("Results object contains no elements to parse.")}
+
   purrr::map_df(1:length(res),
                 ~tibble::tibble(
                   title = res[[.]]$title,
@@ -57,6 +59,8 @@ parse_issues <- function(res){
 
 parse_issue_events <- function(res){
 
+  if(res == ""){stop("Results object contains no elements to parse.")}
+
   purrr::map_df(1:length(res),
                 ~tibble::tibble(
                   number = res[[.]]$number,
@@ -87,6 +91,8 @@ parse_issue_events <- function(res){
 #' }
 
 parse_milestones <- function(res){
+
+  if(res == ""){stop("Results object contains no elements to parse.")}
 
   purrr::map_df(1:length(res),
                 ~tibble::tibble(
