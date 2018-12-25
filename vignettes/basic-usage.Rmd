@@ -57,7 +57,7 @@ viz_taskboard(dplyr_issues)
 `viz_waterfall_issues()` creates a waterfall plot showing, for a fixed time-period, the initial count of open issues, newly reported issues, closed issues, and final open count. 
 
 ```{r}
-viz_waterfall_issues(dplyr_issues, '2016-01-01', '2018-01-01')
+viz_waterfall_issues(dplyr_issues, '2014-01-01', '2015-01-01')
 ```
 
 

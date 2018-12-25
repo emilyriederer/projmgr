@@ -17,7 +17,7 @@
 
 viz_waterfall_issues <- function(issues,
                                    start_date, end_date,
-                                   start = "created_at", end = "closed_at"){
+                                   start = created_at, end = closed_at){
 
   # initial <- sum(issues$created_at <= start_date &
   #                  (issues$closed_at >= start_date | issues$state == 'open'),
@@ -36,8 +36,8 @@ viz_waterfall_issues <- function(issues,
   #   stringsAsFactors = FALSE
   # )
 
-  start_var <- sym(start)
-  end_var <- sym(end)
+  start_var <- enquo(start)
+  end_var <- enquo(end)
 
   issues <-
     dplyr::mutate(issues, dummy_var = 1) %>%
