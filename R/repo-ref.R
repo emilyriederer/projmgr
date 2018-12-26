@@ -28,14 +28,6 @@ create_repo_ref <-
            identifier = "",
            password = ""){
 
-    # validate valid entries for repo_owner and repo_name ----
-    stopifnot(
-      is.character(repo_owner),
-      grepl("^[a-zA-Z0-9][a-zA-Z0-9-]{0,38}$", repo_owner),
-      is.character(repo_name),
-      grepl("^[a-zA-Z0-9-]{1,100}$", repo_name)
-    )
-
     # determine authentication strategy ----
     if(identifier != "" & password != ""){
 
