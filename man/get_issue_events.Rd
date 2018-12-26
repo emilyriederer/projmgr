@@ -27,7 +27,8 @@ events <- parse_issue_events(events_res)
 }
 \seealso{
 Other get: \code{\link{get_issues}},
-  \code{\link{get_milestones}}
+  \code{\link{get_milestones}},
+  \code{\link{get_repo_labels}}
 
 Other issues: \code{\link{get_issues}},
   \code{\link{parse_issue_events}},

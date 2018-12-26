@@ -24,7 +24,8 @@ milestones <- parse_milestones(milestones_res)
 }
 \seealso{
 Other parse: \code{\link{parse_issue_events}},
-  \code{\link{parse_issues}}
+  \code{\link{parse_issues}},
+  \code{\link{parse_repo_labels}}
 
 Other milestones: \code{\link{get_milestones}},
   \code{\link{post_milestone}}

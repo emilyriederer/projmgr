@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Parse issues overview from <code>get_issues</code> — parse_issues • tidytracker</title>
+<title>Parse labels from <code>get_repo_labels</code> — parse_repo_labels • tidytracker</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Parse issues overview from <code>get_issues</code> — parse_issues" />
+<meta property="og:title" content="Parse labels from <code>get_repo_labels</code> — parse_repo_labels" />
 
-<meta property="og:description" content="Parse issues overview from get_issues" />
+<meta property="og:description" content="Parse labels from get_repo_labels" />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -110,18 +110,18 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Parse issues overview from <code>get_issues</code></h1>
+    <h1>Parse labels from <code>get_repo_labels</code></h1>
     <small class="dont-index">Source: <a href='https://github.com/emilyriederer/tidytracker/blob/master/R/parse.R'><code>R/parse.R</code></a></small>
-    <div class="hidden name"><code>parse_issues.Rd</code></div>
+    <div class="hidden name"><code>parse_repo_labels.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Parse issues overview from <code>get_issues</code></p>
+    <p>Parse labels from <code>get_repo_labels</code></p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>parse_issues</span>(<span class='no'>res</span>)</pre>
+    <pre class="usage"><span class='fu'>parse_repo_labels</span>(<span class='no'>res</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -134,25 +134,19 @@
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>tibble</code> datasets with one record / issue</p>
+    <p>`tibble` datasets with one record / label</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other parse: <code><a href='parse_issue_events.html'>parse_issue_events</a></code>,
-  <code><a href='parse_milestones.html'>parse_milestones</a></code>,
-  <code><a href='parse_repo_labels.html'>parse_repo_labels</a></code></p>
-<p>Other issues: <code><a href='get_issue_events.html'>get_issue_events</a></code>,
-  <code><a href='get_issues.html'>get_issues</a></code>,
-  <code><a href='parse_issue_events.html'>parse_issue_events</a></code>,
-  <code><a href='post_issue.html'>post_issue</a></code>, <code><a href='report_progress.html'>report_progress</a></code>,
-  <code><a href='viz_waterfall_issues.html'>viz_waterfall_issues</a></code></p></div>
+  <code><a href='parse_issues.html'>parse_issues</a></code>,
+  <code><a href='parse_milestones.html'>parse_milestones</a></code></p>
+<p>Other labels: <code><a href='get_repo_labels.html'>get_repo_labels</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='no'>myrepo</span> <span class='kw'>&lt;-</span> <span class='fu'>create_repo_reference</span>(<span class='st'>'emilyriederer'</span>, <span class='st'>'myrepo'</span>)
-<span class='no'>issues_res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_issues.html'>get_issues</a></span>(<span class='no'>myrepo</span>)
-<span class='no'>issues</span> <span class='kw'>&lt;-</span> <span class='fu'>parse_issues</span>(<span class='no'>issues_res</span>)
+<span class='no'>labels</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_repo_labels.html'>get_repo_labels</a></span>(<span class='no'>my_repo</span>) <span class='kw'>%&gt;%</span> <span class='fu'>parse_repo_labels</span>()
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

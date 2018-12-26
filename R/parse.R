@@ -16,7 +16,7 @@
 
 parse_issues <- function(res){
 
-  if(res == ""){stop("Results object contains no elements to parse.")}
+  if(is.character(res)){stop("Results object contains no elements to parse.")}
 
   purrr::map_df(1:length(res),
                 ~tibble::tibble(
@@ -59,7 +59,7 @@ parse_issues <- function(res){
 
 parse_issue_events <- function(res){
 
-  if(res == ""){stop("Results object contains no elements to parse.")}
+  if(is.character(res)){stop("Results object contains no elements to parse.")}
 
   purrr::map_df(1:length(res),
                 ~tibble::tibble(
@@ -92,7 +92,7 @@ parse_issue_events <- function(res){
 
 parse_milestones <- function(res){
 
-  if(res == ""){stop("Results object contains no elements to parse.")}
+  if(is.character(res)){stop("Results object contains no elements to parse.")}
 
   purrr::map_df(1:length(res),
                 ~tibble::tibble(
@@ -107,6 +107,33 @@ parse_milestones <- function(res){
                   updated_at = as.Date(substring(res[[.]]$updated_at %||% NA, 1, 10)),
                   due_on = as.Date(substring(res[[.]]$due_on %||% NA,1,10)),
                   closed_at = as.Date(substring(res[[.]]$closed_at %||% NA,1,10))
+                ))
+
+}
+
+#' Parse labels from \code{get_repo_labels}
+#'
+#' @inheritParams parse_issues
+#' @return `tibble` datasets with one record / label
+#' @export
+#'
+#' @family parse
+#' @family labels
+#'
+#' @inherit get_repo_labels examples
+
+parse_repo_labels <- function(res){
+
+  if(is.character(res)){stop("Results object contains no elements to parse.")}
+
+  purrr::map_df(1:length(res),
+                ~tibble::tibble(
+                  name = res[[.]]$name,
+                  url = res[[.]]$url,
+                  color = res[[.]]$color,
+                  default = res[[.]]$default,
+                  id = res[[.]]$id,
+                  node_id = res[[.]]$node_id
                 ))
 
 }
