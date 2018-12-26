@@ -18,6 +18,17 @@ knitr::opts_chunk$set(
 
 This vignette details some key design choices in this package with the hope that stating these explicitly will improve package navigability.
 
+## Comparison to Alternatives
+
+This package is designed with a focus on project management and communication. This emphasis distinguishes it from some of the other excellent R packages which wrap the GitHub API. In short, this package focuses on the subset of GitHub API functionality most critical to project management, with an emphasis on communication and reporting of outcomes.
+
+In particular:
+
+- [`gh`](https://github.com/r-lib/gh) descibes itself as a 'Minimalistic GitHub API client in R'. It is best-in-class for robustness and flexibility, but tends to expect slightly more from users in terms of understanding the GitHub API and providing inputs. Instead, this package attempts to be "maximalistic"; it does not support as wide of coverage over the GitHub API's features. Instead, it prioritizes supporting key project management tasks and strives to make that subset as easy as possible.
+- [`ghapiv3`](https://github.com/coatless/ghapi3) also strives to wrap `gh` for a user-friendly, higher-level interface to the GitHub API. However, much like `gh` is is again different from this package in that it provides broader support for the API but lacks the workflow-specific functionality.
+- [`ghclass`](https://github.com/rundel/ghclass/tree/master/R) is very similar in spirit. This package shares the goal of making a particular GitHub workflow easier. However, the workflow it is built to optimize is classroom management. 
+- [Project Management on GitHub](https://github.com/features/project-management/) provides GUI-based project management solutions that overlap with this package. However, this package provides a way to efficiently extract similiar information programmatically and share if with others (e.g. advisors, executives) who are not on GitHub.
+
 ## Repo as First Class Citizen
 
 Repositories are treated as "first class" citizens. The first step to accessing or sending information is to create a repository reference using the `create_repo_ref()` function. The resulting object is the first element passed into all `get_` and `post_` functions.

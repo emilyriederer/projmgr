@@ -78,7 +78,7 @@
       <h1>Design Notes</h1>
                         <h4 class="author">Emily Riederer</h4>
             
-            <h4 class="date">2018-12-25</h4>
+            <h4 class="date">2018-12-26</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/emilyriederer/tidytracker/blob/master/vignettes/design-notes.Rmd"><code>vignettes/design-notes.Rmd</code></a></small>
       <div class="hidden name"><code>design-notes.Rmd</code></div>
@@ -88,6 +88,22 @@
     
     
 <p>This vignette details some key design choices in this package with the hope that stating these explicitly will improve package navigability.</p>
+<div id="comparison-to-alternatives" class="section level2">
+<h2 class="hasAnchor">
+<a href="#comparison-to-alternatives" class="anchor"></a>Comparison to Alternatives</h2>
+<p>This package is designed with a focus on project management and communication. This emphasis distinguishes it from some of the other excellent R packages which wrap the GitHub API. In short, this package focuses on the subset of GitHub API functionality most critical to project management, with an emphasis on communication and reporting of outcomes.</p>
+<p>In particular:</p>
+<ul>
+<li>
+<a href="https://github.com/r-lib/gh"><code>gh</code></a> descibes itself as a ‘Minimalistic GitHub API client in R’. It is best-in-class for robustness and flexibility, but tends to expect slightly more from users in terms of understanding the GitHub API and providing inputs. Instead, this package attempts to be “maximalistic”; it does not support as wide of coverage over the GitHub API’s features. Instead, it prioritizes supporting key project management tasks and strives to make that subset as easy as possible.</li>
+<li>
+<a href="https://github.com/coatless/ghapi3"><code>ghapiv3</code></a> also strives to wrap <code>gh</code> for a user-friendly, higher-level interface to the GitHub API. However, much like <code>gh</code> is is again different from this package in that it provides broader support for the API but lacks the workflow-specific functionality.</li>
+<li>
+<a href="https://github.com/rundel/ghclass/tree/master/R"><code>ghclass</code></a> is very similar in spirit. This package shares the goal of making a particular GitHub workflow easier. However, the workflow it is built to optimize is classroom management.</li>
+<li>
+<a href="https://github.com/features/project-management/">Project Management on GitHub</a> provides GUI-based project management solutions that overlap with this package. However, this package provides a way to efficiently extract similiar information programmatically and share if with others (e.g. advisors, executives) who are not on GitHub.</li>
+</ul>
+</div>
 <div id="repo-as-first-class-citizen" class="section level2">
 <h2 class="hasAnchor">
 <a href="#repo-as-first-class-citizen" class="anchor"></a>Repo as First Class Citizen</h2>
@@ -148,7 +164,8 @@ milestones &lt;-<span class="st"> </span><span class="kw"><a href="../reference/
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#repo-as-first-class-citizen">Repo as First Class Citizen</a></li>
+<li><a href="#comparison-to-alternatives">Comparison to Alternatives</a></li>
+      <li><a href="#repo-as-first-class-citizen">Repo as First Class Citizen</a></li>
       <li><a href="#function-naming">Function Naming</a></li>
       <li><a href="#function-parameters">Function Parameters</a></li>
       <li><a href="#get-parse-codeflow">Get-Parse Codeflow</a></li>
