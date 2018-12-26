@@ -41,12 +41,9 @@ viz_taskboard <- function(issues, str_wrap_width = 20){
 
   # create ggplot object of task board ----
   g <-
-    ggplot(data,
-           aes(x = 1,
-               y = board_pos,
-               Created = created_at
-           )) +
-    geom_tile(aes(fill = board_group), width = 0.9, height = 0.9, size = 2) +
+    ggplot(data, aes(x = 1, y = board_pos)) +
+    geom_tile(aes(fill = board_group),
+              width = 0.9, height = 0.9, size = 2) +
     geom_text(aes(label =
                     paste0("#", number, ": ", title) %>%
                     purrr::map(., ~paste(strwrap(., width = str_wrap_width), collapse = "\n"))
