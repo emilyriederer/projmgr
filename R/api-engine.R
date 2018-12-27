@@ -11,6 +11,7 @@
 
 get_engine <- function(api_endpoint, ref, limit = Inf, ...){
 
+  res <-
   gh::gh(
     endpoint = paste0(ref$base_url, ref$repo_path, api_endpoint),
     ...,
@@ -19,6 +20,11 @@ get_engine <- function(api_endpoint, ref, limit = Inf, ...){
     .send_headers = c("User-Agent" = "https://github.com/emilyriederer/tidytracker"),
     .limit = limit
   )
+
+  # handle special case when single item returned ----
+  if( !is.null( names(res) ) ){ res <- list(res) }
+
+  return(res)
 
 }
 

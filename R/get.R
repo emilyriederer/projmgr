@@ -14,11 +14,20 @@
 
 get_issues <- function(ref, limit = Inf, ...){
 
-  validate_inputs(list(...),
+  args <- list(...)
+
+  if("number" %in% args){
+
+    message("'number' parameter supercedes all other options passed to get_issues")
+    res <- get_engine(api_endpoint = paste("/issues/", args$number), ref = ref)
+    return(res)
+
+  }
+
+  validate_inputs(args,
                   allowed_vars = c("milestone", "state", "assignee",
                                    "creator", "mentioned", "labels",
-                                   "number", "sort", "direction",
-                                   "since"))
+                                   "sort", "direction","since"))
 
   get_engine(api_endpoint = "/issues",
              ref = ref,
