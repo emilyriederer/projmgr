@@ -12,7 +12,7 @@
 #' issues <- parse_issues(issues_res)
 #' }
 
-get_issues <- function(ref, ...){
+get_issues <- function(ref, limit = Inf, ...){
 
   validate_inputs(list(...),
                   allowed_vars = c("milestone", "state", "assignee",
@@ -22,6 +22,7 @@ get_issues <- function(ref, ...){
 
   get_engine(api_endpoint = "/issues",
              ref = ref,
+             .limit = limit,
              ...)
 
 }
@@ -50,6 +51,40 @@ get_issue_events <- function(ref, number){
 
   res <- get_engine(api_endpoint = paste0("/issues/", number, "/events"),
              ref = ref)
+
+  # append the relevant issue number to each element
+  res <- purrr::map(res, ~purrr::list_modify(., "number" = number))
+
+  res
+
+}
+
+#' Get comments for a specific issue from GitHub repository
+#'
+#' In addition to information returned by GitHub API, appends field "number" for the issue number
+#' to which the returned comments correspond.
+#'
+#' @inherit get_engine return params
+#' @param number Number of issue
+#' @export
+#'
+#' @family get
+#' @family issues
+#' @family comments
+#'
+#' @examples
+#' \dontrun{
+#' myrepo <- create_repo_ref('emilyriederer', 'myrepo')
+#' comments_res <- get_issue_comments(myrepo, number = 1)
+#' comments <- parse_issue_comments(comments_res)
+#' }
+
+get_issue_comments <- function(ref, number, ...){
+
+    validate_inputs(list(...), allowed_vars = c("since"))
+
+  res <- get_engine(api_endpoint = paste0("/issues/", number, "/comments"),
+                    ref = ref)
 
   # append the relevant issue number to each element
   res <- purrr::map(res, ~purrr::list_modify(., "number" = number))
@@ -109,3 +144,4 @@ get_repo_labels <- function(ref, ...) {
              ...)
 
 }
+

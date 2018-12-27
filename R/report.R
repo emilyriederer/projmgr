@@ -182,3 +182,88 @@ report_todo <- function(todo){
 
 }
 
+
+#' Print issue comments in RMarkdown friendly way
+#'
+#' Interprets dataframe or tibble of issues by breaking apart milestones and listing each
+#' issue title as open or closed, and uses HTML to format results in a highly readable and
+#' attractive way. Resulting object returned is a character vector of HTML code with the added
+#' class of \code{'knit_asis'} so that when included in an RMarkdown document knitting to HTML,
+#' the results will be correctly rendered as HTML.
+#'
+#' @param issue Dataframe or tibble of issues, as returned by \code{get_issues()}
+#' @param comments Dataframe or tibble of comments for a single issue, as returned by \code{get_issue_comments()}
+#'
+#' @return Returns character string of HTML with class attribute to be correctly shown "as-is" in RMarkdown
+#' @export
+#' @family issues
+#' @family comments
+#'
+#' @examples
+#' \dontrun{
+#' In RMarkdown:
+#' ```{r}
+#' issue <- get_issues(repo, number = 15) %>% parse_issues()
+#' comments <- get_issue_comments(rep, number = 15) %>% parse_issue_comments()
+#' report_discussion(issue, comments)
+#' ```
+#'}
+
+report_discussion <- function(issue, comments){
+
+  # internal fx for comment fmting
+  format_comment <- function(user_login, author_association, body, created_at, updated_at, ...){
+
+    header <- paste("<p><hr><strong>", user_login, "(", author_association, ") wrote at", created_at, ": </strong>")
+    text <- paste("<p/><blockquote>", body, "</blockquote><p/>")
+    bottom <- ifelse(is.na(updated_at) | created_at == updated_at,
+                     "", paste("<em> This comment was last updated at", updated_at, "</em>") )
+
+    return( paste(header, text, bottom) )
+
+  }
+
+  # internal fx for issue fmting
+  format_issue <- function(title, body, state, created_at, closed_at, user_login, url, number, ...){
+
+    title <- paste0("<strong>Issue: #", number, ": ", title, "</strong>")
+    meta <- paste("Created by", user_login, "on", created_at)
+    status <- ifelse(state == 'Open', '', paste("Closed on", closed_at))
+    url <- paste("<a href =' ", url, "'> Visit on GitHub </a>")
+    combined_header <- paste(title, meta, status, url, sep = "<br>")
+
+    body <- paste("<em>Issue Description: </em><br><blockquote>", body, "</blockquote>")
+
+    return( paste(combined_header, "<p>", body, "<p>") )
+
+  }
+
+  # validate inputs ----
+  issue_number <- unique(issue$number)
+  comments_number <- unique(comments$number)
+
+  if(length(comments_number) != 1){
+    stop("Comments dataframe contains comments for more than 1 issue. Please limit data to a single issue.")
+  }
+  if( length(intersect(issue_number, comments_number)) == 0){
+    stop("Issues dataframe does not contain same issue number as comments dataframe.")
+  }
+  if( length(issue_number) > 1){
+    issue <- issue[issue$number == comments_number, ]
+  }
+
+  # generate html from dataframes ----
+  issue_html <- do.call(format_issue, issue)
+
+  comments_html <- ""
+  for(i in 1:nrow(comments)){
+    next_comment_html <- do.call(format_comment, comments[i,])
+    comments_html <- paste(comments_html, next_comment_html)
+  }
+
+  html < paste(issue_html, comments_html)
+  class(html) <- "knit_asis"
+  return(html)
+
+}
+
