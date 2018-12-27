@@ -16,7 +16,7 @@ get_issues <- function(ref, limit = Inf, ...){
 
   args <- list(...)
 
-  if("number" %in% args){
+  if("number" %in% names(args)){
 
     message("'number' parameter supercedes all other options passed to get_issues")
     res <- get_engine(api_endpoint = paste("/issues/", args$number), ref = ref)

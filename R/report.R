@@ -261,7 +261,7 @@ report_discussion <- function(issue, comments){
     comments_html <- paste(comments_html, next_comment_html)
   }
 
-  html < paste(issue_html, comments_html)
+  html <- paste(issue_html, comments_html)
   class(html) <- "knit_asis"
   return(html)
 
