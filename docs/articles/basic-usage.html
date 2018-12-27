@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Introduction to Git and GitHub • tidytracker</title>
+<title>Basic Usage • tidytracker</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
-<meta property="og:title" content="Introduction to Git and GitHub">
+<meta property="og:title" content="Basic Usage">
 <meta property="og:description" content="">
 <meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
@@ -75,39 +75,51 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Introduction to Git and GitHub</h1>
+      <h1>Basic Usage</h1>
                         <h4 class="author">Emily Riederer</h4>
             
             <h4 class="date">2018-12-27</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/emilyriederer/tidytracker/blob/master/vignettes/git-github-introduction.Rmd"><code>vignettes/git-github-introduction.Rmd</code></a></small>
-      <div class="hidden name"><code>git-github-introduction.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/emilyriederer/tidytracker/blob/master/vignettes/basic-usage.Rmd"><code>vignettes/basic-usage.Rmd</code></a></small>
+      <div class="hidden name"><code>basic-usage.Rmd</code></div>
 
     </div>
 
     
     
-<p>Using git for version control and GitHub for project managmenet and collaboration can massively improve your data workflow. If you are new to these tools, here are some great resources to get started.</p>
-<div id="learning-git" class="section level2">
+<p>This vignette illustrates codeflows of <code>tidytracker</code>’s core functionality.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidytracker)</code></pre></div>
+<div id="creating-a-repo-reference" class="section level2">
 <h2 class="hasAnchor">
-<a href="#learning-git" class="anchor"></a>Learning Git</h2>
-<p>Software Carpentry’s self-paced <a href="http://swcarpentry.github.io/git-novice/">Version Control with Git</a> course website with reading, exercises</p>
-<p>DataCamp’s free, interactive <a href="https://www.datacamp.com/courses/introduction-to-git-for-data-science">Introduction to Git for Data Science</a> course</p>
-<p>Jenny Bryan’s course website <a href="http://happygitwithr.com/">Happy Git and GitHub for the useR</a></p>
+<a href="#creating-a-repo-reference" class="anchor"></a>Creating a Repo Reference</h2>
+<p>The first step to interacting with a GitHub repository is creating a repository reference.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dplyr &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_repo_ref.html">create_repo_ref</a></span>(<span class="st">'tidyverse'</span>, <span class="st">'dplyr'</span>)</code></pre></div>
 </div>
-<div id="learning-github" class="section level2">
+<div id="getting-issues" class="section level2">
 <h2 class="hasAnchor">
-<a href="#learning-github" class="anchor"></a>Learning GitHub</h2>
-<p>Jenny Bryan’s paper <a href="https://peerj.com/preprints/3159/">Excuse me, do you have a moment to talk about version control?</a>, an excellent explanation of how R and RStudio integrate with GitHub</p>
-<p>GitHub’s <a href="https://www.youtube.com/watch?v=6fByt0o4UYs">webcast on Project Management</a> (Note: this is from 2015 so some information on feature may be outdated. However, it remains a good high-level overview.)</p>
-<p>GitHub’s <a href="http://happygitwithr.com/">Learning Lab</a> with guided exercises for different features of its platform</p>
+<a href="#getting-issues" class="anchor"></a>Getting Issues</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dplyr_issues_list &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_issues.html">get_issues</a></span>(dplyr, <span class="dt">milestone =</span> <span class="dv">1</span>, <span class="dt">state =</span> <span class="st">'all'</span>)
+dplyr_issues &lt;-<span class="st"> </span><span class="kw"><a href="../reference/parse_issues.html">parse_issues</a></span>(dplyr_issues_list)
+<span class="kw">head</span>(dplyr_issues)</code></pre></div>
 </div>
-<div id="working-reproducibly" class="section level2">
+<div id="visualizing-issues" class="section level2">
 <h2 class="hasAnchor">
-<a href="#working-reproducibly" class="anchor"></a>Working Reproducibly</h2>
-<p>Using Git and GitHub are important pieces to having a comprehensive reproducible workflow. This can make you more efficient and accurate. To understand how GitHub fits into this, check out these great papers.</p>
-<p>Greg Wilson (et al)’s paper <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510">Good Enough Practices for Scientific Computing</a></p>
-<p>Hillary Parker’s paper <a href="https://peerj.com/preprints/3210/">Opinionated Analysis Development</a></p>
+<a href="#visualizing-issues" class="anchor"></a>Visualizing Issues</h2>
+<p>There are many different ways to visualize issues.</p>
+<p>For reporting on time-to-completion, <code><a href="../reference/viz_gantt_closed.html">viz_gantt_closed()</a></code> creates one horizontal bar per issue and colors issues by length of time open.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/viz_gantt_closed.html">viz_gantt_closed</a></span>(dplyr_issues)</code></pre></div>
+<p><code><a href="../reference/viz_taskboard.html">viz_taskboard()</a></code> creates an Agile-like taskboard of issues open, in progress, and completed.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dplyr_issues<span class="op">$</span>closed_at[<span class="dv">1</span>] &lt;-<span class="st"> </span><span class="ot">NA</span>
+dplyr_issues<span class="op">$</span>closed_at[<span class="dv">3</span>] &lt;-<span class="st"> </span><span class="ot">NA</span>
+dplyr_issues<span class="op">$</span>state[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)] &lt;-<span class="st"> "open"</span>
+dplyr_issues<span class="op">$</span>labels_name[[<span class="dv">3</span>]] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"in-progress"</span>, dplyr_issues<span class="op">$</span>labels_name[[<span class="dv">3</span>]])
+<span class="kw">viz_taskboard_v2</span>(dplyr_issues, <span class="dv">40</span>)</code></pre></div>
+<p><code><a href="../reference/viz_waterfall_issues.html">viz_waterfall_issues()</a></code> creates a waterfall plot showing, for a fixed time-period, the initial count of open issues, newly reported issues, closed issues, and final open count.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/viz_waterfall_issues.html">viz_waterfall_issues</a></span>(dplyr_issues, <span class="st">'2014-01-01'</span>, <span class="st">'2015-01-01'</span>)</code></pre></div>
+</div>
+<div id="posting-issues" class="section level2">
+<h2 class="hasAnchor">
+<a href="#posting-issues" class="anchor"></a>Posting Issues</h2>
 </div>
   </div>
 
@@ -116,9 +128,10 @@
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#learning-git">Learning Git</a></li>
-      <li><a href="#learning-github">Learning GitHub</a></li>
-      <li><a href="#working-reproducibly">Working Reproducibly</a></li>
+<li><a href="#creating-a-repo-reference">Creating a Repo Reference</a></li>
+      <li><a href="#getting-issues">Getting Issues</a></li>
+      <li><a href="#visualizing-issues">Visualizing Issues</a></li>
+      <li><a href="#posting-issues">Posting Issues</a></li>
       </ul>
 </div>
       </div>

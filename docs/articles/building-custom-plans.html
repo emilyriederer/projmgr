@@ -78,7 +78,7 @@
       <h1>Building custom plans and to-do lists</h1>
                         <h4 class="author">Emily Riederer</h4>
             
-            <h4 class="date">2018-12-23</h4>
+            <h4 class="date">2018-12-27</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/emilyriederer/tidytracker/blob/master/vignettes/building-custom-plans.Rmd"><code>vignettes/building-custom-plans.Rmd</code></a></small>
       <div class="hidden name"><code>building-custom-plans.Rmd</code></div>
@@ -95,13 +95,12 @@
 <h2 class="hasAnchor">
 <a href="#creating-a-plan-with-yaml" class="anchor"></a>Creating a Plan with YAML</h2>
 <p>YAML can be used to specify milestones and issues with all the same fields as are accepted into <code><a href="../reference/post_milestone.html">post_milestone()</a></code> and <code><a href="../reference/post_issue.html">post_issue()</a></code>. Consider the following YAML file as an example:</p>
-<pre><code>milestone1:
-  title: Data cleaning and validation
+<pre><code>- title: Data cleaning and validation
   description: &gt;
     We will conduct data quality checks,
     resolve issues with data quality, and
     document this process
-  due_on: 2018-12-31Z12:59:59Z
+  due_on: 2018-12-31T12:59:59Z
   issue:
     - title: Define data quality standards
       body: List out decision rules to check data quality
@@ -113,8 +112,7 @@
     - title: Resolve data quality issues
       body: Conduct needed research to resolve any issues
 
-milestone2:
-  title: Exploratory data analysis
+- title: Exploratory data analysis
   description: &gt;
     Create basic statistics and views to better
     understand dataset and relationships
@@ -128,7 +126,34 @@ milestone2:
 my_plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/read_yaml.html">read_yaml</a></span>(plan_path)</code></pre></div>
 <p>This function converts YAML to an R list. You can sanity check the structure of this output with base R <code>str()</code> function which shows the structure of a list:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(my_plan)
-<span class="co">#&gt;  chr "C:/Users/emily/Documents/R/win-library/3.4/tidytracker/extdata/plan.yml"</span></code></pre></div>
+<span class="co">#&gt; List of 2</span>
+<span class="co">#&gt;  $ :List of 4</span>
+<span class="co">#&gt;   ..$ title      : chr "Data cleaning and validation"</span>
+<span class="co">#&gt;   ..$ description: chr "We will conduct data quality checks, resolve issues with data quality, and document this process\n"</span>
+<span class="co">#&gt;   ..$ due_on     : chr "2018-12-31T12:59:59Z"</span>
+<span class="co">#&gt;   ..$ issue      :List of 3</span>
+<span class="co">#&gt;   .. ..$ :List of 4</span>
+<span class="co">#&gt;   .. .. ..$ title    : chr "Define data quality standards"</span>
+<span class="co">#&gt;   .. .. ..$ body     : chr "List out decision rules to check data quality"</span>
+<span class="co">#&gt;   .. .. ..$ assignees: chr "emilyriederer"</span>
+<span class="co">#&gt;   .. .. ..$ labels   : chr [1:3] "a" "b" "c"</span>
+<span class="co">#&gt;   .. ..$ :List of 3</span>
+<span class="co">#&gt;   .. .. ..$ title : chr "Assess data quality"</span>
+<span class="co">#&gt;   .. .. ..$ body  : chr "Use assertthat to test decision rules on dataset"</span>
+<span class="co">#&gt;   .. .. ..$ labels: chr "low"</span>
+<span class="co">#&gt;   .. ..$ :List of 2</span>
+<span class="co">#&gt;   .. .. ..$ title: chr "Resolve data quality issues"</span>
+<span class="co">#&gt;   .. .. ..$ body : chr "Conduct needed research to resolve any issues"</span>
+<span class="co">#&gt;  $ :List of 3</span>
+<span class="co">#&gt;   ..$ title      : chr "Exploratory data analysis"</span>
+<span class="co">#&gt;   ..$ description: chr "Create basic statistics and views to better understand dataset and relationships\n"</span>
+<span class="co">#&gt;   ..$ issue      :List of 2</span>
+<span class="co">#&gt;   .. ..$ :List of 2</span>
+<span class="co">#&gt;   .. .. ..$ title: chr "Summary statistics"</span>
+<span class="co">#&gt;   .. .. ..$ body : chr "Calculate summary statistics"</span>
+<span class="co">#&gt;   .. ..$ :List of 2</span>
+<span class="co">#&gt;   .. .. ..$ title: chr "Visualizations"</span>
+<span class="co">#&gt;   .. .. ..$ body : chr "Create univariate and bivariate plots"</span></code></pre></div>
 <p>Finally, this collection of milestones and associated issues can be posted to GitHub with the <code><a href="../reference/post_plan.html">post_plan()</a></code> function.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">experigit &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_repo_ref.html">create_repo_ref</a></span>(<span class="st">"emilyriederer"</span>, <span class="st">"experigit"</span>)
 <span class="kw"><a href="../reference/post_plan.html">post_plan</a></span>(experigit, my_plan)</code></pre></div>
@@ -158,11 +183,10 @@ plan_from_vbl &lt;-<span class="st"> </span><span class="kw"><a href="../referen
 <span class="co">#&gt;   ..$ body : chr "Repsond to feedback from reviewers"</span></code></pre></div>
 <p>Should you ever forget exactly what this YAML should look like, the <code><a href="../reference/template_yaml.html">template_yaml()</a></code> function is here to help. It prints a template example to your console:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/template_yaml.html">template_yaml</a></span>(<span class="st">"plan"</span>)
-<span class="co">#&gt; milestone1:</span>
-<span class="co">#&gt;   title: Enter a short, informative title of your goal</span>
+<span class="co">#&gt; - title: Enter a short, informative title of your goal</span>
 <span class="co">#&gt;   description: &gt;</span>
 <span class="co">#&gt;     Enter a longer description of the objectives</span>
-<span class="co">#&gt;   due_on: 2018-12-31Z12:59:59Z</span>
+<span class="co">#&gt;   due_on: 2018-12-31T12:59:59Z</span>
 <span class="co">#&gt;   issue:</span>
 <span class="co">#&gt;     - title: Title of task 1 to complete</span>
 <span class="co">#&gt;       body: Describe this step</span>
@@ -172,8 +196,7 @@ plan_from_vbl &lt;-<span class="st"> </span><span class="kw"><a href="../referen
 <span class="co">#&gt;       body: Describe this step</span>
 <span class="co">#&gt;       labels: [low]</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; milestone2:</span>
-<span class="co">#&gt;   title: Enter another short, informative title of your goal</span>
+<span class="co">#&gt; - title: Enter another short, informative title of your goal</span>
 <span class="co">#&gt;   description: &gt;</span>
 <span class="co">#&gt;     Enter a longer description of the objectives</span>
 <span class="co">#&gt;   issue:</span>
@@ -186,35 +209,38 @@ plan_from_vbl &lt;-<span class="st"> </span><span class="kw"><a href="../referen
 <h2 class="hasAnchor">
 <a href="#create-a-to-do-list-with-yaml" class="anchor"></a>Create a To-Do List with YAML</h2>
 <p>The workflow for posting to-do lists is very similar to that of plans. Consider the following YAML file as an example:</p>
-<pre><code>issue1:
-  title: Consider renaming my_very_long_function_name
+<pre><code>- title: Consider renaming my_very_long_function_name
   body: &gt;
     This name is unneccesarily long and hence
      it is very hard and annoying to type
   assignees: [emilyriederer]
   labels: [low]
 
-issue2:
-  title: Make sure documentation links right pages of API docs</code></pre>
+- title: Make sure documentation links right pages of API docs</code></pre>
 <p>The same <code><a href="../reference/read_yaml.html">read_yaml()</a></code> function reads in a to-do YAML file and converts it to an R list:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">todo_path &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata"</span>, <span class="st">"todo.yml"</span>, <span class="dt">package =</span> <span class="st">"tidytracker"</span>, <span class="dt">mustWork =</span> <span class="ot">TRUE</span>)
 my_todo &lt;-<span class="st"> </span><span class="kw"><a href="../reference/read_yaml.html">read_yaml</a></span>(todo_path)
 <span class="kw">str</span>(my_todo)
-<span class="co">#&gt;  chr "C:/Users/emily/Documents/R/win-library/3.4/tidytracker/extdata/todo.yml"</span></code></pre></div>
+<span class="co">#&gt; List of 2</span>
+<span class="co">#&gt;  $ :List of 4</span>
+<span class="co">#&gt;   ..$ title    : chr "Consider renaming my_very_long_function_name"</span>
+<span class="co">#&gt;   ..$ body     : chr "This name is unneccesarily long and hence\n it is very hard and annoying to type\n"</span>
+<span class="co">#&gt;   ..$ assignees: chr "emilyriederer"</span>
+<span class="co">#&gt;   ..$ labels   : chr "low"</span>
+<span class="co">#&gt;  $ :List of 1</span>
+<span class="co">#&gt;   ..$ title: chr "Make sure documentation links right pages of API docs"</span></code></pre></div>
 <p>This collection of issues can be posted to a GitHub with the <code><a href="../reference/post_todo.html">post_todo()</a></code> function.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">experigit &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_repo_ref.html">create_repo_ref</a></span>(<span class="st">"emilyriederer"</span>, <span class="st">"experigit"</span>)
 <span class="kw"><a href="../reference/post_todo.html">post_todo</a></span>(experigit, my_todo)</code></pre></div>
 <p>Just like with plans, you can also pass a character string instead of a file and use <code><a href="../reference/template_yaml.html">template_yaml()</a></code> to remind yourself of the required format:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/template_yaml.html">template_yaml</a></span>(<span class="st">"todo"</span>)
-<span class="co">#&gt; issue1:</span>
-<span class="co">#&gt;   title: Informative title</span>
+<span class="co">#&gt; - title: Informative title</span>
 <span class="co">#&gt;   body: &gt;</span>
 <span class="co">#&gt;     Longer description of issue</span>
 <span class="co">#&gt;   assignees: [emilyriederer]</span>
 <span class="co">#&gt;   labels: [low]</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; issue2:</span>
-<span class="co">#&gt;   title: Another informative title - body not required!</span></code></pre></div>
+<span class="co">#&gt; - title: Another informative title - body not required!</span></code></pre></div>
 </div>
 <div id="create-a-plan-or-to-do-list-with-r" class="section level2">
 <h2 class="hasAnchor">

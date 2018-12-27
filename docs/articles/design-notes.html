@@ -78,7 +78,7 @@
       <h1>Design Notes</h1>
                         <h4 class="author">Emily Riederer</h4>
             
-            <h4 class="date">2018-12-26</h4>
+            <h4 class="date">2018-12-27</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/emilyriederer/tidytracker/blob/master/vignettes/design-notes.Rmd"><code>vignettes/design-notes.Rmd</code></a></small>
       <div class="hidden name"><code>design-notes.Rmd</code></div>
@@ -99,7 +99,7 @@
 <li>
 <a href="https://github.com/coatless/ghapi3"><code>ghapiv3</code></a> also strives to wrap <code>gh</code> for a user-friendly, higher-level interface to the GitHub API. However, much like <code>gh</code> is is again different from this package in that it provides broader support for the API but lacks the workflow-specific functionality.</li>
 <li>
-<a href="https://github.com/rundel/ghclass/tree/master/R"><code>ghclass</code></a> is very similar in spirit. This package shares the goal of making a particular GitHub workflow easier. However, the workflow it is built to optimize is classroom management.</li>
+<a href="https://github.com/rundel/ghclass/tree/master/R"><code>ghclass</code></a> is very similar in spirit. This package shares the goal of making a particular GitHub workflow easier. However, the workflow it is built to optimize is classroom management. It’s worth noting that <code>ghclass</code> has some functionality that is complementary to this package, such as programmatically setting up groups of repositories.</li>
 <li>
 <a href="https://github.com/features/project-management/">Project Management on GitHub</a> provides GUI-based project management solutions that overlap with this package. However, this package provides a way to efficiently extract similiar information programmatically and share if with others (e.g. advisors, executives) who are not on GitHub.</li>
 </ul>
@@ -138,6 +138,7 @@ milestones &lt;-<span class="st"> </span><span class="kw"><a href="../reference/
 <li>want to access information returned by the API that is not included in the <code>parse</code>d output</li>
 <li>need a stop-gap solution should the GitHub API ever change until the <code>parse_</code> functions are updated accordingly</li>
 </ul>
+<p>In rare cases, <code>get_</code> functions will return additional information not provided by the API to preserve data lineage. For example, <code><a href="../reference/get_issue_events.html">get_issue_events()</a></code> and <code><a href="../reference/get_issue_comments.html">get_issue_comments()</a></code> include the issue number (provided as a required argument) in the output.</p>
 </div>
 <div id="parse-output-variable-names" class="section level2">
 <h2 class="hasAnchor">

@@ -4,12 +4,15 @@
 \alias{get_engine}
 \title{Core code for all GET calls}
 \usage{
-get_engine(api_endpoint, ref, .limit = Inf, ...)
+get_engine(api_endpoint, ref, limit = Inf, ...)
 }
 \arguments{
 \item{api_endpoint}{API endpoint}
 
 \item{ref}{Repository reference (list) created by \code{create_repo_ref()}}
+
+\item{limit}{Number of records to return, passed directly to \code{gh} documentation. Defaults to
+\code{Inf} which requests all records but may required multiple API calls}
 
 \item{...}{Additional user-defined query parameters. Use \code{browse_docs()} to learn more.}
 }

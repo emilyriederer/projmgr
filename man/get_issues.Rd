@@ -4,10 +4,13 @@
 \alias{get_issues}
 \title{Get issues from GitHub repository}
 \usage{
-get_issues(ref, ...)
+get_issues(ref, limit = Inf, ...)
 }
 \arguments{
 \item{ref}{Repository reference (list) created by \code{create_repo_ref()}}
+
+\item{limit}{Number of records to return, passed directly to \code{gh} documentation. Defaults to
+\code{Inf} which requests all records but may required multiple API calls}
 
 \item{...}{Additional user-defined query parameters. Use \code{browse_docs()} to learn more.}
 }

@@ -2,8 +2,10 @@ pandoc: 1.19.2.1
 pkgdown: 1.1.0
 pkgdown_sha: ~
 articles:
+  basic-usage: basic-usage.html
   building-custom-plans: building-custom-plans.html
   creating-a-github-personal-authentication-token: creating-a-github-personal-authentication-token.html
+  design-notes: design-notes.html
   git-github-introduction: git-github-introduction.html
   reprex-clipr: reprex-clipr.html
 

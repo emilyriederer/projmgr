@@ -121,7 +121,7 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_issues</span>(<span class='no'>ref</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>get_issues</span>(<span class='no'>ref</span>, <span class='kw'>limit</span> <span class='kw'>=</span> <span class='fl'>Inf</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -129,6 +129,11 @@
     <tr>
       <th>ref</th>
       <td><p>Repository reference (list) created by <code><a href='create_repo_ref.html'>create_repo_ref()</a></code></p></td>
+    </tr>
+    <tr>
+      <th>limit</th>
+      <td><p>Number of records to return, passed directly to <code>gh</code> documentation. Defaults to
+<code>Inf</code> which requests all records but may required multiple API calls</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -142,12 +147,16 @@
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other get: <code><a href='get_issue_events.html'>get_issue_events</a></code>,
+    <div class='dont-index'><p>Other get: <code><a href='get_issue_comments.html'>get_issue_comments</a></code>,
+  <code><a href='get_issue_events.html'>get_issue_events</a></code>,
   <code><a href='get_milestones.html'>get_milestones</a></code>,
   <code><a href='get_repo_labels.html'>get_repo_labels</a></code></p>
-<p>Other issues: <code><a href='get_issue_events.html'>get_issue_events</a></code>,
+<p>Other issues: <code><a href='get_issue_comments.html'>get_issue_comments</a></code>,
+  <code><a href='get_issue_events.html'>get_issue_events</a></code>,
+  <code><a href='parse_issue_comments.html'>parse_issue_comments</a></code>,
   <code><a href='parse_issue_events.html'>parse_issue_events</a></code>,
   <code><a href='parse_issues.html'>parse_issues</a></code>, <code><a href='post_issue.html'>post_issue</a></code>,
+  <code><a href='report_discussion.html'>report_discussion</a></code>,
   <code><a href='report_progress.html'>report_progress</a></code>,
   <code><a href='viz_waterfall_issues.html'>viz_waterfall_issues</a></code></p></div>
     

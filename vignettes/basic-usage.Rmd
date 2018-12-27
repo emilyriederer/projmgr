@@ -12,11 +12,17 @@ vignette: >
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  eval = FALSE
 )
 ```
 
 This vignette illustrates codeflows of `tidytracker`'s core functionality.
+
+```{r}
+library(tidytracker)
+```
+
 
 ## Creating a Repo Reference
 

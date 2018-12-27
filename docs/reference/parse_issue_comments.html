@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Parse milestones from <code>get_milestones</code> — parse_milestones • tidytracker</title>
+<title>Parse issue comments from <code>get_issues_comments</code> — parse_issue_comments • tidytracker</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Parse milestones from <code>get_milestones</code> — parse_milestones" />
+<meta property="og:title" content="Parse issue comments from <code>get_issues_comments</code> — parse_issue_comments" />
 
-<meta property="og:description" content="Parse milestones from get_milestones" />
+<meta property="og:description" content="Parse issue comments from get_issues_comments" />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -110,18 +110,18 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Parse milestones from <code>get_milestones</code></h1>
+    <h1>Parse issue comments from <code>get_issues_comments</code></h1>
     <small class="dont-index">Source: <a href='https://github.com/emilyriederer/tidytracker/blob/master/R/parse.R'><code>R/parse.R</code></a></small>
-    <div class="hidden name"><code>parse_milestones.Rd</code></div>
+    <div class="hidden name"><code>parse_issue_comments.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Parse milestones from <code>get_milestones</code></p>
+    <p>Parse issue comments from <code>get_issues_comments</code></p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>parse_milestones</span>(<span class='no'>res</span>)</pre>
+    <pre class="usage"><span class='fu'>parse_issue_comments</span>(<span class='no'>res</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -134,23 +134,30 @@
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>`tibble` datasets with one record / milestone</p>
+    <p><code>tibble</code> datasets with one record / issue-comment</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other parse: <code><a href='parse_issue_comments.html'>parse_issue_comments</a></code>,
-  <code><a href='parse_issue_events.html'>parse_issue_events</a></code>,
+    <div class='dont-index'><p>Other parse: <code><a href='parse_issue_events.html'>parse_issue_events</a></code>,
   <code><a href='parse_issues.html'>parse_issues</a></code>,
+  <code><a href='parse_milestones.html'>parse_milestones</a></code>,
   <code><a href='parse_repo_labels.html'>parse_repo_labels</a></code></p>
-<p>Other milestones: <code><a href='get_milestones.html'>get_milestones</a></code>,
-  <code><a href='post_milestone.html'>post_milestone</a></code></p></div>
+<p>Other issues: <code><a href='get_issue_comments.html'>get_issue_comments</a></code>,
+  <code><a href='get_issue_events.html'>get_issue_events</a></code>, <code><a href='get_issues.html'>get_issues</a></code>,
+  <code><a href='parse_issue_events.html'>parse_issue_events</a></code>,
+  <code><a href='parse_issues.html'>parse_issues</a></code>, <code><a href='post_issue.html'>post_issue</a></code>,
+  <code><a href='report_discussion.html'>report_discussion</a></code>,
+  <code><a href='report_progress.html'>report_progress</a></code>,
+  <code><a href='viz_waterfall_issues.html'>viz_waterfall_issues</a></code></p>
+<p>Other comments: <code><a href='get_issue_comments.html'>get_issue_comments</a></code>,
+  <code><a href='report_discussion.html'>report_discussion</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='no'>myrepo</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='create_repo_ref.html'>create_repo_ref</a></span>(<span class='st'>"emilyriederer"</span>, <span class='st'>"myrepo"</span>)
-<span class='no'>milestones_res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_milestones.html'>get_milestones</a></span>(<span class='no'>myrepo</span>)
-<span class='no'>milestones</span> <span class='kw'>&lt;-</span> <span class='fu'>parse_milestones</span>(<span class='no'>milestones_res</span>)
+<span class='no'>myrepo</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='create_repo_ref.html'>create_repo_ref</a></span>(<span class='st'>'emilyriederer'</span>, <span class='st'>'myrepo'</span>)
+<span class='no'>comments_res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_issue_comments.html'>get_issue_comments</a></span>(<span class='no'>myrepo</span>, <span class='kw'>number</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+<span class='no'>comments</span> <span class='kw'>&lt;-</span> <span class='fu'>parse_issue_comments</span>(<span class='no'>comments_res</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
