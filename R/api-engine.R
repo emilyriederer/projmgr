@@ -2,19 +2,22 @@
 #'
 #' @param api_endpoint API endpoint
 #' @param ref Repository reference (list) created by \code{create_repo_ref()}
+#' @param limit Number of records to return, passed directly to \code{gh} documentation. Defaults to
+#'     \code{Inf} which requests all records but may required multiple API calls
 #' @param ... Additional user-defined query parameters. Use \code{browse_docs()} to learn more.
 #'
 #' @keywords internal
 #' @return Content of GET request as list
 
-get_engine <- function(api_endpoint, ref, .limit = Inf, ...){
+get_engine <- function(api_endpoint, ref, limit = Inf, ...){
 
   gh::gh(
     endpoint = paste0(ref$base_url, ref$repo_path, api_endpoint),
     ...,
     .token = Sys.getenv(ref$id),
     .method = "GET",
-    .send_headers = c("User-Agent" = "https://github.com/emilyriederer/tidytracker")
+    .send_headers = c("User-Agent" = "https://github.com/emilyriederer/tidytracker"),
+    .limit = limit
   )
 
 }
