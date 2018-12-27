@@ -30,10 +30,12 @@ viz_progress_waterfall(issues, '2017-01-01', '2017-03-31')
 }
 }
 \seealso{
-Other issues: \code{\link{get_issue_events}},
-  \code{\link{get_issues}},
+Other issues: \code{\link{get_issue_comments}},
+  \code{\link{get_issue_events}}, \code{\link{get_issues}},
+  \code{\link{parse_issue_comments}},
   \code{\link{parse_issue_events}},
   \code{\link{parse_issues}}, \code{\link{post_issue}},
+  \code{\link{report_discussion}},
   \code{\link{report_progress}}
 }
 \concept{issues}

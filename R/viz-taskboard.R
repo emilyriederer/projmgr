@@ -46,12 +46,12 @@ viz_taskboard <- function(issues, str_wrap_width = 20){
   #data$height <- max( purrr::map_int(label_components, length) ) * 2
   height <- max( purrr::map_int(label_components, length) ) * 2
 
-
   # create ggplot object of task board ----
   g <-
     ggplot(data, aes(x = 0, y = 0)) +
     geom_rect(aes(fill = board_group), xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf) +
     geom_text(aes(label = label)) +
+    geom_point(data = data.frame(y = c(-5*height, 5*height), x = c(0,0)), col = NA) +
     facet_grid(board_pos ~ board_group) +
     scale_y_continuous(limits = c(round(-1 * height / 1.75), round(height / 1.75))) +
     theme(

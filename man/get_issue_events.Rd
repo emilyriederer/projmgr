@@ -26,13 +26,16 @@ events <- parse_issue_events(events_res)
 }
 }
 \seealso{
-Other get: \code{\link{get_issues}},
-  \code{\link{get_milestones}},
+Other get: \code{\link{get_issue_comments}},
+  \code{\link{get_issues}}, \code{\link{get_milestones}},
   \code{\link{get_repo_labels}}
 
-Other issues: \code{\link{get_issues}},
+Other issues: \code{\link{get_issue_comments}},
+  \code{\link{get_issues}},
+  \code{\link{parse_issue_comments}},
   \code{\link{parse_issue_events}},
   \code{\link{parse_issues}}, \code{\link{post_issue}},
+  \code{\link{report_discussion}},
   \code{\link{report_progress}},
   \code{\link{viz_waterfall_issues}}
 

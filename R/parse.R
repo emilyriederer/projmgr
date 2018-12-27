@@ -67,9 +67,38 @@ parse_issue_events <- function(res){
                   id = res[[.]]$id,
                   actor_login = res[[.]]$actor$login,
                   event = res[[.]]$event,
-                  created_at = res[[.]]$created_at,
+                  created_at = as.Date(res[[.]]$created_at %>% substring(1,10)),
                   label_name = res[[.]]$label$name %||% NA,
                   milestone_title = res[[.]]$milestone$title %||% NA
+                ))
+
+}
+
+#' Parse issue comments from \code{get_issues_comments}
+#'
+#' @inheritParams parse_issues
+#' @inherit get_issue_comments examples
+#' @return \code{tibble} datasets with one record / issue-comment
+#' @export
+#'
+#' @family parse
+#' @family issues
+#' @family comments
+
+parse_issue_comments <- function(res){
+
+  if(is.character(res)){stop("Results object contains no elements to parse.")}
+
+  purrr::map_df(1:length(res),
+                ~tibble::tibble(
+                  url = res[[.]]$html_url,
+                  id = res[[.]]$id,
+                  user_login = res[[.]]$user$login,
+                  created_at = as.Date(substring(res[[.]]$created_at %||% NA, 1, 10)),
+                  updated_at = as.Date(substring(res[[.]]$updated_at %||% NA, 1, 10)),
+                  author_association = res[[.]]$author_association,
+                  body = res[[.]]$body,
+                  number = res[[.]]$number
                 ))
 
 }

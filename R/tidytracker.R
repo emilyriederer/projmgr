@@ -14,7 +14,7 @@ globalVars <- c(
   "issue", "milestone", "milestone_title",
   # from viz:
   "created_at", "closed_at", "state", "id", "title", "id_label",
-  "board_col", "board_pos", "number", "board_group",
+  "board_col", "board_pos", "number", "board_group", "label",
   "dummy_var", "lag", "index", "base", "status",
   "Initial", "Opened", "Closed", "Final", "n",
   # from tidyverse

@@ -108,7 +108,7 @@ browse_milestones <- function(repo_ref, id = "") {
 
 browse_docs <- function(
   action = c('get', 'post'),
-  object = c('milestone', 'issue', 'issue event', 'repo labels')){
+  object = c('milestone', 'issue', 'issue event', 'issue comment', 'repo labels')){
 
   action <- match.arg(action)
   object <- match.arg(object)
@@ -126,10 +126,12 @@ browse_docs <- function(
     'get', 'issue', "issues/#list-issues-for-a-repository",
     'get', 'issue event', "issues/events/#list-events-for-an-issue",
     'get', 'repo labels', 'issues/labels/#list-all-labels-for-this-repository',
+    'get', 'issue comment', 'issues/comments/#list-comments-on-an-issue',
     'post', 'milestone', "issues/milestones/#create-a-milestone",
     'post', 'issue', "issues/#create-an-issue",
     'post', 'issue event', NA_character_,
-    'post', 'repo labels', 'issues/labels/#create-a-label'
+    'post', 'repo labels', 'issues/labels/#create-a-label',
+    'post', 'issue comment', 'issues/comments/#create-a-comment'
   )
 
   view_url(url_prefix, urls$url_suffix[urls$action == action & urls$object == object])
