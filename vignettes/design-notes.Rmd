@@ -26,7 +26,7 @@ In particular:
 
 - [`gh`](https://github.com/r-lib/gh) descibes itself as a 'Minimalistic GitHub API client in R'. It is best-in-class for robustness and flexibility, but tends to expect slightly more from users in terms of understanding the GitHub API and providing inputs. Instead, this package attempts to be "maximalistic"; it does not support as wide of coverage over the GitHub API's features. Instead, it prioritizes supporting key project management tasks and strives to make that subset as easy as possible.
 - [`ghapiv3`](https://github.com/coatless/ghapi3) also strives to wrap `gh` for a user-friendly, higher-level interface to the GitHub API. However, much like `gh` is is again different from this package in that it provides broader support for the API but lacks the workflow-specific functionality.
-- [`ghclass`](https://github.com/rundel/ghclass/tree/master/R) is very similar in spirit. This package shares the goal of making a particular GitHub workflow easier. However, the workflow it is built to optimize is classroom management. 
+- [`ghclass`](https://github.com/rundel/ghclass/tree/master/R) is very similar in spirit. This package shares the goal of making a particular GitHub workflow easier. However, the workflow it is built to optimize is classroom management. It's worth noting that `ghclass` has some functionality that is complementary to this package, such as programmatically setting up groups of repositories.
 - [Project Management on GitHub](https://github.com/features/project-management/) provides GUI-based project management solutions that overlap with this package. However, this package provides a way to efficiently extract similiar information programmatically and share if with others (e.g. advisors, executives) who are not on GitHub.
 
 ## Repo as First Class Citizen
@@ -66,6 +66,8 @@ However, the `get_` and `parse_` functions are provided separately to empower us
 - prefer working with lists than dataframes
 - want to access information returned by the API that is not included in the `parse`d output
 - need a stop-gap solution should the GitHub API ever change until the `parse_` functions are updated accordingly
+
+In rare cases, `get_` functions will return additional information not provided by the API to preserve data lineage. For example, `get_issue_events()` and `get_issue_comments()` include the issue number (provided as a required argument) in the output.
 
 ## Parse Output Variable Names
 
