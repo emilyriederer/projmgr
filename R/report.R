@@ -65,7 +65,7 @@ report_progress <- function(issues){
     html <- paste(html, "</ul>", "</p>")
   }
 
-  class(html) <- "knit_asis"
+  class(html) <- c("knit_asis", class(html))
   return(html)
 
 }
@@ -128,7 +128,7 @@ report_plan <- function(plan){
     html <- paste(html, "</ul>", "</p>")
   }
 
-  class(html) <- "knit_asis"
+  class(html) <- c("knit_asis", class(html))
   return(html)
 
 }
@@ -175,7 +175,7 @@ report_todo <- function(todo){
 
   html <- paste(html, "</ul>", "</p>")
 
-  class(html) <- "knit_asis"
+  class(html) <- c("knit_asis", class(html))
   return(html)
 
 }
@@ -269,7 +269,7 @@ report_discussion <- function(comments, issue = NA){
 
   }
 
-  class(html) <- "knit_asis"
+  class(html) <- c("knit_asis", class(html))
   return(html)
 
 }
