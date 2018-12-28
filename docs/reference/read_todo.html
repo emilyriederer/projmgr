@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Post to-do list (issues) to GitHub repository — post_todo • tidytracker</title>
+<title>Read to-do list from YAML — read_todo • tidytracker</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -32,10 +32,11 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Post to-do list (issues) to GitHub repository — post_todo" />
+<meta property="og:title" content="Read to-do list from YAML — read_todo" />
 
-<meta property="og:description" content="Post custom to-do lists (i.e. issues) based on yaml read in by read_todo.
-Please see the &quot;Building Custom Plans&quot; vignette for details." />
+<meta property="og:description" content="This function reads a carefully constructed YAML file representing a to-do list (of issues).
+YAML is converted into an R list structure which can then be passed to  post_todo()
+to build infrastructure for your repository." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -111,45 +112,43 @@ Please see the &quot;Building Custom Plans&quot; vignette for details." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Post to-do list (issues) to GitHub repository</h1>
+    <h1>Read to-do list from YAML</h1>
     <small class="dont-index">Source: <a href='https://github.com/emilyriederer/tidytracker/blob/master/R/plan-todo.R'><code>R/plan-todo.R</code></a></small>
-    <div class="hidden name"><code>post_todo.Rd</code></div>
+    <div class="hidden name"><code>read_todo.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Post custom to-do lists (i.e. issues) based on yaml read in by <code>read_todo</code>.
-Please see the "Building Custom Plans" vignette for details.</p>
+    <p>This function reads a carefully constructed YAML file representing a to-do list (of issues).
+YAML is converted into an R list structure which can then be passed to  <code><a href='post_todo.html'>post_todo()</a></code>
+to build infrastructure for your repository.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>post_todo</span>(<span class='no'>ref</span>, <span class='no'>todo</span>)</pre>
+    <pre class="usage"><span class='fu'>read_todo</span>(<span class='no'>input</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>ref</th>
-      <td><p>Repository reference (list) created by <code><a href='create_repo_ref.html'>create_repo_ref()</a></code></p></td>
-    </tr>
-    <tr>
-      <th>todo</th>
-      <td><p>To-do R list structure as read with <code><a href='read_todo.html'>read_todo()</a></code></p></td>
+      <th>input</th>
+      <td><p>Either filepath to YAML file or character string. Assumes filepath if ends in ".yml"
+and assumes string otherwise.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Number (identifier) of posted issue</p>
+    <p>List containing plan compatible with <code><a href='post_plan.html'>post_plan()</a></code> or <code><a href='post_todo.html'>post_todo()</a></code></p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Currently has know bug in that cannot be used to introduce new labels.</p>
+    <p>Please see the "Building Custom Plans" vignette for more details.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other plans and todos: <code><a href='post_plan.html'>post_plan</a></code>,
-  <code><a href='read_plan.html'>read_plan</a></code>, <code><a href='read_todo.html'>read_todo</a></code>,
+  <code><a href='post_todo.html'>post_todo</a></code>, <code><a href='read_plan.html'>read_plan</a></code>,
   <code><a href='report_plan.html'>report_plan</a></code>, <code><a href='report_todo.html'>report_todo</a></code>,
   <code><a href='template_yaml.html'>template_yaml</a></code></p></div>
     
@@ -159,8 +158,8 @@ Please see the "Building Custom Plans" vignette for details.</p>
 <span class='co'># This example uses example file included in pkg</span>
 <span class='co'># You should be able to run example as-is after creating your own repo reference</span>
 <span class='no'>file_path</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='st'>"todo.yml"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"tidytracker"</span>, <span class='kw'>mustWork</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='no'>my_todo</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='read_todo.html'>read_todo</a></span>(<span class='no'>file_path</span>)
-<span class='fu'>post_todo</span>(<span class='no'>ref</span>, <span class='no'>my_todo</span>)
+<span class='no'>my_todo</span> <span class='kw'>&lt;-</span> <span class='fu'>read_todo</span>(<span class='no'>file_path</span>)
+<span class='fu'><a href='post_todo.html'>post_todo</a></span>(<span class='no'>ref</span>, <span class='no'>my_todo</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

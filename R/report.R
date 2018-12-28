@@ -78,7 +78,7 @@ report_progress <- function(issues){
 #' class of \code{'knit_asis'} so that when included in an RMarkdown document knitting to HTML,
 #' the results will be correctly rendered as HTML.
 #'
-#' @param plan List of project plan, as returned by \code{read_yaml()}
+#' @param plan List of project plan, as returned by \code{read_plan()}
 #'
 #' @inherit report_progress return
 #' @export
@@ -88,7 +88,7 @@ report_progress <- function(issues){
 #' \dontrun{
 #' In RMarkdown:
 #' ```{r}
-#' my_plan <- read_yaml("my_plan.yml")
+#' my_plan <- read_plan("my_plan.yml")
 #' report_plan(my_plan)
 #' ```
 #'}
@@ -140,7 +140,7 @@ report_plan <- function(plan){
 #' class of \code{'knit_asis'} so that when included in an RMarkdown document knitting to HTML,
 #' the results will be correctly rendered as HTML.
 #'
-#' @param todo List of to-do list, as returned by \code{read_yaml()}
+#' @param todo List of to-do list, as returned by \code{read_todo()}
 #'
 #' @inherit report_progress return
 #' @export
@@ -150,7 +150,7 @@ report_plan <- function(plan){
 #' \dontrun{
 #' In RMarkdown:
 #' ```{r}
-#' my_todo <- read_yaml("my_todo.yml")
+#' my_todo <- read_todo("my_todo.yml")
 #' report_todo(my_todo)
 #' ```
 #'}

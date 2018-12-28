@@ -7,7 +7,7 @@
 report_todo(todo)
 }
 \arguments{
-\item{todo}{List of to-do list, as returned by \code{read_yaml()}}
+\item{todo}{List of to-do list, as returned by \code{read_todo()}}
 }
 \value{
 Returns character string of HTML with class attribute to be correctly
@@ -23,14 +23,15 @@ the results will be correctly rendered as HTML.
 \dontrun{
 In RMarkdown:
 ```{r}
-my_todo <- read_yaml("my_todo.yml")
+my_todo <- read_todo("my_todo.yml")
 report_todo(my_todo)
 ```
 }
 }
 \seealso{
 Other plans and todos: \code{\link{post_plan}},
-  \code{\link{post_todo}}, \code{\link{read_yaml}},
-  \code{\link{report_plan}}, \code{\link{template_yaml}}
+  \code{\link{post_todo}}, \code{\link{read_plan}},
+  \code{\link{read_todo}}, \code{\link{report_plan}},
+  \code{\link{template_yaml}}
 }
 \concept{plans and todos}

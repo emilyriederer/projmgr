@@ -67,4 +67,4 @@ viz_waterfall_issues(dplyr_issues, '2014-01-01', '2015-01-01')
 ```
 
 
-## Posting Issues
+

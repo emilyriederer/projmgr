@@ -123,7 +123,7 @@
       body: Create univariate and bivariate plots</code></pre>
 <p>The <code>read_my_plan_todo_yaml()</code> function reads in either plan or to-do YAML files. We will continue to work with the example plan embedded in the package.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plan_path &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata"</span>, <span class="st">"plan.yml"</span>, <span class="dt">package =</span> <span class="st">"tidytracker"</span>, <span class="dt">mustWork =</span> <span class="ot">TRUE</span>)
-my_plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/read_yaml.html">read_yaml</a></span>(plan_path)</code></pre></div>
+my_plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/read_plan.html">read_plan</a></span>(plan_path)</code></pre></div>
 <p>This function converts YAML to an R list. You can sanity check the structure of this output with base R <code>str()</code> function which shows the structure of a list:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(my_plan)
 <span class="co">#&gt; List of 2</span>
@@ -153,7 +153,8 @@ my_plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rea
 <span class="co">#&gt;   .. .. ..$ body : chr "Calculate summary statistics"</span>
 <span class="co">#&gt;   .. ..$ :List of 2</span>
 <span class="co">#&gt;   .. .. ..$ title: chr "Visualizations"</span>
-<span class="co">#&gt;   .. .. ..$ body : chr "Create univariate and bivariate plots"</span></code></pre></div>
+<span class="co">#&gt;   .. .. ..$ body : chr "Create univariate and bivariate plots"</span>
+<span class="co">#&gt;  - attr(*, "class")= chr [1:2] "plan" "list"</span></code></pre></div>
 <p>Finally, this collection of milestones and associated issues can be posted to GitHub with the <code><a href="../reference/post_plan.html">post_plan()</a></code> function.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">experigit &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_repo_ref.html">create_repo_ref</a></span>(<span class="st">"emilyriederer"</span>, <span class="st">"experigit"</span>)
 <span class="kw"><a href="../reference/post_plan.html">post_plan</a></span>(experigit, my_plan)</code></pre></div>
@@ -172,7 +173,7 @@ my_plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rea
 <span class="st">  body: Repsond to feedback from reviewers</span>
 <span class="st">"</span>
 
-plan_from_vbl &lt;-<span class="st"> </span><span class="kw"><a href="../reference/read_yaml.html">read_yaml</a></span>(plan_yaml_vbl)
+plan_from_vbl &lt;-<span class="st"> </span><span class="kw"><a href="../reference/read_plan.html">read_plan</a></span>(plan_yaml_vbl)
 <span class="kw">str</span>(plan_from_vbl)
 <span class="co">#&gt; List of 2</span>
 <span class="co">#&gt;  $ milestone1:List of 2</span>
@@ -180,7 +181,8 @@ plan_from_vbl &lt;-<span class="st"> </span><span class="kw"><a href="../referen
 <span class="co">#&gt;   ..$ body : chr "Complete the first draft of this paper for review"</span>
 <span class="co">#&gt;  $ milestone2:List of 2</span>
 <span class="co">#&gt;   ..$ title: chr "Make revisions"</span>
-<span class="co">#&gt;   ..$ body : chr "Repsond to feedback from reviewers"</span></code></pre></div>
+<span class="co">#&gt;   ..$ body : chr "Repsond to feedback from reviewers"</span>
+<span class="co">#&gt;  - attr(*, "class")= chr [1:2] "plan" "list"</span></code></pre></div>
 <p>Should you ever forget exactly what this YAML should look like, the <code><a href="../reference/template_yaml.html">template_yaml()</a></code> function is here to help. It prints a template example to your console:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/template_yaml.html">template_yaml</a></span>(<span class="st">"plan"</span>)
 <span class="co">#&gt; - title: Enter a short, informative title of your goal</span>
@@ -217,9 +219,9 @@ plan_from_vbl &lt;-<span class="st"> </span><span class="kw"><a href="../referen
   labels: [low]
 
 - title: Make sure documentation links right pages of API docs</code></pre>
-<p>The same <code><a href="../reference/read_yaml.html">read_yaml()</a></code> function reads in a to-do YAML file and converts it to an R list:</p>
+<p>Similarly, the <code><a href="../reference/read_todo.html">read_todo()</a></code> function reads in a to-do YAML file and converts it to an R list:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">todo_path &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata"</span>, <span class="st">"todo.yml"</span>, <span class="dt">package =</span> <span class="st">"tidytracker"</span>, <span class="dt">mustWork =</span> <span class="ot">TRUE</span>)
-my_todo &lt;-<span class="st"> </span><span class="kw"><a href="../reference/read_yaml.html">read_yaml</a></span>(todo_path)
+my_todo &lt;-<span class="st"> </span><span class="kw"><a href="../reference/read_todo.html">read_todo</a></span>(todo_path)
 <span class="kw">str</span>(my_todo)
 <span class="co">#&gt; List of 2</span>
 <span class="co">#&gt;  $ :List of 4</span>
@@ -228,7 +230,8 @@ my_todo &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rea
 <span class="co">#&gt;   ..$ assignees: chr "emilyriederer"</span>
 <span class="co">#&gt;   ..$ labels   : chr "low"</span>
 <span class="co">#&gt;  $ :List of 1</span>
-<span class="co">#&gt;   ..$ title: chr "Make sure documentation links right pages of API docs"</span></code></pre></div>
+<span class="co">#&gt;   ..$ title: chr "Make sure documentation links right pages of API docs"</span>
+<span class="co">#&gt;  - attr(*, "class")= chr [1:2] "todo" "list"</span></code></pre></div>
 <p>This collection of issues can be posted to a GitHub with the <code><a href="../reference/post_todo.html">post_todo()</a></code> function.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">experigit &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_repo_ref.html">create_repo_ref</a></span>(<span class="st">"emilyriederer"</span>, <span class="st">"experigit"</span>)
 <span class="kw"><a href="../reference/post_todo.html">post_todo</a></span>(experigit, my_todo)</code></pre></div>

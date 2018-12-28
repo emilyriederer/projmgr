@@ -7,7 +7,7 @@
 report_plan(plan)
 }
 \arguments{
-\item{plan}{List of project plan, as returned by \code{read_yaml()}}
+\item{plan}{List of project plan, as returned by \code{read_plan()}}
 }
 \value{
 Returns character string of HTML with class attribute to be correctly
@@ -23,14 +23,15 @@ the results will be correctly rendered as HTML.
 \dontrun{
 In RMarkdown:
 ```{r}
-my_plan <- read_yaml("my_plan.yml")
+my_plan <- read_plan("my_plan.yml")
 report_plan(my_plan)
 ```
 }
 }
 \seealso{
 Other plans and todos: \code{\link{post_plan}},
-  \code{\link{post_todo}}, \code{\link{read_yaml}},
-  \code{\link{report_todo}}, \code{\link{template_yaml}}
+  \code{\link{post_todo}}, \code{\link{read_plan}},
+  \code{\link{read_todo}}, \code{\link{report_todo}},
+  \code{\link{template_yaml}}
 }
 \concept{plans and todos}

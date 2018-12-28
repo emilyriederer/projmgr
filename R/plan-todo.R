@@ -1,9 +1,8 @@
-#' Read plan or to-do list from YAML
+#' Read plan from YAML
 #'
 #' This function reads a carefully constructed YAML file representing a project plan (of
-#' milestones and issues) or a to-do list (of issues). YAML is converted into an R list
-#' structure which can then be passed to \code{post_plan()} or \code{post_todo()}
-#' to build infrastructure for your repository.
+#' milestones and issues). YAML is converted into an R list structure which can then be passed
+#' to \code{post_plan()} to build infrastructure for your repository.
 #'
 #' Please see the "Building Custom Plans" vignette for more details.
 #'
@@ -20,18 +19,11 @@
 #' # This example uses example file included in pkg
 #' # You should be able to run example as-is after creating your own repo reference
 #' file_path <- system.file("extdata", "plan.yml", package = "tidytracker", mustWork = TRUE)
-#' my_plan <- read_yaml(file_path)
+#' my_plan <- read_plan(file_path)
 #' post_plan(ref, my_plan)
 #' }
-#' \dontrun{
-#' # This example uses example file included in pkg
-#' # You should be able to run example as-is after creating your own repo reference
-#' file_path <- system.file("extdata", "todo.yml", package = "tidytracker", mustWork = TRUE)
-#' my_todo <- read_yaml(file_path)
-#' post_todo(ref, my_todo)
-#' }
 
-read_yaml <- function(input){
+read_plan <- function(input){
 
   # check if yaml package installed
   if (!requireNamespace("yaml", quietly = TRUE)) {
@@ -54,6 +46,57 @@ read_yaml <- function(input){
                                      list(expr = function(x) eval(parse(text = x))))
   }
 
+  class(parsed) <- c("plan", class(parsed))
+  return(parsed)
+
+}
+
+#' Read to-do list from YAML
+#'
+#' This function reads a carefully constructed YAML file representing a to-do list (of issues).
+#' YAML is converted into an R list structure which can then be passed to  \code{post_todo()}
+#' to build infrastructure for your repository.
+#'
+#' Please see the "Building Custom Plans" vignette for more details.
+#'
+#' @inherit read_plan return params
+#' @export
+#'
+#' @family plans and todos
+#'
+#' @examples
+#' \dontrun{
+#' # This example uses example file included in pkg
+#' # You should be able to run example as-is after creating your own repo reference
+#' file_path <- system.file("extdata", "todo.yml", package = "tidytracker", mustWork = TRUE)
+#' my_todo <- read_todo(file_path)
+#' post_todo(ref, my_todo)
+#' }
+
+read_todo <- function(input){
+
+  # check if yaml package installed
+  if (!requireNamespace("yaml", quietly = TRUE)) {
+    stop("Package \"yaml\" needed for this function to work. Please install it.",
+         call. = FALSE)
+  }
+
+  # determine input type
+  stub <- substring( trimws(input), nchar(trimws(input)) - 3)
+
+  # check if at least one of filepath or chars in not NA
+  if(stub == ".yml"){
+    parsed <- yaml::yaml.load_file(input,
+                                   handlers =
+                                     list(expr = function(x) eval(parse(text = x))))
+  }
+  else{
+    parsed <- yaml::yaml.load(input,
+                              handlers =
+                                list(expr = function(x) eval(parse(text = x))))
+  }
+
+  class(parsed) <- c("todo", class(parsed))
   return(parsed)
 
 }
@@ -61,11 +104,11 @@ read_yaml <- function(input){
 #' Post plan (milestones + issues) to GitHub repository
 #'
 #' Post custom plans (i.e. create milestons and issues) based on yaml read in by
-#' \code{read_yaml}. Please see the "Building Custom Plans" vignette for details.
+#' \code{read_plan}. Please see the "Building Custom Plans" vignette for details.
 #'
 #' @inherit post_engine params
-#' @inherit read_yaml examples
-#' @param plan Plan list as read with \code{read_yaml()}
+#' @inherit read_plan examples
+#' @param plan Plan list as read with \code{read_plan()}
 #' @export
 #'
 #' @return Dataframe with numbers (identifiers) of posted milestones and issues and issue title
@@ -109,15 +152,15 @@ post_plan <- function(ref, plan){
 
 #' Post to-do list (issues) to GitHub repository
 #'
-#' Post custom to-do lists (i.e. issues) based on yaml read in by \code{read_yaml}.
+#' Post custom to-do lists (i.e. issues) based on yaml read in by \code{read_todo}.
 #' Please see the "Building Custom Plans" vignette for details.
 #'
 #' Currently has know bug in that cannot be used to introduce new labels.
 #'
 #' @inherit post_engine params
 #' @inherit post_issue return
-#' @inherit read_yaml examples
-#' @param todo To-do R list structure as read with \code{read_yaml()}
+#' @inherit read_todo examples
+#' @param todo To-do R list structure as read with \code{read_todo()}
 #' @export
 #'
 #' @family plans and todos
