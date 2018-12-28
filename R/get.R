@@ -31,7 +31,7 @@ get_issues <- function(ref, limit = Inf, ...){
 
   get_engine(api_endpoint = "/issues",
              ref = ref,
-             .limit = limit,
+             limit = limit,
              ...)
 
 }
