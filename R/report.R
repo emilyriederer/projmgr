@@ -80,8 +80,7 @@ report_progress <- function(issues){
 #'
 #' @param plan List of project plan, as returned by \code{read_yaml()}
 #'
-#' @return Returns character string of HTML with class attribute to be correctly
-#'     shown "as-is" in RMarkdown
+#' @inherit report_progress return
 #' @export
 #' @family plans and todos
 #'
@@ -143,8 +142,7 @@ report_plan <- function(plan){
 #'
 #' @param todo List of to-do list, as returned by \code{read_yaml()}
 #'
-#' @return Returns character string of HTML with class attribute to be correctly
-#'     shown "as-is" in RMarkdown
+#' @inherit report_progress return
 #' @export
 #' @family plans and todos
 #'
@@ -191,10 +189,11 @@ report_todo <- function(todo){
 #' class of \code{'knit_asis'} so that when included in an RMarkdown document knitting to HTML,
 #' the results will be correctly rendered as HTML.
 #'
-#' @param issue Dataframe or tibble of issues, as returned by \code{get_issues()}
 #' @param comments Dataframe or tibble of comments for a single issue, as returned by \code{get_issue_comments()}
+#' @param issue Optional dataframe or tibble of issues, as returned by \code{get_issues()}. If provided,
+#'     output includes issue-level data such as the title, intitial description, creation date, etc.
 #'
-#' @return Returns character string of HTML with class attribute to be correctly shown "as-is" in RMarkdown
+#' @inherit report_progress return
 #' @export
 #' @family issues
 #' @family comments
@@ -209,7 +208,7 @@ report_todo <- function(todo){
 #' ```
 #'}
 
-report_discussion <- function(issue, comments){
+report_discussion <- function(comments, issue = NA){
 
   # internal fx for comment fmting
   format_comment <- function(user_login, author_association, body, created_at, updated_at, ...){
@@ -239,29 +238,37 @@ report_discussion <- function(issue, comments){
   }
 
   # validate inputs ----
-  issue_number <- unique(issue$number)
   comments_number <- unique(comments$number)
 
   if(length(comments_number) != 1){
     stop("Comments dataframe contains comments for more than 1 issue. Please limit data to a single issue.")
   }
-  if( length(intersect(issue_number, comments_number)) == 0){
-    stop("Issues dataframe does not contain same issue number as comments dataframe.")
-  }
-  if( length(issue_number) > 1){
-    issue <- issue[issue$number == comments_number, ]
-  }
 
-  # generate html from dataframes ----
-  issue_html <- do.call(format_issue, issue)
-
-  comments_html <- ""
+  html <- ""
   for(i in 1:nrow(comments)){
     next_comment_html <- do.call(format_comment, comments[i,])
-    comments_html <- paste(comments_html, next_comment_html)
+    html <- paste(html, next_comment_html)
   }
 
-  html <- paste(issue_html, comments_html)
+  # include issue-level data if provided ----
+
+  if(!is.na(issue)){
+
+    issue_number <- unique(issue$number)
+
+    if( length(intersect(issue_number, comments_number)) == 0){
+      stop("Issues dataframe does not contain same issue number as comments dataframe.")
+    }
+    if( length(issue_number) > 1){
+      issue <- issue[issue$number == comments_number, ]
+    }
+
+    # generate html from dataframes ----
+    issue_html <- do.call(format_issue, issue)
+    html <- paste(issue_html, html)
+
+  }
+
   class(html) <- "knit_asis"
   return(html)
 

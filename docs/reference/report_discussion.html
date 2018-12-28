@@ -129,24 +129,26 @@ the results will be correctly rendered as HTML.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>report_discussion</span>(<span class='no'>issue</span>, <span class='no'>comments</span>)</pre>
+    <pre class="usage"><span class='fu'>report_discussion</span>(<span class='no'>comments</span>, <span class='kw'>issue</span> <span class='kw'>=</span> <span class='fl'>NA</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>issue</th>
-      <td><p>Dataframe or tibble of issues, as returned by <code><a href='get_issues.html'>get_issues()</a></code></p></td>
-    </tr>
-    <tr>
       <th>comments</th>
       <td><p>Dataframe or tibble of comments for a single issue, as returned by <code><a href='get_issue_comments.html'>get_issue_comments()</a></code></p></td>
+    </tr>
+    <tr>
+      <th>issue</th>
+      <td><p>Optional dataframe or tibble of issues, as returned by <code><a href='get_issues.html'>get_issues()</a></code>. If provided,
+output includes issue-level data such as the title, intitial description, creation date, etc.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Returns character string of HTML with class attribute to be correctly shown "as-is" in RMarkdown</p>
+    <p>Returns character string of HTML with class attribute to be correctly
+    shown "as-is" in RMarkdown</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
