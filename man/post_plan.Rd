@@ -4,12 +4,15 @@
 \alias{post_plan}
 \title{Post plan (milestones + issues) to GitHub repository}
 \usage{
-post_plan(ref, plan)
+post_plan(ref, plan, distinct = TRUE)
 }
 \arguments{
 \item{ref}{Repository reference (list) created by \code{create_repo_ref()}}
 
 \item{plan}{Plan list as read with \code{read_plan()}}
+
+\item{distinct}{Logical value to denote whether issues with the same title
+as a current open issue should be allowed. Passed to \code{get_issues()}}
 }
 \value{
 Dataframe with numbers (identifiers) of posted milestones and issues and issue title

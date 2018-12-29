@@ -123,7 +123,7 @@ read_plan. Please see the &quot;Building Custom Plans&quot; vignette for details
     
     </div>
 
-    <pre class="usage"><span class='fu'>post_plan</span>(<span class='no'>ref</span>, <span class='no'>plan</span>)</pre>
+    <pre class="usage"><span class='fu'>post_plan</span>(<span class='no'>ref</span>, <span class='no'>plan</span>, <span class='kw'>distinct</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -135,6 +135,11 @@ read_plan. Please see the &quot;Building Custom Plans&quot; vignette for details
     <tr>
       <th>plan</th>
       <td><p>Plan list as read with <code><a href='read_plan.html'>read_plan()</a></code></p></td>
+    </tr>
+    <tr>
+      <th>distinct</th>
+      <td><p>Logical value to denote whether issues with the same title
+as a current open issue should be allowed. Passed to <code><a href='get_issues.html'>get_issues()</a></code></p></td>
     </tr>
     </table>
     

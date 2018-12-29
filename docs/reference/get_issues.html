@@ -121,7 +121,7 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_issues</span>(<span class='no'>ref</span>, <span class='kw'>limit</span> <span class='kw'>=</span> <span class='fl'>Inf</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>get_issues</span>(<span class='no'>ref</span>, <span class='kw'>limit</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -133,7 +133,7 @@
     <tr>
       <th>limit</th>
       <td><p>Number of records to return, passed directly to <code>gh</code> documentation. Defaults to
-<code>Inf</code> which requests all records but may required multiple API calls</p></td>
+1000 and provides message if number of records returned equals the limit</p></td>
     </tr>
     <tr>
       <th>...</th>

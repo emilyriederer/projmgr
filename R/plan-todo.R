@@ -107,6 +107,8 @@ read_todo <- function(input){
 #' \code{read_plan}. Please see the "Building Custom Plans" vignette for details.
 #'
 #' @inherit post_engine params
+#' @param distinct Logical value to denote whether issues with the same title
+#'     as a current open issue should be allowed. Passed to \code{get_issues()}
 #' @inherit read_plan examples
 #' @param plan Plan list as read with \code{read_plan()}
 #' @export
@@ -116,7 +118,7 @@ read_todo <- function(input){
 #' @family plans and todos
 #' @importFrom dplyr distinct mutate pull select transmute
 
-post_plan <- function(ref, plan){
+post_plan <- function(ref, plan, distinct = TRUE){
 
   # create milestones
   milestone_num_dist <-
@@ -140,7 +142,7 @@ post_plan <- function(ref, plan){
 
   # post issues
   issue_num <- purrr::map_chr(issues_prep,
-                                ~do.call(function(...) post_issue(ref, ...), .x))
+                                ~do.call(function(...) post_issue(ref, ..., distinct = distinct), .x))
 
   return(
     data.frame(milestone_number = purrr::map_int(issues_prep, "milestone"),
@@ -170,7 +172,7 @@ post_plan <- function(ref, plan){
 post_todo <- function(ref, todo){
 
   # create issues
-  res_issues <- purrr::map(todo, ~purrr::pmap(., ~post_issue(ref, ...)))
+  res_issues <- purrr::map(todo, ~purrr::pmap(., ~post_issue(ref, ..., distinct = distinct)))
 
   return( unlist(res_issues) )
 
