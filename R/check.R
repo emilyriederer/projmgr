@@ -20,7 +20,7 @@ check_rate_limit <- function(ref){
 
   ref[['repo_path']] <- ''
   req <- get_engine("rate_limit", ref)
-  core <- req$resources$core
+  core <- req[[1]]$resources$core
   reset <- as.POSIXct(core$reset, origin = "1970-01-01")
   cat(core$remaining, " / ", core$limit,
       " (Resets at ", strftime(reset, "%H:%M:%S"), ")\n",
@@ -46,7 +46,7 @@ check_authentication <- function(ref){
 
   ref[['repo_path']] <- ''
   req <- get_engine("user", ref)
-  cat("+ Login: ", req$login, "\n", "+ Type: ", req$type, "\n", sep = '')
+  cat("+ Login: ", req[[1]]$login, "\n", "+ Type: ", req[[1]]$type, "\n", sep = '')
 
 }
 
