@@ -44,13 +44,13 @@ report_progress <- function(issues){
     html <- paste(html,
                   "<p>",
                   "<strong>", df$milestone_title[i], "</strong>",
-                  "<i>",
+                  "<em>",
                   "(",
                   round(100*sum(df$data[[i]]$state == 'closed')/nrow(df$data[[i]])),
                   "% Complete - ",
                   sum(df$data[[i]]$state == 'closed'),"/",nrow(df$data[[i]]),
                   " Issues)",
-                  "</i>",
+                  "</em>",
                   "<ul>"
     )
 
@@ -107,11 +107,11 @@ report_plan <- function(plan){
     html <- paste(html,
                   "<p>",
                   "<strong>", milestones[i], "</strong>",
-                  "<i>",
+                  "<em>",
                   "( 0 % Complete - 0 /",
                   length(plan[[i]]$issue),
                   " Issues)",
-                  "</i>",
+                  "</em>",
                   "<ul>"
     )
 
