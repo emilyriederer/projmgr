@@ -28,12 +28,13 @@ check_rate_limit <- function(ref){
 
 }
 
-#' Check for valid authentication credentials
+#' Check for valid credentials and repo permissions
 #'
 #' @param ref Any repository reference being used. Repository information is stripped out and
-#'     only authentication credentials are used to determine the rate limit.
+#'     only authentication credentials are validated.
 #'
-#' @return If valid, returns related GitHub username. Else returns 401 Unauthorized error.
+#' @return Prints GitHub username as determined by credentials (if valid) and repo-level permissions (if any),
+#'     else throws 401 Unauthorized error.
 #' @export
 #'
 #' @examples
@@ -42,11 +43,29 @@ check_rate_limit <- function(ref){
 #' check_authentication(experigit)
 #' }
 
-check_authentication <- function(ref){
+check_credentials <- function(ref){
 
-  ref[['repo_path']] <- ''
-  req <- get_engine("user", ref)
-  cat("+ Login: ", req[[1]]$login, "\n", "+ Type: ", req[[1]]$type, "\n", sep = '')
+  auth_ref <- ref
+  auth_ref[['repo_path']] <- ''
+  auth_req <- get_engine("user", auth_ref)
+
+  perm_req <- try(get_engine("/collaborators", ref), silent = TRUE)
+  if("try-error" %in% class(perm_req)){
+  perm_req <- list(admin = FALSE, push = FALSE, pull = FALSE)
+  }
+  else{
+  perm_req <- purrr::keep(perm_req, ~.[['login']] == auth_req[[1]]$login)
+  perm_req <- perm_req[[1]]$permissions
+  }
+
+  cat("-- With provided credentials -- \n",
+      "+ Login: ", auth_req[[1]]$login, "\n",
+      "+ Type: ", auth_req[[1]]$type, "\n",
+      "-- In the ", ref$repo_name, " repo -- \n",
+      "+ Admin: ", perm_req$admin, "\n",
+      "+ Push: ", perm_req$push, "\n",
+      "+ Pull: ", perm_req$pull, "\n",
+      sep = '')
 
 }
 
