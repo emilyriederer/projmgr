@@ -2,13 +2,14 @@ context("GET functions")
 
 skip_on_cran()
 skip_on_travis()
+skip_on_appveyor()
 
 experigit <- create_repo_ref('emilyriederer', 'experigit')
 
 test_that( "zero item output is returned as type character (vs list)", {
 
-  expect_type( get_engine("/issues", experigit, since = '3000-12-31'), "character")
-  expect_type( get_issues(experigit, since = '3000-12-31'), "character")
+  expect_type( get_engine("/issues", experigit, since = '4000-12-31'), "character")
+  expect_type( get_issues(experigit, since = '4000-12-31'), "character")
 
 })
 
