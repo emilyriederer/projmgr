@@ -49,7 +49,7 @@ post_issue <- function(ref, title, ..., distinct = TRUE){
 
   # check that rest of inputs are valid per github api ----
   args <- list(...)
-  validate_inputs(args, allowed_vars = c("body", "milestone","labels", "assignees"))
+  validate_inputs(args, allowed_vars = help_post_issues() )
   if(length(args[['labels']] == 1)){args[["labels"]] <- I(args[["labels"]])}
   if(length(args[['assignees']] == 1)){args[["assignees"]] <- I(args[["assignees"]])}
 
@@ -100,7 +100,7 @@ post_milestone <- function(ref, title, ...){
   }
 
   # check that rest of inputs are valid per github api ----
-  validate_inputs(list(...), allowed_vars = c("state", "description", "due_on"))
+  validate_inputs(list(...), help_post_milestones())
 
   res <- post_engine(api_endpoint = "/milestones",
                      ref = ref,

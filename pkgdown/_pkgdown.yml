@@ -61,9 +61,11 @@ reference:
 - title: Check functions
   desc: "Test and diagnose common impediments"
   contents: starts_with("check")
-- title: Browse functions
-  desc: "Launch browser to specific GitHub destination"
-  contents: starts_with("browse")
+- title: Navigation functions
+  desc: "Access more information on or about GitHub"
+  contents:
+  - starts_with("browse")
+  - starts_with("help")
 - title: Misc functions
   desc: "Miscellaneous functions that make life a little bit easier"
   contents:
@@ -74,4 +76,5 @@ reference:
   - -starts_with("check")
   - -starts_with("report")
   - -starts_with("browse")
+  - -starts_with("help")
   - -tidytracker

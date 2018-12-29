@@ -26,13 +26,15 @@ library(tidytracker)
 
 ## Creating a Repo Reference
 
-The first step to interacting with a GitHub repository is creating a repository reference.
+The first step to interacting with a GitHub repository is creating a repository reference. Repository references are "first class citizens" in `tidytracker` and contain all authorization credentials. These references are passed as the first argument in all `get_` functions.
 
 ```{r}
 dplyr <- create_repo_ref('tidyverse', 'dplyr')
 ```
 
 ## Getting Issues
+
+`get_` functions retrieve information from the GitHub API. The first argument is the repository reference and additional named query parameters can be passed subsequently. For example, here, we request issues of the first `milestone` with either an open or closed `state`. (Note that, in keeping with the GitHub API, only open issues are returned when `state` is not specified.)
 
 ```{r}
 dplyr_issues_list <- get_issues(dplyr, milestone = 1, state = 'all')

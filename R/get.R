@@ -29,10 +29,7 @@ get_issues <- function(ref, limit = 1000, ...){
 
   }
 
-  validate_inputs(args,
-                  allowed_vars = c("milestone", "state", "assignee",
-                                   "creator", "mentioned", "labels",
-                                   "sort", "direction","since"))
+  validate_inputs(args, help_issues_args())
 
   res <- get_engine(api_endpoint = "/issues",
              ref = ref,
@@ -104,7 +101,7 @@ get_issue_events <- function(ref, number){
 
 get_issue_comments <- function(ref, number, ...){
 
-    validate_inputs(list(...), allowed_vars = c("since"))
+    validate_inputs(list(...), help_issue_comments_args())
 
   res <- get_engine(api_endpoint = paste0("/issues/", number, "/comments"),
                     ref = ref)
@@ -145,8 +142,7 @@ get_milestones <- function(ref, ...){
 
   }
 
-  validate_inputs(list(...),
-                  allowed_vars = c("state", "sort", "direction"))
+  validate_inputs(list(...), allowed_vars = help_milestones_args())
 
   get_engine(api_endpoint = "/milestones",
              ref = ref,
