@@ -31,9 +31,11 @@ Suggests:
     reprex,
     rmarkdown,
     roxygen2,
+    testthat,
     xml2,
     yaml
-VignetteBuilder: knitr
+VignetteBuilder: 
+    knitr
 Encoding: UTF-8
 Language: en-US
 LazyData: true
