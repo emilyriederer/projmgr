@@ -1,6 +1,9 @@
 #' Get issues from GitHub repository
 #'
 #' @inherit get_engine return params
+#' @param limit Number of records to return, passed directly to \code{gh} documentation. Defaults to
+#'     1000 and provides message if number of records returned equals the limit
+#'
 #' @export
 #' @family get
 #' @family issues
@@ -12,7 +15,7 @@
 #' issues <- parse_issues(issues_res)
 #' }
 
-get_issues <- function(ref, limit = Inf, ...){
+get_issues <- function(ref, limit = 1000, ...){
 
   args <- list(...)
 
@@ -29,10 +32,19 @@ get_issues <- function(ref, limit = Inf, ...){
                                    "creator", "mentioned", "labels",
                                    "sort", "direction","since"))
 
-  get_engine(api_endpoint = "/issues",
+  res <- get_engine(api_endpoint = "/issues",
              ref = ref,
              limit = limit,
              ...)
+
+  # notify user if seem to be hitting record limit
+  if(length(res) == limit){
+    message(
+      paste("Number of results equals max number allowed by limit argument.",
+             "Additional relevant records may be getting excluded.",
+            "Consider making your query more specific or increasing the limit."),
+      sep = "/n")
+  }
 
 }
 
