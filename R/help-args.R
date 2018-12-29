@@ -61,7 +61,7 @@ help_get_repo_label <- function(){
 
 #' @export
 #' @name help
-help_post_issues <- function(){
+help_post_issue <- function(){
 
   c("body", "milestone","labels", "assignees")
 
@@ -69,7 +69,7 @@ help_post_issues <- function(){
 
 #' @export
 #' @name help
-help_post_milestones <- function(){
+help_post_milestone <- function(){
 
   c("state", "description", "due_on")
 
