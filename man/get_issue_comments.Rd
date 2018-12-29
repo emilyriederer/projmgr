@@ -28,10 +28,6 @@ comments <- parse_issue_comments(comments_res)
 }
 }
 \seealso{
-Other get: \code{\link{get_issue_events}},
-  \code{\link{get_issues}}, \code{\link{get_milestones}},
-  \code{\link{get_repo_labels}}
-
 Other issues: \code{\link{get_issue_events}},
   \code{\link{get_issues}},
   \code{\link{parse_issue_comments}},
@@ -45,5 +41,4 @@ Other comments: \code{\link{parse_issue_comments}},
   \code{\link{report_discussion}}
 }
 \concept{comments}
-\concept{get}
 \concept{issues}

@@ -4,7 +4,6 @@
 #' @return \code{tibble} datasets with one record / issue
 #' @export
 #'
-#' @family parse
 #' @family issues
 #'
 #' @examples
@@ -46,7 +45,6 @@ parse_issues <- function(res){
 #' @return \code{tibble} datasets with one record / issue-event
 #' @export
 #'
-#' @family parse
 #' @family issues
 #' @family events
 #'
@@ -81,7 +79,6 @@ parse_issue_events <- function(res){
 #' @return \code{tibble} datasets with one record / issue-comment
 #' @export
 #'
-#' @family parse
 #' @family issues
 #' @family comments
 
@@ -109,7 +106,6 @@ parse_issue_comments <- function(res){
 #' @return `tibble` datasets with one record / milestone
 #' @export
 #'
-#' @family parse
 #' @family milestones
 #'
 #' @examples
@@ -146,7 +142,6 @@ parse_milestones <- function(res){
 #' @return `tibble` datasets with one record / label
 #' @export
 #'
-#' @family parse
 #' @family labels
 #'
 #' @inherit get_repo_labels examples

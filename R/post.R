@@ -5,7 +5,6 @@
 #' @param distinct Logical value to denote whether issues with the same title
 #'     as a current open issue should be allowed
 #' @export
-#' @family post
 #' @family issues
 #'
 #' @return Number (identifier) of posted issue
@@ -72,7 +71,6 @@ post_issue <- function(ref, title, ..., distinct = TRUE){
 #' @inherit post_engine params
 #' @param title Milestone title (required)
 #' @export
-#' @family post
 #' @family milestones
 #'
 #' @return Number (identifier) of posted milestone

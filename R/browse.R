@@ -83,7 +83,12 @@ browse_milestones <- function(repo_ref, id = "") {
     }
   else{"https://github.com/"}
 
-  view_url(url_prefix, repo_ref$repo_owner, repo_ref$repo_name, "milestones", id)
+  if(id == ""){
+  view_url(url_prefix, repo_ref$repo_owner, repo_ref$repo_name, "milestones")
+  }
+  else{
+    view_url(url_prefix, repo_ref$repo_owner, repo_ref$repo_name, "milestone", id)
+  }
 
 }
 

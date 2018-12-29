@@ -29,10 +29,7 @@ post_milestone(myrepo,
 }
 }
 \seealso{
-Other post: \code{\link{post_issue}}
-
 Other milestones: \code{\link{get_milestones}},
   \code{\link{parse_milestones}}
 }
 \concept{milestones}
-\concept{post}

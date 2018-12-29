@@ -23,11 +23,6 @@ labels <- get_repo_labels(my_repo) \%>\% parse_repo_labels()
 }
 }
 \seealso{
-Other get: \code{\link{get_issue_comments}},
-  \code{\link{get_issue_events}}, \code{\link{get_issues}},
-  \code{\link{get_milestones}}
-
 Other labels: \code{\link{parse_repo_labels}}
 }
-\concept{get}
 \concept{labels}

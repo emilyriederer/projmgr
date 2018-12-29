@@ -8,7 +8,6 @@
 #'     1000 and provides message if number of records returned equals the limit
 #'
 #' @export
-#' @family get
 #' @family issues
 #'
 #' @examples
@@ -62,7 +61,6 @@ get_issues <- function(ref, limit = 1000, ...){
 #' @param number Number of issue
 #' @export
 #'
-#' @family get
 #' @family issues
 #' @family events
 #'
@@ -94,7 +92,6 @@ get_issue_events <- function(ref, number){
 #' @param number Number of issue
 #' @export
 #'
-#' @family get
 #' @family issues
 #' @family comments
 #'
@@ -127,7 +124,6 @@ get_issue_comments <- function(ref, number, ...){
 #' @inherit get_engine return params
 #' @export
 #'
-#' @family get
 #' @family milestones
 #'
 #' @examples
@@ -165,7 +161,6 @@ get_milestones <- function(ref, ...){
 #' @param ... Additional arguments (none currently implemented on GitHub API)
 #' @export
 #'
-#' @family get
 #' @family labels
 #'
 #' @examples
