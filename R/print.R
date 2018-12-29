@@ -16,30 +16,34 @@ print.repo_ref <- function(x, ...){
 #' @export
 print.plan <- function(x, ...){
 
-  milestones <- purrr::map(x, "title")
-  n_issues <- purrr::map(x, ~length(.[["issue"]]))
+  milestones <- sapply(x, function(x) x[["title"]])
+  n_issues <- sapply(x, function(x) length(x[["issue"]]))
 
-  out <- "Plan: \n"
-  for(i in 1:length(milestones)){
-    out <-
-      paste0(out, i, ". ", milestones[i], " (",n_issues[i]," issues) \n")
+  # format plan component ----
+  format_component <- function(index, milestones, n_issues){
+    paste0(index, ". ", milestones, " (", n_issues, " issues) \n")
   }
 
+  out <- mapply(format_component, seq_along(milestones), milestones, n_issues)
+  out <- paste(out, collapse = "")
+  out <- paste0("Plan: \n", out)
+
   writeLines(out)
+  invisible(x)
 
 }
 
 #' @export
 print.todo <- function(x, ...){
 
-  issues <- purrr::map(x, "title")
+  issues <- sapply(x, function(x) x[["title"]])
 
-  out <- "To Do: \n"
-  for(i in 1:length(issues)){
-    out <-
-      paste0(out, i, ". ", issues[i], "\n")
-  }
+  out <- mapply(function(index, issues) paste0(index, ". ", issues, "\n"),
+                seq_along(issues), issues)
+  out <- paste(out, collapse = "")
+  out <- paste0("To Do: \n", out)
 
   writeLines(out)
+  invisible(x)
 
 }
