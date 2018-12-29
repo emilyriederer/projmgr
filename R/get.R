@@ -1,5 +1,8 @@
 #' Get issues from GitHub repository
 #'
+#' A single issue can be obtained by identification number of \code{number} is passed through \code{...}s.
+#' In this case, all other query parameters will be ignored.
+#'
 #' @inherit get_engine return params
 #' @param limit Number of records to return, passed directly to \code{gh} documentation. Defaults to
 #'     1000 and provides message if number of records returned equals the limit
@@ -118,6 +121,9 @@ get_issue_comments <- function(ref, number, ...){
 
 #' Get milestones from GitHub repository
 #'
+#' A single milestone can be obtained by identification number of \code{number} is passed through \code{...}s.
+#' In this case, all other query parameters will be ignored.
+#'
 #' @inherit get_engine return params
 #' @export
 #'
@@ -132,6 +138,16 @@ get_issue_comments <- function(ref, number, ...){
 #' }
 
 get_milestones <- function(ref, ...){
+
+  args <- list(...)
+
+  if("number" %in% names(args)){
+
+    message("'number' parameter supercedes all other options passed to get_milestones")
+    res <- get_engine(api_endpoint = paste("/milestones/", args$number), ref = ref)
+    return(res)
+
+  }
 
   validate_inputs(list(...),
                   allowed_vars = c("state", "sort", "direction"))

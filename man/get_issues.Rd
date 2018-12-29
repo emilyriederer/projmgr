@@ -18,7 +18,8 @@ get_issues(ref, limit = 1000, ...)
 Content of GET request as list
 }
 \description{
-Get issues from GitHub repository
+A single issue can be obtained by identification number of \code{number} is passed through \code{...}s.
+In this case, all other query parameters will be ignored.
 }
 \examples{
 \dontrun{

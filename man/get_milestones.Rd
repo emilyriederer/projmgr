@@ -15,7 +15,8 @@ get_milestones(ref, ...)
 Content of GET request as list
 }
 \description{
-Get milestones from GitHub repository
+A single milestone can be obtained by identification number of \code{number} is passed through \code{...}s.
+In this case, all other query parameters will be ignored.
 }
 \examples{
 \dontrun{
