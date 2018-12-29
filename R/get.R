@@ -158,7 +158,6 @@ get_milestones <- function(ref, ...){
 #' Get all labels for a repository
 #'
 #' @inherit get_engine return params
-#' @param ... Additional arguments (none currently implemented on GitHub API)
 #' @export
 #'
 #' @family labels
@@ -168,14 +167,9 @@ get_milestones <- function(ref, ...){
 #' labels <- get_repo_labels(my_repo) %>% parse_repo_labels()
 #' }
 
-get_repo_labels <- function(ref, ...) {
+get_repo_labels <- function(ref) {
 
-  validate_inputs(list(...),
-                  allowed_vars = c(""))
-
-  get_engine(api_endpoint = "/labels",
-             ref = ref,
-             ...)
+  get_engine(api_endpoint = "/labels", ref = ref)
 
 }
 

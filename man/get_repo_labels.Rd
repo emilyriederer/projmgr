@@ -4,12 +4,10 @@
 \alias{get_repo_labels}
 \title{Get all labels for a repository}
 \usage{
-get_repo_labels(ref, ...)
+get_repo_labels(ref)
 }
 \arguments{
 \item{ref}{Repository reference (list) created by \code{create_repo_ref()}}
-
-\item{...}{Additional arguments (none currently implemented on GitHub API)}
 }
 \value{
 Content of GET request as list
