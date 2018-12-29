@@ -46,6 +46,8 @@ get_issues <- function(ref, limit = 1000, ...){
       sep = "/n")
   }
 
+  return(res)
+
 }
 
 #' Get events for a specific issue from GitHub repository
