@@ -33,7 +33,7 @@ viz_linked <- function(g, filepath){
   if (!requireNamespace("xml2", quietly = TRUE)) {
     message(
       paste0("Package \"xml2\" is needed to edit SVG.",
-             "Please install \"xml2\" or use viz_gantt_closed for the non-linked version."),
+             "Please install \"xml2\" or use the non-linked version."),
       call. = FALSE)
   }
 
@@ -81,7 +81,7 @@ get_text_link_map <- function(g){
 
   # throw more readable error message if type unsupported
   supported_plots <- c("gantt", "taskboard")
-  if(!(class(g) %in% supported_plots)) {
+  if(intersect(class(g), supported_plots) == 0) {
     stop( paste(
       "Object provided does not have an implementation for adding links.",
       "Supported plots types are:",
