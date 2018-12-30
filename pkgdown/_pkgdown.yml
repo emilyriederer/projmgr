@@ -31,11 +31,9 @@ articles:
     desc: Demo of possible applications for personal projects, academia, and industry
     contents:
     - reprex-clipr
-    - large-analysis-projects
-    - reporting-bugs
     - tracking-KPIs
-    - projmgmt-and-productivity
-    - hackathon-coordination
+    - large-analysis-projects
+    - projmgmt-and-events
     - working-offline
 
 reference:

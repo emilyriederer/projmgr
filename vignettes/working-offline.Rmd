@@ -1,0 +1,51 @@
+---
+title: "Working Offline"
+author: "Vignette Author"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Sometimes, we have to work offline when traveling or dealing with a bad internet connection. Othertimes, we may prefer to work offline to focus more effectively on a single task. Regardless, while playing in R, you might discovered new bugs or think of new features and need a way to jot them down.
+
+This is one benefit of custom to-do lists. For example, as you encounter new issues, you can keep a running list of them as YAML. (This can be done either by assigning to an R variable or by saving a separate .yml file. Please see the vignette on Custom Plans for more details.)
+
+```{r}
+todo_yaml <- "
+- title: Add update functions
+  body: Issue labels especially could benefit by PATCH or POST/DELETE functionality
+  assignees: emilyriederer
+- title: Consider adding interactive visualizations
+- title: Add function(s) to open GitHub API docs 
+  labels: [enhancement, priority:low]
+"
+```
+
+Then, once you have internet again (which you can check with `check_internet()`), you can simply post all of these items at once.
+
+```{r eval = FALSE}
+repo <- create_repo_ref("emilyriederer", "tidytracker")
+todo <- read_todo(todo_yaml)
+post_todo(repo, todo)
+```
+
+Of course, if you have an internet connection, posting issues from R can also help you resist the temptation to go online and get distracted. As you think of new issues, you can simply just post them from the console. For example:
+
+```{r eval = FALSE}
+post_issue(
+  title = 'Add YAML validators to read_ functions',
+  body = 'read_ functions should check for correct plan structure (field names & relationships)',
+  labels = 'enhancement'
+)
+```
+
