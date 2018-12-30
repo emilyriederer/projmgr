@@ -1,10 +1,10 @@
 ---
-title: "Tracking KPIS"
+title: "KPI Tracking"
 author: "Emily Riederer"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Tracking KPIs}
+  %\VignetteIndexEntry{KPI Tracking}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

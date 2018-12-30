@@ -1,0 +1,183 @@
+---
+title: "Event and Project Management"
+author: "Emily Riederer"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Event and Project Management}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+library(tidytracker)
+```
+
+GitHub is a well-known collaboration tool for multiple people to work on a single project. Milestones and issues can also be used as an easy way to track and coordinate multiple teams working on parallel projects. Custom plans in `tidytracker` can be used to set up a group of repos with a standard set of pre-populated milestones and issues. This is useful whenever you're overseeing a large group of people who should be following some similar process -- for example, at a hackathon, unconf, group working session, or training.
+
+## Configuring Issues and Milestones
+
+Imagine you are planning a hackathon or working session with 5 teams, each with their own GitHub repo within your organization named "team{i}" (for i from 1 to 5).
+
+Suppose there is a specific set of steps you wish each team to progress through. These can be specified as a custom plan. For example, in a separate YAML file, suppose you save the following plan in a file "plan.yml".
+
+```{r eval = FALSE}
+- title: Pre-Work
+  description: Tasks to be completed before the hackathon
+  due_on: 2019-12-31
+  issue:
+    - title: Introductions
+      body: Each team member should post a brief introduction of themselves here
+    - title: Project brainstorming
+      body: >
+        Each team member should post at least 1 project idea here and attempt to
+        provide at least 1 constructive comment on another project idea shared.
+        
+- title: Project Specification
+  description: Tasks for Day 1 AM to help ease the project management burdens
+  due_on: 2020-01-15T11:59:59Z
+  issue:
+    - title: Set scope of project
+      body: Define what success means for your project, bearing in mind the time constraints!
+    - title: Assign roles
+      body: >
+        Roles can and should be fluid, but deciding upfront what team member take
+        certain leading roles will save time throughout the day.
+        
+- title: Heads-Down Work Time
+  due_on: 2020-01-16T10:00:00Z
+  description: The bulk of your time goes here! Please add custom issues related to you project.
+  issue:
+    - title: Define API
+      body: Consider the problem you are trying to solve and the best interface for it
+        
+- title: Presentation Preparation
+  description: Tasks for Day 2 PM to help prepare for final read out
+  due_on: 2020-01-16T13:00:00Z
+  issue:
+    - title: Outline key points
+      body: >
+        Decide what you want to share about your process and results. 
+        Remember that you only have 15 minutes!
+    - title: Make deck
+      body: Make xaringan deck about your project
+```
+
+```{r eval = FALSE}
+plan <- read_plan("plan.yml")
+```
+
+
+```{r echo = FALSE}
+plan_yml <- "
+- title: Pre-Work
+  description: Tasks to be completed before the hackathon
+  due_on: 2019-12-31
+  issue:
+    - title: Introductions
+      body: Each team member should post a brief introduction of themselves here
+    - title: Project brainstorming
+      body: >
+        Each team member should post at least 1 project idea here and attempt to
+        provide at least 1 constructive comment on another project idea shared.
+        
+- title: Project Specification
+  description: Tasks for Day 1 AM to help ease the project management burdens
+  due_on: 2020-01-15T11:59:59Z
+  issue:
+    - title: Set scope of project
+      body: Define what success means for your project, bearing in mind the time constraints!
+    - title: Assign roles
+      body: >
+        Roles can and should be fluid, but deciding upfront what team member take
+        certain leading roles will save time throughout the day.
+        
+- title: Heads-Down Work Time
+  due_on: 2020-01-16T10:00:00Z
+  description: The bulk of your time goes here! Please add custom issues related to you project.
+  issue:
+    - title: Define API
+      body: Consider the problem you are trying to solve and the best interface for it
+        
+- title: Presentation Preparation
+  description: Tasks for Day 2 PM to help prepare for final read out
+  due_on: 2020-01-16T13:00:00Z
+  issue:
+    - title: Outline key points
+      body: >
+        Decide what you want to share about your process and results. 
+        Remember that you only have 15 minutes!
+    - title: Make deck
+      body: Make xaringan deck about your project
+"
+
+plan <- read_plan(plan_yml)
+```
+
+We can check that our plan was read correctly by printing it back out.
+
+```{r}
+print(plan)
+```
+
+Next, create repository references for each repo, using `purrr::map()` for iteration.
+
+```{r eval = FALSE}
+repo_names <- paste0("team", 1:5)
+repo_refs <- purrr::map(repo_names, ~create_repo_ref("emilyriederer", .))
+```
+
+Finally, we can again use `purrr::walk()` to post the project plan to each GitHub repository.
+
+```{r eval = FALSE}
+purrr::walk(repo_refs, ~post_plan(., plan))
+```
+
+## Communication
+
+Posting project plans in this way has numerous benefits. Participants in your event may be interested to know ahead what they will be doing. Using the `report_plan()` function, you can convert all of the same information on GitHub into an aesthetic and readable list that could be shared in a website or an email
+
+```{r}
+report_plan(plan)
+```
+
+
+## Tracking
+
+You can also use this to monitor participant progress throughout the event, potentially noticing groups that are falling behind and might need assistance. We can apply our `get_milestones()` and `parse_milestones()` functions by mapping over the repository references.
+
+```{r eval = FALSE}
+milestone_lists <- purrr::map(repo_refs, get_milestones)
+milestones <- purrr::map_dfr(milestone_lists, parse_milestones, .id = 'team')
+```
+
+```{r echo = FALSE}
+milestones <- readRDS(system.file("extdata", "event-milestones.rds", package = "tidytracker", mustWork = TRUE))
+milestones$n_closed_issues <- c(2,2,0,0,2,1,0,0,2,2,1,2,2,0,0,0,0,0,0,0)
+milestones$n_open_issues <- milestones$n_open_issues - milestones$n_closed_issues
+milestones$closed_at <- ifelse(milestones$n_open_issues == 0, milestones$due_on, milestones$closed_at)
+```
+
+This gives us data on all teams:
+
+```{r}
+milestones
+```
+
+Which we can wrangle for quick summary views:
+
+```{r}
+milestones %>%
+  dplyr::mutate(percent_complete = n_closed_issues * 100 / (n_closed_issues + n_open_issues)) %>%
+  dplyr::select(team, title, percent_complete, number) %>%
+  tidyr::spread(team, percent_complete) %>%
+  dplyr::arrange(number) %>%
+  dplyr::select(-number)
+```
+
+In some cases a [GitHub Project Board](https://help.github.com/articles/about-project-boards/) might be a better choice, but R provides easy integration with tweets, emails, Shiny apps, or other tools you may be using to communicate throughout your event.
