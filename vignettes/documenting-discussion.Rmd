@@ -1,0 +1,56 @@
+---
+title: "Documenting Discussion"
+author: "Emily Riederer"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Documenting Discussion}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+library(tidytracker)
+```
+
+If your GitHub issue is home to important discussions regarding your analysis, you may wish to save an immutable copy of these offline for documentation. For example, consider this important discussion:
+
+![GitHub issue with comments](report_discussion.PNG)
+
+You can do this in two steps. First, `get` the issue metadata and comments from GitHub with `get_issues()` and `get_issue_comments()`.
+
+```{r eval = FALSE}
+issues <- get_issues(experigit, number = 163) %>% parse_issues()
+comments <- get_issue_comments(experigit, number = 163) %>% parse_issue_comments()
+```
+
+```{r echo = FALSE}
+issues <- readRDS(system.file("extdata", "disc-issues.rds", package = "tidytracker", mustWork = TRUE))
+comments <- readRDS(system.file("extdata", "disc-comments.rds", package = "tidytracker", mustWork = TRUE))
+```
+
+As with all other `get-parse` codeflows, this produces dataframe output.
+
+```{r}
+head(issues)
+head(comments)
+```
+
+Next, simply pass these into the `report_discussion()` function to generate a formatted RMarkdown report.
+
+```{r}
+report_discussion(comments, issues)
+```
+
+Note that the `issues` dataframe is optional. You can pass only the comments in for documentation, but you do risk missing out on important context.
+
+```{r}
+report_discussion(comments)
+```
+
+

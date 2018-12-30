@@ -26,15 +26,17 @@ articles:
     desc: Tutotials related to with sending and receiving information with GitHub
     contents:
     - basic-usage
+    - events-data
     - building-custom-plans
   - title: "Use Cases"
     desc: Demo of possible applications for personal projects, academia, and industry
     contents:
-    - reprex-clipr
     - tracking-KPIs
-    - large-analysis-projects
     - event-projmgt
+    - analysis-projects
     - working-offline
+    - reprex-clipr
+    - documenting-discussion
 
 reference:
 - title: Retrieval functions

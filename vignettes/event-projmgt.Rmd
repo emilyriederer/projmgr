@@ -132,7 +132,7 @@ repo_names <- paste0("team", 1:5)
 repo_refs <- purrr::map(repo_names, ~create_repo_ref("emilyriederer", .))
 ```
 
-Finally, we can again use `purrr::walk()` to post the project plan to each GitHub repository.
+Finally, we can again use `purrr::walk()` to post the project plan to each GitHub repository. (Note that `purrr::map()` would also work here, but `purrr::walk()` executes silently which is convenient when we don't care about the return values.)
 
 ```{r eval = FALSE}
 purrr::walk(repo_refs, ~post_plan(., plan))

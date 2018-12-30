@@ -30,8 +30,11 @@ parse_issues <- function(res){
                   number = res[[.]]$number,
                   milestone_title = res[[.]]$milestone$title %||% NA,
                   milestone_id = res[[.]]$milestone$id %||% NA,
+                  milestone_number = res[[.]]$milestone$number %||% NA,
                   milestone_state = res[[.]]$milestone$state %||% NA,
-                  due_on = substring(res[[.]]$milestone$due_on %||% NA,1,10),
+                  milestone_created_at = as.Date(substring(res[[.]]$milestone$created_at %||% NA,1,10)),
+                  milestone_closed_at = as.Date(substring(res[[.]]$milestone$closed_at %||% NA,1,10)),
+                  milestone_due_on = as.Date(substring(res[[.]]$milestone$due_on %||% NA,1,10)),
                   assignee_login = res[[.]]$assignee$login %||% NA,
                   assignees_login = list(res[[.]]$assignees %>% purrr::map_chr('login')),
                   labels_name = list(res[[.]]$labels %>% purrr::map_chr('name'))
@@ -67,7 +70,9 @@ parse_issue_events <- function(res){
                   event = res[[.]]$event,
                   created_at = as.Date(res[[.]]$created_at %>% substring(1,10)),
                   label_name = res[[.]]$label$name %||% NA,
-                  milestone_title = res[[.]]$milestone$title %||% NA
+                  milestone_title = res[[.]]$milestone$title %||% NA,
+                  assignee_login = res[[.]]$assignee$login %||% NA,
+                  assigner_login = res[[.]]$assigner$login %||% NA
                 ))
 
 }

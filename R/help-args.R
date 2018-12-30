@@ -11,8 +11,8 @@
 #' @name help
 #'
 #' @examples
-#' help_issues_args()
-#' help_milestones_args()
+#' help_get_issues()
+#' help_get_milestones()
 NULL
 
 #' @export

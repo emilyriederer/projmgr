@@ -38,6 +38,6 @@ For more details on these parameters, please use the \code{browse_docs()} functi
 to navigate to the appropriate part of the GitHub API documentation.
 }
 \examples{
-help_issues_args()
-help_milestones_args()
+help_get_issues()
+help_get_milestones()
 }

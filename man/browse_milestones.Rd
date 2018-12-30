@@ -4,12 +4,12 @@
 \alias{browse_milestones}
 \title{Browse milestones for given GitHub repo}
 \usage{
-browse_milestones(repo_ref, id = "")
+browse_milestones(repo_ref, number = "")
 }
 \arguments{
 \item{repo_ref}{Repository reference as created by \code{create_repo_ref()}}
 
-\item{id}{Optional argument of milestone ID, if opening page for specific milestone is desired}
+\item{number}{Optional argument of milestone ID, if opening page for specific milestone is desired}
 }
 \value{
 Returns URL in non-interactive session or launches browser to docs in interactive session

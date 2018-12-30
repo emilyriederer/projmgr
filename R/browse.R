@@ -63,7 +63,7 @@ browse_issues <- function(repo_ref, number = "") {
 #' the \code{usethis} package.
 #'
 #' @inheritParams browse_repo
-#' @param id Optional argument of milestone ID, if opening page for specific milestone is desired
+#' @param number Optional argument of milestone ID, if opening page for specific milestone is desired
 #'
 #' @return Returns URL in non-interactive session or launches browser to docs in interactive session
 #' @export
@@ -74,7 +74,7 @@ browse_issues <- function(repo_ref, number = "") {
 #' browse_milestones(my_repo)
 #' }
 
-browse_milestones <- function(repo_ref, id = "") {
+browse_milestones <- function(repo_ref, number = "") {
 
   # base url varies depending on if private/ent or public
   url_prefix <-

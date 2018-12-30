@@ -1,0 +1,96 @@
+---
+title: "Timestamping with Events Data"
+author: "Emily Riederer"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Timestamping with Events Data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+library(tidytracker)
+```
+
+```{r echo = FALSE}
+# mock issues data
+issues <-
+data.frame(
+  title = paste("Issue", 1:3),
+  body = rep("Hello", 3),
+  state = rep("closed", 3),
+  created_at = as.Date(c('2018-03-30', '2018-04-02', '2018-04-17')),
+  closed_at = as.Date(c('2018-04-30', '2018-04-15', '2018-05-02')),
+  user_login = rep('emilyriederer', 3),
+  number = 1:3,
+  stringsAsFactors = FALSE
+)
+
+# mock events data
+issue_events <-
+  data.frame(
+    number = 1:3,
+    id = 123:125,
+    actor_login = rep('emilyriederer', 3),
+    event = rep('labeled', 3),
+    created_at = as.Date(c('2018-04-15', '2018-04-02', '2018-04-20')),
+    label_name = rep('in-progress', 3),
+    milestone_title = NA,
+    assignee_login = NA,
+    assigner_login = NA,
+    stringsAsFactors = FALSE
+  )
+```
+
+
+Events data, as returned by `get_issue_events()`, provides a much more granular view of the innerworkins of your GItHub repository. As opposed to the snapshot view returned by `get_issues()`, `get_issue_events()` provides specific times that key changes were made to each issue, such as the addition and deletion of labels and milestones. This is useful if the `created_at` date for your issues don't have intrinsic meaning with regard to when you started working on an issue. 
+
+For example, let's suppose we pull some issues from our repo and visualize their time-to-completion with `viz_gantt_closed()`.
+
+```{r eval = FALSE}
+my_repo <- create_repo_ref('emilyriederer', 'my_repo')
+issues <- get_issues(experigit, state = 'closed', milestone = 1) %>% parse_issues()
+```
+
+```{r}
+viz_gantt_closed(issues)
+```
+
+Issue 1 stands out as having taken a very long time. However, it's possible it was created a long time before anyone started actively working on it. Instead, we might want to consider the start time to be, for example, when an issue was tagged with the "in-progress label".
+
+We can get events for a specific issue with the following code.Due to the potentially massive size of this data, the function returns events for a single issue at a time and, thus, has a required `number` parameter to specify the issue for which events should be returned. As such, to events for multiple issues, we need to use `purrr::map()`.
+
+Since events can also include adding assignees or milestones, we filter our dataset to `'labeled'` events where the `label_name` is "in-progress".
+
+```{r eval = FALSE}
+issue_events <- 
+  purrr::map(1:3, ~get_issue_events(experigit, number = .)) %>% 
+  purrr::map_df(parse_issue_events) %>%
+  dplyr::filter(event == 'labeled' & label_name == 'in-progress')
+```
+
+The fields of the resulting dataframe are shown below. 
+
+```{r}
+head(issue_events)
+```
+
+Next, we can join our datasets together.
+
+```{r}
+issue_with_events <- dplyr::inner_join(issues, issue_events, by = "number", suffix = c("", "_event"))
+```
+
+Finally, we can use this new dataset to remark our plot by specifying the new `created_at_event` variable as the appropriate issue start date, via the optional `start` parameter.
+
+```{r}
+viz_gantt_closed(issue_with_events, start = created_at_event)
+```
+
+

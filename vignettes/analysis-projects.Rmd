@@ -1,0 +1,68 @@
+---
+title: "Analysis Project Planning & Stakeholder Updates"
+author: "Emily Riederer"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Analysis Projects}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+library(tidytracker)
+```
+
+Many people in the R community have shared their thoughts on how best to structure large analytical projects for ease of use and reproducibility. Much of the discussion has stemmed from academia, including Lucy D'Agostino McGowan's blog post on organization a [disertations](https://livefreeordichotomize.com/2018/09/14/one-year-to-dissertate/), and Software Carpentry's paper on best practices for [research projects](https://arxiv.org/abs/1609.00037). However, these principles are also relevant to personal or enterprise work.
+
+Since version control via git and sharing on GitHub are often recommended practices for these projects, it is natural to want to use GitHub for the project management component as well. In particular, project planning through GitHub enables natural communication to various consumers of your analysis, whether committee members (as Lucy describes) or business leaders.
+
+In particular, Lucy emphasizes the importance of sending out an agenda before meetings and sharing minutes afterward, specifically recapping recently completed work and next steps. Such meetings are another good use for plans to make sure everyone is aligned with an analysts approach.
+
+## Planning Your Project
+
+Writing out your plan of attack in YAML lets you foxus on key details and allows everything to remain easily editable while you refine your approach.
+
+Recall the example plan discussed in the vignette on custom plans:
+
+```{r comment='', echo = FALSE}
+plan_path <- system.file("extdata", "plan.yml", package = "tidytracker", mustWork = TRUE)
+cat(readLines(plan_path), sep = '\n')
+```
+
+As described in the custom plans vignette, this could be added to a GitHub repo as issues and milestones with the `post_plan()` function.
+
+## Including in Meeting Reports
+
+Meeting minutes or agendas can be added to agendas and minutes, such as Lucy's templates provide, with the `report_` functions. 
+
+```{r}
+plan_path <- system.file("extdata", "plan.yml", package = "tidytracker", mustWork = TRUE)
+my_plan <- read_plan(plan_path)
+report_plan(my_plan)
+```
+
+Similarly, as items are accomplished, the complementary `report_progress()` function provides information on in-progress parts of your plan, pulled back down from GitHub.
+
+```{r eval = FALSE}
+issues <- 
+  get_issues(analysis_repo, state = 'all', since = '2018-12-01') %>% 
+  parse_issues() %>%
+  filter(issues, milestone_created_at >='2018-12-25' & milestone_created_at <= '2018-12-31') %>%
+  arrange(milestone_number)
+```
+
+```{r echo = FALSE}
+issues <- 
+  readRDS(system.file("extdata", "anproj-issues.rds", package = "tidytracker", mustWork = TRUE))
+```
+
+```{r}
+report_progress(issues)
+```
+
