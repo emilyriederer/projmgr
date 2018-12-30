@@ -1,5 +1,5 @@
 ---
-title: "Building custom plans and to-do lists"
+title: "Building Custom Plans and To-Do Lists"
 author: "Emily Riederer"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -35,7 +35,7 @@ plan_path <- system.file("extdata", "plan.yml", package = "tidytracker", mustWor
 cat(readLines(plan_path), sep = '\n')
 ```
 
-The `read_my_plan_todo_yaml()` function reads in either plan or to-do YAML files. We will continue to work with the example plan embedded in the package.
+The `read_plan()` function reads plan YAML files. We will continue to work with the example plan embedded in the package.
 
 ```{r}
 plan_path <- system.file("extdata", "plan.yml", package = "tidytracker", mustWork = TRUE)
@@ -46,6 +46,12 @@ This function converts YAML to an R list. You can sanity check the structure of 
 
 ```{r}
 str(my_plan)
+```
+
+Or `print()`s out in a more aesthetic way more quick sanity checking:
+
+```{r}
+print(my_plan)
 ```
 
 Finally, this collection of milestones and associated issues can be posted to GitHub with the `post_plan()` function.
@@ -113,6 +119,23 @@ Just like with plans, you can also pass a character string instead of a file and
 template_yaml("todo")
 ```
 
+## Reporting on Plans or To-Do Lists
+
+Sometimes, it may be helpful to share what you plan to do with a larger team. The `report_plan()` and `report_todo()` functions translates plans and to-do lists into HTML for inclusion in RMarkdown.
+
+For example:
+
+```{r}
+report_plan(my_plan)
+```
+
+
+```{r}
+report_todo(my_todo)
+```
+
+These plans looks thematically similar to the output of `report_progress()` for consistency in reporting of planned or in-progress work.
+
 ## Create a Plan or To-Do List with R
 
 Of course, `tidytracker`'s YAML-parsing functionalities are only provided as a convenience. Users are also welcome to create their own plans and to-do lists simply with base R's `list()` function. For example, the following code creates an analog to the second milestone in the YAML above.
@@ -130,7 +153,17 @@ list(
     )
 )
 
-str(milestone)
+plan <- list(milestone)
+
+str(plan)
 ```
+
+To take full advantage of some features (like the plan-specific `print` method), the only additional step you need to take is manually adding `"plan"` or `"todo"` to the `class` of the variable you have created.
+
+```{r}
+class(plan) <- c("plan", class(plan))
+print(plan)
+```
+
 
 

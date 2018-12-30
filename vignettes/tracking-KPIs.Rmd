@@ -1,0 +1,125 @@
+---
+title: "Tracking KPIS"
+author: "Emily Riederer"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Tracking KPIs}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+library(dplyr)
+```
+
+The power of the `post` functions generally comes not when filing one-off issues but when automating a bulk upload of issues. One case where this could be useful is when using GitHub as a management platform for business metrics tracking. 
+
+## Tracking KPIs
+
+```{r echo = FALSE}
+set.seed(123)
+
+sales_data <- data.frame(
+  region = c("Northeast", "Southeast", "Midwest", "Southwest", "Northwest"),
+  month = "October",
+  sales_amt = c(3000, 5000, 4000, 7000, 2000) + round(runif(5, 0, 500)),
+  sales_expected = c(5000, 5000, 4000, 4000, 2000),
+  stringsAsFactors = FALSE
+)
+```
+
+As a toy example, suppose an analyst is already using R to report quarterly sales data and look for anomalous performance. After some wrangling, their data might look something like this.
+
+```{r}
+head(sales_data)
+```
+
+Assume they have some criterion to determine how much of a difference between their KPIs and expectations should warrant further investigation. For simplicity here, we will simply use a deviation of more than 25%. In this case, that yield two regions. 
+
+```{r}
+deviations <- dplyr::filter(sales_data, abs(sales_amt - sales_expected) >= 0.25 * sales_expected )
+deviations
+```
+
+Using `purrr::pmap_chr()`, it is easily to automatically post these issues to a GitHub repository. The result returned is the number of the GitHub issues posted. 
+
+```{r eval = FALSE}
+# create custom function to convert dataframe to human-readable issue elements
+
+post_kpis <- function(ref, region, month, sales_amt, sales_expected){
+  
+  post_issue(ref,
+                    title = paste(region, 
+                                  ifelse(sales_amt < sales_expected, "below", "above"), 
+                                  "sales expectations in", 
+                                  month),
+                    body = paste(
+                      "**Region**: ", region, "\n",
+                      "**Month**: ", month, "\n",
+                      "**Actual**: ", sales_amt, "\n",
+                      "**Expected**: ", sales_expected, "\n"
+                    ), 
+                    labels = c(
+                      paste0("region:",region),
+                      paste0("month:",month),
+                      paste0("dir:", ifelse(sales_amt < sales_expected, "below", "above"))
+                    )
+  )
+  
+}
+
+# post as issues on GitHub 
+experigit <- create_repo_ref('emilyriederer', 'experigit')
+pmap_chr(deviations, post_kpis, ref = experigit)
+```
+
+```{r eval = FALSE}
+#> [1] 158 159
+```
+
+
+Results then appear as normal GitHub issues with whatever title, body, labels, or assignees you chose to specify. From here, various parties can discuss next steps in the comments, include in milestones, and ultimate seek to resolve the issue.
+
+![Issue created from out-of-bounds metric](post_kpi.PNG)
+
+## A more complicated example
+
+The same approach holds up to more complex dataframes comparing more metrics. Suppose all of your expectations are contained in a "shadow matrix", similar to the treatment of missing data described in the [`naniar` paper](https://arxiv.org/abs/1809.02264). 
+
+```{r echo = FALSE}
+performance_data <- data.frame(
+  region = c("Northeast", "Southeast", "Midwest", "Southwest", "Northwest"),
+  month = "October",
+  sales_actual = c(3000, 5000, 4000, 7000, 2000) + round(runif(5, 0, 500)),
+  returns_actual = c(300, 500, 400, 700, 200) + round(runif(5, 0, 10)),
+  visitors_actual = c(60, 100, 80, 140, 40) + round(runif(5, 0, 5)),
+  sales_expected = c(5000, 5000, 4000, 4000, 2000),
+  returns_expected = c(300, 200, 400, 700, 200),
+  visitors_expected = c(60, 100, 160, 140, 40),
+  stringsAsFactors = FALSE
+)
+```
+
+```{r}
+head(performance_data)
+```
+
+With a bit of data wrangling with `tidyr`, we can make one unique record per region, month, and metric.
+
+```{r}
+performance_pivoted <-
+  performance_data %>%
+  tidyr::gather(metric, value, -region, -month) %>%
+  tidyr::separate(metric, into = c('metric', 'type'), sep = "_") %>%
+  tidyr::spread(type, value)
+
+print(performance_pivoted)
+```
+
+After that, the process of identifying deviations and posting these to a repository is the same as above.

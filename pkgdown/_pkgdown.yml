@@ -27,10 +27,10 @@ articles:
     contents:
     - basic-usage
     - building-custom-plans
-    - reprex-clipr
   - title: "Use Cases"
     desc: Demo of possible applications for personal projects, academia, and industry
     contents:
+    - reprex-clipr
     - large-analysis-projects
     - reporting-bugs
     - tracking-KPIs

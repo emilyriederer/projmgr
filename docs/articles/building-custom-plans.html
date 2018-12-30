@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Building custom plans and to-do lists • tidytracker</title>
+<title>Building Custom Plans and To-Do Lists • tidytracker</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
-<meta property="og:title" content="Building custom plans and to-do lists">
+<meta property="og:title" content="Building Custom Plans and To-Do Lists">
 <meta property="og:description" content="">
 <meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
@@ -75,7 +75,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Building custom plans and to-do lists</h1>
+      <h1>Building Custom Plans and To-Do Lists</h1>
                         <h4 class="author">Emily Riederer</h4>
             
             <h4 class="date">2018-12-29</h4>
@@ -121,7 +121,7 @@
       body: Calculate summary statistics
     - title: Visualizations
       body: Create univariate and bivariate plots</code></pre>
-<p>The <code>read_my_plan_todo_yaml()</code> function reads in either plan or to-do YAML files. We will continue to work with the example plan embedded in the package.</p>
+<p>The <code><a href="../reference/read_plan.html">read_plan()</a></code> function reads plan YAML files. We will continue to work with the example plan embedded in the package.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plan_path &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata"</span>, <span class="st">"plan.yml"</span>, <span class="dt">package =</span> <span class="st">"tidytracker"</span>, <span class="dt">mustWork =</span> <span class="ot">TRUE</span>)
 my_plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/read_plan.html">read_plan</a></span>(plan_path)</code></pre></div>
 <p>This function converts YAML to an R list. You can sanity check the structure of this output with base R <code>str()</code> function which shows the structure of a list:</p>
@@ -155,6 +155,11 @@ my_plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rea
 <span class="co">#&gt;   .. .. ..$ title: chr "Visualizations"</span>
 <span class="co">#&gt;   .. .. ..$ body : chr "Create univariate and bivariate plots"</span>
 <span class="co">#&gt;  - attr(*, "class")= chr [1:2] "plan" "list"</span></code></pre></div>
+<p>Or <code>print()</code>s out in a more aesthetic way more quick sanity checking:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(my_plan)
+<span class="co">#&gt; Plan: </span>
+<span class="co">#&gt; 1. Data cleaning and validation (3 issues) </span>
+<span class="co">#&gt; 2. Exploratory data analysis (2 issues)</span></code></pre></div>
 <p>Finally, this collection of milestones and associated issues can be posted to GitHub with the <code><a href="../reference/post_plan.html">post_plan()</a></code> function.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">experigit &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_repo_ref.html">create_repo_ref</a></span>(<span class="st">"emilyriederer"</span>, <span class="st">"experigit"</span>)
 <span class="kw"><a href="../reference/post_plan.html">post_plan</a></span>(experigit, my_plan)</code></pre></div>
@@ -245,6 +250,50 @@ my_todo &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rea
 <span class="co">#&gt; </span>
 <span class="co">#&gt; - title: Another informative title - body not required!</span></code></pre></div>
 </div>
+<div id="reporting-on-plans-or-to-do-lists" class="section level2">
+<h2 class="hasAnchor">
+<a href="#reporting-on-plans-or-to-do-lists" class="anchor"></a>Reporting on Plans or To-Do Lists</h2>
+<p>Sometimes, it may be helpful to share what you plan to do with a larger team. The <code><a href="../reference/report_plan.html">report_plan()</a></code> and <code><a href="../reference/report_todo.html">report_todo()</a></code> functions translates plans and to-do lists into HTML for inclusion in RMarkdown.</p>
+<p>For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/report_plan.html">report_plan</a></span>(my_plan)</code></pre></div>
+<p>
+<strong> Data cleaning and validation </strong> <em> ( 0 % Complete - 0 / 3 Issues) </em>
+</p>
+<ul>
+<li>
+☐ Define data quality standards
+</li>
+<li>
+☐ Assess data quality
+</li>
+<li>
+☐ Resolve data quality issues
+</li>
+</ul>
+<p>
+<strong> Exploratory data analysis </strong> <em> ( 0 % Complete - 0 / 2 Issues) </em>
+</p>
+<ul>
+<li>
+☐ Summary statistics
+</li>
+<li>
+☐ Visualizations
+</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/report_todo.html">report_todo</a></span>(my_todo)</code></pre></div>
+<p>
+</p>
+<ul>
+<li>
+☐ Consider renaming my_very_long_function_name
+</li>
+<li>
+☐ Make sure documentation links right pages of API docs
+</li>
+</ul>
+<p>These plans looks thematically similar to the output of <code><a href="../reference/report_progress.html">report_progress()</a></code> for consistency in reporting of planned or in-progress work.</p>
+</div>
 <div id="create-a-plan-or-to-do-list-with-r" class="section level2">
 <h2 class="hasAnchor">
 <a href="#create-a-plan-or-to-do-list-with-r" class="anchor"></a>Create a Plan or To-Do List with R</h2>
@@ -261,17 +310,25 @@ my_todo &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rea
     )
 )
 
-<span class="kw">str</span>(milestone)
-<span class="co">#&gt; List of 3</span>
-<span class="co">#&gt;  $ title      : chr "Exporatory data analysis"</span>
-<span class="co">#&gt;  $ description: chr "Create basic statistics and views"</span>
-<span class="co">#&gt;  $ issue      :List of 2</span>
-<span class="co">#&gt;   ..$ :List of 2</span>
-<span class="co">#&gt;   .. ..$ title: chr "Summary statistics"</span>
-<span class="co">#&gt;   .. ..$ body : chr "Calculate summary statistics"</span>
-<span class="co">#&gt;   ..$ :List of 2</span>
-<span class="co">#&gt;   .. ..$ title: chr "Visualizations"</span>
-<span class="co">#&gt;   .. ..$ body : chr "Create univariate and bivariate plots"</span></code></pre></div>
+plan &lt;-<span class="st"> </span><span class="kw">list</span>(milestone)
+
+<span class="kw">str</span>(plan)
+<span class="co">#&gt; List of 1</span>
+<span class="co">#&gt;  $ :List of 3</span>
+<span class="co">#&gt;   ..$ title      : chr "Exporatory data analysis"</span>
+<span class="co">#&gt;   ..$ description: chr "Create basic statistics and views"</span>
+<span class="co">#&gt;   ..$ issue      :List of 2</span>
+<span class="co">#&gt;   .. ..$ :List of 2</span>
+<span class="co">#&gt;   .. .. ..$ title: chr "Summary statistics"</span>
+<span class="co">#&gt;   .. .. ..$ body : chr "Calculate summary statistics"</span>
+<span class="co">#&gt;   .. ..$ :List of 2</span>
+<span class="co">#&gt;   .. .. ..$ title: chr "Visualizations"</span>
+<span class="co">#&gt;   .. .. ..$ body : chr "Create univariate and bivariate plots"</span></code></pre></div>
+<p>To take full advantage of some features (like the plan-specific <code>print</code> method), the only additional step you need to take is manually adding <code>"plan"</code> or <code>"todo"</code> to the <code>class</code> of the variable you have created.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(plan) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"plan"</span>, <span class="kw">class</span>(plan))
+<span class="kw">print</span>(plan)
+<span class="co">#&gt; Plan: </span>
+<span class="co">#&gt; 1. Exporatory data analysis (2 issues)</span></code></pre></div>
 </div>
   </div>
 
@@ -282,6 +339,7 @@ my_todo &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rea
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#creating-a-plan-with-yaml">Creating a Plan with YAML</a></li>
       <li><a href="#create-a-to-do-list-with-yaml">Create a To-Do List with YAML</a></li>
+      <li><a href="#reporting-on-plans-or-to-do-lists">Reporting on Plans or To-Do Lists</a></li>
       <li><a href="#create-a-plan-or-to-do-list-with-r">Create a Plan or To-Do List with R</a></li>
       </ul>
 </div>

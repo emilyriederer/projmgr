@@ -7,8 +7,8 @@
 \alias{help_get_issue_comments}
 \alias{help_get_milestones}
 \alias{help_get_repo_label}
-\alias{help_post_issues}
-\alias{help_post_milestones}
+\alias{help_post_issue}
+\alias{help_post_milestone}
 \title{Learn about optional fields for related get_ functions}
 \usage{
 help_get_issues()
@@ -21,9 +21,9 @@ help_get_milestones()
 
 help_get_repo_label()
 
-help_post_issues()
+help_post_issue()
 
-help_post_milestones()
+help_post_milestone()
 }
 \value{
 Character string of optional field names

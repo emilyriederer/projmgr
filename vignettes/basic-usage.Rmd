@@ -12,8 +12,7 @@ vignette: >
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>",
-  eval = FALSE
+  comment = "#>"
 )
 ```
 
@@ -38,6 +37,29 @@ dplyr <- create_repo_ref('tidyverse', 'dplyr')
 
 ```{r}
 dplyr_issues_list <- get_issues(dplyr, milestone = 1, state = 'all')
+```
+
+If you don't know what parameters are available, the `help_<function_name>` family provides more information on valid arguments to include in `get_` and `post_` functions.
+
+```{r}
+help_get_issues()
+```
+
+More detailed documentation can also be viewed using the `browse_docs()` function, which launches your browser to the appropriate part of the GitHub API documentation. For example, one might run:
+
+```{r}
+browse_docs(action = 'get', object = 'issue')
+```
+
+Results are returned as a list, closely mirror the JSON output from the actual API.
+
+```{r}
+str(dplyr_issues_list[[1]], max.level = 1)
+```
+
+It's likely you may prefer to work with them as dataframes instead. The `parse_` family of functions converts "raw" list output from `get_` into tibbles.
+
+```{r}
 dplyr_issues <- parse_issues(dplyr_issues_list)
 head(dplyr_issues)
 ```
@@ -59,14 +81,53 @@ dplyr_issues$closed_at[1] <- NA
 dplyr_issues$closed_at[3] <- NA
 dplyr_issues$state[c(1,3)] <- "open"
 dplyr_issues$labels_name[[3]] <- c("in-progress", dplyr_issues$labels_name[[3]])
-viz_taskboard_v2(dplyr_issues, 40)
+viz_taskboard(dplyr_issues, 40)
 ```
 
-`viz_waterfall_issues()` creates a waterfall plot showing, for a fixed time-period, the initial count of open issues, newly reported issues, closed issues, and final open count. 
+Either task boards or gantt plots can also be passed through `viz_linked` to add links to their text back to the relevant GitHub issues. This only works in RMarkdown with the `results = "asis"` option or saved to a file.
+
+```{r results = 'asis'}
+g <- viz_gantt_closed(dplyr_issues)
+viz_linked(g)
+```
+
+
+`viz_waterfall_issues()` creates a waterfall plot showing, for a fixed time-period, the initial count of open issues, the number of newly reported issues, the number of closed issues, and the final open count as the end of that time period. 
 
 ```{r}
 viz_waterfall_issues(dplyr_issues, '2014-01-01', '2015-01-01')
 ```
 
+## Reporting On Issue Status
 
+The `report_` function family offers an alternative to visualizations. These functions generate HTML for aethetic output in RMarkdown reports. Output is automatically tagged so `knitr` knows to interpret it as HTML, so it is not necessary to manually add the `results = 'asis'` chunk option. (Don't worry if you don't know what this means. You don't need to do anything!) 
+
+```{r}
+report_progress(dplyr_issues)
+```
+
+## Posting Issues
+
+The `post_` function family helps add new objects to a GitHub repo. For example, the following command adds a new issue to a repository. After posting new content, `post_` functions return the identification number for the new object.
+
+```{r eval = FALSE}
+experigit <- create_repo_ref('emilyriederer', 'experigit')
+post_issue(experigit,
+           title = "Add unit tests for post_issues when title duplicated",
+           body = "Check that code appropriately warns users when attempting to post a duplicate issue",
+           labels = c("enhancement", "test"),
+           assignees = "emilyriederer" )
+```
+```{r}
+#> [1] 150
+```
+
+Natively, the GitHub API allows multiple issues to have the same title. However, you may want to disable this functionality (for example, if a `post_` function is in a script that may be re-run.) In this case, the `distinct` parameter allows you to chose whether or not to allow the posting of new issues with the same title as *open* existing issues. When `distinct = TRUE` (as it is by default), the function throws an error and does not post the issue.
+
+```{r eval = FALSE}
+post_issue(experigit, title = "Add unit tests for post_issues when title duplicated")
+```
+```{r}
+#> Error: New issue title is not distinct with current open issues. Please change title or set distinct = FALSE.
+```
 
