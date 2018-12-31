@@ -1,7 +1,6 @@
 ^CODE_OF_CONDUCT\.md$
 ^LICENSE\.md$
 ^CREDITS\.md$
-^tidytracker\.Rproj$
 ^ghtrackr\.Rproj$
 ^\.Rproj\.user$
 ^pkgdown

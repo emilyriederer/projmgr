@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Post to-do list (issues) to GitHub repository — post_todo • tidytracker</title>
+<title>Post to-do list (issues) to GitHub repository — post_todo • ghtrackr</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -65,7 +65,7 @@ Please see the &quot;Building Custom Plans&quot; vignette for details." />
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">tidytracker</a>
+        <a class="navbar-link" href="../index.html">ghtrackr</a>
         <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9000</span>
       </span>
     </div>
@@ -94,7 +94,7 @@ Please see the &quot;Building Custom Plans&quot; vignette for details." />
       
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/emilyriederer/tidytracker/">
+  <a href="https://github.com/emilyriederer/ghtrackr/">
     <span class="fa fa-github"></span>
      
   </a>
@@ -112,7 +112,7 @@ Please see the &quot;Building Custom Plans&quot; vignette for details." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Post to-do list (issues) to GitHub repository</h1>
-    <small class="dont-index">Source: <a href='https://github.com/emilyriederer/tidytracker/blob/master/R/plan-todo.R'><code>R/plan-todo.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/emilyriederer/ghtrackr/blob/master/R/plan-todo.R'><code>R/plan-todo.R</code></a></small>
     <div class="hidden name"><code>post_todo.Rd</code></div>
     </div>
 
@@ -158,7 +158,7 @@ Please see the "Building Custom Plans" vignette for details.</p>
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='co'># This example uses example file included in pkg</span>
 <span class='co'># You should be able to run example as-is after creating your own repo reference</span>
-<span class='no'>file_path</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='st'>"todo.yml"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"tidytracker"</span>, <span class='kw'>mustWork</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='no'>file_path</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='st'>"todo.yml"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"ghtrackr"</span>, <span class='kw'>mustWork</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 <span class='no'>my_todo</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='read_todo.html'>read_todo</a></span>(<span class='no'>file_path</span>)
 <span class='fu'>post_todo</span>(<span class='no'>ref</span>, <span class='no'>my_todo</span>)
 <span class='co'># }</span></pre>

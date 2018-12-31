@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Basic Usage • tidytracker</title>
+<title>Basic Usage • ghtrackr</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
@@ -30,7 +30,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">tidytracker</a>
+        <a class="navbar-link" href="../index.html">ghtrackr</a>
         <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9000</span>
       </span>
     </div>
@@ -58,7 +58,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/emilyriederer/tidytracker/">
+  <a href="https://github.com/emilyriederer/ghtrackr/">
     <span class="fa fa-github"></span>
      
   </a>
@@ -78,21 +78,21 @@
       <h1>Basic Usage</h1>
                         <h4 class="author">Emily Riederer</h4>
             
-            <h4 class="date">2018-12-29</h4>
+            <h4 class="date">2018-12-31</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/emilyriederer/tidytracker/blob/master/vignettes/basic-usage.Rmd"><code>vignettes/basic-usage.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/emilyriederer/ghtrackr/blob/master/vignettes/basic-usage.Rmd"><code>vignettes/basic-usage.Rmd</code></a></small>
       <div class="hidden name"><code>basic-usage.Rmd</code></div>
 
     </div>
 
     
     
-<p>This vignette illustrates codeflows of <code>tidytracker</code>’s core functionality.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidytracker)</code></pre></div>
+<p>This vignette illustrates codeflows of <code>ghtrackr</code>’s core functionality.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ghtrackr)</code></pre></div>
 <div id="creating-a-repo-reference" class="section level2">
 <h2 class="hasAnchor">
 <a href="#creating-a-repo-reference" class="anchor"></a>Creating a Repo Reference</h2>
-<p>The first step to interacting with a GitHub repository is creating a repository reference. Repository references are “first class citizens” in <code>tidytracker</code> and contain all authorization credentials. These references are passed as the first argument in all <code>get_</code> functions.</p>
+<p>The first step to interacting with a GitHub repository is creating a repository reference. Repository references are “first class citizens” in <code>ghtrackr</code> and contain all authorization credentials. These references are passed as the first argument in all <code>get_</code> functions.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dplyr &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_repo_ref.html">create_repo_ref</a></span>(<span class="st">'tidyverse'</span>, <span class="st">'dplyr'</span>)
 <span class="co">#&gt; Requests will authenticate with GITHUB_PAT</span></code></pre></div>
 </div>
@@ -137,7 +137,7 @@
 <p>It’s likely you may prefer to work with them as dataframes instead. The <code>parse_</code> family of functions converts “raw” list output from <code>get_</code> into tibbles.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dplyr_issues &lt;-<span class="st"> </span><span class="kw"><a href="../reference/parse_issues.html">parse_issues</a></span>(dplyr_issues_list)
 <span class="kw">head</span>(dplyr_issues)
-<span class="co">#&gt; # A tibble: 6 x 16</span>
+<span class="co">#&gt; # A tibble: 6 x 19</span>
 <span class="co">#&gt;   title  body      state created_at closed_at  user_login n_comments url  </span>
 <span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt; &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;</span>
 <span class="co">#&gt; 1 Pass ~ "Right n~ clos~ 2015-06-19 2017-02-02 msjgriffi~          1 http~</span>
@@ -146,9 +146,11 @@
 <span class="co">#&gt; 4 Anton~ "It woul~ clos~ 2014-11-02 2017-02-02 matthieug~          3 http~</span>
 <span class="co">#&gt; 5 equiv~ "pig has~ clos~ 2014-08-18 2017-02-02 jhofman            10 http~</span>
 <span class="co">#&gt; 6 SQL e~ "When fi~ clos~ 2014-07-28 2017-02-14 vzemlys            16 http~</span>
-<span class="co">#&gt; # ... with 8 more variables: number &lt;int&gt;, milestone_title &lt;chr&gt;,</span>
-<span class="co">#&gt; #   milestone_id &lt;int&gt;, milestone_state &lt;chr&gt;, due_on &lt;chr&gt;,</span>
-<span class="co">#&gt; #   assignee_login &lt;chr&gt;, assignees_login &lt;list&gt;, labels_name &lt;list&gt;</span></code></pre></div>
+<span class="co">#&gt; # ... with 11 more variables: number &lt;int&gt;, milestone_title &lt;chr&gt;,</span>
+<span class="co">#&gt; #   milestone_id &lt;int&gt;, milestone_number &lt;int&gt;, milestone_state &lt;chr&gt;,</span>
+<span class="co">#&gt; #   milestone_created_at &lt;date&gt;, milestone_closed_at &lt;date&gt;,</span>
+<span class="co">#&gt; #   milestone_due_on &lt;date&gt;, assignee_login &lt;chr&gt;, assignees_login &lt;list&gt;,</span>
+<span class="co">#&gt; #   labels_name &lt;list&gt;</span></code></pre></div>
 </div>
 <div id="visualizing-issues" class="section level2">
 <h2 class="hasAnchor">
@@ -186,9 +188,8 @@ dplyr_issues<span class="op">$</span>labels_name[[<span class="dv">3</span>]] &l
 <a href="#reporting-on-issue-status" class="anchor"></a>Reporting On Issue Status</h2>
 <p>The <code>report_</code> function family offers an alternative to visualizations. These functions generate HTML for aethetic output in RMarkdown reports. Output is automatically tagged so <code>knitr</code> knows to interpret it as HTML, so it is not necessary to manually add the <code>results = 'asis'</code> chunk option. (Don’t worry if you don’t know what this means. You don’t need to do anything!)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/report_progress.html">report_progress</a></span>(dplyr_issues)</code></pre></div>
-<p>
+<p></p>
 <strong> bluesky </strong> <em> ( 88 % Complete - 14 / 16 Issues) </em>
-</p>
 <ul>
 <li>
 ☐ Pass custom functions to select()
@@ -239,6 +240,7 @@ dplyr_issues<span class="op">$</span>labels_name[[<span class="dv">3</span>]] &l
 ☑ MonetDB backend
 </li>
 </ul>
+<p></p>
 </div>
 <div id="posting-issues" class="section level2">
 <h2 class="hasAnchor">

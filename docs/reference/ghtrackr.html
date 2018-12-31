@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Visualize waterfall of issues opened, closed, and pend_dateing over fixed time window — viz_progress_waterfall • tidytracker</title>
+<title><code>ghtrackr</code> package — ghtrackr • ghtrackr</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Visualize waterfall of issues opened, closed, and pend_dateing over fixed time window — viz_progress_waterfall" />
+<meta property="og:title" content="<code>ghtrackr</code> package — ghtrackr" />
 
-<meta property="og:description" content="Visualize waterfall of issues opened, closed, and pend_dateing over fixed time window" />
+<meta property="og:description" content="A quick and easy wrapper for working with GitHub and other project management tools" />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -64,7 +64,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">tidytracker</a>
+        <a class="navbar-link" href="../index.html">ghtrackr</a>
         <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9000</span>
       </span>
     </div>
@@ -93,7 +93,7 @@
       
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/emilyriederer/tidytracker/">
+  <a href="https://github.com/emilyriederer/ghtrackr/">
     <span class="fa fa-github"></span>
      
   </a>
@@ -110,78 +110,31 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Visualize waterfall of issues opened, closed, and pend_dateing over fixed time window</h1>
-    <small class="dont-index">Source: <a href='https://github.com/emilyriederer/tidytracker/blob/master/R/viz-waterfall.R'><code>R/viz-waterfall.R</code></a></small>
-    <div class="hidden name"><code>viz_progress_waterfall.Rd</code></div>
+    <h1><code>ghtrackr</code> package</h1>
+    <small class="dont-index">Source: <a href='https://github.com/emilyriederer/ghtrackr/blob/master/R/ghtrackr.R'><code>R/ghtrackr.R</code></a></small>
+    <div class="hidden name"><code>ghtrackr.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Visualize waterfall of issues opened, closed, and pend_dateing over fixed time window</p>
+    <p>A quick and easy wrapper for working with GitHub and other project management tools</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>viz_progress_waterfall</span>(<span class='no'>issues</span>, <span class='no'>start_date</span>, <span class='no'>end_date</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='no'>created_at</span>,
-  <span class='kw'>end</span> <span class='kw'>=</span> <span class='no'>closed_at</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>issues</th>
-      <td><p>Issues dataset as produced by <code><a href='parse_issues.html'>parse_issues()</a></code></p></td>
-    </tr>
-    <tr>
-      <th>start_date</th>
-      <td><p>Character string in 'YYYY-MM-DD' form for first date to be considered</p></td>
-    </tr>
-    <tr>
-      <th>end_date</th>
-      <td><p>Character string in 'YYYY-MM-DD' form for last date to be considered</p></td>
-    </tr>
-    <tr>
-      <th>start</th>
-      <td><p>Unquoted variable name denoting issue start date</p></td>
-    </tr>
-    <tr>
-      <th>end</th>
-      <td><p>Unquoted variable name denoting issue end date</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+        
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>ggplot object</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>Other issues: <code><a href='get_issues_events.html'>get_issues_events</a></code>,
-  <code><a href='get_issues.html'>get_issues</a></code>,
-  <code><a href='parse_issue_events.html'>parse_issue_events</a></code>,
-  <code><a href='parse_issues.html'>parse_issues</a></code>, <code><a href='post_issue.html'>post_issue</a></code>,
-  <code><a href='report_progress.html'>report_progress</a></code>,
-  <code><a href='viz_gantt_closed_links.html'>viz_gantt_closed_links</a></code>,
-  <code><a href='viz_gantt_closed.html'>viz_gantt_closed</a></code>,
-  <code><a href='viz_taskboard_links.html'>viz_taskboard_links</a></code>,
-  <code><a href='viz_taskboard.html'>viz_taskboard</a></code></p></div>
+    <p>See the README on
+<a href='https://github.com/emilyriederer/ghtrackr'>GitHub</a></p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'>viz_progress_waterfall</span>(<span class='no'>issues</span>, <span class='st'>'2017-01-01'</span>, <span class='st'>'2017-03-31'</span>)
-<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+      <li><a href="#details">Details</a></li>
+          </ul>
 
   </div>
 </div>
