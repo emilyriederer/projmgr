@@ -25,51 +25,32 @@
 
 report_progress <- function(issues){
 
-  # define fx for format checkboxes ----
-  unicode_checkbox <- function(x){ifelse(x == "open", " &#9744;", " &#9745;")}
-
   # prep data ----
 
-  df <- issues %>%
-    dplyr::distinct(title, .keep_all = TRUE) %>%
-    dplyr::filter(!is.na(milestone_title)) %>%
-    dplyr::group_by(milestone_title) %>%
-    tidyr::nest()
+  df <- issues[!is.na(issues$milestone_title),]
+  milestone_title <- unique(df$milestone_title)
+  issue_closed_count <-
+    stats::aggregate(df$state,
+                     by= list(df$milestone_title) ,
+                     FUN= function(x) sum(x == 'closed'))$x
+  issue_count <- sapply( unique(df$milestone_title), function(x) nrow(df[df$milestone_title == x,]))
+  issue_title <- df$title
+  state <- df$state
 
   # write html ----
+  milestone_html <- fmt_milestone(milestone_title, issue_closed_count, issue_count)
+  issue_html <- fmt_issue( issue_title, state )
+  issue_html_grp <- stats::aggregate(issue_html,
+                                     by = list(df$milestone_title),
+                                     FUN = function(x) paste(x, collapse = " "))$x
+  milestone_issue_html_grp <- paste(milestone_html, "<ul>", issue_html_grp, "</ul>")
 
-  html <- ""
-  for(i in 1:nrow(df)){
-
-    html <- paste(html,
-                  "<p>",
-                  "<strong>", df$milestone_title[i], "</strong>",
-                  "<em>",
-                  "(",
-                  round(100*sum(df$data[[i]]$state == 'closed')/nrow(df$data[[i]])),
-                  "% Complete - ",
-                  sum(df$data[[i]]$state == 'closed'),"/",nrow(df$data[[i]]),
-                  " Issues)",
-                  "</em>",
-                  "<ul>"
-    )
-
-    for(j in 1:nrow(df$data[[i]])){
-      html <- paste(html,
-                    "<li>",
-                    unicode_checkbox(df$data[[i]]$state[j]),
-                    df$data[[i]]$title[j] ,
-                    "</li>")
-    }
-
-    html <- paste(html, "</ul>", "</p>")
-  }
-
+  # final output ----
+  html <- paste("<p/>", paste(milestone_issue_html_grp, collapse = " "), "<p/>")
   class(html) <- c("knit_asis", class(html))
   return(html)
 
 }
-
 
 #' Print plan in RMarkdown friendly way
 #'
@@ -96,38 +77,20 @@ report_progress <- function(issues){
 report_plan <- function(plan){
 
   # prep data ----
-
-  milestones <- purrr::map_chr(plan, "title")
+  milestone_title <- sapply(plan, function(x) x[["title"]])
+  issue_count <- sapply(plan, function(x) length(x[["issue"]]))
+  issue_title <- unlist(sapply(plan, function(x) sapply(x[["issue"]], function(y) y[["title"]])))
 
   # write html ----
+  milestone_html <- fmt_milestone(milestone_title, 0, issue_count)
+  issue_html <- fmt_issue( issue_title, "open" )
+  issue_html_grp <- stats::aggregate(issue_html,
+                                     by = list( rep(1:length(issue_count), issue_count) ),
+                                     FUN = function(x) paste(x, collapse = " "))$x
+  milestone_issue_html_grp <- paste("<p>",milestone_html, "<ul>", issue_html_grp, "</ul>")
 
-  html <- ""
-  for(i in 1:length(milestones)){
-
-    html <- paste(html,
-                  "<p>",
-                  "<strong>", milestones[i], "</strong>",
-                  "<em>",
-                  "( 0 % Complete - 0 /",
-                  length(plan[[i]]$issue),
-                  " Issues)",
-                  "</em>",
-                  "<ul>"
-    )
-
-    issues <- purrr::map_chr(plan[[i]]$issue, "title")
-
-    for(j in 1:length(issues)){
-      html <- paste(html,
-                    "<li>",
-                    " &#9744;",
-                    issues[j],
-                    "</li>")
-    }
-
-    html <- paste(html, "</ul>", "</p>")
-  }
-
+  # final output ----
+  html <- paste("<p/>", paste(milestone_issue_html_grp, collapse = " "), "<p/>")
   class(html) <- c("knit_asis", class(html))
   return(html)
 
@@ -158,23 +121,16 @@ report_plan <- function(plan){
 report_todo <- function(todo){
 
   # prep data ----
-
-  issues <- purrr::map_chr(todo, "title")
+  issue_title <- sapply(todo, function(x) x[["title"]])
 
   # write html ----
+  milestone_html <- fmt_milestone("To Do", 0, length(issue_title))
+  issue_html <- fmt_issue( issue_title, "open" )
+  issue_html_grp <- paste(issue_html, collapse = " ")
+  milestone_issue_html_grp <- paste("<p>",milestone_html, "<ul>", issue_html_grp, "</ul>")
 
-  html <- "<p> <ul>"
-
-    for(i in 1:length(issues)){
-      html <- paste(html,
-                    "<li>",
-                    " &#9744;",
-                    issues[i],
-                    "</li>")
-    }
-
-  html <- paste(html, "</ul>", "</p>")
-
+  # final output ----
+  html <- paste("<p/>", paste(milestone_issue_html_grp, collapse = " "), "<p/>")
   class(html) <- c("knit_asis", class(html))
   return(html)
 
@@ -210,67 +166,34 @@ report_todo <- function(todo){
 
 report_discussion <- function(comments, issue = NA){
 
-  # internal fx for comment fmting
-  format_comment <- function(user_login, author_association, body, created_at, updated_at, ...){
-
-    header <- paste("<p><hr><strong>", user_login, "(", author_association, ") wrote at", created_at, ": </strong>")
-    text <- paste("<p/><blockquote>", body, "</blockquote><p/>")
-    bottom <- ifelse(is.na(updated_at) | created_at == updated_at,
-                     "", paste("<em> This comment was last updated at", updated_at, "</em>") )
-
-    return( paste(header, text, bottom) )
-
-  }
-
-  # internal fx for issue fmting
-  format_issue <- function(title, body, state, created_at, closed_at, user_login, url, number, ...){
-
-    title <- paste0("<strong>Issue: #", number, ": ", title, "</strong>")
-    meta <- paste("Created by", user_login, "on", created_at)
-    status <- ifelse(state == 'Open', '', paste("Closed on", closed_at))
-    url <- paste("<a href =' ", url, "'> Visit on GitHub </a>")
-    combined_header <- paste(title, meta, status, url, sep = "<br>")
-
-    body <- paste("<em>Issue Description: </em><br><blockquote>", body, "</blockquote>")
-
-    return( paste(combined_header, "<p>", body, "<p>") )
-
-  }
-
   # validate inputs ----
   comments_number <- unique(comments$number)
-
-  if(length(comments_number) != 1){
+  if(length( unique(comments$number )) != 1){
     stop("Comments dataframe contains comments for more than 1 issue. Please limit data to a single issue.")
   }
 
-  html <- ""
-  for(i in 1:nrow(comments)){
-    next_comment_html <- do.call(format_comment, comments[i,])
-    html <- paste(html, next_comment_html)
-  }
+  # write html ----
+  html <- paste( do.call(fmt_comment, comments) , collapse = " ")
 
   # include issue-level data if provided ----
-
   if(!is.na(issue)){
 
+    # validate inputs ----
     issue_number <- unique(issue$number)
-
-    if( length(intersect(issue_number, comments_number)) == 0){
+    if(!any(comments_number == issue_number)){
       stop("Issues dataframe does not contain same issue number as comments dataframe.")
     }
     if( length(issue_number) > 1){
       issue <- issue[issue$number == comments_number, ]
     }
 
-    # generate html from dataframes ----
-    issue_html <- do.call(format_issue, issue)
+    # write html ----
+    issue_html <- do.call(fmt_issue_desc, issue)
     html <- paste(issue_html, html)
-
   }
 
+  # final output ----
   class(html) <- c("knit_asis", class(html))
   return(html)
 
 }
-
