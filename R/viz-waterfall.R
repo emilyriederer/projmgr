@@ -76,13 +76,13 @@ viz_waterfall_issues <- function(issues,
       aes( x = index,
            y = (2*base + sign*n)/2,
            label = n),
-      color = 'white') +
+      color = 'black') +
     scale_x_continuous(breaks = 1:4, labels = c('Initial', 'Opened', 'Closed', 'Final')) +
     scale_fill_manual(values =
-                        c('Initial' = 'blue',
-                          'Opened' = 'darkred',
-                          'Closed' = 'darkgreen',
-                          'Final' = 'blue')
+                        c('Initial' = "#56B4E9",
+                          'Opened' = "#F0E442",
+                          'Closed' = "#009E73",
+                          'Final' = "#56B4E9")
     ) +
     guides(fill = FALSE) +
     labs(title = "Issue Progress Waterfall",

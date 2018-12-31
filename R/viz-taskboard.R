@@ -54,6 +54,9 @@ viz_taskboard <- function(issues, str_wrap_width = 20){
     geom_point(data = data.frame(y = c(-5*height, 5*height), x = c(0,0)), col = NA) +
     facet_grid(board_pos ~ board_group) +
     scale_y_continuous(limits = c(round(-1 * height / 1.75), round(height / 1.75))) +
+    scale_fill_manual(values = c("Not Started" = "#F0E442",
+                                   "In Progress" = "#56B4E9",
+                                   "Done" = "#009E73")) +
     theme(
       panel.grid = element_blank(),
       axis.title = element_blank(),
