@@ -9,7 +9,7 @@
 #' \code{start} and \code{end} parameters since these dates might not be reflective of the
 #' true timeframe (e.g. if issues are posted well in advance of work beginning.)
 #'
-#' @param issues Issues dataset as produced by \code{parse_issues()}
+#' @param data Issues dataset as produced by \code{parse_issues()} or \code{parse_milestones()}
 #' @param start Unquoted variable name denoting issue start date
 #' @param end Unquoted variable name denoting issue end date
 #' @param str_wrap_width Number of characters before text of issue title begins to wrap
@@ -23,19 +23,22 @@
 #' @examples
 #' \dontrun{
 #' issues <- get_issues(myrepo, state = "closed") %>% parse_issues()
-#' viz_gantt_closed(issues)
+#' viz_gantt(issues)
 #' }
 
-viz_gantt_closed <- function(issues, start = created_at, end = closed_at, str_wrap_width = 30){
+viz_gantt <- function(data, start = created_at, end = closed_at, str_wrap_width = 30){
 
   start_var <- enquo(start)
   end_var <- enquo(end)
 
-  g <-
-  issues %>%
+  # filter data to valid values having start and end
+  plot_data <-
+    data %>%
     dplyr::filter(state == "closed", !is.na(!!start_var), !is.na(!!end_var)) %>%
-    dplyr::mutate(id_label = factor(number, levels = number, labels = title)) %>%
-    ggplot(aes(
+    dplyr::mutate(id_label = factor(number, levels = number, labels = title))
+
+  g <-
+    ggplot(plot_data, aes(
       x = !!start_var, xend = !!end_var,
       y = id_label, yend = id_label,
       col = -1*as.integer(difftime(!!end_var, !!start_var, "days"))
@@ -43,19 +46,18 @@ viz_gantt_closed <- function(issues, start = created_at, end = closed_at, str_wr
     geom_segment(size = 8) +
     geom_point(aes(x = !!start_var), size = 2) +
     geom_point(aes(x = !!end_var), size = 2) +
-    labs(
-      title = "Closed Issues",
-      x = "", y = ""
-    ) +
+    labs(title = "Time to Completion") +
     scale_y_discrete(labels = function(x) purrr::map(x, ~paste(strwrap(., width = str_wrap_width), collapse = "\n"))
                      ) +
     theme_bw() +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-    guides(col = FALSE)
+    theme(axis.text.x = element_text(angle = 45, hjust = 1),
+          axis.title.x = element_blank(),
+          axis.title.y = element_blank(),
+          legend.position = "none")
 
   # add metadata to be used with viz_linked
 
-  class(g) <- c(class(g), "gantt")
+  class(g) <- c("gantt", class(g))
   g[['str_wrap_width']] <- str_wrap_width
 
   return(g)

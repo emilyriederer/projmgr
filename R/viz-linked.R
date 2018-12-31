@@ -6,7 +6,7 @@
 #' Credit goes to this Stack Overflow answer for figuring out how to do this:
 #' https://stackoverflow.com/questions/42259826/hyperlinking-text-in-a-ggplot2-visualization/42262407
 #'
-#' @param g ggplot2 object returned by \code{viz_gantt_closed()} or \code{viz_taskboard()}
+#' @param g ggplot2 object returned by \code{viz_gantt()} or \code{viz_taskboard()}
 #' @param filepath Location to save resulting SVG file of ggplot2, if desired. Leave blank for
 #'     function to output message precisely as needed to render in HTML RMarkdown with chunk
 #'     option \code{results = 'asis'}
@@ -23,7 +23,7 @@
 #'
 #' # In RMarkdown chunk, to print as output:
 #' ```{r results = 'asis', echo = FALSE}
-#' gantt <- viz_gantt_closed(issues)
+#' gantt <- viz_gantt(issues)
 #' viz_linked(gantt)
 #' ````
 #' }

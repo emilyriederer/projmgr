@@ -1,6 +1,7 @@
 #' Visualize waterfall of issues opened, closed, and pending over timeframe
 #'
-#' @inheritParams viz_gantt_closed
+#' @inheritParams viz_gantt
+#' @param issues Issues dataset as produced by \code{parse_issues()}
 #' @param start_date Character string in 'YYYY-MM-DD' form for first date to be considered
 #' @param end_date Character string in 'YYYY-MM-DD' form for last date to be considered
 #'

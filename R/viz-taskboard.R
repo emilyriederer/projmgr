@@ -12,7 +12,8 @@
 #'   \item{Done:}{ \code{closed_at} is not NA}
 #' }
 #'
-#' @inheritParams viz_gantt_closed
+#' @inheritParams viz_gantt
+#' @param issues Issues dataset as produced by \code{parse_issues()}
 #'
 #' @return ggplot object
 #' @export
