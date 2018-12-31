@@ -44,6 +44,20 @@ parse_issues <- function(res){
 
 #' Parse issue events from \code{get_issues_events}
 #'
+#' This function convert list output returned by get into a dataframe. Due to the diverse
+#' fields for different types of events, many fields in the dataframe may be NA.
+#'
+#' Currently, the following event types are unsupported (with regard to processing all
+#' of their fields) due to their additional bulk and limited utility with respect to
+#' this packages functionality. Please file an issue if you disagree:
+#' \itemize{
+#'  \item{"(removed_from/moved_columns_in/added_to)_project"}{Since this package has limited value with GitHub projects}
+#'  \item{"converted_note_to_issue"}{Since issue lineage is not a key concern}
+#'  \item{"head_ref_(deleted/restored)"}{Since future support for pull requests would likely be handled separately}
+#'  \item{"merged"}{Same justification as head_ref}
+#'  \item{"review_(requested/dismissed/request_removed)}{Same justification as head_ref}
+#' }
+#'
 #' @inheritParams parse_issues
 #' @return \code{tibble} datasets with one record / issue-event
 #' @export
@@ -69,10 +83,20 @@ parse_issue_events <- function(res){
                   actor_login = res[[.]]$actor$login,
                   event = res[[.]]$event,
                   created_at = as.Date(res[[.]]$created_at %>% substring(1,10)),
+
+                  # label events
                   label_name = res[[.]]$label$name %||% NA,
+
+                  # milestone events
                   milestone_title = res[[.]]$milestone$title %||% NA,
+
+                  # assignment events
                   assignee_login = res[[.]]$assignee$login %||% NA,
-                  assigner_login = res[[.]]$assigner$login %||% NA
+                  assigner_login = res[[.]]$assigner$login %||% NA,
+
+                  # rename events
+                  rename_from = res[[.]]$rename$from %||% NA,
+                  rename_to = res[[.]]$rename$to %||% NA
                 ))
 
 }

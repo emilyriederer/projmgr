@@ -13,7 +13,20 @@ parse_issue_events(res)
 \code{tibble} datasets with one record / issue-event
 }
 \description{
-Parse issue events from \code{get_issues_events}
+This function convert list output returned by get into a dataframe. Due to the diverse
+fields for different types of events, many fields in the dataframe may be NA.
+}
+\details{
+Currently, the following event types are unsupported (with regard to processing all
+of their fields) due to their additional bulk and limited utility with respect to
+this packages functionality. Please file an issue if you disagree:
+\itemize{
+ \item{"(removed_from/moved_columns_in/added_to)_project"}{Since this package has limited value with GitHub projects}
+ \item{"converted_note_to_issue"}{Since issue lineage is not a key concern}
+ \item{"head_ref_(deleted/restored)"}{Since future support for pull requests would likely be handled separately}
+ \item{"merged"}{Same justification as head_ref}
+ \item{"review_(requested/dismissed/request_removed)}{Same justification as head_ref}
+}
 }
 \examples{
 \dontrun{
