@@ -7,8 +7,11 @@
 #' @param repo_owner Repository owner's eid or GitHub Organization name
 #' @param repo_name Repository name
 #' @param is_enterprise Boolean denoting whether or not working with Enterprise GitHub.Defaults to \code{FALSE}
-#' @param hostname Host URL stub for Enterprise repositories (e.g. if URL is "github.abc.com" then set to "abc")
-#' @param identifier GitHub username. Ideally should be left blank and then defaults to \code{GITHUB_PAT} or \code{GITHUB_ENT_PAT} environment variables if not provided.
+#' @param hostname Host URL stub for Enterprise repositories (e.g. "mycorp.github.com")
+#' @param identifier Ideally should be left blank and defaults to using \code{GITHUB_PAT} or \code{GITHUB_ENT_PAT}
+#'     environment variables as Personal Access Tokens. If \code{identifier} has a value and \code{password} does not,
+#'     this is assumed to be an alternative name of the environment variable to use for your Personal Access Token. If
+#'     \code{password} is also provided, this is interpretted as a username.
 #' @param password GitHub password. Ideally should be left blank and then defaults to empty string which works in conjunction with personal access tokens. Required if supplying username.
 #'
 #' @return List of repository reference information and credentials
