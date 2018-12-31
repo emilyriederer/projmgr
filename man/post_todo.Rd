@@ -25,7 +25,7 @@ Currently has know bug in that cannot be used to introduce new labels.
 \dontrun{
 # This example uses example file included in pkg
 # You should be able to run example as-is after creating your own repo reference
-file_path <- system.file("extdata", "todo.yml", package = "tidytracker", mustWork = TRUE)
+file_path <- system.file("extdata", "todo.yml", package = "ghtrackr", mustWork = TRUE)
 my_todo <- read_todo(file_path)
 post_todo(ref, my_todo)
 }

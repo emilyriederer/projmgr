@@ -25,7 +25,7 @@ Post custom plans (i.e. create milestons and issues) based on yaml read in by
 \dontrun{
 # This example uses example file included in pkg
 # You should be able to run example as-is after creating your own repo reference
-file_path <- system.file("extdata", "plan.yml", package = "tidytracker", mustWork = TRUE)
+file_path <- system.file("extdata", "plan.yml", package = "ghtrackr", mustWork = TRUE)
 my_plan <- read_plan(file_path)
 post_plan(ref, my_plan)
 }

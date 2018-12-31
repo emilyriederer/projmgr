@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 
-library(tidytracker)
+library(ghtrackr)
 ```
 
 Many people in the R community have shared their thoughts on how best to structure large analytical projects for ease of use and reproducibility. Much of the discussion has stemmed from academia, including Lucy D'Agostino McGowan's blog post on organization a [disertations](https://livefreeordichotomize.com/2018/09/14/one-year-to-dissertate/), and Software Carpentry's paper on best practices for [research projects](https://arxiv.org/abs/1609.00037). However, these principles are also relevant to personal or enterprise work.
@@ -31,7 +31,7 @@ Writing out your plan of attack in YAML lets you foxus on key details and allows
 Recall the example plan discussed in the vignette on custom plans:
 
 ```{r comment='', echo = FALSE}
-plan_path <- system.file("extdata", "plan.yml", package = "tidytracker", mustWork = TRUE)
+plan_path <- system.file("extdata", "plan.yml", package = "ghtrackr", mustWork = TRUE)
 cat(readLines(plan_path), sep = '\n')
 ```
 
@@ -42,7 +42,7 @@ As described in the custom plans vignette, this could be added to a GitHub repo 
 Meeting minutes or agendas can be added to agendas and minutes, such as Lucy's templates provide, with the `report_` functions. 
 
 ```{r}
-plan_path <- system.file("extdata", "plan.yml", package = "tidytracker", mustWork = TRUE)
+plan_path <- system.file("extdata", "plan.yml", package = "ghtrackr", mustWork = TRUE)
 my_plan <- read_plan(plan_path)
 report_plan(my_plan)
 ```
@@ -59,7 +59,7 @@ issues <-
 
 ```{r echo = FALSE}
 issues <- 
-  readRDS(system.file("extdata", "anproj-issues.rds", package = "tidytracker", mustWork = TRUE))
+  readRDS(system.file("extdata", "anproj-issues.rds", package = "ghtrackr", mustWork = TRUE))
 ```
 
 ```{r}

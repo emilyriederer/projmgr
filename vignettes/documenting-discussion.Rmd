@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 
-library(tidytracker)
+library(ghtrackr)
 ```
 
 If your GitHub issue is home to important discussions regarding your analysis, you may wish to save an immutable copy of these offline for documentation. For example, consider this important discussion:
@@ -30,8 +30,8 @@ comments <- get_issue_comments(experigit, number = 163) %>% parse_issue_comments
 ```
 
 ```{r echo = FALSE}
-issues <- readRDS(system.file("extdata", "disc-issues.rds", package = "tidytracker", mustWork = TRUE))
-comments <- readRDS(system.file("extdata", "disc-comments.rds", package = "tidytracker", mustWork = TRUE))
+issues <- readRDS(system.file("extdata", "disc-issues.rds", package = "ghtrackr", mustWork = TRUE))
+comments <- readRDS(system.file("extdata", "disc-comments.rds", package = "ghtrackr", mustWork = TRUE))
 ```
 
 As with all other `get-parse` codeflows, this produces dataframe output.

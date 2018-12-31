@@ -1,5 +1,5 @@
-Package: tidytracker
-Title: Task tracking the tidy way
+Package: ghtrackr
+Title: Task tracking and project management with GitHub via R
 Version: 0.0.0.9000
 Authors@R:
     person(given = "Emily",
@@ -13,8 +13,8 @@ Description: Provides a highly abstracted wrapper for the GitHub
     GitHub in personal, professional, or academic settings with an
     emphasis on usage for data analysis projects.
 License: MIT + file LICENSE
-URL: https://github.com/emilyriederer/tidytracker
-BugReports: https://github.com/emilyriederer/tidytracker/issues
+URL: https://github.com/emilyriederer/ghtrackr
+BugReports: https://github.com/emilyriederer/ghtrackr/issues
 Imports:
     dplyr,
     ggplot2,

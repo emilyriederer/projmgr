@@ -17,11 +17,11 @@ knitr::opts_chunk$set(
 )
 ```
 
-Many functions in `tidytracker` require authentication to interface with external services. Specifically, any functions pulling information from GitHub (e.g. `get_issues`) or sending information to GitHub (e.g. `post_issue`) require authentication. Just like logging in on the website, this preserves the security of information within repositories and prevents outsides from altering said information. 
+Many functions in `ghtrackr` require authentication to interface with external services. Specifically, any functions pulling information from GitHub (e.g. `get_issues`) or sending information to GitHub (e.g. `post_issue`) require authentication. Just like logging in on the website, this preserves the security of information within repositories and prevents outsides from altering said information. 
 
 However, there are many reasons you won't want to send your username and password through these functions. First of all, it's inconvenient to type your credentials over and over. More critically, you might accidentally end up sharing a script that has your password in it. 
 
-This vignette describes a better approach to authentication that is both easier and safer: the personal access token (PAT). At a high level, this is a random string of characters GitHub assigns to you and you alone. By saving this in your R environment, `tidytracker` can automatically provide this variable to GitHub instead of your login for better safety and efficiency. 
+This vignette describes a better approach to authentication that is both easier and safer: the personal access token (PAT). At a high level, this is a random string of characters GitHub assigns to you and you alone. By saving this in your R environment, `ghtrackr` can automatically provide this variable to GitHub instead of your login for better safety and efficiency. 
 
 For more information beyond this vignette, check out the relevant section of Jenny Bryan's [Happy Git with R](http://happygitwithr.com/github-pat.html) ebook.
 

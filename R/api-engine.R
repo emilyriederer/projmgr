@@ -17,7 +17,7 @@ get_engine <- function(api_endpoint, ref, limit = Inf, ...){
     ...,
     .token = Sys.getenv(ref$id),
     .method = "GET",
-    .send_headers = c("User-Agent" = "https://github.com/emilyriederer/tidytracker"),
+    .send_headers = c("User-Agent" = "https://github.com/emilyriederer/ghtrackr"),
     .limit = limit
   )
 
@@ -45,7 +45,7 @@ post_engine <- function(api_endpoint, ref, ...){
     .token = Sys.getenv(ref$id),
     .method = "POST",
     .limit = Inf,
-    .send_headers = c("User-Agent" = "https://github.com/emilyriederer/tidytracker")
+    .send_headers = c("User-Agent" = "https://github.com/emilyriederer/ghtrackr")
   )
 
 }
@@ -67,7 +67,7 @@ patch_engine <- function(api_endpoint, ref, ...){
     .token = Sys.getenv(ref$id),
     .method = "PATCH",
     .limit = Inf,
-    .send_headers = c("User-Agent" = "https://github.com/emilyriederer/tidytracker")
+    .send_headers = c("User-Agent" = "https://github.com/emilyriederer/ghtrackr")
   )
 
 }

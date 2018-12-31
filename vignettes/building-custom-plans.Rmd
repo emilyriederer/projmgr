@@ -15,30 +15,30 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 
-library(tidytracker)
+library(ghtrackr)
 ```
 
-In many cases, it can be useful to automate bulk posting of issues or milestones to GitHub. `tidytracker` helps facilitate this with the notion of plans and to-do lists.
+In many cases, it can be useful to automate bulk posting of issues or milestones to GitHub. `ghtrackr` helps facilitate this with the notion of plans and to-do lists.
 
 **Plans** are a collection of milestones and issues assigned to them. In general, these issues are going to be created *proactively* as foreseen key steps in a project (versus the more common *reactive* usage of GitHub issues to report bugs and request enhancements.) Plans can serve as a roadmap or framework for tackling a large chunk of work.
 
 **To-do lists** are simply collections of issues. These might just be many bugs, feature enhancements, or ideas you jotted down while working offline or while not wanting to get on GitHub to log them. Alternatively, they also could be created proactively as with plans.
 
-To reduce the manual effort of bulk creation of plans and to-do lists, `tidytracker` offers functionality to read, interpret, and post milestones and issues encoded in [YAML](http://yaml.org/), a light-weight markup language.
+To reduce the manual effort of bulk creation of plans and to-do lists, `ghtrackr` offers functionality to read, interpret, and post milestones and issues encoded in [YAML](http://yaml.org/), a light-weight markup language.
 
 ## Creating a Plan with YAML
 
 YAML can be used to specify milestones and issues with all the same fields as are accepted into `post_milestone()` and `post_issue()`. Consider the following YAML file as an example:
 
 ```{r comment='', echo = FALSE}
-plan_path <- system.file("extdata", "plan.yml", package = "tidytracker", mustWork = TRUE)
+plan_path <- system.file("extdata", "plan.yml", package = "ghtrackr", mustWork = TRUE)
 cat(readLines(plan_path), sep = '\n')
 ```
 
 The `read_plan()` function reads plan YAML files. We will continue to work with the example plan embedded in the package.
 
 ```{r}
-plan_path <- system.file("extdata", "plan.yml", package = "tidytracker", mustWork = TRUE)
+plan_path <- system.file("extdata", "plan.yml", package = "ghtrackr", mustWork = TRUE)
 my_plan <- read_plan(plan_path)
 ```
 
@@ -94,14 +94,14 @@ template_yaml("plan")
 The workflow for posting to-do lists is very similar to that of plans. Consider the following YAML file as an example:
 
 ```{r comment='', echo = FALSE}
-todo_path <- system.file("extdata", "todo.yml", package = "tidytracker", mustWork = TRUE)
+todo_path <- system.file("extdata", "todo.yml", package = "ghtrackr", mustWork = TRUE)
 cat(readLines(todo_path), sep = '\n')
 ```
 
 Similarly, the `read_todo()` function reads in a to-do YAML file and converts it to an R list:
 
 ```{r}
-todo_path <- system.file("extdata", "todo.yml", package = "tidytracker", mustWork = TRUE)
+todo_path <- system.file("extdata", "todo.yml", package = "ghtrackr", mustWork = TRUE)
 my_todo <- read_todo(todo_path)
 str(my_todo)
 ```
@@ -138,7 +138,7 @@ These plans looks thematically similar to the output of `report_progress()` for 
 
 ## Create a Plan or To-Do List with R
 
-Of course, `tidytracker`'s YAML-parsing functionalities are only provided as a convenience. Users are also welcome to create their own plans and to-do lists simply with base R's `list()` function. For example, the following code creates an analog to the second milestone in the YAML above.
+Of course, `ghtrackr`'s YAML-parsing functionalities are only provided as a convenience. Users are also welcome to create their own plans and to-do lists simply with base R's `list()` function. For example, the following code creates an analog to the second milestone in the YAML above.
 
 ```{r}
 milestone <-

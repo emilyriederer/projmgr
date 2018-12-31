@@ -34,7 +34,7 @@ todo_yaml <- "
 Then, once you have internet again (which you can check with `check_internet()`), you can simply post all of these items at once.
 
 ```{r eval = FALSE}
-repo <- create_repo_ref("emilyriederer", "tidytracker")
+repo <- create_repo_ref("emilyriederer", "my_gh_repo")
 todo <- read_todo(todo_yaml)
 post_todo(repo, todo)
 ```

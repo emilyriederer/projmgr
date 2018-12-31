@@ -2,6 +2,7 @@
 ^LICENSE\.md$
 ^CREDITS\.md$
 ^tidytracker\.Rproj$
+^ghtrackr\.Rproj$
 ^\.Rproj\.user$
 ^pkgdown
 ^docs

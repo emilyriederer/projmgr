@@ -16,16 +16,16 @@ knitr::opts_chunk$set(
 )
 ```
 
-This vignette illustrates codeflows of `tidytracker`'s core functionality.
+This vignette illustrates codeflows of `ghtrackr`'s core functionality.
 
 ```{r}
-library(tidytracker)
+library(ghtrackr)
 ```
 
 
 ## Creating a Repo Reference
 
-The first step to interacting with a GitHub repository is creating a repository reference. Repository references are "first class citizens" in `tidytracker` and contain all authorization credentials. These references are passed as the first argument in all `get_` functions.
+The first step to interacting with a GitHub repository is creating a repository reference. Repository references are "first class citizens" in `ghtrackr` and contain all authorization credentials. These references are passed as the first argument in all `get_` functions.
 
 ```{r}
 dplyr <- create_repo_ref('tidyverse', 'dplyr')

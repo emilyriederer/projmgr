@@ -1,4 +1,4 @@
 library(testthat)
-library(tidytracker)
+library(ghtrackr)
 
-test_check("tidytracker")
+test_check("ghtrackr")
