@@ -29,7 +29,12 @@ create_repo_ref <-
            password = ""){
 
     # determine authentication strategy ----
-    if(identifier != "" & password != ""){
+    if(identifier != "" & password == ""){
+      id_sys_var <- identifier
+      pw_sys_var <- ""
+      message(paste("Requests will authenticate with", identifier))
+    }
+    else if(identifier != "" & password != ""){
 
       # save credentials to local environment
       id_sys_var <- paste0("GITHUB_USER_", repo_name)
@@ -84,9 +89,8 @@ create_repo_ref <-
       repo_path = paste("repos", repo_owner, repo_name, sep = "/")
     )
 
-
     # add repo-ref class ----
-    class(ref) <- c("repo_ref", "list")
+    class(ref) <- c("repo_ref", class(ref))
 
     # return repo reference ----
     return(ref)
