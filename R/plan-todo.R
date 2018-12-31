@@ -163,13 +163,15 @@ post_plan <- function(ref, plan, distinct = TRUE){
 #' @inherit post_issue return
 #' @inherit read_todo examples
 #' @param todo To-do R list structure as read with \code{read_todo()}
+#' @param distinct Logical value to denote whether issues with the same title
+#'     as a current open issue should be allowed. Passed to \code{get_issues()}
 #' @export
 #'
 #' @family plans and todos
 #' @importFrom dplyr distinct mutate pull select transmute
 
 
-post_todo <- function(ref, todo){
+post_todo <- function(ref, todo, distinct = TRUE){
 
   # create issues
   res_issues <- purrr::map(todo, ~purrr::pmap(., ~post_issue(ref, ..., distinct = distinct)))

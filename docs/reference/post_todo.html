@@ -123,7 +123,7 @@ Please see the "Building Custom Plans" vignette for details.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>post_todo</span>(<span class='no'>ref</span>, <span class='no'>todo</span>)</pre>
+    <pre class="usage"><span class='fu'>post_todo</span>(<span class='no'>ref</span>, <span class='no'>todo</span>, <span class='kw'>distinct</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -135,6 +135,11 @@ Please see the "Building Custom Plans" vignette for details.</p>
     <tr>
       <th>todo</th>
       <td><p>To-do R list structure as read with <code><a href='read_todo.html'>read_todo()</a></code></p></td>
+    </tr>
+    <tr>
+      <th>distinct</th>
+      <td><p>Logical value to denote whether issues with the same title
+as a current open issue should be allowed. Passed to <code><a href='get_issues.html'>get_issues()</a></code></p></td>
     </tr>
     </table>
     

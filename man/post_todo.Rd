@@ -4,12 +4,15 @@
 \alias{post_todo}
 \title{Post to-do list (issues) to GitHub repository}
 \usage{
-post_todo(ref, todo)
+post_todo(ref, todo, distinct = TRUE)
 }
 \arguments{
 \item{ref}{Repository reference (list) created by \code{create_repo_ref()}}
 
 \item{todo}{To-do R list structure as read with \code{read_todo()}}
+
+\item{distinct}{Logical value to denote whether issues with the same title
+as a current open issue should be allowed. Passed to \code{get_issues()}}
 }
 \value{
 Number (identifier) of posted issue
