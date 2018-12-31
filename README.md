@@ -3,7 +3,15 @@
 
 # ghtrackr <img src="man/figures/logo.png" align="right" height=140/>
 
-The goal of `ghtrackr` is to help reduce time spent on tedious project management tasks to free up time for more exciting things like R coding and data analysis. `ghtrackr` does this by providing a convenient interface between your R-based workflow and GitHub, with a particular focus on GitHub's project management capabilities.
+`ghtrackr` aims to better integrate project management into your workflow and free up time for more exciting taks like R coding and data analysis. Since many R users and programmers use GitHub as a home for their analysis, `ghtrackr` provides an easy interface to GitHub for project management.
+
+Key functionalities include:
+
+- exchanging data with the GitHub API using user-friendly syntax
+- generating issues and milestones from plain text (YAML) or R objects
+- communicating (with reports or charts) project plans and progress to non-technical (non-GitHub using) collaborators
+
+Just like communicating analytical results, good process communication is the key to success in most applied analysis settings. However, ad hoc processes or alternative tools can knock an analyst out of their R-based workflow and distract them from their core goals. 
 
 ## Try before you buy!
 
