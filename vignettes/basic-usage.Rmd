@@ -4,7 +4,7 @@ author: "Emily Riederer"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Basic Usage}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -60,7 +60,9 @@ check_rate_limit(dplyr)
 
 ## Getting Issues
 
-`get_` functions retrieve information from the GitHub API. The first argument is the repository reference and additional named query parameters can be passed subsequently. For example, here, we request issues of the first `milestone` with either an open or closed `state`. (Note that, in keeping with the GitHub API, only open issues are returned when `state` is not specified.)
+`get_` functions retrieve information from the GitHub API. The first argument is the repository reference and additional named query parameters can be passed subsequently. 
+
+For example, here, we request issues of the first `milestone` with either an open or closed `state`. (Note that, in keeping with the GitHub API, only open issues are returned when `state` is not specified. If you're trying to build a productivity report, i.e. about everything that's been *completed*, it's very important to specify `state` as "closed" or "all".)
 
 ```{r}
 dplyr_issues_list <- get_issues(dplyr, milestone = 1, state = 'all')
@@ -91,39 +93,14 @@ dplyr_issues <- parse_issues(dplyr_issues_list)
 head(dplyr_issues)
 ```
 
-## Visualizing Issues
-
-There are many different ways to visualize issues. 
-
-For reporting on time-to-completion, `viz_gantt()` creates one horizontal bar per issue and colors issues by length of time open.
+In summary, the general process is calling a `get_` function followed by a `parse_` function. We will get milestones for a second example.
 
 ```{r}
-viz_gantt(dplyr_issues)
+dplyr_milestones <-
+  get_milestones(dplyr, state = 'all') %>%
+  parse_milestones()
 ```
 
-`viz_taskboard()` creates an Agile-like taskboard of issues open, in progress, and completed.
-
-```{r}
-dplyr_issues$closed_at[1] <- NA
-dplyr_issues$closed_at[3] <- NA
-dplyr_issues$state[c(1,3)] <- "open"
-dplyr_issues$labels_name[[3]] <- c("in-progress", dplyr_issues$labels_name[[3]])
-viz_taskboard(dplyr_issues, 40)
-```
-
-Either task boards or gantt plots can also be passed through `viz_linked` to add links to their text back to the relevant GitHub issues. This only works in RMarkdown with the `results = "asis"` option or saved to a file.
-
-```{r results = 'asis'}
-g <- viz_gantt(dplyr_issues)
-viz_linked(g)
-```
-
-
-`viz_waterfall_state()` creates a waterfall plot showing, for a fixed time-period, the initial count of open issues, the number of newly reported issues, the number of closed issues, and the final open count as the end of that time period. 
-
-```{r}
-viz_waterfall_state(dplyr_issues, '2014-01-01', '2015-01-01')
-```
 
 ## Reporting On Issue Status
 

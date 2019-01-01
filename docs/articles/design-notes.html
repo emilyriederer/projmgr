@@ -78,7 +78,7 @@
       <h1>Design Notes</h1>
                         <h4 class="author">Emily Riederer</h4>
             
-            <h4 class="date">2018-12-31</h4>
+            <h4 class="date">2019-01-01</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/emilyriederer/ghtrackr/blob/master/vignettes/design-notes.Rmd"><code>vignettes/design-notes.Rmd</code></a></small>
       <div class="hidden name"><code>design-notes.Rmd</code></div>
@@ -157,6 +157,7 @@ milestones &lt;-<span class="st"> </span><span class="kw"><a href="../reference/
 </ul>
 </li>
 </ul>
+<p>There are some disadvantages to this approach. For example, if one wishes to join issues and milestone data by milestone number, in the issues data it will be called <code>milestone_number</code> and in the milestone data it will simply be called <code>number</code>. One alternative would be to use <code>{object}_{field}</code> conventions (e.g. <code>issue_name</code>) uniformly across all datasets. However, this was not selected since it makes variable names long and bulky.</p>
 </div>
   </div>
 

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get events for a specific issue from GitHub repository — get_issue_events • ghtrackr</title>
+<title>Visualize waterfall of opened, closed, and pending items over timeframe — viz_waterfall • ghtrackr</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -32,10 +32,11 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Get events for a specific issue from GitHub repository — get_issue_events" />
+<meta property="og:title" content="Visualize waterfall of opened, closed, and pending items over timeframe — viz_waterfall" />
 
-<meta property="og:description" content="In addition to information returned by GitHub API, appends field &quot;number&quot; for the issue number
-to which the returned events correspond." />
+<meta property="og:description" content="Creates a four-bar waterfall diagram. Within the specified timeframe, shows initial,
+newly opened, newly closed, and final open counts. Works with either issues or milestones,
+as obtained by the get and parse functions." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -111,55 +112,86 @@ to which the returned events correspond." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get events for a specific issue from GitHub repository</h1>
-    <small class="dont-index">Source: <a href='https://github.com/emilyriederer/ghtrackr/blob/master/R/get.R'><code>R/get.R</code></a></small>
-    <div class="hidden name"><code>get_issue_events.Rd</code></div>
+    <h1>Visualize waterfall of opened, closed, and pending items over timeframe</h1>
+    <small class="dont-index">Source: <a href='https://github.com/emilyriederer/ghtrackr/blob/master/R/viz-waterfall.R'><code>R/viz-waterfall.R</code></a></small>
+    <div class="hidden name"><code>viz_waterfall.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>In addition to information returned by GitHub API, appends field "number" for the issue number
-to which the returned events correspond.</p>
+    <p>Creates a four-bar waterfall diagram. Within the specified timeframe, shows initial,
+newly opened, newly closed, and final open counts. Works with either issues or milestones,
+as obtained by the <code>get</code> and <code>parse</code> functions.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_issue_events</span>(<span class='no'>ref</span>, <span class='no'>number</span>)</pre>
+    <pre class="usage"><span class='fu'>viz_waterfall</span>(<span class='no'>data</span>, <span class='no'>start_date</span>, <span class='no'>end_date</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='no'>created_at</span>,
+  <span class='kw'>end</span> <span class='kw'>=</span> <span class='no'>closed_at</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>ref</th>
-      <td><p>Repository reference (list) created by <code><a href='create_repo_ref.html'>create_repo_ref()</a></code></p></td>
+      <th>data</th>
+      <td><p>Dataset, such as those representing issues or milestones (i.e. <code><a href='parse_issues.html'>parse_issues()</a></code> or
+<code><a href='parse_milestones.html'>parse_milestones()</a></code>). Must have <code>state</code> variable and variables to specify for
+<code>start</code> and <code>end</code></p></td>
     </tr>
     <tr>
-      <th>number</th>
-      <td><p>Number of issue</p></td>
+      <th>start_date</th>
+      <td><p>Character string in 'YYYY-MM-DD' form for first date to be considered (inclusive)</p></td>
+    </tr>
+    <tr>
+      <th>end_date</th>
+      <td><p>Character string in 'YYYY-MM-DD' form for last date to be considered (inclusive)</p></td>
+    </tr>
+    <tr>
+      <th>start</th>
+      <td><p>Unquoted variable name denoting issue start date</p></td>
+    </tr>
+    <tr>
+      <th>end</th>
+      <td><p>Unquoted variable name denoting issue end date</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Content of GET request as list</p>
+    <p>ggplot object</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The following logic is used to classify issues:</p>
+<ul>
+<li><p>Initial: <code>start &lt; start_date and (end &gt; start_date or state == 'open')</code></p></li>
+<li><p>Open: <code>start &gt;= start_date and start &lt;= end_date</code></p></li>
+<li><p>Closed: <code>end &gt;= start_date and end &lt;= end_date</code></p></li>
+<li><p>Final: <code>start &lt; end_date and (end &gt; end_date or state == 'open')</code></p></li>
+</ul>
+    <p>The exact accuracy of the logic depends on filtering that has already been done to the dataset. Think carefully
+about the population you wish to represent when <code>get</code>ting your data.</p>
+<p>Note that this function respects <code><a href='http://dplyr.tidyverse.org/reference/group_by.html'>dplyr::group_by()</a></code>. If grouped data is passed, it will preserve
+the grouping and separate plots can be made with facetting.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other issues: <code><a href='get_issue_comments.html'>get_issue_comments</a></code>,
-  <code><a href='get_issues.html'>get_issues</a></code>,
+  <code><a href='get_issue_events.html'>get_issue_events</a></code>, <code><a href='get_issues.html'>get_issues</a></code>,
   <code><a href='parse_issue_comments.html'>parse_issue_comments</a></code>,
   <code><a href='parse_issue_events.html'>parse_issue_events</a></code>,
   <code><a href='parse_issues.html'>parse_issues</a></code>, <code><a href='post_issue.html'>post_issue</a></code>,
   <code><a href='report_discussion.html'>report_discussion</a></code>,
-  <code><a href='report_progress.html'>report_progress</a></code>,
-  <code><a href='viz_waterfall.html'>viz_waterfall</a></code></p>
-<p>Other events: <code><a href='parse_issue_events.html'>parse_issue_events</a></code></p></div>
+  <code><a href='report_progress.html'>report_progress</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='no'>myrepo</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='create_repo_ref.html'>create_repo_ref</a></span>(<span class='st'>'emilyriederer'</span>, <span class='st'>'myrepo'</span>)
-<span class='no'>events_res</span> <span class='kw'>&lt;-</span> <span class='fu'>get_issue_events</span>(<span class='no'>myrepo</span>, <span class='kw'>number</span> <span class='kw'>=</span> <span class='fl'>1</span>)
-<span class='no'>events</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='parse_issue_events.html'>parse_issue_events</a></span>(<span class='no'>events_res</span>)
+<span class='fu'>viz_waterfall</span>(<span class='no'>milestones</span>, <span class='st'>'2017-01-01'</span>, <span class='st'>'2017-03-31'</span>)
+<span class='co'># }</span><span class='co'># NOT RUN {</span>
+<span class='no'>issues</span> <span class='kw'>%&gt;%</span>
+<span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span>(<span class='no'>milestone</span>) <span class='kw'>%&gt;%</span>
+<span class='fu'>viz_waterfall</span>(<span class='st'>'2017-01-01'</span>, <span class='st'>'2017-03-31'</span>) +
+<span class='fu'>facet_grid</span>(<span class='no'>milestone</span> ~ <span class='no'>.</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -168,6 +200,8 @@ to which the returned events correspond.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
       

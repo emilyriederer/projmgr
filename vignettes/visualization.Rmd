@@ -1,0 +1,93 @@
+---
+title: "Visualizations (Experimental)"
+author: "Emily Riederer"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Visualizations}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+library(ghtrackr)
+library(dplyr)
+```
+
+```{r echo = FALSE, message = FALSE}
+dplyr <- create_repo_ref('tidyverse', 'dplyr')
+
+dplyr_issues <- 
+get_issues(dplyr, milestone = 1, state = 'all') %>%
+parse_issues()
+
+dplyr_milestones <-
+  get_milestones(dplyr, state = 'all') %>%
+  parse_milestones()
+```
+
+`ghtrackr` has many different ways to visualize project status. Note that all visualization functions are currently experimental and still have some known challenges. All feedback is welcome on these visualizations or other desired visualizations.
+
+## Gantt Charts
+
+For reporting on time-to-completion, `viz_gantt()` creates one horizontal bar per item (e.g. issue, milestone) and colors issues by length of time open. Items are ordered by start date, which defaults to the data's `created_at` data but can be altered via the function's parameters.
+
+Items which are not yet completed are colored in grey since the true time-to-completion value is censored. Additionally, they do not have the terminal half-dot at the end of the bar. 
+
+```{r}
+viz_gantt(dplyr_milestones)
+```
+
+As a `ggplot`, standard `ggplot2` features and styling can be added to the output.
+
+```{r}
+viz_gantt(dplyr_milestones) +
+  ggplot2::labs(subtitle = 'Milestones in the dplyr repository')
+```
+
+Either gantt charts or task boards (next section) can also be passed through `viz_linked` to add links to their text back to the relevant GitHub issues. This only works in RMarkdown with the `results = "asis"` chunk option or saved to a file.
+
+```{r results = 'asis'}
+g <- viz_gantt(dplyr_milestones)
+viz_linked(g)
+```
+
+## Task Boards
+
+`viz_taskboard()` creates an Agile-like taskboard of items (e.g. issues, milestones) to be started, in progress, and completed.
+
+```{r echo = FALSE}
+dplyr_issues$closed_at[1] <- NA
+dplyr_issues$closed_at[3] <- NA
+dplyr_issues$state[c(1,3)] <- "open"
+dplyr_issues$labels_name[[3]] <- c("in-progress", dplyr_issues$labels_name[[3]])
+dplyr_issues <- filter(dplyr_issues, !(state == 'closed' & row_number() %% 2 == 0))
+```
+
+```{r}
+viz_taskboard(dplyr_issues, is_labelled_with("in-progress"), 40)
+```
+
+Users specify what logic to use for identifying "in progress" items by passing a function factory to the `in_progress_when` parameter. The above example uses the `is_labelled_with()` option. Other options include:
+
+```{r}
+ls('package:ghtrackr')[grep("^is_*", ls('package:ghtrackr'))]
+```
+
+
+See `?taskboard_helpers` for more details.
+
+Unfortunately, this function currently suffers from spacing problems when trying to show many items or items with very long names. Users can corrently attempt to fix this by experimenting with the `str_wrap_width` and `text_size` parameters or by adjusting the `fig.width` and `fig.height` RMarkdown options; however, in the long-term, this should be handled in a more sustainable, automated fashion.
+
+## Waterfall Charts
+
+`viz_waterfall()` creates a waterfall plot showing, for a fixed time-period, the initial open count, newly opened, newly closed, and final open count of issues or milestones. 
+
+```{r}
+viz_waterfall(dplyr_issues, '2014-01-01', '2015-01-01')
+```

@@ -78,3 +78,5 @@ In keeping with the [Function Parameters], the dataframe returned by `parse_` fu
 - When the field is nested, underscores are used to provide the hierarchy. 
     + For example, after getting an issue, the "user" field contains multiple subfields about the issue author. Most critical is that user's login, so the field in the resulting dataframe is called "user_login". 
     + This can provide some confusion since other non-hierarchical fields naturally contain underscores, such as the "created_at" date.
+    
+There are some disadvantages to this approach. For example, if one wishes to join issues and milestone data by milestone number, in the issues data it will be called `milestone_number` and in the milestone data it will simply be called `number`. One alternative would be to use `{object}_{field}` conventions (e.g. `issue_name`) uniformly across all datasets. However, this was not selected since it makes variable names long and bulky. 

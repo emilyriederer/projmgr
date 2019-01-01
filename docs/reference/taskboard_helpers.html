@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get events for a specific issue from GitHub repository — get_issue_events • ghtrackr</title>
+<title>Tag "in-progress" items for taskboard visualization — taskboard_helpers • ghtrackr</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -32,10 +32,13 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Get events for a specific issue from GitHub repository — get_issue_events" />
+<meta property="og:title" content="Tag "in-progress" items for taskboard visualization — taskboard_helpers" />
 
-<meta property="og:description" content="In addition to information returned by GitHub API, appends field &quot;number&quot; for the issue number
-to which the returned events correspond." />
+<meta property="og:description" content="The viz_taskboard() function creates a three-column layout of entities that are
+not started, in progress, or done. Objects are classified as done when they have a
+state of &quot;closed&quot;. Object are classified as &quot;To-Do&quot; when they are neither &quot;Closed&quot;
+or &quot;In Progress&quot;. However, what consistutes &quot;In Progress&quot; is user and project dependent.
+Thus, these functions let users specify what they mean." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -111,55 +114,95 @@ to which the returned events correspond." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get events for a specific issue from GitHub repository</h1>
-    <small class="dont-index">Source: <a href='https://github.com/emilyriederer/ghtrackr/blob/master/R/get.R'><code>R/get.R</code></a></small>
-    <div class="hidden name"><code>get_issue_events.Rd</code></div>
+    <h1>Tag "in-progress" items for taskboard visualization</h1>
+    <small class="dont-index">Source: <a href='https://github.com/emilyriederer/ghtrackr/blob/master/R/viz-taskboard-helpers.R'><code>R/viz-taskboard-helpers.R</code></a></small>
+    <div class="hidden name"><code>taskboard_helpers.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>In addition to information returned by GitHub API, appends field "number" for the issue number
-to which the returned events correspond.</p>
+    <p>The <code><a href='viz_taskboard.html'>viz_taskboard()</a></code> function creates a three-column layout of entities that are
+not started, in progress, or done. Objects are classified as done when they have a
+<code>state</code> of "closed". Object are classified as "To-Do" when they are neither "Closed"
+or "In Progress". However, what consistutes "In Progress" is user and project dependent.
+Thus, these functions let users specify what they mean.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_issue_events</span>(<span class='no'>ref</span>, <span class='no'>number</span>)</pre>
+    <pre class="usage"><span class='fu'>is_labelled_with</span>(<span class='no'>label</span>)
+
+<span class='fu'>is_assigned</span>()
+
+<span class='fu'>is_assigned_to</span>(<span class='no'>login</span>)
+
+<span class='fu'>is_in_a_milestone</span>()
+
+<span class='fu'>is_in_milestone</span>(<span class='no'>number</span>)
+
+<span class='fu'>is_created_before</span>(<span class='no'>created_date</span>)
+
+<span class='fu'>is_part_closed</span>()
+
+<span class='fu'>is_due</span>()
+
+<span class='fu'>is_due_before</span>(<span class='no'>due_date</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>ref</th>
-      <td><p>Repository reference (list) created by <code><a href='create_repo_ref.html'>create_repo_ref()</a></code></p></td>
+      <th>label</th>
+      <td><p>Label name as character</p></td>
+    </tr>
+    <tr>
+      <th>login</th>
+      <td><p>User login as character</p></td>
     </tr>
     <tr>
       <th>number</th>
-      <td><p>Number of issue</p></td>
+      <td><p>Milestone number</p></td>
+    </tr>
+    <tr>
+      <th>created_date</th>
+      <td><p>Date as character in "YYYY-MM-DD" format</p></td>
+    </tr>
+    <tr>
+      <th>due_date</th>
+      <td><p>Date as character in "YYYY-MM-DD" format</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Content of GET request as list</p>
+    <p>Function to be passed as <code>in_progress_when</code> argument in <code><a href='viz_taskboard.html'>viz_taskboard()</a></code></p>
     
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <div class='dont-index'><p>Other issues: <code><a href='get_issue_comments.html'>get_issue_comments</a></code>,
-  <code><a href='get_issues.html'>get_issues</a></code>,
-  <code><a href='parse_issue_comments.html'>parse_issue_comments</a></code>,
-  <code><a href='parse_issue_events.html'>parse_issue_events</a></code>,
-  <code><a href='parse_issues.html'>parse_issues</a></code>, <code><a href='post_issue.html'>post_issue</a></code>,
-  <code><a href='report_discussion.html'>report_discussion</a></code>,
-  <code><a href='report_progress.html'>report_progress</a></code>,
-  <code><a href='viz_waterfall.html'>viz_waterfall</a></code></p>
-<p>Other events: <code><a href='parse_issue_events.html'>parse_issue_events</a></code></p></div>
+    <p>General options:</p>
+<ul>
+<li><p>is_created_before: Was created before a user-specified data (as "YYYY-MM-DD" character string)</p></li>
+</ul>
+    <p>Issue-specific options:</p>
+<ul>
+<li><p>is_labelled_with: User-specified label (as character string) exists</p></li>
+<li><p>is_assigned: Has been assigned to anyone</p></li>
+<li><p>is_assigned_to: Has been assigned to specific user-specified login (as character string)</p></li>
+<li><p>is_in_a_milestone: Has been put into any milestone</p></li>
+<li><p>is_in_milestone: Has been put into a specific milestone</p></li>
+</ul>
+    <p>Milestone-specific options:</p>
+<ul>
+<li><p>is_part_closed: Has any of its issues closed</p></li>
+<li><p>is_due: Has a due date</p></li>
+<li><p>is_due_before: Has a due data by or before a user-specified date (as "YYYY-MM-DD" character string)</p></li>
+</ul>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='no'>myrepo</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='create_repo_ref.html'>create_repo_ref</a></span>(<span class='st'>'emilyriederer'</span>, <span class='st'>'myrepo'</span>)
-<span class='no'>events_res</span> <span class='kw'>&lt;-</span> <span class='fu'>get_issue_events</span>(<span class='no'>myrepo</span>, <span class='kw'>number</span> <span class='kw'>=</span> <span class='fl'>1</span>)
-<span class='no'>events</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='parse_issue_events.html'>parse_issue_events</a></span>(<span class='no'>events_res</span>)
+<span class='fu'><a href='viz_taskboard.html'>viz_taskboard</a></span>(<span class='no'>issues</span>, <span class='kw'>in_progress_when</span> <span class='kw'>=</span> <span class='fu'>is_labelled_with</span>(<span class='st'>'in-progress'</span>))
+<span class='fu'><a href='viz_taskboard.html'>viz_taskboard</a></span>(<span class='no'>milestones</span>, <span class='kw'>in_progress_when</span> <span class='kw'>=</span> <span class='fu'>is_created_before</span>(<span class='st'>'2018-12-31'</span>))
+<span class='fu'><a href='viz_taskboard.html'>viz_taskboard</a></span>(<span class='no'>issues</span>, <span class='kw'>in_progress_when</span> <span class='kw'>=</span> <span class='fu'>is_in_milestone</span>())
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -169,7 +212,7 @@ to which the returned events correspond.</p>
       
       <li><a href="#value">Value</a></li>
 
-      <li><a href="#see-also">See also</a></li>
+      <li><a href="#details">Details</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

@@ -44,7 +44,7 @@ viz_gantt <- function(data, start = created_at, end = closed_at, str_wrap_width 
     data %>%
     dplyr::filter(!is.na(!!start_var)) %>%
     dplyr::arrange(dplyr::desc(!!start_var)) %>%
-    dplyr::mutate(gannt_y = factor(title, levels = title),
+    dplyr::mutate(gantt_y = factor(title, levels = title),
                   start_var = !!start_var,
                   end_var = !!end_var,
                   psuedo_start_var = dplyr::if_else(is.na(start_var), min(start_var, na.rm = TRUE), start_var),

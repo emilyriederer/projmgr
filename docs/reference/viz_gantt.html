@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Visualize Gannt-style chart of closed issues — viz_gantt • ghtrackr</title>
+<title>Visualize Gannt-style chart of planned or actual time to completion — viz_gantt • ghtrackr</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -32,11 +32,13 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Visualize Gannt-style chart of closed issues — viz_gantt" />
+<meta property="og:title" content="Visualize Gannt-style chart of planned or actual time to completion — viz_gantt" />
 
-<meta property="og:description" content="Produces plot of all closed issues from start date to end date, based on output of
-issues from get_issues() and parse_issues(). Plot
-has one row per issues spanning from start to end." />
+<meta property="og:description" content="Produces plot with one vertical bar from the specified start variable's value to the
+end variable's value. Common uses would be to visualize time-to-completion for issues
+gotten by (get_issues and parse_issues) or milestones. Bars are colored by
+duration with longer bars as a darker shade of blue, and start/completion is denoted by
+points at the ends of the bars." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -112,16 +114,18 @@ has one row per issues spanning from start to end." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Visualize Gannt-style chart of closed issues</h1>
+    <h1>Visualize Gannt-style chart of planned or actual time to completion</h1>
     <small class="dont-index">Source: <a href='https://github.com/emilyriederer/ghtrackr/blob/master/R/viz-gantt.R'><code>R/viz-gantt.R</code></a></small>
     <div class="hidden name"><code>viz_gantt.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Produces plot of all closed issues from start date to end date, based on output of
-issues from <code><a href='get_issues.html'>get_issues()</a></code> and <code><a href='parse_issues.html'>parse_issues()</a></code>. Plot
-has one row per issues spanning from <code>start</code> to <code>end</code>.</p>
+    <p>Produces plot with one vertical bar from the specified <code>start</code> variable's value to the
+<code>end</code> variable's value. Common uses would be to visualize time-to-completion for issues
+gotten by (<code>get_issues</code> and <code>parse_issues</code>) or milestones. Bars are colored by
+duration with longer bars as a darker shade of blue, and start/completion is denoted by
+points at the ends of the bars.</p>
     
     </div>
 
@@ -161,6 +165,9 @@ has one row per issues spanning from <code>start</code> to <code>end</code>.</p>
 the issue's <code>closed_at</code> date. However, either of these can be altered via the
 <code>start</code> and <code>end</code> parameters since these dates might not be reflective of the
 true timeframe (e.g. if issues are posted well in advance of work beginning.)</p>
+<p>Unfinished tasks (where the value of the <code>end</code> variable is <code>NA</code>) are colored grey and
+do not have dots on their bars. Unstarted tasks are dropped because user intent is ambiguous
+in that case.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 

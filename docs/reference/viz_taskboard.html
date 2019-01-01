@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Visualize Agile-style task board of issue status — viz_taskboard • ghtrackr</title>
+<title>Visualize Agile-style task board of item status — viz_taskboard • ghtrackr</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -32,12 +32,10 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Visualize Agile-style task board of issue status — viz_taskboard" />
+<meta property="og:title" content="Visualize Agile-style task board of item status — viz_taskboard" />
 
-<meta property="og:description" content="Produces three column task board of all issues categorized as &quot;Not Started&quot;, &quot;In Progress&quot;,
-or &quot;Done&quot;. When interativitity is enabled (by changing the  .interactive parameter
-from its default of FALSE), a tooltip is enabled to show the created_at date
-for each issue." />
+<meta property="og:description" content="Produces three column task board showing any relevant objects (typically issues or milestones)
+as &quot;Not Started&quot;, &quot;In Progress&quot;, or &quot;Done&quot;." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -113,32 +111,41 @@ for each issue." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Visualize Agile-style task board of issue status</h1>
+    <h1>Visualize Agile-style task board of item status</h1>
     <small class="dont-index">Source: <a href='https://github.com/emilyriederer/ghtrackr/blob/master/R/viz-taskboard.R'><code>R/viz-taskboard.R</code></a></small>
     <div class="hidden name"><code>viz_taskboard.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Produces three column task board of all issues categorized as "Not Started", "In Progress",
-or "Done". When interativitity is enabled (by changing the  <code>.interactive</code> parameter
-from its default of <code>FALSE</code>), a tooltip is enabled to show the <code>created_at</code> date
-for each issue.</p>
+    <p>Produces three column task board showing any relevant objects (typically issues or milestones)
+as "Not Started", "In Progress", or "Done".</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>viz_taskboard</span>(<span class='no'>issues</span>, <span class='kw'>str_wrap_width</span> <span class='kw'>=</span> <span class='fl'>20</span>)</pre>
+    <pre class="usage"><span class='fu'>viz_taskboard</span>(<span class='no'>data</span>, <span class='no'>in_progress_when</span>, <span class='kw'>str_wrap_width</span> <span class='kw'>=</span> <span class='fl'>30</span>,
+  <span class='kw'>text_size</span> <span class='kw'>=</span> <span class='fl'>3</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>issues</th>
-      <td><p>Issues dataset as produced by <code><a href='parse_issues.html'>parse_issues()</a></code></p></td>
+      <th>data</th>
+      <td><p>Dataset, such as those representing issues or milestones (i.e. from <code><a href='parse_issues.html'>parse_issues()</a></code>).
+Must have <code>state</code> variable.</p></td>
+    </tr>
+    <tr>
+      <th>in_progress_when</th>
+      <td><p>Function with parameter <code>data</code> that returns Boolean vector. Generally, one of the
+taskboard helper functions. See <code><a href='taskboard_helpers.html'>?taskboard_helpers</a></code> for details.</p></td>
     </tr>
     <tr>
       <th>str_wrap_width</th>
       <td><p>Number of characters before text of issue title begins to wrap</p></td>
+    </tr>
+    <tr>
+      <th>text_size</th>
+      <td><p>Text size</p></td>
     </tr>
     </table>
     
@@ -149,9 +156,9 @@ for each issue.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The following logic is used to determine the status of each issue:</p><ul>
-<li><p>Not Started: <code>closed_at</code> is NA and no <code>in-progress</code> label</p></li>
-<li><p>In Progress: <code>closed_at</code> is NA but <code>in-progress</code> label exists</p></li>
-<li><p>Done: <code>closed_at</code> is not NA</p></li>
+<li><p>Done: Items with a <code>state</code> of "closed"</p></li>
+<li><p>In Progress: Custom logic via <code>in_progress_when</code>. See <code><a href='taskboard_helpers.html'>?taskboard_helpers</a></code> for details.</p></li>
+<li><p>Not Started: Default case for items neither In Progress or Closed</p></li>
 </ul>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -162,7 +169,8 @@ for each issue.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='no'>issues</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_issues.html'>get_issues</a></span>(<span class='no'>myrepo</span>, <span class='kw'>milestone</span> <span class='kw'>=</span> <span class='fl'>1</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='parse_issues.html'>parse_issues</a></span>()
-<span class='fu'>viz_task_board</span>(<span class='no'>issues</span>)
+<span class='fu'>viz_taskboard</span>(<span class='no'>issues</span>, <span class='kw'>in_progress_when</span> <span class='kw'>=</span> <span class='fu'><a href='taskboard_helpers.html'>is_labelled_with</a></span>(<span class='st'>'in-progress'</span>))
+<span class='fu'>viz_taskboard</span>(<span class='no'>issues</span>, <span class='kw'>in_progress_when</span> <span class='kw'>=</span> <span class='fu'><a href='taskboard_helpers.html'>is_in_a_milestone</a></span>())
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
