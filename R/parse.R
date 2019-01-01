@@ -157,6 +157,7 @@ parse_milestones <- function(res){
                   n_open_issues = res[[.]]$open_issues,
                   n_closed_issues = res[[.]]$closed_issues,
                   state = res[[.]]$state,
+                  url = res[[.]]$html_url,
                   created_at = as.Date(substring(res[[.]]$created_at %||% NA, 1, 10)),
                   updated_at = as.Date(substring(res[[.]]$updated_at %||% NA, 1, 10)),
                   due_on = as.Date(substring(res[[.]]$due_on %||% NA,1,10)),
