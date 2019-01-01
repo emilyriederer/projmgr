@@ -1,7 +1,8 @@
-#' Visualize waterfall of issues opened, closed, and pending over timeframe
+#' Visualize waterfall of opened, closed, and pending items over timeframe
 #'
-#' Creates a four-bar waterfall diagram. Within the specified timeframe, shows initial issues,
-#' new issues opened, issues closed, and final open issues remaining.
+#' Creates a four-bar waterfall diagram. Within the specified timeframe, shows initial,
+#' newly opened, newly closed, and final open counts. Works with either issues or milestones,
+#' as obtained by the \code{get} and \code{parse} functions.
 #'
 #' The following logic is used to classify issues:
 #'
@@ -45,6 +46,11 @@
 viz_waterfall_state <- function(data,
                                    start_date, end_date,
                                    start = created_at, end = closed_at){
+
+  if(!grepl("\\d{4}-\\d{2}-\\d{2}", start_date) || !grepl("\\d{4}-\\d{2}-\\d{2}", end_date)){
+    stop("Invalid date format. Please format start_date and end_date as 'YYYY-MM-DD' ",
+         call. = FALSE)
+  }
 
   start_var <- enquo(start)
   end_var <- enquo(end)
