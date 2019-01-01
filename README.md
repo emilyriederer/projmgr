@@ -15,7 +15,7 @@ Just like communicating analytical results, good process communication is the ke
 
 ## Try before you buy!
 
-Want to find out more about `ghtrackr` before you commit? Check out the [package website](https://github.com/pages/emilyriederer/ghtrackr/).
+Want to find out more about `ghtrackr` before you commit? Check out the [package website](https://emilyriederer.github.io/ghtrackr/).
 
 ## Installation
 
