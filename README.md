@@ -3,7 +3,7 @@
 
 # ghtrackr <img src="man/figures/logo.png" align="right" height=140/>
 
-`ghtrackr` aims to better integrate project management into your workflow and free up time for more exciting taks like R coding and data analysis. Since many R users and programmers use GitHub as a home for their analysis, `ghtrackr` provides an easy interface to GitHub for project management.
+`ghtrackr` aims to better integrate project management into your workflow and free up time for more exciting tasks like R coding and data analysis. Since many R users and programmers use GitHub as a home for their analysis, `ghtrackr` provides an easy interface to GitHub for project management.
 
 Key functionalities include:
 
@@ -15,7 +15,7 @@ Just like communicating analytical results, good process communication is the ke
 
 ## Try before you buy!
 
-Want to find out more about `ghtrackr` before you commit? Check out the [package website](https://emilyriederer.github.io/ghtrackr/).
+Want to find out more about `ghtrackr` before you install? Check out the [package website](https://emilyriederer.github.io/ghtrackr/) for an overview of features and example use cases.
 
 ## Installation
 
