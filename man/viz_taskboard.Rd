@@ -16,9 +16,7 @@ ggplot object
 }
 \description{
 Produces three column task board of all issues categorized as "Not Started", "In Progress",
-or "Done". When interativitity is enabled (by changing the  \code{.interactive} parameter
-from its default of \code{FALSE}), a tooltip is enabled to show the \code{created_at} date
-for each issue.
+or "Done".
 }
 \details{
 The following logic is used to determine the status of each issue:
