@@ -32,7 +32,7 @@
 #'
 #'
 #' @return Function to be passed as \code{in_progress_when} argument in \code{viz_taskboard()}
-#' @name taskboard-helpers
+#' @name taskboard_helpers
 #'
 #' @examples
 #' \dontrun{
@@ -44,7 +44,7 @@ NULL
 
 #' @export
 #' @param label Label name as character
-#' @name taskboard-helpers
+#' @name taskboard_helpers
 is_labelled_with <- function(label){
   function(data){
     stopifnot("labels_name" %in% names(data))
@@ -53,7 +53,7 @@ is_labelled_with <- function(label){
 }
 
 #' @export
-#' @name taskboard-helpers
+#' @name taskboard_helpers
 is_assigned <- function(){
   function(data){
     stopifnot("assignees_login" %in% names(data))
@@ -63,7 +63,7 @@ is_assigned <- function(){
 
 #' @export
 #' @param login User login as character
-#' @name taskboard-helpers
+#' @name taskboard_helpers
 is_assigned_to <- function(login){
   function(data){
     stopifnot("assignees_login" %in% names(data))
@@ -72,7 +72,7 @@ is_assigned_to <- function(login){
 }
 
 #' @export
-#' @name taskboard-helpers
+#' @name taskboard_helpers
 is_in_a_milestone <- function(){
   function(data){
     stopifnot("milestone_number" %in% names(data))
@@ -82,7 +82,7 @@ is_in_a_milestone <- function(){
 
 #' @export
 #' @param number Milestone number
-#' @name taskboard-helpers
+#' @name taskboard_helpers
 is_in_milestone <- function(number){
   function(data){
     stopifnot("milestone_number" %in% names(data))
@@ -92,7 +92,7 @@ is_in_milestone <- function(number){
 
 #' @export
 #' @param created_date Date as character in "YYYY-MM-DD" format
-#' @name taskboard-helpers
+#' @name taskboard_helpers
 is_created_before <- function(created_date){
   function(data){
     stopifnot("created_at" %in% names(data))
@@ -101,7 +101,7 @@ is_created_before <- function(created_date){
 }
 
 #' @export
-#' @name taskboard-helpers
+#' @name taskboard_helpers
 is_part_closed <- function(){
   function(data){
     stopifnot("n_closed_issues" %in% names(data))
@@ -110,7 +110,7 @@ is_part_closed <- function(){
 }
 
 #' @export
-#' @name taskboard-helpers
+#' @name taskboard_helpers
 is_due <- function(){
   function(data){
     stopifnot("due_on" %in% names(data))
@@ -120,7 +120,7 @@ is_due <- function(){
 
 #' @export
 #' @param due_date Date as character in "YYYY-MM-DD" format
-#' @name taskboard-helpers
+#' @name taskboard_helpers
 is_due_before <- function(due_date){
   function(data){
     stopifnot("due_on" %in% names(data))
