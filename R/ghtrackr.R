@@ -15,8 +15,10 @@ globalVars <- c(
   # from viz:
   "created_at", "closed_at", "state", "id", "title", "id_label",
   "board_col", "board_pos", "number", "board_group", "label",
-  "dummy_var", "lag", "index", "base", "status",
-  "Initial", "Opened", "Closed", "Final", "n",
+  "dummy_var", "lag", "index", "base", "status", "gantt_y",
+  "psuedo_start_var", "psuedo_end_var", "taskboard_text",
+  "Initial", "Opened", "Closed", "Final", "n", "assignees_login",
+  "label", "login", "number", "date",
   # from tidyverse
   ".")
 
