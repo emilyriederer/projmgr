@@ -15,6 +15,7 @@
 #'     Must have \code{state} variable.
 #' @param in_progress_when Function with parameter \code{data} that returns Boolean vector. Generally, one of the
 #'  taskboard helper functions. See \code{?taskboard_helpers} for details.
+#' @param text_size Text size
 #'
 #' @return ggplot object
 #' @export
@@ -29,7 +30,7 @@
 #' viz_taskboard(issues, in_progress_when = is_in_a_milestone())
 #' }
 
-viz_taskboard <- function(data, in_progress_when, str_wrap_width = 20){
+viz_taskboard <- function(data, in_progress_when, str_wrap_width = 30, text_size = 3){
 
   stopifnot(is.function(in_progress_when))
 
@@ -56,7 +57,7 @@ viz_taskboard <- function(data, in_progress_when, str_wrap_width = 20){
   g <-
     ggplot(data, aes(x = 0, y = 0)) +
     geom_rect(aes(fill = board_group), xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf) +
-    geom_text(aes(label = taskboard_text)) +
+    geom_text(aes(label = taskboard_text), size = text_size) +
     facet_grid(board_pos ~ board_group, drop = FALSE, space = "fixed") +
     scale_fill_manual(values = c("Not Started" = "#F0E442",
                                  "In Progress" = "#56B4E9",
