@@ -44,7 +44,7 @@ viz_gantt <- function(data, start = created_at, end = closed_at, str_wrap_width 
     data %>%
     dplyr::filter(!is.na(!!start_var)) %>%
     dplyr::arrange(dplyr::desc(!!start_var)) %>%
-    dplyr::mutate(y = factor(title, levels = title),
+    dplyr::mutate(gannt_y = factor(title, levels = title),
                   start_var = !!start_var,
                   end_var = !!end_var,
                   psuedo_start_var = dplyr::if_else(is.na(start_var), min(start_var, na.rm = TRUE), start_var),
@@ -53,7 +53,7 @@ viz_gantt <- function(data, start = created_at, end = closed_at, str_wrap_width 
 
   g <-
     ggplot(plot_data,
-           aes(x = psuedo_start_var, xend = psuedo_end_var, y = y, yend = y,
+           aes(x = psuedo_start_var, xend = psuedo_end_var, y = gantt_y, yend = gantt_y,
                col = -1*as.integer(difftime(!!end_var, !!start_var, "days"))
            )) +
     geom_segment(size = 8) +
