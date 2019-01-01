@@ -1,10 +1,10 @@
 ---
-title: "Event and Project Management"
+title: "Event & Team Management"
 author: "Emily Riederer"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Event and Project Management}
+  %\VignetteIndexEntry{Event & Team Management}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -137,6 +137,10 @@ Finally, we can again use `purrr::walk()` to post the project plan to each GitHu
 ```{r eval = FALSE}
 purrr::walk(repo_refs, ~post_plan(., plan))
 ```
+
+Each repo is now populated with a set of milestones and related issues for the respective team to work through.
+
+![Example team repo](post_hack.png)
 
 ## Communication
 

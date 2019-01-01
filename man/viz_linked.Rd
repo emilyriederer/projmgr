@@ -7,7 +7,7 @@
 viz_linked(g, filepath)
 }
 \arguments{
-\item{g}{ggplot2 object returned by \code{viz_gantt_closed()} or \code{viz_taskboard()}}
+\item{g}{ggplot2 object returned by \code{viz_gantt()} or \code{viz_taskboard()}}
 
 \item{filepath}{Location to save resulting SVG file of ggplot2, if desired. Leave blank for
 function to output message precisely as needed to render in HTML RMarkdown with chunk
@@ -33,7 +33,7 @@ viz_linked(taskboard, "my_folder/my_file.svg")
 
 # In RMarkdown chunk, to print as output:
 ```{r results = 'asis', echo = FALSE}
-gantt <- viz_gantt_closed(issues)
+gantt <- viz_gantt(issues)
 viz_linked(gantt)
 ````
 }

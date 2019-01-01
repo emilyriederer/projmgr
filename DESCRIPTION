@@ -15,6 +15,7 @@ Description: Provides a highly abstracted wrapper for the GitHub
 License: MIT + file LICENSE
 URL: https://github.com/emilyriederer/ghtrackr
 BugReports: https://github.com/emilyriederer/ghtrackr/issues
+Depends: R (>= 3.1.2)
 Imports:
     dplyr,
     ggplot2,

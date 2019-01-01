@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-This vignette illustrates codeflows of `ghtrackr`'s core functionality.
+This vignette illustrates basic `ghtrackr` codeflows.
 
 ```{r}
 library(ghtrackr)
@@ -68,10 +68,10 @@ head(dplyr_issues)
 
 There are many different ways to visualize issues. 
 
-For reporting on time-to-completion, `viz_gantt_closed()` creates one horizontal bar per issue and colors issues by length of time open.
+For reporting on time-to-completion, `viz_gantt()` creates one horizontal bar per issue and colors issues by length of time open.
 
 ```{r}
-viz_gantt_closed(dplyr_issues)
+viz_gantt(dplyr_issues)
 ```
 
 `viz_taskboard()` creates an Agile-like taskboard of issues open, in progress, and completed.
@@ -87,15 +87,15 @@ viz_taskboard(dplyr_issues, 40)
 Either task boards or gantt plots can also be passed through `viz_linked` to add links to their text back to the relevant GitHub issues. This only works in RMarkdown with the `results = "asis"` option or saved to a file.
 
 ```{r results = 'asis'}
-g <- viz_gantt_closed(dplyr_issues)
+g <- viz_gantt(dplyr_issues)
 viz_linked(g)
 ```
 
 
-`viz_waterfall_issues()` creates a waterfall plot showing, for a fixed time-period, the initial count of open issues, the number of newly reported issues, the number of closed issues, and the final open count as the end of that time period. 
+`viz_waterfall_state()` creates a waterfall plot showing, for a fixed time-period, the initial count of open issues, the number of newly reported issues, the number of closed issues, and the final open count as the end of that time period. 
 
 ```{r}
-viz_waterfall_issues(dplyr_issues, '2014-01-01', '2015-01-01')
+viz_waterfall_state(dplyr_issues, '2014-01-01', '2015-01-01')
 ```
 
 ## Reporting On Issue Status

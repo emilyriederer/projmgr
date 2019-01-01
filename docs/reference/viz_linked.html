@@ -119,7 +119,7 @@ GitHub issue. This is currently implemented for viz_taskboard() and viz_gantt()"
     <div class="ref-description">
     
     <p>This function alters the internal representation of a plot to include links back to the actual
-GitHub issue. This is currently implemented for <code><a href='viz_taskboard.html'>viz_taskboard()</a></code> and <code>viz_gantt()</code></p>
+GitHub issue. This is currently implemented for <code><a href='viz_taskboard.html'>viz_taskboard()</a></code> and <code><a href='viz_gantt.html'>viz_gantt()</a></code></p>
     
     </div>
 
@@ -130,7 +130,7 @@ GitHub issue. This is currently implemented for <code><a href='viz_taskboard.htm
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>g</th>
-      <td><p>ggplot2 object returned by <code><a href='viz_gantt_closed.html'>viz_gantt_closed()</a></code> or <code><a href='viz_taskboard.html'>viz_taskboard()</a></code></p></td>
+      <td><p>ggplot2 object returned by <code><a href='viz_gantt.html'>viz_gantt()</a></code> or <code><a href='viz_taskboard.html'>viz_taskboard()</a></code></p></td>
     </tr>
     <tr>
       <th>filepath</th>
@@ -159,7 +159,7 @@ viz_linked(taskboard, "my_folder/my_file.svg")
 
 # In RMarkdown chunk, to print as output:
 ```{r results = 'asis', echo = FALSE}
-gantt <- viz_gantt_closed(issues)
+gantt <- viz_gantt(issues)
 viz_linked(gantt)
 ````
 # }

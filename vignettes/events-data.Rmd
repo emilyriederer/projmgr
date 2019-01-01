@@ -51,7 +51,7 @@ issue_events <-
 
 Events data, as returned by `get_issue_events()`, provides a much more granular view of the innerworkins of your GItHub repository. As opposed to the snapshot view returned by `get_issues()`, `get_issue_events()` provides specific times that key changes were made to each issue, such as the addition and deletion of labels and milestones. This is useful if the `created_at` date for your issues don't have intrinsic meaning with regard to when you started working on an issue. 
 
-For example, let's suppose we pull some issues from our repo and visualize their time-to-completion with `viz_gantt_closed()`.
+For example, let's suppose we pull some issues from our repo and visualize their time-to-completion with `viz_gantt()`.
 
 ```{r eval = FALSE}
 my_repo <- create_repo_ref('emilyriederer', 'my_repo')
@@ -59,7 +59,7 @@ issues <- get_issues(experigit, state = 'closed', milestone = 1) %>% parse_issue
 ```
 
 ```{r}
-viz_gantt_closed(issues)
+viz_gantt(issues)
 ```
 
 Issue 1 stands out as having taken a very long time. However, it's possible it was created a long time before anyone started actively working on it. Instead, we might want to consider the start time to be, for example, when an issue was tagged with the "in-progress label".
@@ -90,7 +90,7 @@ issue_with_events <- dplyr::inner_join(issues, issue_events, by = "number", suff
 Finally, we can use this new dataset to remark our plot by specifying the new `created_at_event` variable as the appropriate issue start date, via the optional `start` parameter.
 
 ```{r}
-viz_gantt_closed(issue_with_events, start = created_at_event)
+viz_gantt(issue_with_events, start = created_at_event)
 ```
 
 

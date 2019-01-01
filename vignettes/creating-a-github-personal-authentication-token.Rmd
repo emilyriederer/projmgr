@@ -72,3 +72,4 @@ GITHUB_PAT = 'asj382058235u0sdij0486jj205270d'
 GITHUB_ENT_PAT = 'djghdu830603jfhdktej3n4aj38090dj'
 ```
 
+The `create_repo_ref()` documentation and the basic usage vignette describes how to specify the name of the environment variable you wish to use if it is not the default `GITHUB_PAT`.

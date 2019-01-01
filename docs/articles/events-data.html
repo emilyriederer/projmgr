@@ -88,10 +88,10 @@
     
     
 <p>Events data, as returned by <code><a href="../reference/get_issue_events.html">get_issue_events()</a></code>, provides a much more granular view of the innerworkins of your GItHub repository. As opposed to the snapshot view returned by <code><a href="../reference/get_issues.html">get_issues()</a></code>, <code><a href="../reference/get_issue_events.html">get_issue_events()</a></code> provides specific times that key changes were made to each issue, such as the addition and deletion of labels and milestones. This is useful if the <code>created_at</code> date for your issues don’t have intrinsic meaning with regard to when you started working on an issue.</p>
-<p>For example, let’s suppose we pull some issues from our repo and visualize their time-to-completion with <code><a href="../reference/viz_gantt_closed.html">viz_gantt_closed()</a></code>.</p>
+<p>For example, let’s suppose we pull some issues from our repo and visualize their time-to-completion with <code><a href="../reference/viz_gantt.html">viz_gantt()</a></code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_repo &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_repo_ref.html">create_repo_ref</a></span>(<span class="st">'emilyriederer'</span>, <span class="st">'my_repo'</span>)
 issues &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_issues.html">get_issues</a></span>(experigit, <span class="dt">state =</span> <span class="st">'closed'</span>, <span class="dt">milestone =</span> <span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/parse_issues.html">parse_issues</a></span>()</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/viz_gantt_closed.html">viz_gantt_closed</a></span>(issues)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/viz_gantt.html">viz_gantt</a></span>(issues)</code></pre></div>
 <p><img src="events-data_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 <p>Issue 1 stands out as having taken a very long time. However, it’s possible it was created a long time before anyone started actively working on it. Instead, we might want to consider the start time to be, for example, when an issue was tagged with the “in-progress label”.</p>
 <p>We can get events for a specific issue with the following code.Due to the potentially massive size of this data, the function returns events for a single issue at a time and, thus, has a required <code>number</code> parameter to specify the issue for which events should be returned. As such, to events for multiple issues, we need to use <code><a href="https://purrr.tidyverse.org/reference/map.html">purrr::map()</a></code>.</p>
@@ -113,7 +113,7 @@ issues &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_
 <p>Next, we can join our datasets together.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">issue_with_events &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/join.html">inner_join</a></span>(issues, issue_events, <span class="dt">by =</span> <span class="st">"number"</span>, <span class="dt">suffix =</span> <span class="kw">c</span>(<span class="st">""</span>, <span class="st">"_event"</span>))</code></pre></div>
 <p>Finally, we can use this new dataset to remark our plot by specifying the new <code>created_at_event</code> variable as the appropriate issue start date, via the optional <code>start</code> parameter.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/viz_gantt_closed.html">viz_gantt_closed</a></span>(issue_with_events, <span class="dt">start =</span> created_at_event)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/viz_gantt.html">viz_gantt</a></span>(issue_with_events, <span class="dt">start =</span> created_at_event)</code></pre></div>
 <p><img src="events-data_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
   </div>
 

@@ -145,11 +145,14 @@ owner, the type (whether or not Enterprise GitHub), and potentially credentials 
     </tr>
     <tr>
       <th>hostname</th>
-      <td><p>Host URL stub for Enterprise repositories (e.g. if URL is "github.abc.com" then set to "abc")</p></td>
+      <td><p>Host URL stub for Enterprise repositories (e.g. "mycorp.github.com")</p></td>
     </tr>
     <tr>
       <th>identifier</th>
-      <td><p>GitHub username. Ideally should be left blank and then defaults to <code>GITHUB_PAT</code> or <code>GITHUB_ENT_PAT</code> environment variables if not provided.</p></td>
+      <td><p>Ideally should be left blank and defaults to using <code>GITHUB_PAT</code> or <code>GITHUB_ENT_PAT</code>
+environment variables as Personal Access Tokens. If <code>identifier</code> has a value and <code>password</code> does not,
+this is assumed to be an alternative name of the environment variable to use for your Personal Access Token. If
+<code>password</code> is also provided, this is interpretted as a username.</p></td>
     </tr>
     <tr>
       <th>password</th>

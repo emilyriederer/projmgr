@@ -22,8 +22,8 @@ articles:
     - git-github-introduction
     - creating-a-github-personal-authentication-token
     - design-notes
-  - title: "Interacting with GitHub Repositories"
-    desc: Tutotials related to with sending and receiving information with GitHub
+  - title: "Overview of Functionality"
+    desc: A survey of features and codeflows
     contents:
     - basic-usage
     - events-data
@@ -32,11 +32,11 @@ articles:
     desc: Demo of possible applications for personal projects, academia, and industry
     contents:
     - tracking-KPIs
-    - event-projmgt
     - analysis-projects
+    - event-mgt
+    - documenting-discussion
     - working-offline
     - reprex-clipr
-    - documenting-discussion
 
 reference:
 - title: Retrieval functions
