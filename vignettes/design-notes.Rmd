@@ -12,6 +12,7 @@ vignette: >
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
+  eval = FALSE,
   comment = "#>"
 )
 ```
@@ -20,34 +21,36 @@ This vignette details some key design choices in this package with the hope that
 
 ## Comparison to Alternatives
 
-This package is designed with a focus on project management and communication. This emphasis distinguishes it from some of the other excellent R packages which wrap the GitHub API. In short, this package focuses on the subset of GitHub API functionality most critical to project management, with an emphasis on communication and reporting of outcomes.
+This package is designed with a focus on project management and communication. This emphasis distinguishes it from some of the other excellent R packages which wrap the GitHub API. In short, this package focuses on the subset of GitHub API functionality most critical to project management and provides additional tooling to support communcation of planning and results.
 
 In particular:
 
-- [`gh`](https://github.com/r-lib/gh) descibes itself as a 'Minimalistic GitHub API client in R'. It is best-in-class for robustness and flexibility, but tends to expect slightly more from users in terms of understanding the GitHub API and providing inputs. Instead, this package attempts to be "maximalistic"; it does not support as wide of coverage over the GitHub API's features. Instead, it prioritizes supporting key project management tasks and strives to make that subset as easy as possible.
-- [`ghapiv3`](https://github.com/coatless/ghapi3) also strives to wrap `gh` for a user-friendly, higher-level interface to the GitHub API. However, much like `gh` is is again different from this package in that it provides broader support for the API but lacks the workflow-specific functionality.
-- [`ghclass`](https://github.com/rundel/ghclass/tree/master/R) is very similar in spirit. This package shares the goal of making a particular GitHub workflow easier. However, the workflow it is built to optimize is classroom management. It's worth noting that `ghclass` has some functionality that is complementary to this package, such as programmatically setting up groups of repositories.
-- [Project Management on GitHub](https://github.com/features/project-management/) provides GUI-based project management solutions that overlap with this package. However, this package provides a way to efficiently extract similiar information programmatically and share if with others (e.g. advisors, executives) who are not on GitHub.
+- [`gh`](https://github.com/r-lib/gh) descibes itself as a 'Minimalistic GitHub API client in R'. It is very robust and flexible (and powers this package!) but demands slightly more from users (e.g. understanding the GitHub API's endpoints). Instead, this package supports only a subset of the GitHub API. Instead, `ghtrackr` prioritizes making key project management tasks as friendly as possible.
+- [`ghapiv3`](https://github.com/coatless/ghapi3) also wraps `gh` for a user-friendly, higher-level interface to the GitHub API. However, like `gh`, it also provides broader support for the API but lacks the workflow-specific functionality.
+- [`ghclass`](https://github.com/rundel/ghclass/tree/master/R) shares the goal of streamlining a specific GitHub workflow easier. However, classroom management is the specific workflow it is built to improve. That said, `ghclass` has some complementary functions, such as programmatically setting up groups of repositories.
+- [Project Management on GitHub](https://github.com/features/project-management/) provides GUI-based project management solutions that overlap with this package. However, this package provides a way to efficiently extract similiar information programmatically and share if with others (e.g. advisors, executives) who do not use GitHub.
 
 ## Repo as First Class Citizen
 
-Repositories are treated as "first class" citizens. The first step to accessing or sending information is to create a repository reference using the `create_repo_ref()` function. The resulting object is the first element passed into all `get_` and `post_` functions.
+Repositories are "first class" citizens in `ghtrackr`. The first step to accessing or sending information is to create a repository reference using the `create_repo_ref()` function. The resulting object is the first element passed into all `get_` and `post_` functions.
 
 For users that work with databases in R with the `DBI` package, this codeflow is analogous to querying from a database. In this case, users first create a database connection object with `dbConnect()` which is passed into subsequent functions such as `dbGetQuery`.
 
-This decision was made under the assumption that working with a single repository would be the most common use case for individual users. Sometimes, users might instead wish for a view further up in the hierarchy, e.g. an organization object versus a repository object. Hopefully, it should be possible to achieve the same results as this would provide by mapping over a set of repositories.
+This decision was based on the assumption that the most common use case for `ghtrackr` would be interacting with a single repository at a time. Admittedly, some users may prefer a view further up in the hierarchy, e.g. an organization object versus a repository object. By providing lower-level building blocks, broader functionality can be achieved by mapping over a set of repositories. A code example is provided in the Event & Team Management vignette.
 
 ## Function Naming
 
-Functions generally conform to the popular `<verb>_<details>` convention, which is popular across many R packages. For functions interaction with the GitHub API, the `<verb>` component is the HTTP method invoked (e.g. GET, POST, DELETE). 
+Functions generally conform to the `<verb>_<details>` convention. For functions interaction with the GitHub API, the `<verb>` component is the HTTP method invoked (e.g. GET, POST, DELETE). 
 
-To users unfamiliar with APIs, verbs like "post" might seem less intuitive than a synonym like "create" or "submit". However, this convention describes the function's action most precisely and ideally also serves to raise awareness of HTTP methods.
+Verbs like "post" might seem less intuitive than a synonym like "create" or "submit" for users who have not worked with APIs previously. However, this convention describes the function's action most precisely and ideally also serves to raise awareness of HTTP methods.
 
 ## Function Parameters
 
-Functions that interact with GitHub's API demure to the naming conventions of that API. This ideally empowers users for future, direct work with the API or allows for easier maintenance.
+Functions that interact with GitHub's API demure to the naming conventions of that API. This ideally empowers users for future, direct work with the API and allows for easier maintenance.
 
-More specifically, parameters required by the GitHub API are required by the corresponding functions in this package. Any additionaly parameters not required by the GitHub API can be passed in through the `...`s. The `browse_docs()` function can be used to find out more about these optional parameters.
+More specifically, parameters required by the GitHub API are required by the corresponding functions in this package. Any additional parameters not required by the GitHub API can be passed in through the `...`s. The `help_{function name}` and `browse_docs()` functions can be used to find out more about the names and descriptions of these optional parameters.
+
+Two noteworthy exceptions are `get_issues()` and `get_milestones()`. In the GitHub API, there are separate endpoints for getting a single item (issue/milestone) or multiple items However, it seemed unneccesary to create separate functios for the single and plural versions. Instead, if either function is provided an argument for `number`, the single-item endpoint is used. Any other query parameters are then irrelevant and ignored. If no argument is provided for the `number` parameter, the multiple-item enpoint is used with allowed parameters given by `help_{function name}()`.
 
 ## Get-Parse Codeflow
 
@@ -60,18 +63,18 @@ issue_events <- get_issue_events(my_repo, number = 7) %>% parse_issue_events()
 milestones <- get_milestones(my_repo) %>% parse_milestones()
 ```
 
-However, the `get_` and `parse_` functions are provided separately to empower users. Some use cases where users may prefer to *not* use the provided `parse_` functions include if they:
+However, the `get_` and `parse_` functions are provided separately to empower users. Some use cases where users may prefer to *not* use the `parse_` functions include if they:
 
 - wish to understand the type of output returned by the API
 - prefer working with lists than dataframes
 - want to access information returned by the API that is not included in the `parse`d output
-- need a stop-gap solution should the GitHub API ever change until the `parse_` functions are updated accordingly
+- need a stop-gap solution if the GitHub API changes and the `parse_` functions have not been updated
 
-In rare cases, `get_` functions will return additional information not provided by the API to preserve data lineage. For example, `get_issue_events()` and `get_issue_comments()` include the issue number (provided as a required argument) in the output.
+In rare cases, `get_` functions will return additional information not provided by the API to preserve data lineage. For example, `get_issue_events()` and `get_issue_comments()` include the issue number (provided as a required function argument) in the output so users know to what issue they refer.
 
 ## Parse Output Variable Names
 
-In keeping with the [Function Parameters], the dataframe returned by `parse_` functions attempt to maintain the same field names as used by the GitHub API. However, there are a few key exceptions:
+The dataframe returned by `parse_` functions attempt to maintain the same field names as used by the GitHub API, similar to the conventions described in [Function Parameters]. However, there are a few key exceptions:
 
 - When the field name is ambiguous, additional information may be appended. 
     + For example, after getting an issue, the "comments" field contains the count of comments. Since the name might otherwise suggested that the text of the comments is being returned, the `parsed_` field is instead called "n_comments"

@@ -17,11 +17,9 @@ knitr::opts_chunk$set(
 )
 ```
 
-Many functions in `ghtrackr` require authentication to interface with external services. Specifically, any functions pulling information from GitHub (e.g. `get_issues`) or sending information to GitHub (e.g. `post_issue`) require authentication. Just like logging in on the website, this preserves the security of information within repositories and prevents outsides from altering said information. 
+Functions in `ghtrackr` that pull information from GitHub (e.g. `get_issues`) or send information to GitHub (e.g. `post_issue`) require credentials for authentication. Just like users are asked to provide a username and password when logging in to the GitHub's website, these credentials identify you, protect your information security, and prevent unauthorized parties from altering your information (among other API-specific purposes.) However, there are many reasons you won't want to send your username and password through these functions. First of all, it's inconvenient to type your credentials over and over. More importantly, it's generally a bad idea to hardcode your password; you might accidentally sharing a script that has your password in it. 
 
-However, there are many reasons you won't want to send your username and password through these functions. First of all, it's inconvenient to type your credentials over and over. More critically, you might accidentally end up sharing a script that has your password in it. 
-
-This vignette describes a better approach to authentication that is both easier and safer: the personal access token (PAT). At a high level, this is a random string of characters GitHub assigns to you and you alone. By saving this in your R environment, `ghtrackr` can automatically provide this variable to GitHub instead of your login for better safety and efficiency. 
+An easier and safer approach to authentication is the personal access token (PAT). At a high level, this is a random string of characters GitHub assigns to you and you alone. By saving this in your R environment, `ghtrackr` can automatically provide this variable to GitHub instead of your login for better safety and efficiency. 
 
 For more information beyond this vignette, check out the relevant section of Jenny Bryan's [Happy Git with R](http://happygitwithr.com/github-pat.html) ebook.
 
@@ -72,4 +70,4 @@ GITHUB_PAT = 'asj382058235u0sdij0486jj205270d'
 GITHUB_ENT_PAT = 'djghdu830603jfhdktej3n4aj38090dj'
 ```
 
-The `create_repo_ref()` documentation and the basic usage vignette describes how to specify the name of the environment variable you wish to use if it is not the default `GITHUB_PAT`.
+The `create_repo_ref()` documentation and the Basic Usage vignette describe how to specify the name of the environment variable containing your PAT if it is not one of the defaults.

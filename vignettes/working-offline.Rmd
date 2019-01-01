@@ -1,10 +1,10 @@
 ---
 title: "Working Offline"
-author: "Vignette Author"
+author: "Emily Riederer"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Working Offline}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -16,9 +16,9 @@ knitr::opts_chunk$set(
 )
 ```
 
-Sometimes, we have to work offline when traveling or dealing with a bad internet connection. Othertimes, we may prefer to work offline to focus more effectively on a single task. Regardless, while playing in R, you might discovered new bugs or think of new features and need a way to jot them down.
+`ghtrackr` allows you to collect issues when working offline and easily post them to a repository later. This provides a productivity boost when you're forced offline by travel or a bad internet connection or prefer to be offline to minimize distractions. 
 
-This is one benefit of custom to-do lists. For example, as you encounter new issues, you can keep a running list of them as YAML. (This can be done either by assigning to an R variable or by saving a separate .yml file. Please see the vignette on Custom Plans for more details.)
+Issues can be collected either as a dataframe (and posted with code similar to that shown in the KPI Tracking vignette) or as a to-do list. For example, as you encounter new issues, you can keep a running list of them as YAML. (This can be done either by assigning to an R variable or by saving a separate .yml file. Please see the vignette on Custom Plans for more details.)
 
 ```{r}
 todo_yaml <- "
@@ -39,7 +39,7 @@ todo <- read_todo(todo_yaml)
 post_todo(repo, todo)
 ```
 
-Of course, if you have an internet connection, posting issues from R can also help you resist the temptation to go online and get distracted. As you think of new issues, you can simply just post them from the console. For example:
+Of course, even if you have an internet connection, posting issues from R can also help you resist the temptation to go online and get distracted. As you think of new issues, you can simply just post them from the console. For example:
 
 ```{r eval = FALSE}
 post_issue(

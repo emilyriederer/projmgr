@@ -87,11 +87,11 @@
 
     
     
-<p>The power of the <code>post</code> functions generally comes not when filing one-off issues but when automating a bulk upload of issues. One case where this could be useful is when using GitHub as a management platform for business metrics tracking.</p>
+<p>The utility of the <code>post</code> functions generally come not when filing one-off issues but when automating a bulk upload of issues. One use case for this is when using GitHub as a management platform for business metrics tracking.</p>
 <div id="tracking-kpis" class="section level2">
 <h2 class="hasAnchor">
 <a href="#tracking-kpis" class="anchor"></a>Tracking KPIs</h2>
-<p>As a toy example, suppose an analyst is already using R to report quarterly sales data and look for anomalous performance. After some wrangling, their data might look something like this.</p>
+<p>As a toy example, suppose an analyst is already using R to report quarterly sales data and look for anomalous performance. After some wrangling, suppose their data looks something like this.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(sales_data)
 <span class="co">#&gt;      region   month sales_amt sales_expected</span>
 <span class="co">#&gt; 1 Northeast October      3144           5000</span>
@@ -99,7 +99,7 @@
 <span class="co">#&gt; 3   Midwest October      4204           4000</span>
 <span class="co">#&gt; 4 Southwest October      7442           4000</span>
 <span class="co">#&gt; 5 Northwest October      2470           2000</span></code></pre></div>
-<p>Assume they have some criterion to determine how much of a difference between their KPIs and expectations should warrant further investigation. For simplicity here, we will simply use a deviation of more than 25%. In this case, that yield two regions.</p>
+<p>Assume they have some criterion to determine how much of a difference between actual metrics and expectations warrants further investigation. For simplicity in this example, we will look at observations exceeding 25% error. In this case, that yield two regions.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">deviations &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(sales_data, <span class="kw">abs</span>(sales_amt <span class="op">-</span><span class="st"> </span>sales_expected) <span class="op">&gt;=</span><span class="st"> </span><span class="fl">0.25</span> <span class="op">*</span><span class="st"> </span>sales_expected )
 deviations
 <span class="co">#&gt;      region   month sales_amt sales_expected</span>

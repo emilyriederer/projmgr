@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 library(ghtrackr)
 ```
 
-If your GitHub issue is home to important discussions regarding your analysis, you may wish to save an immutable copy of these offline for documentation. For example, consider this important discussion:
+If the comments of a  GitHub issue contain an important discussions regarding your analysis, you may wish to save an immutable copy of this conversation for documentation. For example, consider this important discussion:
 
 ![GitHub issue with comments](report_discussion.PNG)
 
@@ -47,7 +47,7 @@ Next, simply pass these into the `report_discussion()` function to generate a fo
 report_discussion(comments, issues)
 ```
 
-Note that the `issues` dataframe is optional. You can pass only the comments in for documentation, but you do risk missing out on important context.
+Note that the `issues` dataframe is optional. You can pass only the comments in for documentation, but you do risk missing out on important context from the issue description and metadata.
 
 ```{r}
 report_discussion(comments)

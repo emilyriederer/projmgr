@@ -20,7 +20,7 @@ articles:
     desc: Introduction to tools, set-up, and design
     contents:
     - git-github-introduction
-    - creating-a-github-personal-authentication-token
+    - github-pat
     - design-notes
   - title: "Overview of Functionality"
     desc: A survey of features and codeflows
@@ -36,8 +36,8 @@ articles:
     - analysis-projects
     - event-mgt
     - documenting-discussion
-    - working-offline
     - reprex-clipr
+    - working-offline
 
 reference:
 - title: Retrieval functions

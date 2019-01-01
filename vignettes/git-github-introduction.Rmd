@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-Using git for version control and GitHub for project managmenet and collaboration can massively improve your data workflow. If you are new to these tools, here are some great resources to get started. 
+Using git for version control and GitHub for project managmenet and collaboration can massively improve your analysis workflow. If you are new to these tools, here are some great resources to get started. 
 
 ## Learning Git
 
@@ -32,11 +32,11 @@ Jenny Bryan's paper [Excuse me, do you have a moment to talk about version contr
 
 GitHub's [webcast on Project Management](https://www.youtube.com/watch?v=6fByt0o4UYs) (Note: this is from 2015 so some information on feature may be outdated. However, it remains a good high-level overview.)
 
-GitHub's [Learning Lab](http://happygitwithr.com/) with guided exercises for different features of its platform
+GitHub's [Learning Lab](https://lab.github.com/) with guided exercises for different features of its platform
 
 ## Working Reproducibly
 
-Using Git and GitHub are important pieces to having a comprehensive reproducible workflow. This can make you more efficient and accurate. To understand how GitHub fits into this, check out these great papers.
+Using Git and GitHub are important pieces to having a comprehensive reproducible workflow. This can make your work more accurate, efficient, and sharable. To understand how git and GitHub fit into this, check out these papers.
 
 Greg Wilson (et al)'s paper [Good Enough Practices for Scientific Computing](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510)
 

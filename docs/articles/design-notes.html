@@ -91,37 +91,38 @@
 <div id="comparison-to-alternatives" class="section level2">
 <h2 class="hasAnchor">
 <a href="#comparison-to-alternatives" class="anchor"></a>Comparison to Alternatives</h2>
-<p>This package is designed with a focus on project management and communication. This emphasis distinguishes it from some of the other excellent R packages which wrap the GitHub API. In short, this package focuses on the subset of GitHub API functionality most critical to project management, with an emphasis on communication and reporting of outcomes.</p>
+<p>This package is designed with a focus on project management and communication. This emphasis distinguishes it from some of the other excellent R packages which wrap the GitHub API. In short, this package focuses on the subset of GitHub API functionality most critical to project management and provides additional tooling to support communcation of planning and results.</p>
 <p>In particular:</p>
 <ul>
 <li>
-<a href="https://github.com/r-lib/gh"><code>gh</code></a> descibes itself as a ‘Minimalistic GitHub API client in R’. It is best-in-class for robustness and flexibility, but tends to expect slightly more from users in terms of understanding the GitHub API and providing inputs. Instead, this package attempts to be “maximalistic”; it does not support as wide of coverage over the GitHub API’s features. Instead, it prioritizes supporting key project management tasks and strives to make that subset as easy as possible.</li>
+<a href="https://github.com/r-lib/gh"><code>gh</code></a> descibes itself as a ‘Minimalistic GitHub API client in R’. It is very robust and flexible (and powers this package!) but demands slightly more from users (e.g. understanding the GitHub API’s endpoints). Instead, this package supports only a subset of the GitHub API. Instead, <code>ghtrackr</code> prioritizes making key project management tasks as friendly as possible.</li>
 <li>
-<a href="https://github.com/coatless/ghapi3"><code>ghapiv3</code></a> also strives to wrap <code>gh</code> for a user-friendly, higher-level interface to the GitHub API. However, much like <code>gh</code> is is again different from this package in that it provides broader support for the API but lacks the workflow-specific functionality.</li>
+<a href="https://github.com/coatless/ghapi3"><code>ghapiv3</code></a> also wraps <code>gh</code> for a user-friendly, higher-level interface to the GitHub API. However, like <code>gh</code>, it also provides broader support for the API but lacks the workflow-specific functionality.</li>
 <li>
-<a href="https://github.com/rundel/ghclass/tree/master/R"><code>ghclass</code></a> is very similar in spirit. This package shares the goal of making a particular GitHub workflow easier. However, the workflow it is built to optimize is classroom management. It’s worth noting that <code>ghclass</code> has some functionality that is complementary to this package, such as programmatically setting up groups of repositories.</li>
+<a href="https://github.com/rundel/ghclass/tree/master/R"><code>ghclass</code></a> shares the goal of streamlining a specific GitHub workflow easier. However, classroom management is the specific workflow it is built to improve. That said, <code>ghclass</code> has some complementary functions, such as programmatically setting up groups of repositories.</li>
 <li>
-<a href="https://github.com/features/project-management/">Project Management on GitHub</a> provides GUI-based project management solutions that overlap with this package. However, this package provides a way to efficiently extract similiar information programmatically and share if with others (e.g. advisors, executives) who are not on GitHub.</li>
+<a href="https://github.com/features/project-management/">Project Management on GitHub</a> provides GUI-based project management solutions that overlap with this package. However, this package provides a way to efficiently extract similiar information programmatically and share if with others (e.g. advisors, executives) who do not use GitHub.</li>
 </ul>
 </div>
 <div id="repo-as-first-class-citizen" class="section level2">
 <h2 class="hasAnchor">
 <a href="#repo-as-first-class-citizen" class="anchor"></a>Repo as First Class Citizen</h2>
-<p>Repositories are treated as “first class” citizens. The first step to accessing or sending information is to create a repository reference using the <code><a href="../reference/create_repo_ref.html">create_repo_ref()</a></code> function. The resulting object is the first element passed into all <code>get_</code> and <code>post_</code> functions.</p>
+<p>Repositories are “first class” citizens in <code>ghtrackr</code>. The first step to accessing or sending information is to create a repository reference using the <code><a href="../reference/create_repo_ref.html">create_repo_ref()</a></code> function. The resulting object is the first element passed into all <code>get_</code> and <code>post_</code> functions.</p>
 <p>For users that work with databases in R with the <code>DBI</code> package, this codeflow is analogous to querying from a database. In this case, users first create a database connection object with <code>dbConnect()</code> which is passed into subsequent functions such as <code>dbGetQuery</code>.</p>
-<p>This decision was made under the assumption that working with a single repository would be the most common use case for individual users. Sometimes, users might instead wish for a view further up in the hierarchy, e.g. an organization object versus a repository object. Hopefully, it should be possible to achieve the same results as this would provide by mapping over a set of repositories.</p>
+<p>This decision was based on the assumption that the most common use case for <code>ghtrackr</code> would be interacting with a single repository at a time. Admittedly, some users may prefer a view further up in the hierarchy, e.g. an organization object versus a repository object. By providing lower-level building blocks, broader functionality can be achieved by mapping over a set of repositories. A code example is provided in the Event &amp; Team Management vignette.</p>
 </div>
 <div id="function-naming" class="section level2">
 <h2 class="hasAnchor">
 <a href="#function-naming" class="anchor"></a>Function Naming</h2>
-<p>Functions generally conform to the popular <code>&lt;verb&gt;_&lt;details&gt;</code> convention, which is popular across many R packages. For functions interaction with the GitHub API, the <code>&lt;verb&gt;</code> component is the HTTP method invoked (e.g. GET, POST, DELETE).</p>
-<p>To users unfamiliar with APIs, verbs like “post” might seem less intuitive than a synonym like “create” or “submit”. However, this convention describes the function’s action most precisely and ideally also serves to raise awareness of HTTP methods.</p>
+<p>Functions generally conform to the <code>&lt;verb&gt;_&lt;details&gt;</code> convention. For functions interaction with the GitHub API, the <code>&lt;verb&gt;</code> component is the HTTP method invoked (e.g. GET, POST, DELETE).</p>
+<p>Verbs like “post” might seem less intuitive than a synonym like “create” or “submit” for users who have not worked with APIs previously. However, this convention describes the function’s action most precisely and ideally also serves to raise awareness of HTTP methods.</p>
 </div>
 <div id="function-parameters" class="section level2">
 <h2 class="hasAnchor">
 <a href="#function-parameters" class="anchor"></a>Function Parameters</h2>
-<p>Functions that interact with GitHub’s API demure to the naming conventions of that API. This ideally empowers users for future, direct work with the API or allows for easier maintenance.</p>
-<p>More specifically, parameters required by the GitHub API are required by the corresponding functions in this package. Any additionaly parameters not required by the GitHub API can be passed in through the <code>...</code>s. The <code><a href="../reference/browse_docs.html">browse_docs()</a></code> function can be used to find out more about these optional parameters.</p>
+<p>Functions that interact with GitHub’s API demure to the naming conventions of that API. This ideally empowers users for future, direct work with the API and allows for easier maintenance.</p>
+<p>More specifically, parameters required by the GitHub API are required by the corresponding functions in this package. Any additional parameters not required by the GitHub API can be passed in through the <code>...</code>s. The <code>help_{function name}</code> and <code><a href="../reference/browse_docs.html">browse_docs()</a></code> functions can be used to find out more about the names and descriptions of these optional parameters.</p>
+<p>Two noteworthy exceptions are <code><a href="../reference/get_issues.html">get_issues()</a></code> and <code><a href="../reference/get_milestones.html">get_milestones()</a></code>. In the GitHub API, there are separate endpoints for getting a single item (issue/milestone) or multiple items However, it seemed unneccesary to create separate functios for the single and plural versions. Instead, if either function is provided an argument for <code>number</code>, the single-item endpoint is used. Any other query parameters are then irrelevant and ignored. If no argument is provided for the <code>number</code> parameter, the multiple-item enpoint is used with allowed parameters given by <code>help_{function name}()</code>.</p>
 </div>
 <div id="get-parse-codeflow" class="section level2">
 <h2 class="hasAnchor">
@@ -131,19 +132,19 @@
 issues &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_issues.html">get_issues</a></span>(my_repo, <span class="dt">state =</span> <span class="st">'all'</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/parse_issues.html">parse_issues</a></span>()
 issue_events &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_issue_events.html">get_issue_events</a></span>(my_repo, <span class="dt">number =</span> <span class="dv">7</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/parse_issue_events.html">parse_issue_events</a></span>()
 milestones &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_milestones.html">get_milestones</a></span>(my_repo) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/parse_milestones.html">parse_milestones</a></span>()</code></pre></div>
-<p>However, the <code>get_</code> and <code>parse_</code> functions are provided separately to empower users. Some use cases where users may prefer to <em>not</em> use the provided <code>parse_</code> functions include if they:</p>
+<p>However, the <code>get_</code> and <code>parse_</code> functions are provided separately to empower users. Some use cases where users may prefer to <em>not</em> use the <code>parse_</code> functions include if they:</p>
 <ul>
 <li>wish to understand the type of output returned by the API</li>
 <li>prefer working with lists than dataframes</li>
 <li>want to access information returned by the API that is not included in the <code>parse</code>d output</li>
-<li>need a stop-gap solution should the GitHub API ever change until the <code>parse_</code> functions are updated accordingly</li>
+<li>need a stop-gap solution if the GitHub API changes and the <code>parse_</code> functions have not been updated</li>
 </ul>
-<p>In rare cases, <code>get_</code> functions will return additional information not provided by the API to preserve data lineage. For example, <code><a href="../reference/get_issue_events.html">get_issue_events()</a></code> and <code><a href="../reference/get_issue_comments.html">get_issue_comments()</a></code> include the issue number (provided as a required argument) in the output.</p>
+<p>In rare cases, <code>get_</code> functions will return additional information not provided by the API to preserve data lineage. For example, <code><a href="../reference/get_issue_events.html">get_issue_events()</a></code> and <code><a href="../reference/get_issue_comments.html">get_issue_comments()</a></code> include the issue number (provided as a required function argument) in the output so users know to what issue they refer.</p>
 </div>
 <div id="parse-output-variable-names" class="section level2">
 <h2 class="hasAnchor">
 <a href="#parse-output-variable-names" class="anchor"></a>Parse Output Variable Names</h2>
-<p>In keeping with the <a href="#function-parameters">Function Parameters</a>, the dataframe returned by <code>parse_</code> functions attempt to maintain the same field names as used by the GitHub API. However, there are a few key exceptions:</p>
+<p>The dataframe returned by <code>parse_</code> functions attempt to maintain the same field names as used by the GitHub API, similar to the conventions described in <a href="#function-parameters">Function Parameters</a>. However, there are a few key exceptions:</p>
 <ul>
 <li>When the field name is ambiguous, additional information may be appended.
 <ul>

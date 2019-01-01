@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Integrating reprex and clipr • ghtrackr</title>
+<title>Bug reporting with reprex • ghtrackr</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
-<meta property="og:title" content="Integrating reprex and clipr">
+<meta property="og:title" content="Bug reporting with reprex">
 <meta property="og:description" content="">
 <meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
@@ -75,7 +75,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Integrating reprex and clipr</h1>
+      <h1>Bug reporting with reprex</h1>
                         <h4 class="author">Emily Riederer</h4>
             
             <h4 class="date">2019-01-01</h4>
@@ -87,22 +87,17 @@
 
     
     
-<p><a href="https://www.tidyverse.org/help/"><code>reprex</code></a> is a great package to help package users and developers communicate by allowing for the sharing of reproducible examples.</p>
-<p><code>ghtrackr</code> can play along with <code>reprex</code> by facilitating posting reprexes to repos as well as pulling them back down to evaluate them.</p>
-<div id="posting-reprexes" class="section level2">
-<h2 class="hasAnchor">
-<a href="#posting-reprexes" class="anchor"></a>Posting reprexes</h2>
+<p>The <a href="https://www.tidyverse.org/help/"><code>reprex</code></a> package creates reproducible examples of code bugs to be shared in GitHub issues. <code>ghtrackr</code> plays nice with <code>reprex</code> to help post reproducible examples and pull them back down for evaluation. ## Posting reprexes</p>
 <p>Much like other types of issues, <code>ghtrackr</code> make it easy to post issues containing reprexes to GitHub.</p>
 <p>For example, suppose you have the problematic code on your clipboard, open in a file, or somewhere that <code>reprex</code> can find it (refer to the <code>reprex</code> package documentation for details). You could post this as the body of an issue with the following code:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">reprex<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/reprex/topics/reprex">reprex</a></span>(<span class="dt">venue =</span> <span class="st">"gh"</span>)
 <span class="kw"><a href="../reference/post_issue.html">post_issue</a></span>(ghtrackr,
            <span class="dt">title =</span> <span class="st">"this is a descriptive title of my issue"</span>,
            <span class="dt">body =</span> <span class="kw">paste</span>( clipr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/clipr/topics/read_clip">read_clip</a></span>(), <span class="dt">collapse =</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>) )</code></pre></div>
-</div>
 <div id="getting-and-running-reprexes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#getting-and-running-reprexes" class="anchor"></a>Getting and running reprexes</h2>
-<p>Suppose you see on GitHub that a user posted an issue, say number 82, with a reprex. Admittedly, you could just copy this directly from GitHub like a sane person. However, should you wish to do this with <code>ghtrackr</code>, you can!</p>
+<p>Suppose you see on GitHub that a user posted an issue, say number 82, with a reprex. You can use <code>ghtracker</code> to copy and run their code back in R. (Admittedly, its hard to imagine this has significant benefits over copying from GitHub.)</p>
 <p>For example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="co"># get issue in question from repo</span>
@@ -124,8 +119,7 @@ reprex<span class="op">::</span><span class="kw"><a href="http://www.rdocumentat
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#posting-reprexes">Posting reprexes</a></li>
-      <li><a href="#getting-and-running-reprexes">Getting and running reprexes</a></li>
+<li><a href="#getting-and-running-reprexes">Getting and running reprexes</a></li>
       </ul>
 </div>
       </div>

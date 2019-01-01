@@ -76,7 +76,7 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Working Offline</h1>
-                        <h4 class="author">Vignette Author</h4>
+                        <h4 class="author">Emily Riederer</h4>
             
             <h4 class="date">2019-01-01</h4>
       
@@ -87,8 +87,8 @@
 
     
     
-<p>Sometimes, we have to work offline when traveling or dealing with a bad internet connection. Othertimes, we may prefer to work offline to focus more effectively on a single task. Regardless, while playing in R, you might discovered new bugs or think of new features and need a way to jot them down.</p>
-<p>This is one benefit of custom to-do lists. For example, as you encounter new issues, you can keep a running list of them as YAML. (This can be done either by assigning to an R variable or by saving a separate .yml file. Please see the vignette on Custom Plans for more details.)</p>
+<p><code>ghtrackr</code> allows you to collect issues when working offline and easily post them to a repository later. This provides a productivity boost when you’re forced offline by travel or a bad internet connection or prefer to be offline to minimize distractions.</p>
+<p>Issues can be collected either as a dataframe (and posted with code similar to that shown in the KPI Tracking vignette) or as a to-do list. For example, as you encounter new issues, you can keep a running list of them as YAML. (This can be done either by assigning to an R variable or by saving a separate .yml file. Please see the vignette on Custom Plans for more details.)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">todo_yaml &lt;-<span class="st"> "</span>
 <span class="st">- title: Add update functions</span>
 <span class="st">  body: Issue labels especially could benefit by PATCH or POST/DELETE functionality</span>
@@ -101,7 +101,7 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">repo &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_repo_ref.html">create_repo_ref</a></span>(<span class="st">"emilyriederer"</span>, <span class="st">"my_gh_repo"</span>)
 todo &lt;-<span class="st"> </span><span class="kw"><a href="../reference/read_todo.html">read_todo</a></span>(todo_yaml)
 <span class="kw"><a href="../reference/post_todo.html">post_todo</a></span>(repo, todo)</code></pre></div>
-<p>Of course, if you have an internet connection, posting issues from R can also help you resist the temptation to go online and get distracted. As you think of new issues, you can simply just post them from the console. For example:</p>
+<p>Of course, even if you have an internet connection, posting issues from R can also help you resist the temptation to go online and get distracted. As you think of new issues, you can simply just post them from the console. For example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/post_issue.html">post_issue</a></span>(
   <span class="dt">title =</span> <span class="st">'Add YAML validators to read_ functions'</span>,
   <span class="dt">body =</span> <span class="st">'read_ functions should check for correct plan structure (field names &amp; relationships)'</span>,

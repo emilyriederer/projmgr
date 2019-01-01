@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 library(dplyr)
 ```
 
-The power of the `post` functions generally comes not when filing one-off issues but when automating a bulk upload of issues. One case where this could be useful is when using GitHub as a management platform for business metrics tracking. 
+The utility of the `post` functions generally come not when filing one-off issues but when automating a bulk upload of issues. One use case for this is when using GitHub as a management platform for business metrics tracking. 
 
 ## Tracking KPIs
 
@@ -34,13 +34,13 @@ sales_data <- data.frame(
 )
 ```
 
-As a toy example, suppose an analyst is already using R to report quarterly sales data and look for anomalous performance. After some wrangling, their data might look something like this.
+As a toy example, suppose an analyst is already using R to report quarterly sales data and look for anomalous performance. After some wrangling, suppose their data looks something like this.
 
 ```{r}
 head(sales_data)
 ```
 
-Assume they have some criterion to determine how much of a difference between their KPIs and expectations should warrant further investigation. For simplicity here, we will simply use a deviation of more than 25%. In this case, that yield two regions. 
+Assume they have some criterion to determine how much of a difference between actual metrics and expectations warrants further investigation. For simplicity in this example, we will look at observations exceeding 25% error. In this case, that yield two regions. 
 
 ```{r}
 deviations <- dplyr::filter(sales_data, abs(sales_amt - sales_expected) >= 0.25 * sales_expected )
