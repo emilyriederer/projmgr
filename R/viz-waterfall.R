@@ -34,16 +34,16 @@
 #'
 #' @examples
 #' \dontrun{
-#' viz_waterfall_state(issues, '2017-01-01', '2017-03-31')
+#' viz_waterfall(milestones, '2017-01-01', '2017-03-31')
 #' }
 #' \dontrun{
 #' issues %>%
 #' dplyr::group_by(milestone) %>%
-#' viz_waterfall_state('2017-01-01', '2017-03-31') +
+#' viz_waterfall('2017-01-01', '2017-03-31') +
 #' facet_grid(milestone ~ .)
 #' }
 
-viz_waterfall_state <- function(data,
+viz_waterfall <- function(data,
                                    start_date, end_date,
                                    start = created_at, end = closed_at){
 
