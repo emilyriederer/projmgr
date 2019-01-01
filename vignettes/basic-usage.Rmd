@@ -31,6 +31,33 @@ The first step to interacting with a GitHub repository is creating a repository 
 dplyr <- create_repo_ref('tidyverse', 'dplyr')
 ```
 
+Note that this function has many additional parameters that you can specify as needed. For example:
+
+- if you are using GitHub Enterprise, set `is_enterprise = TRUE` and pass your company's internal GitHub URL in through `hostname`
+- if you personal access tokens are stored in environment variables with a different name than GITHUB_PAT (or GITHUB_PAT_ENT when `is_enterprise = TRUE`), the name you used can be passed through `hostname`
+
+The `check_` family of functions provide some basic validations that everything is working.
+
+`check_internet()` tests for problems connecting to the internet.
+
+```{r}
+check_internet()
+```
+
+
+`check_credentials()` confirms the login associated with the PAT and describes the level of access that PAT have to the specified repo.
+
+```{r}
+check_credentials(dplyr)
+```
+
+`check_rate_limit()` checks how many more API requests you can send and when that count will reset. Note that this accepts a repo reference as a parameter *only to get authentication information for an account*. Limits to requests are established at the account-level not the repository level.
+
+```{r}
+check_rate_limit(dplyr)
+```
+
+
 ## Getting Issues
 
 `get_` functions retrieve information from the GitHub API. The first argument is the repository reference and additional named query parameters can be passed subsequently. For example, here, we request issues of the first `milestone` with either an open or closed `state`. (Note that, in keeping with the GitHub API, only open issues are returned when `state` is not specified.)
