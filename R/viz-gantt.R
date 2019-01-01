@@ -9,7 +9,9 @@
 #' \code{start} and \code{end} parameters since these dates might not be reflective of the
 #' true timeframe (e.g. if issues are posted well in advance of work beginning.)
 #'
-#' @param data Issues dataset as produced by \code{parse_issues()} or \code{parse_milestones()}
+#' @param data Dataset, such as those representing issues or milestones (i.e. \code{parse_issues()} or
+#'     \code{parse_milestones()}). Must have unique \code{title} variable and variables  to specify for
+#'     \code{start} and \code{end}
 #' @param start Unquoted variable name denoting issue start date
 #' @param end Unquoted variable name denoting issue end date
 #' @param str_wrap_width Number of characters before text of issue title begins to wrap
@@ -35,19 +37,21 @@ viz_gantt <- function(data, start = created_at, end = closed_at, str_wrap_width 
   plot_data <-
     data %>%
     dplyr::filter(state == "closed", !is.na(!!start_var), !is.na(!!end_var)) %>%
-    dplyr::mutate(id_label = factor(number, levels = number, labels = title))
+    dplyr::arrange(dplyr::desc(!!start_var)) %>%
+    dplyr::mutate(y = factor(title, levels = title))
 
   g <-
     ggplot(plot_data, aes(
       x = !!start_var, xend = !!end_var,
-      y = id_label, yend = id_label,
+      y = y, yend = y,
       col = -1*as.integer(difftime(!!end_var, !!start_var, "days"))
     )) +
     geom_segment(size = 8) +
     geom_point(aes(x = !!start_var), size = 2) +
     geom_point(aes(x = !!end_var), size = 2) +
     labs(title = "Time to Completion") +
-    scale_y_discrete(labels = function(x) purrr::map(x, ~paste(strwrap(., width = str_wrap_width), collapse = "\n"))
+    scale_y_discrete(labels = function(x)
+      purrr::map(x, ~paste(strwrap(., width = str_wrap_width), collapse = "\n"))
                      ) +
     theme_bw() +
     theme(axis.text.x = element_text(angle = 45, hjust = 1),

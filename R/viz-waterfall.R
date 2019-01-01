@@ -1,9 +1,29 @@
 #' Visualize waterfall of issues opened, closed, and pending over timeframe
 #'
+#' Creates a four-bar waterfall diagram. Within the specified timeframe, shows initial issues,
+#' new issues opened, issues closed, and final open issues remaining.
+#'
+#' The following logic is used to classify issues:
+#'
+#' \itemize{
+#'   \item Initial: \code{start < start_date and (end > start_date or state == 'open')}
+#'   \item Open: \code{start >= start_date and start <= end_date}
+#'   \item Closed: \code{end >= start_date and end <= end_date}
+#'   \item Final: \code{start < end_date and (end > end_date or state == 'open')}
+#' }
+#'
+#' The exact accuracy of the logic depends on filtering that has already been done to the dataset. Think carefully
+#' about the population you wish to represent when \code{get}ting your data.
+#'
+#' Note that this function respects \code{dplyr::group_by()}. If grouped data is passed, it will preserve
+#' the grouping and separate plots can be made with facetting.
+#'
 #' @inheritParams viz_gantt
-#' @param issues Issues dataset as produced by \code{parse_issues()}
-#' @param start_date Character string in 'YYYY-MM-DD' form for first date to be considered
-#' @param end_date Character string in 'YYYY-MM-DD' form for last date to be considered
+#' @param data Dataset, such as those representing issues or milestones (i.e. \code{parse_issues()} or
+#'     \code{parse_milestones()}). Must have \code{state} variable and variables to specify for
+#'     \code{start} and \code{end}
+#' @param start_date Character string in 'YYYY-MM-DD' form for first date to be considered (inclusive)
+#' @param end_date Character string in 'YYYY-MM-DD' form for last date to be considered (inclusive)
 #'
 #' @import ggplot2
 #'
@@ -13,40 +33,29 @@
 #'
 #' @examples
 #' \dontrun{
-#' viz_progress_waterfall(issues, '2017-01-01', '2017-03-31')
+#' viz_waterfall_state(issues, '2017-01-01', '2017-03-31')
+#' }
+#' \dontrun{
+#' issues %>%
+#' dplyr::group_by(milestone) %>%
+#' viz_waterfall_state('2017-01-01', '2017-03-31') +
+#' facet_grid(milestone ~ .)
 #' }
 
-viz_waterfall_issues <- function(issues,
+viz_waterfall_state <- function(data,
                                    start_date, end_date,
                                    start = created_at, end = closed_at){
-
-  # initial <- sum(issues$created_at <= start_date &
-  #                  (issues$closed_at >= start_date | issues$state == 'open'),
-  #                na.rm = TRUE)
-  # opened <- sum(issues$created_at >= start_date & issues$created_at <= end_date, na.rm = TRUE)
-  # closed <- sum(issues$closed_at >= start_date & issues$closed_at <= end_date, na.rm = TRUE)
-  # final <- sum(issues$created_at <= end_date & issues$state == 'open', na.rm = TRUE)
-  #
-  # plot_data <-
-  # data.frame(
-  #   index = 1:4,
-  #   status = c('Initial', 'Opened', 'Closed', 'Final'),
-  #   n = c(initial, opened, closed, final),
-  #   sign = c(1, 1, -1, 1),
-  #   base = c(0, initial, initial+opened, 0),
-  #   stringsAsFactors = FALSE
-  # )
 
   start_var <- enquo(start)
   end_var <- enquo(end)
 
-  issues <-
-    dplyr::mutate(issues, dummy_var = 1) %>%
+  prep_data <-
+    dplyr::mutate(data, dummy_var = 1) %>%
     dplyr::group_by(dummy_var, add = TRUE)
-  group_vars <- dplyr::group_vars(issues)
+  group_vars <- dplyr::group_vars(data)
 
   plot_data <-
-   dplyr::summarize(issues,
+   dplyr::summarize(prep_data,
               Initial = sum(!!start_var < start_date &
                               (!!end_var > start_date | state == 'open'),
                             na.rm = TRUE),
