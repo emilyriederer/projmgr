@@ -42,7 +42,7 @@ Other issues: \code{\link{get_issue_comments}},
   \code{\link{parse_issues}}, \code{\link{post_issue}},
   \code{\link{report_discussion}},
   \code{\link{report_progress}},
-  \code{\link{viz_waterfall_state}}
+  \code{\link{viz_waterfall}}
 
 Other events: \code{\link{get_issue_events}}
 }

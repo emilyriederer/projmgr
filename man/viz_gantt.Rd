@@ -2,7 +2,7 @@
 % Please edit documentation in R/viz-gantt.R
 \name{viz_gantt}
 \alias{viz_gantt}
-\title{Visualize Gannt-style chart of closed issues}
+\title{Visualize Gannt-style chart of planned or actual time to completion}
 \usage{
 viz_gantt(data, start = created_at, end = closed_at,
   str_wrap_width = 30)
@@ -22,15 +22,21 @@ viz_gantt(data, start = created_at, end = closed_at,
 ggplot object
 }
 \description{
-Produces plot of all closed issues from start date to end date, based on output of
-issues from \code{get_issues()} and \code{parse_issues()}. Plot
-has one row per issues spanning from \code{start} to \code{end}.
+Produces plot with one vertical bar from the specified \code{start} variable's value to the
+\code{end} variable's value. Common uses would be to visualize time-to-completion for issues
+gotten by (\code{get_issues} and \code{parse_issues}) or milestones. Bars are colored by
+duration with longer bars as a darker shade of blue, and start/completion is denoted by
+points at the ends of the bars.
 }
 \details{
 By default, the start date is the issue's \code{created_at} date, and the end date is
 the issue's \code{closed_at} date. However, either of these can be altered via the
 \code{start} and \code{end} parameters since these dates might not be reflective of the
 true timeframe (e.g. if issues are posted well in advance of work beginning.)
+
+Unfinished tasks (where the value of the \code{end} variable is \code{NA}) are colored grey and
+do not have dots on their bars. Unstarted tasks are dropped because user intent is ambiguous
+in that case.
 }
 \examples{
 \dontrun{

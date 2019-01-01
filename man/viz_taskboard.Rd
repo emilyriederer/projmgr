@@ -2,34 +2,42 @@
 % Please edit documentation in R/viz-taskboard.R
 \name{viz_taskboard}
 \alias{viz_taskboard}
-\title{Visualize Agile-style task board of issue status}
+\title{Visualize Agile-style task board of item status}
 \usage{
-viz_taskboard(issues, str_wrap_width = 20)
+viz_taskboard(data, in_progress_when, str_wrap_width = 30,
+  text_size = 3)
 }
 \arguments{
-\item{issues}{Issues dataset as produced by \code{parse_issues()}}
+\item{data}{Dataset, such as those representing issues or milestones (i.e. from \code{parse_issues()}).
+Must have \code{state} variable.}
+
+\item{in_progress_when}{Function with parameter \code{data} that returns Boolean vector. Generally, one of the
+taskboard helper functions. See \code{?taskboard_helpers} for details.}
 
 \item{str_wrap_width}{Number of characters before text of issue title begins to wrap}
+
+\item{text_size}{Text size}
 }
 \value{
 ggplot object
 }
 \description{
-Produces three column task board of all issues categorized as "Not Started", "In Progress",
-or "Done".
+Produces three column task board showing any relevant objects (typically issues or milestones)
+as "Not Started", "In Progress", or "Done".
 }
 \details{
 The following logic is used to determine the status of each issue:
 \itemize{
-  \item{Not Started:}{ \code{closed_at} is NA and no \code{in-progress} label}
-  \item{In Progress:}{ \code{closed_at} is NA but \code{in-progress} label exists}
-  \item{Done:}{ \code{closed_at} is not NA}
+  \item Done: Items with a \code{state} of "closed"
+  \item In Progress: Custom logic via \code{in_progress_when}. See \code{?taskboard_helpers} for details.
+  \item Not Started: Default case for items neither In Progress or Closed
 }
 }
 \examples{
 \dontrun{
 issues <- get_issues(myrepo, milestone = 1) \%>\% parse_issues()
-viz_task_board(issues)
+viz_taskboard(issues, in_progress_when = is_labelled_with('in-progress'))
+viz_taskboard(issues, in_progress_when = is_in_a_milestone())
 }
 }
 \seealso{

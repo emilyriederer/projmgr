@@ -30,6 +30,6 @@ Other issues: \code{\link{get_issue_comments}},
   \code{\link{post_issue}},
   \code{\link{report_discussion}},
   \code{\link{report_progress}},
-  \code{\link{viz_waterfall_state}}
+  \code{\link{viz_waterfall}}
 }
 \concept{issues}
