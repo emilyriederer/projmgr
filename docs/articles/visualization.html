@@ -103,7 +103,7 @@
 <span class="st">  </span>ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(<span class="dt">subtitle =</span> <span class="st">'Milestones in the dplyr repository'</span>)
 <span class="co">#&gt; Warning: Removed 4 rows containing missing values (geom_point).</span></code></pre></div>
 <p><img src="visualization_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
-<p>Either gantt charts or task boards (next section) can also be passed through <code>viz_linked</code> to add links to their text back to the relevant GitHub issues. This only works in RMarkdown with the <code>results = "asis"</code> chunk option or saved to a file.</p>
+<p>Either gantt charts or task boards (next section) can also be passed through <code>viz_linked</code> to add links to their text back to the relevant GitHub milestones. This only works in RMarkdown with the <code>results = "asis"</code> chunk option or saved to a file.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g &lt;-<span class="st"> </span><span class="kw"><a href="../reference/viz_gantt.html">viz_gantt</a></span>(dplyr_milestones)
 <span class="kw"><a href="../reference/viz_linked.html">viz_linked</a></span>(g)
 <span class="co">#&gt; Warning: package 'gdtools' was built under R version 3.4.4</span>
