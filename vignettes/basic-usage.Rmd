@@ -1,10 +1,10 @@
 ---
-title: "Basic Usage"
+title: "Basic GitHub API Interaction"
 author: "Emily Riederer"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Basic Usage}
+  %\VignetteIndexEntry{Basic GitHub API Interaction}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -12,22 +12,28 @@ vignette: >
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
+  eval = FALSE,
   comment = "#>"
 )
+
+dplyr_issues_list <- readRDS(system.file("extdata", "dplyr-issues-list.rds", package = "ghtrackr", mustWork = TRUE))
+
 ```
 
 This vignette illustrates basic `ghtrackr` codeflows.
 
-```{r}
+```{r eval = TRUE}
 library(ghtrackr)
 ```
 
 
 ## Creating a Repo Reference
 
-The first step to interacting with a GitHub repository is creating a repository reference. Repository references are "first class citizens" in `ghtrackr` and contain all authorization credentials. These references are passed as the first argument in all `get_` functions.
+The first step to interacting with a GitHub repository is creating a repository reference. Repository references are "first class citizens" in `ghtrackr` and contain all authorization credentials. These references are passed as the first argument in all `get_` functions and `post_` functions.
 
-```{r}
+Suppose, for example, we are interested in pulling data about issues in the `dplyr` repository. We would start off by creating a repository reference with the `create_repo_ref()` function.
+
+```{r eval = TRUE}
 dplyr <- create_repo_ref('tidyverse', 'dplyr')
 ```
 
@@ -43,6 +49,9 @@ The `check_` family of functions provide some basic validations that everything 
 ```{r}
 check_internet()
 ```
+```{r}
+#> [1] TRUE
+```
 
 
 `check_credentials()` confirms the login associated with the PAT and describes the level of access that PAT have to the specified repo.
@@ -50,11 +59,24 @@ check_internet()
 ```{r}
 check_credentials(dplyr)
 ```
+```{r}
+#> -- With provided credentials -- 
+#> + Login: emilyriederer
+#> + Type: User
+#> -- In the dplyr repo -- 
+#> + Admin: FALSE
+#> + Push: FALSE
+#> + Pull: FALSE
+```
+
 
 `check_rate_limit()` checks how many more API requests you can send and when that count will reset. Note that this accepts a repo reference as a parameter *only to get authentication information for an account*. Limits to requests are established at the account-level not the repository level.
 
 ```{r}
 check_rate_limit(dplyr)
+```
+```{r}
+#> 4998 / 5000 (Resets at 22:26:20)
 ```
 
 
@@ -70,25 +92,25 @@ dplyr_issues_list <- get_issues(dplyr, milestone = 1, state = 'all')
 
 If you don't know what parameters are available, the `help_<function_name>` family provides more information on valid arguments to include in `get_` and `post_` functions.
 
-```{r}
+```{r eval = TRUE}
 help_get_issues()
 ```
 
 More detailed documentation can also be viewed using the `browse_docs()` function, which launches your browser to the appropriate part of the GitHub API documentation. For example, one might run:
 
-```{r}
+```{r eval = TRUE}
 browse_docs(action = 'get', object = 'issue')
 ```
 
 Results are returned as a list, closely mirror the JSON output from the actual API.
 
-```{r}
+```{r eval = TRUE}
 str(dplyr_issues_list[[1]], max.level = 1)
 ```
 
 It's likely you may prefer to work with them as dataframes instead. The `parse_` family of functions converts "raw" list output from `get_` into tibbles.
 
-```{r}
+```{r eval = TRUE}
 dplyr_issues <- parse_issues(dplyr_issues_list)
 head(dplyr_issues)
 ```
@@ -114,7 +136,7 @@ report_progress(dplyr_issues)
 
 The `post_` function family helps add new objects to a GitHub repo. For example, the following command adds a new issue to a repository. After posting new content, `post_` functions return the identification number for the new object.
 
-```{r eval = FALSE}
+```{r}
 experigit <- create_repo_ref('emilyriederer', 'experigit')
 post_issue(experigit,
            title = "Add unit tests for post_issues when title duplicated",
@@ -126,9 +148,9 @@ post_issue(experigit,
 #> [1] 150
 ```
 
-Natively, the GitHub API allows multiple issues to have the same title. However, you may want to disable this functionality (for example, if a `post_` function is in a script that may be re-run.) In this case, the `distinct` parameter allows you to chose whether or not to allow the posting of new issues with the same title as *open* existing issues. When `distinct = TRUE` (as it is by default), the function throws an error and does not post the issue.
+The GitHub API allows multiple issues to have the same title. However, you may want to disable this functionality (for example, if a `post_` function is in a script that may be re-run.) In this case, the `distinct` parameter allows you to chose whether or not to allow the posting of new issues with the same title as *open* existing issues. When `distinct = TRUE` (as it is by default), the function throws an error and does not post the issue.
 
-```{r eval = FALSE}
+```{r}
 post_issue(experigit, title = "Add unit tests for post_issues when title duplicated")
 ```
 ```{r}
