@@ -48,7 +48,7 @@ NULL
 is_labelled_with <- function(label){
   function(data){
     stopifnot("labels_name" %in% names(data))
-    purrr::map_lgl(data$labels_name, ~label %in% .)
+    vapply(data$labels_name, FUN = function(x) label %in% x, FUN.VALUE = logical(1))
   }
 }
 
@@ -57,7 +57,7 @@ is_labelled_with <- function(label){
 is_assigned <- function(){
   function(data){
     stopifnot("assignees_login" %in% names(data))
-    !is.na(data$assignees_login)
+    vapply(data$assignees_login, FUN = function(x) length(x) > 0, FUN.VALUE = logical(1))
   }
 }
 
@@ -67,7 +67,7 @@ is_assigned <- function(){
 is_assigned_to <- function(login){
   function(data){
     stopifnot("assignees_login" %in% names(data))
-    purrr::map_lgl(data$assignees_login, ~login %in% .)
+    vapply(data$assignees_login, FUN = function(x) login %in% x, FUN.VALUE = logical(1))
   }
 }
 
