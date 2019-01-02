@@ -20,28 +20,25 @@ library(dplyr)
 ```
 
 ```{r echo = FALSE, message = FALSE}
-dplyr <- create_repo_ref('tidyverse', 'dplyr')
-
-dplyr_issues <- 
-get_issues(dplyr, milestone = 1, state = 'all') %>%
-parse_issues()
-
-dplyr_milestones <-
-  get_milestones(dplyr, state = 'all') %>%
-  parse_milestones()
+dplyr_milestones <- readRDS(system.file("extdata", "dplyr-milestones.rds", package = "ghtrackr", mustWork = TRUE))
+pkg_issues <- readRDS(system.file("extdata", "viz-issues-data.rds", package = "ghtrackr", mustWork = TRUE))
 ```
 
 `ghtrackr` has many different ways to visualize project status. Note that all visualization functions are currently experimental and still have some known challenges. All feedback is welcome on these visualizations or other desired visualizations.
 
 ## Gantt Charts
 
-For reporting on time-to-completion, `viz_gantt()` creates one horizontal bar per item (e.g. issue, milestone) and colors issues by length of time open. Items are ordered by start date, which defaults to the data's `created_at` data but can be altered via the function's parameters.
+For reporting on time-to-completion, `viz_gantt()` creates one horizontal bar per item (e.g. issue, milestone) and colors issues by length of time open. Items are ordered by start date, which defaults to the data's `created_at` data but can be altered via the function's parameters. (This is demonstrated in the Events Data vignette.)
 
-Items which are not yet completed are colored in grey since the true time-to-completion value is censored. Additionally, they do not have the terminal half-dot at the end of the bar. 
+Items which are not yet completed are colored in grey since the true time-to-completion value is censored. Additionally, they do not have the terminal half-dot at the end of the bar.
+
+As an example, let's plot all of the milestones in `dplyr`'s GitHub repository, as pulled on January 1, 2019.
 
 ```{r}
 viz_gantt(dplyr_milestones)
 ```
+
+Note that this plot shows some of the risks of black-box functions. At the time of writing, the "bluesky" milestone was open on GitHub yet has no uncompleted issues. It's important to be precise about your definition of done, or change the `start` and `end` parameters to use variables most closely aligned to your definition.
 
 As a `ggplot`, standard `ggplot2` features and styling can be added to the output.
 
@@ -61,16 +58,10 @@ viz_linked(g)
 
 `viz_taskboard()` creates an Agile-like taskboard of items (e.g. issues, milestones) to be started, in progress, and completed.
 
-```{r echo = FALSE}
-dplyr_issues$closed_at[1] <- NA
-dplyr_issues$closed_at[3] <- NA
-dplyr_issues$state[c(1,3)] <- "open"
-dplyr_issues$labels_name[[3]] <- c("in-progress", dplyr_issues$labels_name[[3]])
-dplyr_issues <- filter(dplyr_issues, !(state == 'closed' & row_number() %% 2 == 0))
-```
+For example, imagine pulling issues from a hypothetical R package into the `pkg_issues` dataframe.
 
 ```{r}
-viz_taskboard(dplyr_issues, is_labelled_with("in-progress"), 40)
+viz_taskboard(pkg_issues, is_labelled_with("in-progress"), 40)
 ```
 
 Users specify what logic to use for identifying "in progress" items by passing a function factory to the `in_progress_when` parameter. The above example uses the `is_labelled_with()` option. Other options include:
@@ -79,8 +70,20 @@ Users specify what logic to use for identifying "in progress" items by passing a
 ls('package:ghtrackr')[grep("^is_*", ls('package:ghtrackr'))]
 ```
 
-
 See `?taskboard_helpers` for more details.
+
+As a second example, suppose we instead classify issues as in progress once they have been put in a milestone.
+
+```{r}
+viz_taskboard(pkg_issues, is_in_a_milestone(), 40)
+```
+
+Or when they were assigned to "emilyriederer".
+
+```{r}
+viz_taskboard(pkg_issues, is_assigned_to("emilyriederer"), 40)
+```
+
 
 Unfortunately, this function currently suffers from spacing problems when trying to show many items or items with very long names. Users can corrently attempt to fix this by experimenting with the `str_wrap_width` and `text_size` parameters or by adjusting the `fig.width` and `fig.height` RMarkdown options; however, in the long-term, this should be handled in a more sustainable, automated fashion.
 
@@ -89,5 +92,5 @@ Unfortunately, this function currently suffers from spacing problems when trying
 `viz_waterfall()` creates a waterfall plot showing, for a fixed time-period, the initial open count, newly opened, newly closed, and final open count of issues or milestones. 
 
 ```{r}
-viz_waterfall(dplyr_issues, '2014-01-01', '2015-01-01')
+viz_waterfall(pkg_issues, '2018-11-20', '2018-12-15')
 ```

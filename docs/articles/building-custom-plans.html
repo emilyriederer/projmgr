@@ -87,8 +87,8 @@
 
     
     
-<p>In many cases, it can be useful to automate bulk posting of issues or milestones to GitHub. <code>ghtrackr</code> helps facilitate this with the notion of plans and to-do lists.</p>
-<p><strong>Plans</strong> are a collection of milestones and issues assigned to them. In general, these issues are going to be created <em>proactively</em> as foreseen key steps in a project (versus the more common <em>reactive</em> usage of GitHub issues to report bugs and request enhancements.) Plans can serve as a roadmap or framework for tackling a large chunk of work.</p>
+<p><code>ghtrackr</code> helps automate bulk posting of issues or milestones to GitHub with the notion of plans and to-do lists.</p>
+<p><strong>Plans</strong> are a collection of milestones and issues assigned to them. In general, these issues are going to be created <em>proactively</em> as foreseen key steps in a project (versus the common <em>reactive</em> usage of GitHub issues to report bugs and request enhancements.) Plans can serve as a roadmap or framework for tackling a large chunk of work.</p>
 <p><strong>To-do lists</strong> are simply collections of issues. These might just be many bugs, feature enhancements, or ideas you jotted down while working offline or while not wanting to get on GitHub to log them. Alternatively, they also could be created proactively as with plans.</p>
 <p>To reduce the manual effort of bulk creation of plans and to-do lists, <code>ghtrackr</code> offers functionality to read, interpret, and post milestones and issues encoded in <a href="http://yaml.org/">YAML</a>, a light-weight markup language.</p>
 <div id="creating-a-plan-with-yaml" class="section level2">
@@ -124,7 +124,7 @@
 <p>The <code><a href="../reference/read_plan.html">read_plan()</a></code> function reads plan YAML files. We will continue to work with the example plan embedded in the package.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plan_path &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata"</span>, <span class="st">"plan.yml"</span>, <span class="dt">package =</span> <span class="st">"ghtrackr"</span>, <span class="dt">mustWork =</span> <span class="ot">TRUE</span>)
 my_plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/read_plan.html">read_plan</a></span>(plan_path)</code></pre></div>
-<p>This function converts YAML to an R list. You can sanity check the structure of this output with base R <code>str()</code> function which shows the structure of a list:</p>
+<p>This function converts YAML to an R list. You can check the structure of this output with base R <code>str()</code> function which shows the structure of a list:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(my_plan)
 <span class="co">#&gt; List of 2</span>
 <span class="co">#&gt;  $ :List of 4</span>
@@ -155,7 +155,7 @@ my_plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rea
 <span class="co">#&gt;   .. .. ..$ title: chr "Visualizations"</span>
 <span class="co">#&gt;   .. .. ..$ body : chr "Create univariate and bivariate plots"</span>
 <span class="co">#&gt;  - attr(*, "class")= chr [1:2] "plan" "list"</span></code></pre></div>
-<p>Or <code>print()</code>s out in a more aesthetic way more quick sanity checking:</p>
+<p>Alternatively, you may <code>print()</code> out the plan for a more aesthetic rpresentation:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(my_plan)
 <span class="co">#&gt; Plan: </span>
 <span class="co">#&gt; 1. Data cleaning and validation (3 issues) </span>
@@ -188,7 +188,7 @@ plan_from_vbl &lt;-<span class="st"> </span><span class="kw"><a href="../referen
 <span class="co">#&gt;   ..$ title: chr "Make revisions"</span>
 <span class="co">#&gt;   ..$ body : chr "Repsond to feedback from reviewers"</span>
 <span class="co">#&gt;  - attr(*, "class")= chr [1:2] "plan" "list"</span></code></pre></div>
-<p>Should you ever forget exactly what this YAML should look like, the <code><a href="../reference/template_yaml.html">template_yaml()</a></code> function is here to help. It prints a template example to your console:</p>
+<p>TO recall the precise YAML formatting required, the <code><a href="../reference/template_yaml.html">template_yaml()</a></code> function prints an example to your console:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/template_yaml.html">template_yaml</a></span>(<span class="st">"plan"</span>)
 <span class="co">#&gt; - title: Enter a short, informative title of your goal</span>
 <span class="co">#&gt;   description: &gt;</span>

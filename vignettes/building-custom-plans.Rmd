@@ -18,9 +18,9 @@ knitr::opts_chunk$set(
 library(ghtrackr)
 ```
 
-In many cases, it can be useful to automate bulk posting of issues or milestones to GitHub. `ghtrackr` helps facilitate this with the notion of plans and to-do lists.
+`ghtrackr` helps automate bulk posting of issues or milestones to GitHub with the notion of plans and to-do lists.
 
-**Plans** are a collection of milestones and issues assigned to them. In general, these issues are going to be created *proactively* as foreseen key steps in a project (versus the more common *reactive* usage of GitHub issues to report bugs and request enhancements.) Plans can serve as a roadmap or framework for tackling a large chunk of work.
+**Plans** are a collection of milestones and issues assigned to them. In general, these issues are going to be created *proactively* as foreseen key steps in a project (versus the common *reactive* usage of GitHub issues to report bugs and request enhancements.) Plans can serve as a roadmap or framework for tackling a large chunk of work.
 
 **To-do lists** are simply collections of issues. These might just be many bugs, feature enhancements, or ideas you jotted down while working offline or while not wanting to get on GitHub to log them. Alternatively, they also could be created proactively as with plans.
 
@@ -42,13 +42,13 @@ plan_path <- system.file("extdata", "plan.yml", package = "ghtrackr", mustWork =
 my_plan <- read_plan(plan_path)
 ```
 
-This function converts YAML to an R list. You can sanity check the structure of this output with base R `str()` function which shows the structure of a list:
+This function converts YAML to an R list. You can check the structure of this output with base R `str()` function which shows the structure of a list:
 
 ```{r}
 str(my_plan)
 ```
 
-Or `print()`s out in a more aesthetic way more quick sanity checking:
+Alternatively, you may `print()` out the plan for a more aesthetic rpresentation:
 
 ```{r}
 print(my_plan)
@@ -82,7 +82,7 @@ plan_from_vbl <- read_plan(plan_yaml_vbl)
 str(plan_from_vbl)
 ```
 
-Should you ever forget exactly what this YAML should look like, the `template_yaml()` function is here to help. It prints a template example to your console:
+TO recall the precise YAML formatting required, the `template_yaml()` function prints an example to your console:
 
 ```{r}
 template_yaml("plan")

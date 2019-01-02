@@ -49,7 +49,9 @@ issue_events <-
 ```
 
 
-Events data, as returned by `get_issue_events()`, provides a much more granular view of the innerworkins of your GItHub repository. As opposed to the snapshot view returned by `get_issues()`, `get_issue_events()` provides specific times that key changes were made to each issue, such as the addition and deletion of labels and milestones. This is useful if the `created_at` date for your issues don't have intrinsic meaning with regard to when you started working on an issue. 
+Events data, as returned by `get_issue_events()`, provides a granular view of issues in your GitHub repository. As opposed to the issue-level data returned by `get_issues()`, `get_issue_events()` provides timestamped event-level data for each issue, such as the addition and deletion of labels and milestones. See the [Issue Events GitHub API documentation](https://developer.github.com/v3/issues/events/) for a more comprehensive list.
+
+This detailed information has many potential uses. One use in reporting and visualization is if if the `created_at` date for your issues does not have an intrinsic meaning and does not represent when work on an issue was started. 
 
 For example, let's suppose we pull some issues from our repo and visualize their time-to-completion with `viz_gantt()`.
 
@@ -62,11 +64,11 @@ issues <- get_issues(experigit, state = 'closed', milestone = 1) %>% parse_issue
 viz_gantt(issues)
 ```
 
-Issue 1 stands out as having taken a very long time. However, it's possible it was created a long time before anyone started actively working on it. Instead, we might want to consider the start time to be, for example, when an issue was tagged with the "in-progress label".
+Issue 1 stands out as having taken a very long time to complete. However, it's possible it was created long before anyone started actively working on it. Instead, we might want to consider the start time to be, for example, when an issue was tagged with the "in-progress label".
 
-We can get events for a specific issue with the following code.Due to the potentially massive size of this data, the function returns events for a single issue at a time and, thus, has a required `number` parameter to specify the issue for which events should be returned. As such, to events for multiple issues, we need to use `purrr::map()`.
+We can get events for a specific issue with the following code. Due to the potentially massive size of this data, the function returns events for a single issue at a time and, thus, has a required `number` parameter to specify the issue for which events should be returned. As such, to events for multiple issues, we need to use `purrr::map()`.
 
-Since events can also include adding assignees or milestones, we filter our dataset to `'labeled'` events where the `label_name` is "in-progress".
+Since events can also include adding assignees or milestones, we filter our dataset to `'labeled'` events where the `label_name` is "in-progress". 
 
 ```{r eval = FALSE}
 issue_events <- 
@@ -75,19 +77,19 @@ issue_events <-
   dplyr::filter(event == 'labeled' & label_name == 'in-progress')
 ```
 
-The fields of the resulting dataframe are shown below. 
+The fields of the resulting dataframe are shown below. Note that in this dataset, the `created_at` field refers to when the *event* was created (i.e. when the issue was labelled in this case) and not when the *issue* was created.
 
 ```{r}
 head(issue_events)
 ```
 
-Next, we can join our datasets together.
+Next, we can join our datasets together. THe `suffix` parameter allows us to append `_event` to all the field names from the events data to distinguished between the issue and event `created_at` fields.
 
 ```{r}
 issue_with_events <- dplyr::inner_join(issues, issue_events, by = "number", suffix = c("", "_event"))
 ```
 
-Finally, we can use this new dataset to remark our plot by specifying the new `created_at_event` variable as the appropriate issue start date, via the optional `start` parameter.
+Finally, we can use this new dataset to remake our plot by specifying the new `created_at_event` variable as the appropriate issue start date, via the optional `start` parameter.
 
 ```{r}
 viz_gantt(issue_with_events, start = created_at_event)
