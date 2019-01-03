@@ -16,8 +16,8 @@ print.repo_ref <- function(x, ...){
 #' @export
 print.plan <- function(x, ...){
 
-  milestones <- sapply(x, function(x) x[["title"]])
-  n_issues <- sapply(x, function(x) length(x[["issue"]]))
+  milestones <- vapply(x, FUN = function(x) x[["title"]], FUN.VALUE = character(1))
+  n_issues <- vapply(x, FUN = function(x) length(x[["issue"]]), FUN.VALUE = integer(1))
 
   # format plan component ----
   format_component <- function(index, milestones, n_issues){
@@ -36,7 +36,7 @@ print.plan <- function(x, ...){
 #' @export
 print.todo <- function(x, ...){
 
-  issues <- sapply(x, function(x) x[["title"]])
+  issues <- vapply(x, FUN, function(x) x[["title"]], FUN.VALUE = character(1))
 
   out <- mapply(function(index, issues) paste0(index, ". ", issues, "\n"),
                 seq_along(issues), issues)

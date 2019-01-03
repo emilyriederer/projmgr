@@ -33,7 +33,9 @@ report_progress <- function(issues){
     stats::aggregate(df$state,
                      by= list(df$milestone_title) ,
                      FUN= function(x) sum(x == 'closed'))$x
-  issue_count <- sapply( unique(df$milestone_title), function(x) nrow(df[df$milestone_title == x,]))
+  issue_count <- vapply( unique(df$milestone_title),
+                         FUN = function(x) nrow(df[df$milestone_title == x,]),
+                         FUN.VALUE = integer(1))
   issue_title <- df$title
   state <- df$state
 
@@ -77,9 +79,12 @@ report_progress <- function(issues){
 report_plan <- function(plan){
 
   # prep data ----
-  milestone_title <- sapply(plan, function(x) x[["title"]])
-  issue_count <- sapply(plan, function(x) length(x[["issue"]]))
-  issue_title <- unlist(sapply(plan, function(x) sapply(x[["issue"]], function(y) y[["title"]])))
+  milestone_title <- vapply(plan, FUN = function(x) x[["title"]], FUN.VALUE = character(1))
+  issue_count <- vapply(plan, FUN = function(x) length(x[["issue"]]), FUN.VALUE = integer(1))
+  issue_title <- unlist(sapply(plan,
+                               FUN = function(x) vapply(x[["issue"]], FUN = function(y) y[["title"]], FUN.VALUE = character(1))
+                               )
+                        )
 
   # write html ----
   milestone_html <- fmt_milestone(milestone_title, 0, issue_count)
@@ -121,7 +126,7 @@ report_plan <- function(plan){
 report_todo <- function(todo){
 
   # prep data ----
-  issue_title <- sapply(todo, function(x) x[["title"]])
+  issue_title <- vapply(todo, FUN = function(x) x[["title"]], FUN.VALUE = character(1))
 
   # write html ----
   milestone_html <- fmt_milestone("To Do", 0, length(issue_title))
