@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Analysis Project Planning &amp; Stakeholder Updates • ghtrackr</title>
+<title>Project Planning &amp; Stakeholder Updates • ghtrackr</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
-<meta property="og:title" content="Analysis Project Planning &amp; Stakeholder Updates">
+<meta property="og:title" content="Project Planning &amp; Stakeholder Updates">
 <meta property="og:description" content="">
 <meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
@@ -75,7 +75,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Analysis Project Planning &amp; Stakeholder Updates</h1>
+      <h1>Project Planning &amp; Stakeholder Updates</h1>
                         <h4 class="author">Emily Riederer</h4>
             
             <h4 class="date">2019-01-03</h4>
@@ -87,10 +87,9 @@
 
     
     
-<p>The open science movement has spurred many resources on how to structure large analytical projects in a filesystem for ease of use, collaboration, and reproducibility. These principles apply equally well to research, industry, or personal projects, and often involve the use of GitHub.</p>
-<p>A parallel trend noted in different resources in the need for analysts to communicate plans for their large analytical projects. This is an obvious theme in a range of cases, such as Lucy D’Agostino McGowan’s blog post on writing a <a href="https://livefreeordichotomize.com/2018/09/14/one-year-to-dissertate/">disertation</a> and Jen Thompson’s blogpost and talk <a href="https://jenthompson.me/2018/10/31/data-person-as-pm/">The Data Person as Project Manager</a>. The nature of analytical works forces analysts to coordinate diverse priorities, seek alignment on their priorities and plan of attack, and provide communication and visibility to stakeholders of various seniority and technical engagement.</p>
-<p>Since version control via git and sharing on GitHub are often recommended practices for structuring reproducible analysis projects, using GitHub for the project management component as well reduces the mental overhead of switching between tools. In particular, project planning through GitHub enables natural communication to various consumers of your analysis, whether committee members (as Lucy describes), subject matter experts (as Jen describes), or business leaders.</p>
-<p>In particular, Lucy emphasizes the importance of sending out an agenda before meetings and sharing minutes afterward, specifically recapping recently completed work and next steps. Such meetings are another good use for plans to make sure everyone is aligned with an analysts approach.</p>
+<p>Communicating analytical results is a core part of the data science process. A related but less appreciated task is communcating analysis plans and progress to various stakeholders throughout a project. This need is a recurring theme across disciplines. Lucy D’Agostino McGowan discusses how to lead effective check-ins with dissertation committees in her blog post <a href="https://livefreeordichotomize.com/2018/09/14/one-year-to-dissertate/">One Year to Dissertate</a> and Jen Thompson describes the central role that “data people” play in project managing cross-functional clinical research teams in her blog post (and related talk) <a href="https://jenthompson.me/2018/10/31/data-person-as-pm/">The Data Person as Project Manager</a>. The same need is also readily apparent in corporate settings where it can be crucial for analysts to articulate how they are spending their time and set expectations on when they can deliver results.</p>
+<p>Project management work can sometimes boost productivity and bring benefits, but communcating to stakeholders has significant overhead and can risk stealing time from core job responsibilities. For those “data people” that use R and GitHub, conducting project planning and reporting with the same toolkit can reduce complexity and the inefficiencies of switching between contexts and tools.</p>
+<p><code>ghtrackr</code>’s concepts of “plans” provide an interface for project management. Plans can be created in YAML and delivered to various customers in their preferred format. For the analyst, they can be automatically posted to a GitHub repo as a set of issues and milestones for easy tracking and linking to commits and pull requests. For sharing with senior stakeholders who are not on GitHub, both plans and progress updates can be formatted into aesthetic RMarkdown reports, similar to the examples Lucy’s blog shows for meeting agendas and minutes.</p>
 <div id="planning-your-project" class="section level2">
 <h2 class="hasAnchor">
 <a href="#planning-your-project" class="anchor"></a>Planning Your Project</h2>
@@ -122,11 +121,14 @@
       body: Calculate summary statistics
     - title: Visualizations
       body: Create univariate and bivariate plots</code></pre>
-<p>As described in the custom plans vignette, this could be added to a GitHub repo as issues and milestones with the <code><a href="../reference/post_plan.html">post_plan()</a></code> function.</p>
+<p>As described in the custom plans vignette, this could be added to a GitHub repo as issues and milestones with the <code><a href="../reference/post_plan.html">post_plan()</a></code> function, like this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/read_plan.html">read_plan</a></span>(<span class="st">"plan.yml"</span>)
+my_repo &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_repo_ref.html">create_repo_ref</a></span>(<span class="st">"emilyriederer"</span>, <span class="st">"my_repo_name"</span>)
+<span class="kw"><a href="../reference/post_plan.html">post_plan</a></span>(plan, my_repo)</code></pre></div>
 </div>
-<div id="including-in-meeting-reports" class="section level2">
+<div id="reporting-project-plans-and-progress" class="section level2">
 <h2 class="hasAnchor">
-<a href="#including-in-meeting-reports" class="anchor"></a>Including in Meeting Reports</h2>
+<a href="#reporting-project-plans-and-progress" class="anchor"></a>Reporting Project Plans and Progress</h2>
 <p>Meeting minutes or agendas can be added to agendas and minutes, such as Lucy’s templates provide, with the <code>report_</code> functions.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plan_path &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata"</span>, <span class="st">"plan.yml"</span>, <span class="dt">package =</span> <span class="st">"ghtrackr"</span>, <span class="dt">mustWork =</span> <span class="ot">TRUE</span>)
 my_plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/read_plan.html">read_plan</a></span>(plan_path)
@@ -158,7 +160,7 @@ my_plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rea
 </li>
 </ul>
 <p></p>
-<p>Similarly, as items are accomplished, the complementary <code><a href="../reference/report_progress.html">report_progress()</a></code> function provides information on in-progress parts of your plan, pulled back down from GitHub.</p>
+<p>Similarly, as tasks are completed and their related issues are closed on GitHub, that infromation can be pulled back down from GitHub. The complementary <code><a href="../reference/report_progress.html">report_progress()</a></code> function reformats GitHub issues for a consistent report of an in-progress plan,</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">issues &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/get_issues.html">get_issues</a></span>(analysis_repo, <span class="dt">state =</span> <span class="st">'all'</span>, <span class="dt">since =</span> <span class="st">'2018-12-01'</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/parse_issues.html">parse_issues</a></span>() <span class="op">%&gt;%</span>
@@ -188,6 +190,7 @@ my_plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rea
 </li>
 </ul>
 <p></p>
+<p>For some audiences, posted plan data could also be show visually with functions such as <code><a href="../reference/viz_gantt.html">viz_gantt()</a></code>, which could plot either time-to-completion data or a Gantt plot based on anticipated milestone due dates.</p>
 </div>
   </div>
 
@@ -197,7 +200,7 @@ my_plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rea
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#planning-your-project">Planning Your Project</a></li>
-      <li><a href="#including-in-meeting-reports">Including in Meeting Reports</a></li>
+      <li><a href="#reporting-project-plans-and-progress">Reporting Project Plans and Progress</a></li>
       </ul>
 </div>
       </div>

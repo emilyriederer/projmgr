@@ -1,5 +1,5 @@
 ---
-title: "Analysis Project Planning & Stakeholder Updates"
+title: "Project Planning & Stakeholder Updates"
 author: "Emily Riederer"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -18,13 +18,12 @@ knitr::opts_chunk$set(
 library(ghtrackr)
 ```
 
-The open science movement has spurred many resources on how to structure large analytical projects in a filesystem for ease of use, collaboration, and reproducibility. These principles apply equally well to research, industry, or personal projects, and often involve the use of GitHub.
 
-A parallel trend noted in different resources in the need for analysts to communicate plans for their large analytical projects. This is an obvious theme in a range of cases, such as Lucy D'Agostino McGowan's blog post on writing a [disertation](https://livefreeordichotomize.com/2018/09/14/one-year-to-dissertate/) and Jen Thompson's blogpost and talk [The Data Person as Project Manager](https://jenthompson.me/2018/10/31/data-person-as-pm/). The nature of analytical works forces analysts to coordinate diverse priorities, seek alignment on their priorities and plan of attack, and provide communication and visibility to stakeholders of various seniority and technical engagement.
+Communicating analytical results is a core part of the data science process. A related but less appreciated task is communcating analysis plans and progress to various stakeholders throughout a project. This need is a recurring theme across disciplines. Lucy D'Agostino McGowan discusses how to lead effective check-ins with dissertation committees in her blog post [One Year to Dissertate](https://livefreeordichotomize.com/2018/09/14/one-year-to-dissertate/) and Jen Thompson describes the central role that "data people" play in project managing cross-functional clinical research teams in her blog post (and related talk) [The Data Person as Project Manager](https://jenthompson.me/2018/10/31/data-person-as-pm/). The same need is also readily apparent in corporate settings where it can be crucial for analysts to articulate how they are spending their time and set expectations on when they can deliver results.
 
-Since version control via git and sharing on GitHub are often recommended practices for structuring reproducible analysis projects, using GitHub for the project management component as well reduces the mental overhead of switching between tools. In particular, project planning through GitHub enables natural communication to various consumers of your analysis, whether committee members (as Lucy describes), subject matter experts (as Jen describes), or business leaders.
+Project management work can sometimes boost productivity and bring benefits, but communcating to stakeholders has significant overhead and can risk stealing time from core job responsibilities. For those "data people" that use R and GitHub, conducting project planning and reporting with the same toolkit can reduce complexity and the inefficiencies of switching between contexts and tools. 
 
-In particular, Lucy emphasizes the importance of sending out an agenda before meetings and sharing minutes afterward, specifically recapping recently completed work and next steps. Such meetings are another good use for plans to make sure everyone is aligned with an analysts approach.
+`ghtrackr`'s concepts of "plans" provide an interface for project management. Plans can be created in YAML and delivered to various customers in their preferred format. For the analyst, they can be automatically posted to a GitHub repo as a set of issues and milestones for easy tracking and linking to commits and pull requests. For sharing with senior stakeholders who are not on GitHub, both plans and progress updates can be formatted into aesthetic RMarkdown reports, similar to the examples Lucy's blog shows for meeting agendas and minutes. 
 
 ## Planning Your Project
 
@@ -37,9 +36,15 @@ plan_path <- system.file("extdata", "plan.yml", package = "ghtrackr", mustWork =
 cat(readLines(plan_path), sep = '\n')
 ```
 
-As described in the custom plans vignette, this could be added to a GitHub repo as issues and milestones with the `post_plan()` function.
+As described in the custom plans vignette, this could be added to a GitHub repo as issues and milestones with the `post_plan()` function, like this:
 
-## Including in Meeting Reports
+```{r eval = FALSE}
+plan <- read_plan("plan.yml")
+my_repo <- create_repo_ref("emilyriederer", "my_repo_name")
+post_plan(plan, my_repo)
+```
+
+## Reporting Project Plans and Progress
 
 Meeting minutes or agendas can be added to agendas and minutes, such as Lucy's templates provide, with the `report_` functions. 
 
@@ -49,7 +54,7 @@ my_plan <- read_plan(plan_path)
 report_plan(my_plan)
 ```
 
-Similarly, as items are accomplished, the complementary `report_progress()` function provides information on in-progress parts of your plan, pulled back down from GitHub.
+Similarly, as tasks are completed and their related issues are closed on GitHub, that infromation can be pulled back down from GitHub. The complementary `report_progress()` function reformats GitHub issues for a consistent report of an in-progress plan, 
 
 ```{r eval = FALSE}
 issues <- 
@@ -67,4 +72,6 @@ issues <-
 ```{r}
 report_progress(issues)
 ```
+
+For some audiences, posted plan data could also be show visually with functions such as `viz_gantt()`, which could plot either time-to-completion data or a Gantt plot based on anticipated milestone due dates.
 
