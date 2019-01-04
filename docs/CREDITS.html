@@ -113,8 +113,13 @@
 
 <div id="credits" class="section level1">
 
-<p>Throughout development of this package, I learned a lot both through great blog posts / resources and also by digging into the source code of some great pre-existing API wrapper packages. This section gives kudos to those resources and their creators.</p>
-<p>The only caveat is that I’m sure this is an incredibly incomplete list. As we all know, it takes a village to build an R package.</p>
+<p>Throughout development of this package, I drew much inspiration from a variety of workflow-enhancing R packages and learned a lot from blog posts and source code. This section gives kudos to those resources and their creators. The one caveat is that this list is almost surely incomplete.</p>
+<div id="package-design" class="section level2">
+<h2 class="hasAnchor">
+<a href="#package-design" class="anchor"></a>Package Design</h2>
+<p><code>ghtrackr</code>’s emphasis on project management means that it aspires to the class of workflow enhancing packages. Such packages don’t take center stage in data analysis but instead attempt to improve rote processes and reduce the mental overhead of switching contexts between one’s analysis and other ancillary tasks.</p>
+<p>Two packages that exemplify workflow enhancement are <code>pkgdown</code> and <code>usethis</code>. They inspired me to think broadly about this type of package and also specifically inspired certain functionality and implementation within <code>ghtrackr</code>. In particular, <code>pkgdown</code> inspired my use of YAML templates for project plans and the inclusion of <code>template_</code> functions to demonstrate how that YAML should be structured. <code>usethis</code> includes many <code>browse_</code> functions to help users navigate to various websites easily, and I borrowed this concept and implementation for <code>ghtrackr</code>’s set of <code>browse_</code> functions.</p>
+</div>
 <div id="using-apis-in-r" class="section level2">
 <h2 class="hasAnchor">
 <a href="#using-apis-in-r" class="anchor"></a>Using APIs in R</h2>

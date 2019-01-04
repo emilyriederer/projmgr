@@ -1,8 +1,12 @@
 # Credits
 
-Throughout development of this package, I learned a lot both through great blog posts / resources and also by digging into the source code of some great pre-existing API wrapper packages. This section gives kudos to those resources and their creators.
+Throughout development of this package, I drew much inspiration from a variety of workflow-enhancing R packages and learned a lot from blog posts and source code. This section gives kudos to those resources and their creators. The one caveat is that this list is almost surely incomplete. 
 
-The only caveat is that I'm sure this is an incredibly incomplete list. As we all know, it takes a village to build an R package.
+## Package Design
+
+`ghtrackr`'s emphasis on project management means that it aspires to the class of workflow enhancing packages. Such packages don't take center stage in data analysis but instead attempt to improve rote processes and reduce the mental overhead of switching contexts between one's analysis and other ancillary tasks. 
+
+Two packages that exemplify workflow enhancement are `pkgdown` and `usethis`. They inspired me to think broadly about this type of package and also specifically inspired certain functionality and implementation within `ghtrackr`. In particular, `pkgdown` inspired my use of YAML templates for project plans and the inclusion of `template_` functions to demonstrate how that YAML should be structured. `usethis` includes many `browse_` functions to help users navigate to various websites easily, and I borrowed this concept and implementation for `ghtrackr`'s set of `browse_` functions.
 
 ## Using APIs in R
 

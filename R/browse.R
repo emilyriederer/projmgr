@@ -1,3 +1,5 @@
+# All browse_ function implementations are inspired by usethis package
+
 #' Browse a given GitHub repo
 #'
 #' Opens browser to a given GitHub repo. Inspired by similar \code{browse_} functions included in
