@@ -130,7 +130,15 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/help.html">help_get_issues</a></span>()
 <span class="co">#&gt; [1] "milestone" "state"     "assignee"  "creator"   "mentioned" "labels"   </span>
 <span class="co">#&gt; [7] "sort"      "direction" "since"</span></code></pre></div>
-<p>More detailed documentation can also be viewed using the <code><a href="../reference/browse_docs.html">browse_docs()</a></code> function, which launches your browser to the appropriate part of the GitHub API documentation. For example, one might run:</p>
+<p>Or take a guess. The <code>get_</code> functions will check that all of your named query parameters are accepted by the API and throw an error for any that are unrecognized.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/get_issues.html">get_issues</a></span>(dplyr, <span class="dt">not_a_real_parameter =</span> <span class="st">'abc'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#&gt; Error: The following user-inputted variables are not relevant to this API request: </span>
+<span class="co">#&gt; + not_a_real_parameter </span>
+<span class="co">#&gt; Allowed variables are: </span>
+<span class="co">#&gt; + milestone,state,assignee,creator,mentioned,labels,sort,direction,since </span>
+<span class="co">#&gt; Please remove unallowed fields and try again. </span>
+<span class="co">#&gt; Use the browse_docs() function or visit https://developer.github.com/v3/ for full API documentation.</span></code></pre></div>
+<p>As the <code><a href="../reference/get_issues.html">get_issues()</a></code> error message says, detailed documentation can also be viewed using the <code><a href="../reference/browse_docs.html">browse_docs()</a></code> function. This function launches your browser to the appropriate part of the GitHub API documentation. For example, one might run:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/browse_docs.html">browse_docs</a></span>(<span class="dt">action =</span> <span class="st">'get'</span>, <span class="dt">object =</span> <span class="st">'issue'</span>)
 <span class="co">#&gt; Open URL https://developer.github.com/v3/issues/#list-issues-for-a-repository</span></code></pre></div>
 <p>Results are returned as a list, closely mirror the JSON output from the actual API.</p>

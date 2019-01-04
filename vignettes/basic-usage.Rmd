@@ -96,7 +96,21 @@ If you don't know what parameters are available, the `help_<function_name>` fami
 help_get_issues()
 ```
 
-More detailed documentation can also be viewed using the `browse_docs()` function, which launches your browser to the appropriate part of the GitHub API documentation. For example, one might run:
+Or take a guess. The `get_` functions will check that all of your named query parameters are accepted by the API and throw an error for any that are unrecognized.
+
+```{r}
+get_issues(dplyr, not_a_real_parameter = 'abc')
+```
+```{r}
+#> Error: The following user-inputted variables are not relevant to this API request: 
+#> + not_a_real_parameter 
+#> Allowed variables are: 
+#> + milestone,state,assignee,creator,mentioned,labels,sort,direction,since 
+#> Please remove unallowed fields and try again. 
+#> Use the browse_docs() function or visit https://developer.github.com/v3/ for full API documentation.
+```
+
+As the `get_issues()` error message says, detailed documentation can also be viewed using the `browse_docs()` function. This function launches your browser to the appropriate part of the GitHub API documentation. For example, one might run:
 
 ```{r eval = TRUE}
 browse_docs(action = 'get', object = 'issue')
