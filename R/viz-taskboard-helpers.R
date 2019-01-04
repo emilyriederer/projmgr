@@ -3,7 +3,7 @@
 #' The \code{viz_taskboard()} function creates a three-column layout of entities that are
 #' not started, in progress, or done. Objects are classified as done when they have a
 #' \code{state} of "closed". Object are classified as "To-Do" when they are neither "Closed"
-#' or "In Progress". However, what consistutes "In Progress" is user and project dependent.
+#' or "In Progress". However, what constistutes "In Progress" is user and project dependent.
 #' Thus, these functions let users specify what they mean.
 #'
 #' General options:
@@ -15,7 +15,7 @@
 #' Issue-specific options:
 #'
 #' \itemize{
-#'   \item is_labelled_with: User-specified label (as character string) exists
+#'   \item is_labeled_with: User-specified label (as character string) exists
 #'   \item is_assigned: Has been assigned to anyone
 #'   \item is_assigned_to: Has been assigned to specific user-specified login (as character string)
 #'   \item is_in_a_milestone: Has been put into any milestone
@@ -36,7 +36,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' viz_taskboard(issues, in_progress_when = is_labelled_with('in-progress'))
+#' viz_taskboard(issues, in_progress_when = is_labeled_with('in-progress'))
 #' viz_taskboard(milestones, in_progress_when = is_created_before('2018-12-31'))
 #' viz_taskboard(issues, in_progress_when = is_in_milestone())
 #' }
@@ -45,7 +45,7 @@ NULL
 #' @export
 #' @param label Label name as character
 #' @name taskboard_helpers
-is_labelled_with <- function(label){
+is_labeled_with <- function(label){
   function(data){
     stopifnot("labels_name" %in% names(data))
     vapply(data$labels_name, FUN = function(x) label %in% x, FUN.VALUE = logical(1))

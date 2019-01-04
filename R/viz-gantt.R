@@ -1,4 +1,4 @@
-#' Visualize Gannt-style chart of planned or actual time to completion
+#' Visualize Gantt-style chart of planned or actual time to completion
 #'
 #' Produces plot with one vertical bar from the specified \code{start} variable's value to the
 #' \code{end} variable's value. Common uses would be to visualize time-to-completion for issues

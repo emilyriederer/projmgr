@@ -8,7 +8,7 @@ create_repo_ref(repo_owner, repo_name, is_enterprise = FALSE,
   hostname = "", identifier = "", password = "")
 }
 \arguments{
-\item{repo_owner}{Repository owner's eid or GitHub Organization name}
+\item{repo_owner}{Repository owner's username or GitHub Organization name}
 
 \item{repo_name}{Repository name}
 
@@ -19,7 +19,7 @@ create_repo_ref(repo_owner, repo_name, is_enterprise = FALSE,
 \item{identifier}{Ideally should be left blank and defaults to using \code{GITHUB_PAT} or \code{GITHUB_ENT_PAT}
 environment variables as Personal Access Tokens. If \code{identifier} has a value and \code{password} does not,
 this is assumed to be an alternative name of the environment variable to use for your Personal Access Token. If
-\code{password} is also provided, this is interpretted as a username.}
+\code{password} is also provided, this is interpreted as a username.}
 
 \item{password}{GitHub password. Ideally should be left blank and then defaults to empty string which works in conjunction with personal access tokens. Required if supplying username.}
 }
@@ -28,7 +28,7 @@ List of repository reference information and credentials
 }
 \description{
 This function constructs a list of needed information to send API calls to a specific
-GitHub repository. Specifically, it stores information on thhe repository's name and
+GitHub repository. Specifically, it stores information on the repository's name and
 owner, the type (whether or not Enterprise GitHub), and potentially credentials to authenticate.
 }
 \examples{

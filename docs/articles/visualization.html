@@ -123,13 +123,13 @@
 <a href="#task-boards" class="anchor"></a>Task Boards</h2>
 <p><code><a href="../reference/viz_taskboard.html">viz_taskboard()</a></code> creates an Agile-like taskboard of items (e.g. issues, milestones) to be started, in progress, and completed.</p>
 <p>For example, imagine pulling issues from a hypothetical R package into the <code>pkg_issues</code> dataframe.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/viz_taskboard.html">viz_taskboard</a></span>(pkg_issues, <span class="kw"><a href="../reference/taskboard_helpers.html">is_labelled_with</a></span>(<span class="st">"in-progress"</span>), <span class="dv">40</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/viz_taskboard.html">viz_taskboard</a></span>(pkg_issues, <span class="kw"><a href="../reference/taskboard_helpers.html">is_labeled_with</a></span>(<span class="st">"in-progress"</span>), <span class="dv">40</span>)</code></pre></div>
 <p><img src="visualization_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
-<p>Users specify what logic to use for identifying “in progress” items by passing a function factory to the <code>in_progress_when</code> parameter. The above example uses the <code><a href="../reference/taskboard_helpers.html">is_labelled_with()</a></code> option. Other options include:</p>
+<p>Users specify what logic to use for identifying “in progress” items by passing a function factory to the <code>in_progress_when</code> parameter. The above example uses the <code><a href="../reference/taskboard_helpers.html">is_labeled_with()</a></code> option. Other options include:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ls</span>(<span class="st">'package:ghtrackr'</span>)[<span class="kw">grep</span>(<span class="st">"^is_*"</span>, <span class="kw">ls</span>(<span class="st">'package:ghtrackr'</span>))]
 <span class="co">#&gt; [1] "is_assigned"       "is_assigned_to"    "is_created_before"</span>
 <span class="co">#&gt; [4] "is_due"            "is_due_before"     "is_in_a_milestone"</span>
-<span class="co">#&gt; [7] "is_in_milestone"   "is_labelled_with"  "is_part_closed"</span></code></pre></div>
+<span class="co">#&gt; [7] "is_in_milestone"   "is_labeled_with"   "is_part_closed"</span></code></pre></div>
 <p>See <code><a href="../reference/taskboard_helpers.html">?taskboard_helpers</a></code> for more details.</p>
 <p>As a second example, suppose we instead classify issues as in progress once they have been put in a milestone.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/viz_taskboard.html">viz_taskboard</a></span>(pkg_issues, <span class="kw"><a href="../reference/taskboard_helpers.html">is_in_a_milestone</a></span>(), <span class="dv">40</span>)</code></pre></div>

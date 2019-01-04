@@ -1,17 +1,17 @@
 #' Create reference to a GitHub repository
 #'
 #' This function constructs a list of needed information to send API calls to a specific
-#' GitHub repository. Specifically, it stores information on thhe repository's name and
+#' GitHub repository. Specifically, it stores information on the repository's name and
 #' owner, the type (whether or not Enterprise GitHub), and potentially credentials to authenticate.
 #'
-#' @param repo_owner Repository owner's eid or GitHub Organization name
+#' @param repo_owner Repository owner's username or GitHub Organization name
 #' @param repo_name Repository name
 #' @param is_enterprise Boolean denoting whether or not working with Enterprise GitHub.Defaults to \code{FALSE}
 #' @param hostname Host URL stub for Enterprise repositories (e.g. "mycorp.github.com")
 #' @param identifier Ideally should be left blank and defaults to using \code{GITHUB_PAT} or \code{GITHUB_ENT_PAT}
 #'     environment variables as Personal Access Tokens. If \code{identifier} has a value and \code{password} does not,
 #'     this is assumed to be an alternative name of the environment variable to use for your Personal Access Token. If
-#'     \code{password} is also provided, this is interpretted as a username.
+#'     \code{password} is also provided, this is interpreted as a username.
 #' @param password GitHub password. Ideally should be left blank and then defaults to empty string which works in conjunction with personal access tokens. Required if supplying username.
 #'
 #' @return List of repository reference information and credentials

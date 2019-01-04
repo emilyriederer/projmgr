@@ -169,7 +169,7 @@ taskboard helper functions. See <code><a href='taskboard_helpers.html'>?taskboar
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='no'>issues</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_issues.html'>get_issues</a></span>(<span class='no'>myrepo</span>, <span class='kw'>milestone</span> <span class='kw'>=</span> <span class='fl'>1</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='parse_issues.html'>parse_issues</a></span>()
-<span class='fu'>viz_taskboard</span>(<span class='no'>issues</span>, <span class='kw'>in_progress_when</span> <span class='kw'>=</span> <span class='fu'><a href='taskboard_helpers.html'>is_labelled_with</a></span>(<span class='st'>'in-progress'</span>))
+<span class='fu'>viz_taskboard</span>(<span class='no'>issues</span>, <span class='kw'>in_progress_when</span> <span class='kw'>=</span> <span class='fu'><a href='taskboard_helpers.html'>is_labeled_with</a></span>(<span class='st'>'in-progress'</span>))
 <span class='fu'>viz_taskboard</span>(<span class='no'>issues</span>, <span class='kw'>in_progress_when</span> <span class='kw'>=</span> <span class='fu'><a href='taskboard_helpers.html'>is_in_a_milestone</a></span>())
 <span class='co'># }</span></pre>
   </div>

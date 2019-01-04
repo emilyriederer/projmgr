@@ -152,7 +152,7 @@ report_todo <- function(todo){
 #'
 #' @param comments Dataframe or tibble of comments for a single issue, as returned by \code{get_issue_comments()}
 #' @param issue Optional dataframe or tibble of issues, as returned by \code{get_issues()}. If provided,
-#'     output includes issue-level data such as the title, intitial description, creation date, etc.
+#'     output includes issue-level data such as the title, initial description, creation date, etc.
 #'
 #' @inherit report_progress return
 #' @export

@@ -2,7 +2,7 @@
 % Please edit documentation in R/viz-gantt.R
 \name{viz_gantt}
 \alias{viz_gantt}
-\title{Visualize Gannt-style chart of planned or actual time to completion}
+\title{Visualize Gantt-style chart of planned or actual time to completion}
 \usage{
 viz_gantt(data, start = created_at, end = closed_at,
   str_wrap_width = 30)

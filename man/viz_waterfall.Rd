@@ -42,7 +42,7 @@ The exact accuracy of the logic depends on filtering that has already been done 
 about the population you wish to represent when \code{get}ting your data.
 
 Note that this function respects \code{dplyr::group_by()}. If grouped data is passed, it will preserve
-the grouping and separate plots can be made with facetting.
+the grouping and separate plots can be made with faceting.
 }
 \examples{
 \dontrun{

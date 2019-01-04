@@ -61,10 +61,10 @@ viz_linked(g)
 For example, imagine pulling issues from a hypothetical R package into the `pkg_issues` dataframe.
 
 ```{r}
-viz_taskboard(pkg_issues, is_labelled_with("in-progress"), 40)
+viz_taskboard(pkg_issues, is_labeled_with("in-progress"), 40)
 ```
 
-Users specify what logic to use for identifying "in progress" items by passing a function factory to the `in_progress_when` parameter. The above example uses the `is_labelled_with()` option. Other options include:
+Users specify what logic to use for identifying "in progress" items by passing a function factory to the `in_progress_when` parameter. The above example uses the `is_labeled_with()` option. Other options include:
 
 ```{r}
 ls('package:ghtrackr')[grep("^is_*", ls('package:ghtrackr'))]

@@ -103,7 +103,7 @@ read_todo <- function(input){
 
 #' Post plan (milestones + issues) to GitHub repository
 #'
-#' Post custom plans (i.e. create milestons and issues) based on yaml read in by
+#' Post custom plans (i.e. create milestones and issues) based on yaml read in by
 #' \code{read_plan}. Please see the "Building Custom Plans" vignette for details.
 #'
 #' @inherit post_engine params

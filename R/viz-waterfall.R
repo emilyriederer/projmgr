@@ -17,7 +17,7 @@
 #' about the population you wish to represent when \code{get}ting your data.
 #'
 #' Note that this function respects \code{dplyr::group_by()}. If grouped data is passed, it will preserve
-#' the grouping and separate plots can be made with facetting.
+#' the grouping and separate plots can be made with faceting.
 #'
 #' @inheritParams viz_gantt
 #' @param data Dataset, such as those representing issues or milestones (i.e. \code{parse_issues()} or

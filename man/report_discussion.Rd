@@ -10,7 +10,7 @@ report_discussion(comments, issue = NA)
 \item{comments}{Dataframe or tibble of comments for a single issue, as returned by \code{get_issue_comments()}}
 
 \item{issue}{Optional dataframe or tibble of issues, as returned by \code{get_issues()}. If provided,
-output includes issue-level data such as the title, intitial description, creation date, etc.}
+output includes issue-level data such as the title, initial description, creation date, etc.}
 }
 \value{
 Returns character string of HTML with class attribute to be correctly

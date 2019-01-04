@@ -2,7 +2,7 @@
 % Please edit documentation in R/viz-taskboard-helpers.R
 \name{taskboard_helpers}
 \alias{taskboard_helpers}
-\alias{is_labelled_with}
+\alias{is_labeled_with}
 \alias{is_assigned}
 \alias{is_assigned_to}
 \alias{is_in_a_milestone}
@@ -13,7 +13,7 @@
 \alias{is_due_before}
 \title{Tag "in-progress" items for taskboard visualization}
 \usage{
-is_labelled_with(label)
+is_labeled_with(label)
 
 is_assigned()
 
@@ -49,7 +49,7 @@ Function to be passed as \code{in_progress_when} argument in \code{viz_taskboard
 The \code{viz_taskboard()} function creates a three-column layout of entities that are
 not started, in progress, or done. Objects are classified as done when they have a
 \code{state} of "closed". Object are classified as "To-Do" when they are neither "Closed"
-or "In Progress". However, what consistutes "In Progress" is user and project dependent.
+or "In Progress". However, what constistutes "In Progress" is user and project dependent.
 Thus, these functions let users specify what they mean.
 }
 \details{
@@ -62,7 +62,7 @@ General options:
 Issue-specific options:
 
 \itemize{
-  \item is_labelled_with: User-specified label (as character string) exists
+  \item is_labeled_with: User-specified label (as character string) exists
   \item is_assigned: Has been assigned to anyone
   \item is_assigned_to: Has been assigned to specific user-specified login (as character string)
   \item is_in_a_milestone: Has been put into any milestone
@@ -79,7 +79,7 @@ Milestone-specific options:
 }
 \examples{
 \dontrun{
-viz_taskboard(issues, in_progress_when = is_labelled_with('in-progress'))
+viz_taskboard(issues, in_progress_when = is_labeled_with('in-progress'))
 viz_taskboard(milestones, in_progress_when = is_created_before('2018-12-31'))
 viz_taskboard(issues, in_progress_when = is_in_milestone())
 }

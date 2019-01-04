@@ -37,7 +37,7 @@
 <meta property="og:description" content="The viz_taskboard() function creates a three-column layout of entities that are
 not started, in progress, or done. Objects are classified as done when they have a
 state of &quot;closed&quot;. Object are classified as &quot;To-Do&quot; when they are neither &quot;Closed&quot;
-or &quot;In Progress&quot;. However, what consistutes &quot;In Progress&quot; is user and project dependent.
+or &quot;In Progress&quot;. However, what constistutes &quot;In Progress&quot; is user and project dependent.
 Thus, these functions let users specify what they mean." />
 
 <meta property="og:image" content="/logo.png" />
@@ -124,12 +124,12 @@ Thus, these functions let users specify what they mean." />
     <p>The <code><a href='viz_taskboard.html'>viz_taskboard()</a></code> function creates a three-column layout of entities that are
 not started, in progress, or done. Objects are classified as done when they have a
 <code>state</code> of "closed". Object are classified as "To-Do" when they are neither "Closed"
-or "In Progress". However, what consistutes "In Progress" is user and project dependent.
+or "In Progress". However, what constistutes "In Progress" is user and project dependent.
 Thus, these functions let users specify what they mean.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>is_labelled_with</span>(<span class='no'>label</span>)
+    <pre class="usage"><span class='fu'>is_labeled_with</span>(<span class='no'>label</span>)
 
 <span class='fu'>is_assigned</span>()
 
@@ -184,7 +184,7 @@ Thus, these functions let users specify what they mean.</p>
 </ul>
     <p>Issue-specific options:</p>
 <ul>
-<li><p>is_labelled_with: User-specified label (as character string) exists</p></li>
+<li><p>is_labeled_with: User-specified label (as character string) exists</p></li>
 <li><p>is_assigned: Has been assigned to anyone</p></li>
 <li><p>is_assigned_to: Has been assigned to specific user-specified login (as character string)</p></li>
 <li><p>is_in_a_milestone: Has been put into any milestone</p></li>
@@ -200,7 +200,7 @@ Thus, these functions let users specify what they mean.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'><a href='viz_taskboard.html'>viz_taskboard</a></span>(<span class='no'>issues</span>, <span class='kw'>in_progress_when</span> <span class='kw'>=</span> <span class='fu'>is_labelled_with</span>(<span class='st'>'in-progress'</span>))
+<span class='fu'><a href='viz_taskboard.html'>viz_taskboard</a></span>(<span class='no'>issues</span>, <span class='kw'>in_progress_when</span> <span class='kw'>=</span> <span class='fu'>is_labeled_with</span>(<span class='st'>'in-progress'</span>))
 <span class='fu'><a href='viz_taskboard.html'>viz_taskboard</a></span>(<span class='no'>milestones</span>, <span class='kw'>in_progress_when</span> <span class='kw'>=</span> <span class='fu'>is_created_before</span>(<span class='st'>'2018-12-31'</span>))
 <span class='fu'><a href='viz_taskboard.html'>viz_taskboard</a></span>(<span class='no'>issues</span>, <span class='kw'>in_progress_when</span> <span class='kw'>=</span> <span class='fu'>is_in_milestone</span>())
 <span class='co'># }</span></pre>

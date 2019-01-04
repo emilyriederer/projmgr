@@ -35,7 +35,7 @@
 <meta property="og:title" content="Create reference to a GitHub repository — create_repo_ref" />
 
 <meta property="og:description" content="This function constructs a list of needed information to send API calls to a specific
-GitHub repository. Specifically, it stores information on thhe repository's name and
+GitHub repository. Specifically, it stores information on the repository's name and
 owner, the type (whether or not Enterprise GitHub), and potentially credentials to authenticate." />
 
 <meta property="og:image" content="/logo.png" />
@@ -120,7 +120,7 @@ owner, the type (whether or not Enterprise GitHub), and potentially credentials 
     <div class="ref-description">
     
     <p>This function constructs a list of needed information to send API calls to a specific
-GitHub repository. Specifically, it stores information on thhe repository's name and
+GitHub repository. Specifically, it stores information on the repository's name and
 owner, the type (whether or not Enterprise GitHub), and potentially credentials to authenticate.</p>
     
     </div>
@@ -133,7 +133,7 @@ owner, the type (whether or not Enterprise GitHub), and potentially credentials 
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>repo_owner</th>
-      <td><p>Repository owner's eid or GitHub Organization name</p></td>
+      <td><p>Repository owner's username or GitHub Organization name</p></td>
     </tr>
     <tr>
       <th>repo_name</th>
@@ -152,7 +152,7 @@ owner, the type (whether or not Enterprise GitHub), and potentially credentials 
       <td><p>Ideally should be left blank and defaults to using <code>GITHUB_PAT</code> or <code>GITHUB_ENT_PAT</code>
 environment variables as Personal Access Tokens. If <code>identifier</code> has a value and <code>password</code> does not,
 this is assumed to be an alternative name of the environment variable to use for your Personal Access Token. If
-<code>password</code> is also provided, this is interpretted as a username.</p></td>
+<code>password</code> is also provided, this is interpreted as a username.</p></td>
     </tr>
     <tr>
       <th>password</th>
