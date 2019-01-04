@@ -36,7 +36,7 @@ print.plan <- function(x, ...){
 #' @export
 print.todo <- function(x, ...){
 
-  issues <- vapply(x, FUN, function(x) x[["title"]], FUN.VALUE = character(1))
+  issues <- vapply(x, FUN = function(x) x[["title"]], FUN.VALUE = character(1))
 
   out <- mapply(function(index, issues) paste0(index, ". ", issues, "\n"),
                 seq_along(issues), issues)
