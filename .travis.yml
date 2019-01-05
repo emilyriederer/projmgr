@@ -5,6 +5,9 @@ r:
   - oldrel
   - release
   - devel
+os:
+  - linux
+  - osx
 
 sudo: false
 cache: packages
