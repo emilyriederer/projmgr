@@ -22,7 +22,7 @@ build_script:
 environment:
   USE_RTOOLS: true
 
-    matrix:
+  matrix:
   - R_VERSION: devel
     GCC_PATH: mingw_32
 
