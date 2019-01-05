@@ -4,14 +4,10 @@ language: R
 r:
   - oldrel
   - release
-  - devel
+  - if [ $TRAVIS_OS_NAME = linux ]; then devel; fi
 os:
   - linux
   - osx
-
-matrix:
-  allow_failures:
-    - os: osx
 
 sudo: false
 cache: packages
