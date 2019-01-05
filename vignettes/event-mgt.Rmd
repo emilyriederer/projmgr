@@ -1,5 +1,5 @@
 ---
-title: "Event & Team Management"
+title: "Use Case: Event & Team Management (Postings custom plans to many repos)"
 author: "Emily Riederer"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette

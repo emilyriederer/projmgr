@@ -1,5 +1,5 @@
 ---
-title: "Working Offline"
+title: "Use Case: Working Offline (Posting custom to-do lists)"
 author: "Emily Riederer"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette

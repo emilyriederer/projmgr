@@ -1,5 +1,5 @@
 ---
-title: "Bug reporting with reprex"
+title: "Use Case: Bug reporting with reprex (Posting issues from clipboard)"
 author: "Emily Riederer"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette

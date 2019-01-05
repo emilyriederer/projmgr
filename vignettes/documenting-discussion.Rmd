@@ -1,5 +1,5 @@
 ---
-title: "Documenting Discussion"
+title: "Use Case: Documenting Discussion (Reporting an issue's comments)"
 author: "Emily Riederer"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette

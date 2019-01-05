@@ -1,5 +1,5 @@
 ---
-title: "Project Planning & Stakeholder Updates"
+title: "Use Case: Project Planning & Stakeholder Updates (Posting & reporting custom plans)"
 author: "Emily Riederer"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -23,11 +23,11 @@ Communicating analytical results is a core part of the data science process. A r
 
 Project management work can sometimes boost productivity and bring benefits, but communcating to stakeholders has significant overhead and can risk stealing time from core job responsibilities. For those "data people" that use R and GitHub, conducting project planning and reporting with the same toolkit can reduce complexity and the inefficiencies of switching between contexts and tools. 
 
-`ghtrackr`'s concepts of "plans" provide an interface for project management. Plans can be created in YAML and delivered to various customers in their preferred format. For the analyst, they can be automatically posted to a GitHub repo as a set of issues and milestones for easy tracking and linking to commits and pull requests. For sharing with senior stakeholders who are not on GitHub, both plans and progress updates can be formatted into aesthetic RMarkdown reports, similar to the examples Lucy's blog shows for meeting agendas and minutes. 
+Both Lucy and Jen's recommendations emphasize the importance of facilitating meetings and documentating agreed upon plans and deliverables. `ghtrackr`'s concepts of "plans" provide an interface for these project management tasks. Plans can be created in YAML and delivered to various customers in their preferred format. For the analyst, they can be automatically posted to a GitHub repo as a set of issues and milestones for easy tracking and linking to commits and pull requests. For sharing with senior stakeholders who are not on GitHub, both plans and progress updates can be formatted into aesthetic RMarkdown reports, similar to the examples Lucy's blog shows for meeting agendas and minutes. 
 
-## Planning Your Project
+## Planning Your Project in YAML
 
-Writing out your plan of attack in YAML lets you focus on key details and allows everything to remain easily editable while you refine your approach.
+Writing out your plan of attack in YAML lets you focus on key details and allows everything to remain easily editable while you refine your approach. Lightweight, plain-text YAML can even be tracked by git to record any changes over time.
 
 Recall the example plan discussed in the vignette on custom plans:
 
@@ -35,6 +35,8 @@ Recall the example plan discussed in the vignette on custom plans:
 plan_path <- system.file("extdata", "plan.yml", package = "ghtrackr", mustWork = TRUE)
 cat(readLines(plan_path), sep = '\n')
 ```
+
+## Convert YAML to GitHub Milestones and Issues
 
 As described in the custom plans vignette, this could be added to a GitHub repo as issues and milestones with the `post_plan()` function, like this:
 
@@ -44,9 +46,11 @@ my_repo <- create_repo_ref("emilyriederer", "my_repo_name")
 post_plan(plan, my_repo)
 ```
 
+This can help you keep yourself organized or align priorities with technical collaborators.
+
 ## Reporting Project Plans and Progress
 
-Meeting minutes or agendas can be added to agendas and minutes, such as Lucy's templates provide, with the `report_` functions. 
+To communicate with those not on GitHub, `report_` functions convert plans to HTML which can be inserted into RMarkdown-based meeting agendas, minutes, presentations, or other team communications. 
 
 ```{r}
 plan_path <- system.file("extdata", "plan.yml", package = "ghtrackr", mustWork = TRUE)
