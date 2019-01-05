@@ -26,9 +26,10 @@ articles:
     desc: A survey of features and codeflows
     contents:
     - basic-usage
+    - building-custom-plans
+    - reporting
     - visualization
     - events-data
-    - building-custom-plans
   - title: "Use Cases"
     desc: Demo of possible applications for personal projects, academia, and industry
     contents:

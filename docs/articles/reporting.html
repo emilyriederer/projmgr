@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Use Case: Documenting Discussion (Reporting an issue’s comments) • ghtrackr</title>
+<title>Reporting with RMarkdown • ghtrackr</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
-<meta property="og:title" content="Use Case: Documenting Discussion (Reporting an issue’s comments)">
+<meta property="og:title" content="Reporting with RMarkdown">
 <meta property="og:description" content="">
 <meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
@@ -75,44 +75,116 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Use Case: Documenting Discussion (Reporting an issue’s comments)</h1>
+      <h1>Reporting with RMarkdown</h1>
                         <h4 class="author">Emily Riederer</h4>
             
             <h4 class="date">2019-01-05</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/emilyriederer/ghtrackr/blob/master/vignettes/documenting-discussion.Rmd"><code>vignettes/documenting-discussion.Rmd</code></a></small>
-      <div class="hidden name"><code>documenting-discussion.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/emilyriederer/ghtrackr/blob/master/vignettes/reporting.Rmd"><code>vignettes/reporting.Rmd</code></a></small>
+      <div class="hidden name"><code>reporting.Rmd</code></div>
 
     </div>
 
     
     
-<p>If the comments of a GitHub issue contain an important discussions regarding your analysis, you may wish to save an immutable copy of this conversation for documentation. For example, consider this important discussion:</p>
-<div class="figure">
-<img src="report_discussion.PNG" alt="GitHub issue with comments"><p class="caption">GitHub issue with comments</p>
+<p>Communication is a critical part of project planning. For this, <code>ghtrackr</code> provides a family of <code>report</code> functions. These functions translate certain R objects like lists or dataframes into HTML code which will render nicely when knitted to HTML in an RMarkdown document.</p>
+<div id="plans-to-do-lists" class="section level2">
+<h2 class="hasAnchor">
+<a href="#plans-to-do-lists" class="anchor"></a>Plans &amp; To-Do Lists</h2>
+<p>Recall that plans and to-do lists can be written in YAML. For example:</p>
+<pre><code>- title: Data cleaning and validation
+  description: &gt;
+    We will conduct data quality checks,
+    resolve issues with data quality, and
+    document this process
+  due_on: 2018-12-31T12:59:59Z
+  issue:
+    - title: Define data quality standards
+      body: List out decision rules to check data quality
+      assignees: [emilyriederer]
+      labels: [a, b, c]
+    - title: Assess data quality
+      body: Use assertthat to test decision rules on dataset
+      labels: [low]
+    - title: Resolve data quality issues
+      body: Conduct needed research to resolve any issues
+
+- title: Exploratory data analysis
+  description: &gt;
+    Create basic statistics and views to better
+    understand dataset and relationships
+  issue:
+    - title: Summary statistics
+      body: Calculate summary statistics
+    - title: Visualizations
+      body: Create univariate and bivariate plots</code></pre>
+<p>The <code><a href="../reference/report_plan.html">report_plan()</a></code> function converts plans into formatted HTML for inclusion in RMarkdown documents for more aesthetic reporting.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/read_plan.html">read_plan</a></span>(plan_path)
+<span class="kw"><a href="../reference/report_plan.html">report_plan</a></span>(plan)</code></pre></div>
+<p></p>
+<p>
+<strong> Data cleaning and validation </strong> <em> ( 0 % Complete - 0 / 3 Issues) </em>
+</p>
+<ul>
+<li>
+☐ Define data quality standards
+</li>
+<li>
+☐ Assess data quality
+</li>
+<li>
+☐ Resolve data quality issues
+</li>
+</ul>
+<p>
+<strong> Exploratory data analysis </strong> <em> ( 0 % Complete - 0 / 2 Issues) </em>
+</p>
+<ul>
+<li>
+☐ Summary statistics
+</li>
+<li>
+☐ Visualizations
+</li>
+</ul>
+<p></p>
+<p>The <code><a href="../reference/report_todo.html">report_todo()</a></code> function works similarly.</p>
 </div>
-<p>You can do this in two steps. First, <code>get</code> the issue metadata and comments from GitHub with <code><a href="../reference/get_issues.html">get_issues()</a></code> and <code><a href="../reference/get_issue_comments.html">get_issue_comments()</a></code>.</p>
+<div id="issues-milestones" class="section level2">
+<h2 class="hasAnchor">
+<a href="#issues-milestones" class="anchor"></a>Issues &amp; Milestones</h2>
+<p>Similarly, any issue-milestone data pulled back down from GitHub can be reported in a similar format with <code><a href="../reference/report_progress.html">report_progress()</a></code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/report_progress.html">report_progress</a></span>(issues)</code></pre></div>
+<p></p>
+<strong> Data cleaning and validation </strong> <em> ( 100 % Complete - 3 / 3 Issues) </em>
+<ul>
+<li>
+☑ Resolve data quality issues
+</li>
+<li>
+☑ Assess data quality
+</li>
+<li>
+☑ Define data quality standards
+</li>
+</ul>
+<strong> Exploratory data analysis </strong> <em> ( 50 % Complete - 1 / 2 Issues) </em>
+<ul>
+<li>
+☐ Visualizations
+</li>
+<li>
+☑ Summary statistics
+</li>
+</ul>
+<p></p>
+</div>
+<div id="discussions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#discussions" class="anchor"></a>Discussions</h2>
+<p>Additionally, full issues discussions can be pulled from GitHub and reformatted to HTML for long-term documentation with the <code><a href="../reference/report_discussion.html">report_discussion()</a></code> function.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">issues &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_issues.html">get_issues</a></span>(experigit, <span class="dt">number =</span> <span class="dv">163</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/parse_issues.html">parse_issues</a></span>()
 comments &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_issue_comments.html">get_issue_comments</a></span>(experigit, <span class="dt">number =</span> <span class="dv">163</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/parse_issue_comments.html">parse_issue_comments</a></span>()</code></pre></div>
-<p>As with all other <code>get-parse</code> codeflows, this produces dataframe output.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(issues)
-<span class="co">#&gt; # A tibble: 1 x 19</span>
-<span class="co">#&gt;   title  body    state created_at closed_at  user_login n_comments url    </span>
-<span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;  </span>
-<span class="co">#&gt; 1 A ver~ This i~ open  2018-12-30 NA         emilyried~          2 https:~</span>
-<span class="co">#&gt; # ... with 11 more variables: number &lt;int&gt;, milestone_title &lt;lgl&gt;,</span>
-<span class="co">#&gt; #   milestone_id &lt;lgl&gt;, milestone_number &lt;lgl&gt;, milestone_state &lt;lgl&gt;,</span>
-<span class="co">#&gt; #   milestone_created_at &lt;date&gt;, milestone_closed_at &lt;date&gt;,</span>
-<span class="co">#&gt; #   milestone_due_on &lt;date&gt;, assignee_login &lt;lgl&gt;, assignees_login &lt;list&gt;,</span>
-<span class="co">#&gt; #   labels_name &lt;list&gt;</span>
-<span class="kw">head</span>(comments)
-<span class="co">#&gt; # A tibble: 2 x 8</span>
-<span class="co">#&gt;   url          id user_login created_at updated_at author_associat~ body  </span>
-<span class="co">#&gt;   &lt;chr&gt;     &lt;int&gt; &lt;chr&gt;      &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;            &lt;chr&gt; </span>
-<span class="co">#&gt; 1 https:/~ 4.51e8 emilyried~ 2018-12-30 2018-12-30 OWNER            I'm j~</span>
-<span class="co">#&gt; 2 https:/~ 4.51e8 emilyried~ 2018-12-30 2018-12-30 OWNER            "Actu~</span>
-<span class="co">#&gt; # ... with 1 more variable: number &lt;dbl&gt;</span></code></pre></div>
-<p>Next, simply pass these into the <code><a href="../reference/report_discussion.html">report_discussion()</a></code> function to generate a formatted RMarkdown report.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/report_discussion.html">report_discussion</a></span>(comments, issues)
 <span class="co">#&gt; Warning in if (!is.na(issue)) {: the condition has length &gt; 1 and only the</span>
 <span class="co">#&gt; first element will be used</span></code></pre></div>
@@ -138,27 +210,19 @@ I’m just commenting to add more information.
 Actually, I disagree. My perspective is this.
 </blockquote>
 <p></p>
-<p>Note that the <code>issues</code> dataframe is optional. You can pass only the comments in for documentation, but you do risk missing out on important context from the issue description and metadata.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/report_discussion.html">report_discussion</a></span>(comments)</code></pre></div>
-<p></p>
-<hr>
-<strong> emilyriederer ( OWNER ) wrote at 2018-12-30 : </strong>
-<p></p>
-<blockquote>
-I’m just commenting to add more information.
-</blockquote>
-<p></p>
-<p></p>
-<hr>
-<strong> emilyriederer ( OWNER ) wrote at 2018-12-30 : </strong>
-<p></p>
-<blockquote>
-Actually, I disagree. My perspective is this.
-</blockquote>
-<p></p>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+        <div id="tocnav">
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+<li><a href="#plans-to-do-lists">Plans &amp; To-Do Lists</a></li>
+      <li><a href="#issues-milestones">Issues &amp; Milestones</a></li>
+      <li><a href="#discussions">Discussions</a></li>
+      </ul>
+</div>
       </div>
 
 </div>

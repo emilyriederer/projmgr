@@ -1,0 +1,71 @@
+---
+title: "Reporting with RMarkdown"
+author: "Emily Riederer"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Reporting with RMarkdown}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+library(ghtrackr)
+```
+
+Communication is a critical part of project planning. For this, `ghtrackr` provides a family of `report` functions. These functions translate certain R objects like lists or dataframes into HTML code which will render nicely when knitted to HTML in an RMarkdown document.
+
+## Plans & To-Do Lists
+
+Recall that plans and to-do lists can be written in YAML. For example:
+
+```{r comment='', echo = FALSE}
+plan_path <- system.file("extdata", "plan.yml", package = "ghtrackr", mustWork = TRUE)
+cat(readLines(plan_path), sep = '\n')
+```
+
+The `report_plan()` function converts plans into formatted HTML for inclusion in RMarkdown documents for more aesthetic reporting.
+
+```{r}
+plan <- read_plan(plan_path)
+report_plan(plan)
+```
+
+The `report_todo()` function works similarly.
+
+## Issues & Milestones
+
+Similarly, any issue-milestone data pulled back down from GitHub can be reported in a similar format with `report_progress()`.
+
+```{r echo = FALSE}
+issues <- 
+  readRDS(system.file("extdata", "anproj-issues.rds", package = "ghtrackr", mustWork = TRUE))
+```
+
+```{r}
+report_progress(issues)
+```
+
+## Discussions
+
+Additionally, full issues discussions can be pulled from GitHub and reformatted to HTML for long-term documentation with the `report_discussion()` function.
+
+```{r eval = FALSE}
+issues <- get_issues(experigit, number = 163) %>% parse_issues()
+comments <- get_issue_comments(experigit, number = 163) %>% parse_issue_comments()
+```
+
+```{r echo = FALSE}
+issues <- readRDS(system.file("extdata", "disc-issues.rds", package = "ghtrackr", mustWork = TRUE))
+comments <- readRDS(system.file("extdata", "disc-comments.rds", package = "ghtrackr", mustWork = TRUE))
+```
+
+```{r}
+report_discussion(comments, issues)
+```
+

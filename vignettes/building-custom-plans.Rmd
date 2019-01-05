@@ -1,5 +1,5 @@
 ---
-title: "Building Custom Plans and To-Do Lists"
+title: "Generating Milestones & Issues from YAML"
 author: "Emily Riederer"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
