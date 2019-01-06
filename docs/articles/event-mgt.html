@@ -234,11 +234,11 @@ milestones &lt;-<span class="st"> </span>purrr<span class="op">::</span><span cl
 <span class="co">#&gt; #   created_at &lt;date&gt;, updated_at &lt;date&gt;, due_on &lt;date&gt;, closed_at &lt;dbl&gt;</span></code></pre></div>
 <p>Which we can wrangle for quick summary views:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">milestones <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">percent_complete =</span> n_closed_issues <span class="op">*</span><span class="st"> </span><span class="dv">100</span> <span class="op">/</span><span class="st"> </span>(n_closed_issues <span class="op">+</span><span class="st"> </span>n_open_issues)) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(team, title, percent_complete, number) <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">percent_complete =</span> n_closed_issues <span class="op">*</span><span class="st"> </span><span class="dv">100</span> <span class="op">/</span><span class="st"> </span>(n_closed_issues <span class="op">+</span><span class="st"> </span>n_open_issues)) <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(team, title, percent_complete, number) <span class="op">%&gt;%</span>
 <span class="st">  </span>tidyr<span class="op">::</span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/spread.html">spread</a></span>(team, percent_complete) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(number) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="op">-</span>number)
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(number) <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="op">-</span>number)
 <span class="co">#&gt; # A tibble: 4 x 6</span>
 <span class="co">#&gt;   title                      `1`   `2`   `3`   `4`   `5`</span>
 <span class="co">#&gt;   &lt;chr&gt;                    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>

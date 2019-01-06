@@ -87,9 +87,9 @@
 
     
     
-<p>Communicating analytical results is a core part of the data science process. A related but less appreciated task is communcating analysis plans and progress to various stakeholders throughout a project. This need is a recurring theme across disciplines. Lucy D’Agostino McGowan discusses how to lead effective check-ins with dissertation committees in her blog post <a href="https://livefreeordichotomize.com/2018/09/14/one-year-to-dissertate/">One Year to Dissertate</a> and Jen Thompson describes the central role that “data people” play in project managing cross-functional clinical research teams in her blog post (and related talk) <a href="https://jenthompson.me/2018/10/31/data-person-as-pm/">The Data Person as Project Manager</a>. The same need is also readily apparent in corporate settings where it can be crucial for analysts to articulate how they are spending their time and set expectations on when they can deliver results.</p>
-<p>Project management work can sometimes boost productivity and bring benefits, but communcating to stakeholders has significant overhead and can risk stealing time from core job responsibilities. For those “data people” that use R and GitHub, conducting project planning and reporting with the same toolkit can reduce complexity and the inefficiencies of switching between contexts and tools.</p>
-<p>Both Lucy and Jen’s recommendations emphasize the importance of facilitating meetings and documentating agreed upon plans and deliverables. <code>ghtrackr</code>’s concepts of “plans” provide an interface for these project management tasks. Plans can be created in YAML and delivered to various customers in their preferred format. For the analyst, they can be automatically posted to a GitHub repo as a set of issues and milestones for easy tracking and linking to commits and pull requests. For sharing with senior stakeholders who are not on GitHub, both plans and progress updates can be formatted into aesthetic RMarkdown reports, similar to the examples Lucy’s blog shows for meeting agendas and minutes.</p>
+<p>Communicating analytical results is a core part of the data science process. A related but less appreciated task is communicating analysis plans and progress to various stakeholders throughout a project. This need is a recurring theme across disciplines. Lucy D’Agostino McGowan discusses how to lead effective check-ins with dissertation committees in her blog post <a href="https://livefreeordichotomize.com/2018/09/14/one-year-to-dissertate/">One Year to Dissertate</a> and Jen Thompson describes the central role that “data people” play in project management of cross-functional clinical research teams in her blog post (and related talk) <a href="https://jenthompson.me/2018/10/31/data-person-as-pm/">The Data Person as Project Manager</a>. The same need is also readily apparent in corporate settings where it can be crucial for analysts to articulate how they are spending their time and set expectations on when they can deliver results.</p>
+<p>Despite the benefits of project management, communcating to stakeholders has significant overhead and can risk stealing time from core job responsibilities. For those “data people” that use R and GitHub, conducting project planning and reporting with the same toolkit can reduce complexity and the inefficiencies of switching between contexts and tools.</p>
+<p>Both Lucy and Jen’s recommendations emphasize the importance of facilitating meetings and documentating agreed upon plans and deliverables. <code>ghtrackr</code>’s concept of “plans” provides an interface for these project management tasks. Plans can be created in YAML and delivered to various customers in their preferred format. For the analyst, they can be automatically posted to a GitHub repo as a set of issues and milestones for easy tracking and linking to commits and pull requests. For sharing with senior stakeholders who are not on GitHub, both plans and progress updates can be formatted into aesthetic RMarkdown reports, similar to the examples Lucy’s blog shows for meeting agendas and minutes.</p>
 <div id="planning-your-project-in-yaml" class="section level2">
 <h2 class="hasAnchor">
 <a href="#planning-your-project-in-yaml" class="anchor"></a>Planning Your Project in YAML</h2>
@@ -129,7 +129,10 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/read_plan.html">read_plan</a></span>(<span class="st">"plan.yml"</span>)
 my_repo &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_repo_ref.html">create_repo_ref</a></span>(<span class="st">"emilyriederer"</span>, <span class="st">"my_repo_name"</span>)
 <span class="kw"><a href="../reference/post_plan.html">post_plan</a></span>(plan, my_repo)</code></pre></div>
-<p>This can help you keep yourself organized or align priorities with technical collaborators.</p>
+<p>This can help you keep yourself organized or align priorities with technical collaborators on GitHub.</p>
+<div class="figure">
+<img src="post_plan.PNG" alt="Milestones posted on GitHub"><p class="caption">Milestones posted on GitHub</p>
+</div>
 </div>
 <div id="reporting-project-plans-and-progress" class="section level2">
 <h2 class="hasAnchor">
@@ -165,7 +168,7 @@ my_plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rea
 </li>
 </ul>
 <p></p>
-<p>Similarly, as tasks are completed and their related issues are closed on GitHub, that infromation can be pulled back down from GitHub. The complementary <code><a href="../reference/report_progress.html">report_progress()</a></code> function reformats GitHub issues for a consistent report of an in-progress plan,</p>
+<p>Similarly, as tasks are completed and their related issues are closed on GitHub, that information can be pulled back down from GitHub. The complementary <code><a href="../reference/report_progress.html">report_progress()</a></code> function reformats GitHub issues for a consistent report of an in-progress plan.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">issues &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/get_issues.html">get_issues</a></span>(analysis_repo, <span class="dt">state =</span> <span class="st">'all'</span>, <span class="dt">since =</span> <span class="st">'2018-12-01'</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../reference/parse_issues.html">parse_issues</a></span>() <span class="op">%&gt;%</span>
@@ -195,7 +198,8 @@ my_plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rea
 </li>
 </ul>
 <p></p>
-<p>For some audiences, posted plan data could also be show visually with functions such as <code><a href="../reference/viz_gantt.html">viz_gantt()</a></code>, which could plot either time-to-completion data or a Gantt plot based on anticipated milestone due dates.</p>
+<p>(Note that an hypothetical remaining “open” issue is not checked.)</p>
+<p>For some audiences, posted plan data could also be shown visually with functions such as <code><a href="../reference/viz_gantt.html">viz_gantt()</a></code>, which could plot either time-to-completion data or a Gantt plot based on anticipated milestone due dates. Similarly, changes to plans – neccessitated by analytical deep dives or other work priorities – can be communicated with <code><a href="../reference/viz_waterfall.html">viz_waterfall()</a></code>, which plots changes in total issue count (potentially grouped by milestone) over a fixed time period. See the Visualizations vigentte for more details.</p>
 </div>
   </div>
 

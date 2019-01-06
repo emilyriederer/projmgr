@@ -170,7 +170,7 @@ as obtained by the <code>get</code> and <code>parse</code> functions.</p>
 </ul>
     <p>The exact accuracy of the logic depends on filtering that has already been done to the dataset. Think carefully
 about the population you wish to represent when <code>get</code>ting your data.</p>
-<p>Note that this function respects <code><a href='http://dplyr.tidyverse.org/reference/group_by.html'>dplyr::group_by()</a></code>. If grouped data is passed, it will preserve
+<p>Note that this function respects <code><a href='https://dplyr.tidyverse.org/reference/group_by.html'>dplyr::group_by()</a></code>. If grouped data is passed, it will preserve
 the grouping and separate plots can be made with faceting.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -189,7 +189,7 @@ the grouping and separate plots can be made with faceting.</p>
 <span class='fu'>viz_waterfall</span>(<span class='no'>milestones</span>, <span class='st'>'2017-01-01'</span>, <span class='st'>'2017-03-31'</span>)
 <span class='co'># }</span><span class='co'># NOT RUN {</span>
 <span class='no'>issues</span> <span class='kw'>%&gt;%</span>
-<span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span>(<span class='no'>milestone</span>) <span class='kw'>%&gt;%</span>
+<span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span>(<span class='no'>milestone</span>) <span class='kw'>%&gt;%</span>
 <span class='fu'>viz_waterfall</span>(<span class='st'>'2017-01-01'</span>, <span class='st'>'2017-03-31'</span>) +
 <span class='fu'>facet_grid</span>(<span class='no'>milestone</span> ~ <span class='no'>.</span>)
 <span class='co'># }</span></pre>

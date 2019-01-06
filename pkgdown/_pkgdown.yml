@@ -22,7 +22,7 @@ articles:
     - git-github-introduction
     - github-pat
     - design-notes
-  - title: "Overview of Functionality"
+  - title: "Tour by Functionality"
     desc: A survey of features and codeflows
     contents:
     - basic-usage
@@ -30,7 +30,7 @@ articles:
     - reporting
     - visualization
     - events-data
-  - title: "Use Cases"
+  - title: "Tour by Application"
     desc: Demo of possible applications for personal projects, academia, and industry
     contents:
     - tracking-KPIs
