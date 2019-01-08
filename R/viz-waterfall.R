@@ -47,6 +47,25 @@ viz_waterfall <- function(data,
                                    start_date, end_date,
                                    start = created_at, end = closed_at){
 
+  if (!requireNamespace("tidyr", quietly = TRUE)) {
+    message(
+      paste0("Package \"tidyr\" is needed for this function. Please install \"tidyr\" to continue."),
+      call. = FALSE)
+  }
+
+  if (!requireNamespace("dplyr", quietly = TRUE)) {
+    message(
+      paste0("Package \"dplyr\" is needed for this function. Please install \"dplyr\" to continue."),
+      call. = FALSE)
+  }
+
+
+  if (!requireNamespace("rlang", quietly = TRUE)) {
+    message(
+      paste0("Package \"rlang\" is needed for this function. Please install \"rlang\" to continue."),
+      call. = FALSE)
+  }
+
   if(!grepl("\\d{4}-\\d{2}-\\d{2}", start_date) || !grepl("\\d{4}-\\d{2}-\\d{2}", end_date)){
     stop("Invalid date format. Please format start_date and end_date as 'YYYY-MM-DD' ",
          call. = FALSE)

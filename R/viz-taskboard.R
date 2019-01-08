@@ -32,6 +32,12 @@
 
 viz_taskboard <- function(data, in_progress_when, str_wrap_width = 30, text_size = 3){
 
+  if (!requireNamespace("dplyr", quietly = TRUE)) {
+    message(
+      paste0("Package \"dplyr\" is needed for this function. Please install \"dplyr\" to continue."),
+      call. = FALSE)
+  }
+
   stopifnot(is.function(in_progress_when))
 
   # create classification ----

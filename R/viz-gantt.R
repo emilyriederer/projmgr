@@ -36,6 +36,18 @@
 
 viz_gantt <- function(data, start = created_at, end = closed_at, str_wrap_width = 30){
 
+  if (!requireNamespace("dplyr", quietly = TRUE)) {
+    message(
+      paste0("Package \"dplyr\" is needed for this function. Please install \"dplyr\" to continue."),
+      call. = FALSE)
+  }
+
+  if (!requireNamespace("rlang", quietly = TRUE)) {
+    message(
+      paste0("Package \"rlang\" is needed for this function. Please install \"rlang\" to continue."),
+      call. = FALSE)
+  }
+
   start_var <- enquo(start)
   end_var <- enquo(end)
 

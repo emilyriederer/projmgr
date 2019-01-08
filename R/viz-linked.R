@@ -37,6 +37,13 @@ viz_linked <- function(g, filepath){
       call. = FALSE)
   }
 
+  if (!requireNamespace("tidyr", quietly = TRUE)) {
+    message(
+      paste0("Package \"tidyr\" is needed to edit SVG.",
+             "Please install \"tidyr\" or use the non-linked version."),
+      call. = FALSE)
+  }
+
   # create text-link mapping
   links <- get_text_link_map(g)
 

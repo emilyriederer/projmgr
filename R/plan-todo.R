@@ -116,7 +116,6 @@ read_todo <- function(input){
 #' @return Dataframe with numbers (identifiers) of posted milestones and issues and issue title
 #'
 #' @family plans and todos
-#' @importFrom dplyr distinct mutate pull select transmute
 
 post_plan <- function(ref, plan, distinct = TRUE){
 
@@ -168,8 +167,6 @@ post_plan <- function(ref, plan, distinct = TRUE){
 #' @export
 #'
 #' @family plans and todos
-#' @importFrom dplyr distinct mutate pull select transmute
-
 
 post_todo <- function(ref, todo, distinct = TRUE){
 
