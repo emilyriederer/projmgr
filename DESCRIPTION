@@ -6,12 +6,12 @@ Authors@R:
            family = "Riederer",
            role = c("cre", "aut"),
            email = "emilyriederer@gmail.com")
-Description: Provides a highly abstracted wrapper for the GitHub
+Description: Provides programmatic access to GitHub
     API with a focus on project management.  For example, key
     functionality includes setting up issues and milestones and reporting
     the progress of those events. It should be useful for those using
     GitHub in personal, professional, or academic settings with an
-    emphasis on usage for data analysis projects.
+    emphasis on streamlining the workflow of data analysis projects.
 License: MIT + file LICENSE
 URL: https://github.com/emilyriederer/ghtrackr
 BugReports: https://github.com/emilyriederer/ghtrackr/issues
