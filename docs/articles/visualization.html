@@ -78,7 +78,7 @@
       <h1>Visualizations (Experimental)</h1>
                         <h4 class="author">Emily Riederer</h4>
             
-            <h4 class="date">2019-01-05</h4>
+            <h4 class="date">2019-01-09</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/emilyriederer/ghtrackr/blob/master/vignettes/visualization.Rmd"><code>vignettes/visualization.Rmd</code></a></small>
       <div class="hidden name"><code>visualization.Rmd</code></div>
@@ -100,7 +100,7 @@
 <p>Note that this plot shows some of the risks of black-box functions. At the time of writing, the “bluesky” milestone was open on GitHub yet has no uncompleted issues. It’s important to be precise about your definition of done, or change the <code>start</code> and <code>end</code> parameters to use variables most closely aligned to your definition.</p>
 <p>As a <code>ggplot</code>, standard <code>ggplot2</code> features and styling can be added to the output.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/viz_gantt.html">viz_gantt</a></span>(dplyr_milestones) <span class="op">+</span>
-<span class="st">  </span>ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(<span class="dt">subtitle =</span> <span class="st">'Milestones in the dplyr repository'</span>)
+<span class="st">  </span>ggplot2<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">labs</a></span>(<span class="dt">subtitle =</span> <span class="st">'Milestones in the dplyr repository'</span>)
 <span class="co">#&gt; Warning: Removed 4 rows containing missing values (geom_point).</span></code></pre></div>
 <p><img src="visualization_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 <p>Either gantt charts or task boards (next section) can also be passed through <code>viz_linked</code> to add links to their text back to the relevant GitHub milestones. This only works in RMarkdown with the <code>results = "asis"</code> chunk option or saved to a file.</p>

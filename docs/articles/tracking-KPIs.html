@@ -78,7 +78,7 @@
       <h1>Use Case: KPI Tracking (Posting Issues from a dataframe)</h1>
                         <h4 class="author">Emily Riederer</h4>
             
-            <h4 class="date">2019-01-05</h4>
+            <h4 class="date">2019-01-09</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/emilyriederer/ghtrackr/blob/master/vignettes/tracking-KPIs.Rmd"><code>vignettes/tracking-KPIs.Rmd</code></a></small>
       <div class="hidden name"><code>tracking-KPIs.Rmd</code></div>
@@ -100,12 +100,12 @@
 <span class="co">#&gt; 4 Southwest October      7442           4000</span>
 <span class="co">#&gt; 5 Northwest October      2470           2000</span></code></pre></div>
 <p>Assume they have some criterion to determine how much of a difference between actual metrics and expectations warrants further investigation. For simplicity in this example, we will look at observations exceeding 25% error. In this case, that yield two regions.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">deviations &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(sales_data, <span class="kw">abs</span>(sales_amt <span class="op">-</span><span class="st"> </span>sales_expected) <span class="op">&gt;=</span><span class="st"> </span><span class="fl">0.25</span> <span class="op">*</span><span class="st"> </span>sales_expected )
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">deviations &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/filter">filter</a></span>(sales_data, <span class="kw">abs</span>(sales_amt <span class="op">-</span><span class="st"> </span>sales_expected) <span class="op">&gt;=</span><span class="st"> </span><span class="fl">0.25</span> <span class="op">*</span><span class="st"> </span>sales_expected )
 deviations
 <span class="co">#&gt;      region   month sales_amt sales_expected</span>
 <span class="co">#&gt; 1 Northeast October      3144           5000</span>
 <span class="co">#&gt; 2 Southwest October      7442           4000</span></code></pre></div>
-<p>Using <code><a href="https://purrr.tidyverse.org/reference/map2.html">purrr::pmap_chr()</a></code>, it is easily to automatically post these issues to a GitHub repository. The result returned is the number of the GitHub issues posted.</p>
+<p>Using <code><a href="http://www.rdocumentation.org/packages/purrr/topics/map2">purrr::pmap_chr()</a></code>, it is easily to automatically post these issues to a GitHub repository. The result returned is the number of the GitHub issues posted.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create custom function to convert dataframe to human-readable issue elements</span>
 
 post_kpis &lt;-<span class="st"> </span><span class="cf">function</span>(ref, region, month, sales_amt, sales_expected){
@@ -159,9 +159,9 @@ experigit &lt;-<span class="st"> </span><span class="kw"><a href="../reference/c
 <p>With a bit of data wrangling with <code>tidyr</code>, we can make one unique record per region, month, and metric.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">performance_pivoted &lt;-
 <span class="st">  </span>performance_data <span class="op">%&gt;%</span>
-<span class="st">  </span>tidyr<span class="op">::</span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span>(metric, value, <span class="op">-</span>region, <span class="op">-</span>month) <span class="op">%&gt;%</span>
-<span class="st">  </span>tidyr<span class="op">::</span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/separate.html">separate</a></span>(metric, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">'metric'</span>, <span class="st">'type'</span>), <span class="dt">sep =</span> <span class="st">"_"</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span>tidyr<span class="op">::</span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/spread.html">spread</a></span>(type, value)
+<span class="st">  </span>tidyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/tidyr/topics/gather">gather</a></span>(metric, value, <span class="op">-</span>region, <span class="op">-</span>month) <span class="op">%&gt;%</span>
+<span class="st">  </span>tidyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/tidyr/topics/separate">separate</a></span>(metric, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">'metric'</span>, <span class="st">'type'</span>), <span class="dt">sep =</span> <span class="st">"_"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span>tidyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/tidyr/topics/spread">spread</a></span>(type, value)
 
 <span class="kw">print</span>(performance_pivoted)
 <span class="co">#&gt;       region   month   metric actual expected</span>

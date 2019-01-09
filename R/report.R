@@ -45,7 +45,7 @@ report_progress <- function(issues){
   issue_html_grp <- stats::aggregate(issue_html,
                                      by = list(df$milestone_title),
                                      FUN = function(x) paste(x, collapse = " "))$x
-  milestone_issue_html_grp <- paste(milestone_html, "<ul>", issue_html_grp, "</ul>")
+  milestone_issue_html_grp <- paste(milestone_html, "<ul style = 'list-style: none;'>", issue_html_grp, "</ul>")
 
   # final output ----
   html <- paste("<p/>", paste(milestone_issue_html_grp, collapse = " "), "<p/>")
@@ -92,7 +92,7 @@ report_plan <- function(plan){
   issue_html_grp <- stats::aggregate(issue_html,
                                      by = list( rep(1:length(issue_count), issue_count) ),
                                      FUN = function(x) paste(x, collapse = " "))$x
-  milestone_issue_html_grp <- paste("<p>",milestone_html, "<ul>", issue_html_grp, "</ul>")
+  milestone_issue_html_grp <- paste("<p>",milestone_html, "<ul style = 'list-style: none;'>", issue_html_grp, "</ul>")
 
   # final output ----
   html <- paste("<p/>", paste(milestone_issue_html_grp, collapse = " "), "<p/>")
@@ -132,7 +132,7 @@ report_todo <- function(todo){
   milestone_html <- fmt_milestone("To Do", 0, length(issue_title))
   issue_html <- fmt_issue( issue_title, "open" )
   issue_html_grp <- paste(issue_html, collapse = " ")
-  milestone_issue_html_grp <- paste("<p>",milestone_html, "<ul>", issue_html_grp, "</ul>")
+  milestone_issue_html_grp <- paste("<p>",milestone_html, "<ul style = 'list-style: none;'>", issue_html_grp, "</ul>")
 
   # final output ----
   html <- paste("<p/>", paste(milestone_issue_html_grp, collapse = " "), "<p/>")
