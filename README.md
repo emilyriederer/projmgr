@@ -4,7 +4,7 @@
 
 # ghtrackr <img src="man/figures/logo.png" align="right" height=140/>
 
-`ghtrackr` aims to better integrate project management into your workflow and free up time for more exciting tasks like R coding and data analysis. Since many R users and programmers use GitHub as a home for their analysis, the goal of `ghtrackr` is to streamline project management with R and GitHub as well.
+`ghtrackr` aims to better integrate project management into your workflow and free up time for more exciting tasks like R coding and data analysis. Since many R users and programmers use GitHub as a home for their analysis, the goal of `ghtrackr` is to streamline project management with these same tools.
 
 Key functionalities include:
 
