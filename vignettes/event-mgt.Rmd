@@ -15,10 +15,10 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 
-library(ghtrackr)
+library(projmgr)
 ```
 
-GitHub milestones and issues can be used to track and coordinate multiple teams working on parallel projects. You can use custom `ghtrackr` plans to set up a group of repos with a standard set of milestones and issues. This is useful whenever you're overseeing a large group of people who should be following some similar process -- for example, at a hackathon, unconf, group working session, or training.
+GitHub milestones and issues can be used to track and coordinate multiple teams working on parallel projects. You can use custom `projmgr` plans to set up a group of repos with a standard set of milestones and issues. This is useful whenever you're overseeing a large group of people who should be following some similar process -- for example, at a hackathon, unconf, group working session, or training.
 
 ## Configuring Issues and Milestones
 
@@ -161,7 +161,7 @@ milestones <- purrr::map_dfr(milestone_lists, parse_milestones, .id = 'team')
 ```
 
 ```{r echo = FALSE}
-milestones <- readRDS(system.file("extdata", "event-milestones.rds", package = "ghtrackr", mustWork = TRUE))
+milestones <- readRDS(system.file("extdata", "event-milestones.rds", package = "projmgr", mustWork = TRUE))
 milestones$n_closed_issues <- c(2,2,0,0,2,1,0,0,2,2,1,2,2,0,0,0,0,0,0,0)
 milestones$n_open_issues <- milestones$n_open_issues - milestones$n_closed_issues
 milestones$closed_at <- ifelse(milestones$n_open_issues == 0, milestones$due_on, milestones$closed_at)

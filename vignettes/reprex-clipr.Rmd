@@ -16,16 +16,16 @@ knitr::opts_chunk$set(
 )
 ```
 
-The [`reprex`](https://www.tidyverse.org/help/) package creates reproducible examples of code bugs to be shared in GitHub issues. `ghtrackr` plays nice with `reprex` to help post reproducible examples and pull them back down for evaluation. 
+The [`reprex`](https://www.tidyverse.org/help/) package creates reproducible examples of code bugs to be shared in GitHub issues. `projmgr` plays nice with `reprex` to help post reproducible examples and pull them back down for evaluation. 
 ## Posting reprexes
 
-Much like other types of issues, `ghtrackr` make it easy to post issues containing reprexes to GitHub.
+Much like other types of issues, `projmgr` make it easy to post issues containing reprexes to GitHub.
 
 For example, suppose you have the problematic code on your clipboard, open in a file, or somewhere that `reprex` can find it (refer to the `reprex` package documentation for details). You could post this as the body of an issue with the following code:
 
 ```{r eval = FALSE}
 reprex::reprex(venue = "gh")
-post_issue(ghtrackr,
+post_issue(projmgr,
            title = "this is a descriptive title of my issue",
            body = paste( clipr::read_clip(), collapse = "\n") )
 ```

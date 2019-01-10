@@ -2,7 +2,7 @@
 ^CODE_OF_CONDUCT\.md$
 ^LICENSE\.md$
 ^CREDITS\.md$
-^ghtrackr\.Rproj$
+^projmgr\.Rproj$
 ^\.Rproj\.user$
 ^pkgdown
 ^docs

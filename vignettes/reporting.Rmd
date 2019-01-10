@@ -15,17 +15,17 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 
-library(ghtrackr)
+library(projmgr)
 ```
 
-Communication is a critical part of project planning. For this, `ghtrackr` provides a family of `report` functions. These functions translate certain R objects like lists or dataframes into HTML code which will render nicely when knitted to HTML in an RMarkdown document.
+Communication is a critical part of project planning. For this, `projmgr` provides a family of `report` functions. These functions translate certain R objects like lists or dataframes into HTML code which will render nicely when knitted to HTML in an RMarkdown document.
 
 ## Plans & To-Do Lists
 
 Recall that plans and to-do lists can be written in YAML. For example:
 
 ```{r comment='', echo = FALSE}
-plan_path <- system.file("extdata", "plan.yml", package = "ghtrackr", mustWork = TRUE)
+plan_path <- system.file("extdata", "plan.yml", package = "projmgr", mustWork = TRUE)
 cat(readLines(plan_path), sep = '\n')
 ```
 
@@ -44,7 +44,7 @@ Similarly, any issue-milestone data pulled back down from GitHub can be reported
 
 ```{r echo = FALSE}
 issues <- 
-  readRDS(system.file("extdata", "anproj-issues.rds", package = "ghtrackr", mustWork = TRUE))
+  readRDS(system.file("extdata", "anproj-issues.rds", package = "projmgr", mustWork = TRUE))
 ```
 
 ```{r}
@@ -61,8 +61,8 @@ comments <- get_issue_comments(experigit, number = 163) %>% parse_issue_comments
 ```
 
 ```{r echo = FALSE}
-issues <- readRDS(system.file("extdata", "disc-issues.rds", package = "ghtrackr", mustWork = TRUE))
-comments <- readRDS(system.file("extdata", "disc-comments.rds", package = "ghtrackr", mustWork = TRUE))
+issues <- readRDS(system.file("extdata", "disc-issues.rds", package = "projmgr", mustWork = TRUE))
+comments <- readRDS(system.file("extdata", "disc-comments.rds", package = "projmgr", mustWork = TRUE))
 ```
 
 ```{r}

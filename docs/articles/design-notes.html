@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Design Notes • ghtrackr</title>
+<title>Design Notes • projmgr</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
@@ -30,7 +30,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">ghtrackr</a>
+        <a class="navbar-link" href="../index.html">projmgr</a>
         <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9000</span>
       </span>
     </div>
@@ -58,7 +58,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/emilyriederer/ghtrackr/">
+  <a href="https://github.com/emilyriederer/projmgr/">
     <span class="fa fa-github"></span>
      
   </a>
@@ -78,9 +78,9 @@
       <h1>Design Notes</h1>
                         <h4 class="author">Emily Riederer</h4>
             
-            <h4 class="date">2019-01-09</h4>
+            <h4 class="date">2019-01-10</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/emilyriederer/ghtrackr/blob/master/vignettes/design-notes.Rmd"><code>vignettes/design-notes.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/emilyriederer/projmgr/blob/master/vignettes/design-notes.Rmd"><code>vignettes/design-notes.Rmd</code></a></small>
       <div class="hidden name"><code>design-notes.Rmd</code></div>
 
     </div>
@@ -95,7 +95,7 @@
 <p>In particular:</p>
 <ul>
 <li>
-<a href="https://github.com/r-lib/gh"><code>gh</code></a> descibes itself as a ‘Minimalistic GitHub API client in R’. It is very robust and flexible (and powers this package!) but demands slightly more from users (e.g. understanding the GitHub API’s endpoints). Instead, this package supports only a subset of the GitHub API. Instead, <code>ghtrackr</code> prioritizes making key project management tasks as friendly as possible.</li>
+<a href="https://github.com/r-lib/gh"><code>gh</code></a> descibes itself as a ‘Minimalistic GitHub API client in R’. It is very robust and flexible (and powers this package!) but demands slightly more from users (e.g. understanding the GitHub API’s endpoints). Instead, this package supports only a subset of the GitHub API. Instead, <code>projmgr</code> prioritizes making key project management tasks as friendly as possible.</li>
 <li>
 <a href="https://github.com/coatless/ghapi3"><code>ghapiv3</code></a> also wraps <code>gh</code> for a user-friendly, higher-level interface to the GitHub API. However, like <code>gh</code>, it also provides broader support for the API but lacks the workflow-specific functionality.</li>
 <li>
@@ -107,9 +107,9 @@
 <div id="repo-as-first-class-citizen" class="section level2">
 <h2 class="hasAnchor">
 <a href="#repo-as-first-class-citizen" class="anchor"></a>Repo as First Class Citizen</h2>
-<p>Repositories are “first class” citizens in <code>ghtrackr</code>. The first step to accessing or sending information is to create a repository reference using the <code><a href="../reference/create_repo_ref.html">create_repo_ref()</a></code> function. The resulting object is the first element passed into all <code>get_</code> and <code>post_</code> functions.</p>
+<p>Repositories are “first class” citizens in <code>projmgr</code>. The first step to accessing or sending information is to create a repository reference using the <code><a href="../reference/create_repo_ref.html">create_repo_ref()</a></code> function. The resulting object is the first element passed into all <code>get_</code> and <code>post_</code> functions.</p>
 <p>For users that work with databases in R with the <code>DBI</code> package, this codeflow is analogous to querying from a database. In this case, users first create a database connection object with <code>dbConnect()</code> which is passed into subsequent functions such as <code>dbGetQuery</code>.</p>
-<p>This decision was based on the assumption that the most common use case for <code>ghtrackr</code> would be interacting with a single repository at a time. Admittedly, some users may prefer a view further up in the hierarchy, e.g. an organization object versus a repository object. By providing lower-level building blocks, broader functionality can be achieved by mapping over a set of repositories. A code example is provided in the Event &amp; Team Management vignette.</p>
+<p>This decision was based on the assumption that the most common use case for <code>projmgr</code> would be interacting with a single repository at a time. Admittedly, some users may prefer a view further up in the hierarchy, e.g. an organization object versus a repository object. By providing lower-level building blocks, broader functionality can be achieved by mapping over a set of repositories. A code example is provided in the Event &amp; Team Management vignette.</p>
 </div>
 <div id="function-naming" class="section level2">
 <h2 class="hasAnchor">

@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Use Case: Working Offline (Posting custom to-do lists) • ghtrackr</title>
+<title>Use Case: Working Offline (Posting custom to-do lists) • projmgr</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
@@ -30,7 +30,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">ghtrackr</a>
+        <a class="navbar-link" href="../index.html">projmgr</a>
         <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9000</span>
       </span>
     </div>
@@ -58,7 +58,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/emilyriederer/ghtrackr/">
+  <a href="https://github.com/emilyriederer/projmgr/">
     <span class="fa fa-github"></span>
      
   </a>
@@ -78,16 +78,16 @@
       <h1>Use Case: Working Offline (Posting custom to-do lists)</h1>
                         <h4 class="author">Emily Riederer</h4>
             
-            <h4 class="date">2019-01-09</h4>
+            <h4 class="date">2019-01-10</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/emilyriederer/ghtrackr/blob/master/vignettes/working-offline.Rmd"><code>vignettes/working-offline.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/emilyriederer/projmgr/blob/master/vignettes/working-offline.Rmd"><code>vignettes/working-offline.Rmd</code></a></small>
       <div class="hidden name"><code>working-offline.Rmd</code></div>
 
     </div>
 
     
     
-<p><code>ghtrackr</code> allows you to collect issues when working offline and easily post them to a repository later. This provides a productivity boost when you’re forced offline by travel or a bad internet connection or prefer to be offline to minimize distractions.</p>
+<p><code>projmgr</code> allows you to collect issues when working offline and easily post them to a repository later. This provides a productivity boost when you’re forced offline by travel or a bad internet connection or prefer to be offline to minimize distractions.</p>
 <p>Issues can be collected either as a dataframe (and posted with code similar to that shown in the KPI Tracking vignette) or as a to-do list. For example, as you encounter new issues, you can keep a running list of them as YAML. (This can be done either by assigning to an R variable or by saving a separate .yml file. Please see the vignette on Custom Plans for more details.)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">todo_yaml &lt;-<span class="st"> "</span>
 <span class="st">- title: Add update functions</span>

@@ -25,18 +25,18 @@ This package is designed with a focus on project management and communication. T
 
 In particular:
 
-- [`gh`](https://github.com/r-lib/gh) descibes itself as a 'Minimalistic GitHub API client in R'. It is very robust and flexible (and powers this package!) but demands slightly more from users (e.g. understanding the GitHub API's endpoints). Instead, this package supports only a subset of the GitHub API. Instead, `ghtrackr` prioritizes making key project management tasks as friendly as possible.
+- [`gh`](https://github.com/r-lib/gh) descibes itself as a 'Minimalistic GitHub API client in R'. It is very robust and flexible (and powers this package!) but demands slightly more from users (e.g. understanding the GitHub API's endpoints). Instead, this package supports only a subset of the GitHub API. Instead, `projmgr` prioritizes making key project management tasks as friendly as possible.
 - [`ghapiv3`](https://github.com/coatless/ghapi3) also wraps `gh` for a user-friendly, higher-level interface to the GitHub API. However, like `gh`, it also provides broader support for the API but lacks the workflow-specific functionality.
 - [`ghclass`](https://github.com/rundel/ghclass/tree/master/R) shares the goal of streamlining a specific GitHub workflow easier. However, classroom management is the specific workflow it is built to improve. That said, `ghclass` has some complementary functions, such as programmatically setting up groups of repositories.
 - [Project Management on GitHub](https://github.com/features/project-management/) provides GUI-based project management solutions that overlap with this package. However, this package provides a way to efficiently extract similiar information programmatically and share if with others (e.g. advisors, executives) who do not use GitHub.
 
 ## Repo as First Class Citizen
 
-Repositories are "first class" citizens in `ghtrackr`. The first step to accessing or sending information is to create a repository reference using the `create_repo_ref()` function. The resulting object is the first element passed into all `get_` and `post_` functions.
+Repositories are "first class" citizens in `projmgr`. The first step to accessing or sending information is to create a repository reference using the `create_repo_ref()` function. The resulting object is the first element passed into all `get_` and `post_` functions.
 
 For users that work with databases in R with the `DBI` package, this codeflow is analogous to querying from a database. In this case, users first create a database connection object with `dbConnect()` which is passed into subsequent functions such as `dbGetQuery`.
 
-This decision was based on the assumption that the most common use case for `ghtrackr` would be interacting with a single repository at a time. Admittedly, some users may prefer a view further up in the hierarchy, e.g. an organization object versus a repository object. By providing lower-level building blocks, broader functionality can be achieved by mapping over a set of repositories. A code example is provided in the Event & Team Management vignette.
+This decision was based on the assumption that the most common use case for `projmgr` would be interacting with a single repository at a time. Admittedly, some users may prefer a view further up in the hierarchy, e.g. an organization object versus a repository object. By providing lower-level building blocks, broader functionality can be achieved by mapping over a set of repositories. A code example is provided in the Event & Team Management vignette.
 
 ## Function Naming
 

@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Use Case: Event &amp; Team Management (Postings custom plans to many repos) • ghtrackr</title>
+<title>Use Case: Event &amp; Team Management (Postings custom plans to many repos) • projmgr</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
@@ -30,7 +30,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">ghtrackr</a>
+        <a class="navbar-link" href="../index.html">projmgr</a>
         <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9000</span>
       </span>
     </div>
@@ -58,7 +58,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/emilyriederer/ghtrackr/">
+  <a href="https://github.com/emilyriederer/projmgr/">
     <span class="fa fa-github"></span>
      
   </a>
@@ -78,16 +78,16 @@
       <h1>Use Case: Event &amp; Team Management (Postings custom plans to many repos)</h1>
                         <h4 class="author">Emily Riederer</h4>
             
-            <h4 class="date">2019-01-09</h4>
+            <h4 class="date">2019-01-10</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/emilyriederer/ghtrackr/blob/master/vignettes/event-mgt.Rmd"><code>vignettes/event-mgt.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/emilyriederer/projmgr/blob/master/vignettes/event-mgt.Rmd"><code>vignettes/event-mgt.Rmd</code></a></small>
       <div class="hidden name"><code>event-mgt.Rmd</code></div>
 
     </div>
 
     
     
-<p>GitHub milestones and issues can be used to track and coordinate multiple teams working on parallel projects. You can use custom <code>ghtrackr</code> plans to set up a group of repos with a standard set of milestones and issues. This is useful whenever you’re overseeing a large group of people who should be following some similar process – for example, at a hackathon, unconf, group working session, or training.</p>
+<p>GitHub milestones and issues can be used to track and coordinate multiple teams working on parallel projects. You can use custom <code>projmgr</code> plans to set up a group of repos with a standard set of milestones and issues. This is useful whenever you’re overseeing a large group of people who should be following some similar process – for example, at a hackathon, unconf, group working session, or training.</p>
 <div id="configuring-issues-and-milestones" class="section level2">
 <h2 class="hasAnchor">
 <a href="#configuring-issues-and-milestones" class="anchor"></a>Configuring Issues and Milestones</h2>
@@ -140,11 +140,11 @@
 <span class="co">#&gt; 2. Project Specification (2 issues) </span>
 <span class="co">#&gt; 3. Heads-Down Work Time (1 issues) </span>
 <span class="co">#&gt; 4. Presentation Preparation (2 issues)</span></code></pre></div>
-<p>Next, create repository references for each repo, using <code><a href="http://www.rdocumentation.org/packages/purrr/topics/map">purrr::map()</a></code> for iteration.</p>
+<p>Next, create repository references for each repo, using <code><a href="https://purrr.tidyverse.org/reference/map.html">purrr::map()</a></code> for iteration.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">repo_names &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">"team"</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)
-repo_refs &lt;-<span class="st"> </span>purrr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(repo_names, <span class="op">~</span><span class="kw"><a href="../reference/create_repo_ref.html">create_repo_ref</a></span>(<span class="st">"emilyriederer"</span>, .))</code></pre></div>
-<p>Finally, we can again use <code><a href="http://www.rdocumentation.org/packages/purrr/topics/map">purrr::walk()</a></code> to post the project plan to each GitHub repository. (Note that <code><a href="http://www.rdocumentation.org/packages/purrr/topics/map">purrr::map()</a></code> would also work here, but <code><a href="http://www.rdocumentation.org/packages/purrr/topics/map">purrr::walk()</a></code> executes silently which is convenient when we don’t care about the return values.)</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">purrr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">walk</a></span>(repo_refs, <span class="op">~</span><span class="kw"><a href="../reference/post_plan.html">post_plan</a></span>(., plan))</code></pre></div>
+repo_refs &lt;-<span class="st"> </span>purrr<span class="op">::</span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(repo_names, <span class="op">~</span><span class="kw"><a href="../reference/create_repo_ref.html">create_repo_ref</a></span>(<span class="st">"emilyriederer"</span>, .))</code></pre></div>
+<p>Finally, we can again use <code><a href="https://purrr.tidyverse.org/reference/map.html">purrr::walk()</a></code> to post the project plan to each GitHub repository. (Note that <code><a href="https://purrr.tidyverse.org/reference/map.html">purrr::map()</a></code> would also work here, but <code><a href="https://purrr.tidyverse.org/reference/map.html">purrr::walk()</a></code> executes silently which is convenient when we don’t care about the return values.)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">purrr<span class="op">::</span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">walk</a></span>(repo_refs, <span class="op">~</span><span class="kw"><a href="../reference/post_plan.html">post_plan</a></span>(., plan))</code></pre></div>
 <p>Each repo is now populated with a set of milestones and related issues for the respective team to work through.</p>
 <div class="figure">
 <img src="post_hack.png" alt="Example team repo"><p class="caption">Example team repo</p>
@@ -203,8 +203,8 @@ repo_refs &lt;-<span class="st"> </span>purrr<span class="op">::</span><span cla
 <h2 class="hasAnchor">
 <a href="#tracking" class="anchor"></a>Tracking</h2>
 <p>You can also use this to monitor participant progress throughout the event, potentially noticing groups that are falling behind and might need assistance. We can apply our <code><a href="../reference/get_milestones.html">get_milestones()</a></code> and <code><a href="../reference/parse_milestones.html">parse_milestones()</a></code> functions by mapping over the repository references.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">milestone_lists &lt;-<span class="st"> </span>purrr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(repo_refs, get_milestones)
-milestones &lt;-<span class="st"> </span>purrr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map_dfr</a></span>(milestone_lists, parse_milestones, <span class="dt">.id =</span> <span class="st">'team'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">milestone_lists &lt;-<span class="st"> </span>purrr<span class="op">::</span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(repo_refs, get_milestones)
+milestones &lt;-<span class="st"> </span>purrr<span class="op">::</span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map_dfr</a></span>(milestone_lists, parse_milestones, <span class="dt">.id =</span> <span class="st">'team'</span>)</code></pre></div>
 <p>This gives us data on all teams:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">milestones
 <span class="co">#&gt; # A tibble: 20 x 12</span>
@@ -234,11 +234,11 @@ milestones &lt;-<span class="st"> </span>purrr<span class="op">::</span><span cl
 <span class="co">#&gt; #   created_at &lt;date&gt;, updated_at &lt;date&gt;, due_on &lt;date&gt;, closed_at &lt;dbl&gt;</span></code></pre></div>
 <p>Which we can wrangle for quick summary views:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">milestones <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">percent_complete =</span> n_closed_issues <span class="op">*</span><span class="st"> </span><span class="dv">100</span> <span class="op">/</span><span class="st"> </span>(n_closed_issues <span class="op">+</span><span class="st"> </span>n_open_issues)) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/select">select</a></span>(team, title, percent_complete, number) <span class="op">%&gt;%</span>
-<span class="st">  </span>tidyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/tidyr/topics/spread">spread</a></span>(team, percent_complete) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/arrange">arrange</a></span>(number) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/select">select</a></span>(<span class="op">-</span>number)
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">percent_complete =</span> n_closed_issues <span class="op">*</span><span class="st"> </span><span class="dv">100</span> <span class="op">/</span><span class="st"> </span>(n_closed_issues <span class="op">+</span><span class="st"> </span>n_open_issues)) <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(team, title, percent_complete, number) <span class="op">%&gt;%</span>
+<span class="st">  </span>tidyr<span class="op">::</span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/spread.html">spread</a></span>(team, percent_complete) <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(number) <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="op">-</span>number)
 <span class="co">#&gt; # A tibble: 4 x 6</span>
 <span class="co">#&gt;   title                      `1`   `2`   `3`   `4`   `5`</span>
 <span class="co">#&gt;   &lt;chr&gt;                    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>

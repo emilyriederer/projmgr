@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 
-library(ghtrackr)
+library(projmgr)
 ```
 
 
@@ -23,7 +23,7 @@ Communicating analytical results is a core part of the data science process. A r
 
 Despite the benefits of project management, communcating to stakeholders has significant overhead and can risk stealing time from core job responsibilities. For those "data people" that use R and GitHub, conducting project planning and reporting with the same toolkit can reduce complexity and the inefficiencies of switching between contexts and tools. 
 
-Both Lucy and Jen's recommendations emphasize the importance of facilitating meetings and documentating agreed upon plans and deliverables. `ghtrackr`'s concept of "plans" provides an interface for these project management tasks. Plans can be created in YAML and delivered to various customers in their preferred format. For the analyst, they can be automatically posted to a GitHub repo as a set of issues and milestones for easy tracking and linking to commits and pull requests. For sharing with senior stakeholders who are not on GitHub, both plans and progress updates can be formatted into aesthetic RMarkdown reports, similar to the examples Lucy's blog shows for meeting agendas and minutes. 
+Both Lucy and Jen's recommendations emphasize the importance of facilitating meetings and documentating agreed upon plans and deliverables. `projmgr`'s concept of "plans" provides an interface for these project management tasks. Plans can be created in YAML and delivered to various customers in their preferred format. For the analyst, they can be automatically posted to a GitHub repo as a set of issues and milestones for easy tracking and linking to commits and pull requests. For sharing with senior stakeholders who are not on GitHub, both plans and progress updates can be formatted into aesthetic RMarkdown reports, similar to the examples Lucy's blog shows for meeting agendas and minutes. 
 
 ## Planning Your Project in YAML
 
@@ -32,7 +32,7 @@ Writing out your plan of attack in YAML lets you focus on key details and allows
 Recall the example plan discussed in the vignette on custom plans:
 
 ```{r comment='', echo = FALSE}
-plan_path <- system.file("extdata", "plan.yml", package = "ghtrackr", mustWork = TRUE)
+plan_path <- system.file("extdata", "plan.yml", package = "projmgr", mustWork = TRUE)
 cat(readLines(plan_path), sep = '\n')
 ```
 
@@ -55,7 +55,7 @@ This can help you keep yourself organized or align priorities with technical col
 To communicate with those not on GitHub, `report_` functions convert plans to HTML which can be inserted into RMarkdown-based meeting agendas, minutes, presentations, or other team communications. 
 
 ```{r}
-plan_path <- system.file("extdata", "plan.yml", package = "ghtrackr", mustWork = TRUE)
+plan_path <- system.file("extdata", "plan.yml", package = "projmgr", mustWork = TRUE)
 my_plan <- read_plan(plan_path)
 report_plan(my_plan)
 ```
@@ -72,7 +72,7 @@ issues <-
 
 ```{r echo = FALSE}
 issues <- 
-  readRDS(system.file("extdata", "anproj-issues.rds", package = "ghtrackr", mustWork = TRUE))
+  readRDS(system.file("extdata", "anproj-issues.rds", package = "projmgr", mustWork = TRUE))
 ```
 
 ```{r}

@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Visualizations (Experimental) • ghtrackr</title>
+<title>Visualizations (Experimental) • projmgr</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
@@ -30,7 +30,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">ghtrackr</a>
+        <a class="navbar-link" href="../index.html">projmgr</a>
         <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9000</span>
       </span>
     </div>
@@ -58,7 +58,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/emilyriederer/ghtrackr/">
+  <a href="https://github.com/emilyriederer/projmgr/">
     <span class="fa fa-github"></span>
      
   </a>
@@ -78,16 +78,16 @@
       <h1>Visualizations (Experimental)</h1>
                         <h4 class="author">Emily Riederer</h4>
             
-            <h4 class="date">2019-01-09</h4>
+            <h4 class="date">2019-01-10</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/emilyriederer/ghtrackr/blob/master/vignettes/visualization.Rmd"><code>vignettes/visualization.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/emilyriederer/projmgr/blob/master/vignettes/visualization.Rmd"><code>vignettes/visualization.Rmd</code></a></small>
       <div class="hidden name"><code>visualization.Rmd</code></div>
 
     </div>
 
     
     
-<p><code>ghtrackr</code> has many different ways to visualize project status. Note that all visualization functions are currently experimental and still have some known challenges. All feedback is welcome on these visualizations or other desired visualizations.</p>
+<p><code>projmgr</code> has many different ways to visualize project status. Note that all visualization functions are currently experimental and still have some known challenges. All feedback is welcome on these visualizations or other desired visualizations.</p>
 <div id="gantt-charts" class="section level2">
 <h2 class="hasAnchor">
 <a href="#gantt-charts" class="anchor"></a>Gantt Charts</h2>
@@ -100,7 +100,7 @@
 <p>Note that this plot shows some of the risks of black-box functions. At the time of writing, the “bluesky” milestone was open on GitHub yet has no uncompleted issues. It’s important to be precise about your definition of done, or change the <code>start</code> and <code>end</code> parameters to use variables most closely aligned to your definition.</p>
 <p>As a <code>ggplot</code>, standard <code>ggplot2</code> features and styling can be added to the output.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/viz_gantt.html">viz_gantt</a></span>(dplyr_milestones) <span class="op">+</span>
-<span class="st">  </span>ggplot2<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">labs</a></span>(<span class="dt">subtitle =</span> <span class="st">'Milestones in the dplyr repository'</span>)
+<span class="st">  </span>ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(<span class="dt">subtitle =</span> <span class="st">'Milestones in the dplyr repository'</span>)
 <span class="co">#&gt; Warning: Removed 4 rows containing missing values (geom_point).</span></code></pre></div>
 <p><img src="visualization_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 <p>Either gantt charts or task boards (next section) can also be passed through <code>viz_linked</code> to add links to their text back to the relevant GitHub milestones. This only works in RMarkdown with the <code>results = "asis"</code> chunk option or saved to a file.</p>
@@ -128,7 +128,7 @@
               <span class="dt">str_wrap_width =</span> <span class="dv">40</span>)</code></pre></div>
 <p><img src="visualization_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 <p>Users specify what logic to use for identifying “in progress” items by passing a function factory to the <code>in_progress_when</code> parameter. The above example uses the <code><a href="../reference/taskboard_helpers.html">is_labeled_with()</a></code> option. Other options include:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ls</span>(<span class="st">'package:ghtrackr'</span>)[<span class="kw">grep</span>(<span class="st">"^is_*"</span>, <span class="kw">ls</span>(<span class="st">'package:ghtrackr'</span>))]
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ls</span>(<span class="st">'package:projmgr'</span>)[<span class="kw">grep</span>(<span class="st">"^is_*"</span>, <span class="kw">ls</span>(<span class="st">'package:projmgr'</span>))]
 <span class="co">#&gt; [1] "is_assigned"       "is_assigned_to"    "is_created_before"</span>
 <span class="co">#&gt; [4] "is_due"            "is_due_before"     "is_in_a_milestone"</span>
 <span class="co">#&gt; [7] "is_in_milestone"   "is_labeled_with"   "is_part_closed"</span></code></pre></div>

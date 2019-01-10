@@ -1,12 +1,12 @@
-#' \code{ghtrackr} package
+#' \code{projmgr} package
 #'
 #' A quick and easy wrapper for working with GitHub and other project management tools
 #'
 #' See the README on
-#' \href{https://github.com/emilyriederer/ghtrackr}{GitHub}
+#' \href{https://github.com/emilyriederer/projmgr}{GitHub}
 #'
 #' @docType package
-#' @name ghtrackr
+#' @name projmgr
 NULL
 
 globalVars <- c(

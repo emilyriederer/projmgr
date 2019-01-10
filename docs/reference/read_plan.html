@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Read plan from YAML — read_plan • ghtrackr</title>
+<title>Read plan from YAML — read_plan • projmgr</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -66,7 +66,7 @@ to post_plan() to build infrastructure for your repository." />
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">ghtrackr</a>
+        <a class="navbar-link" href="../index.html">projmgr</a>
         <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9000</span>
       </span>
     </div>
@@ -95,7 +95,7 @@ to post_plan() to build infrastructure for your repository." />
       
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/emilyriederer/ghtrackr/">
+  <a href="https://github.com/emilyriederer/projmgr/">
     <span class="fa fa-github"></span>
      
   </a>
@@ -113,7 +113,7 @@ to post_plan() to build infrastructure for your repository." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Read plan from YAML</h1>
-    <small class="dont-index">Source: <a href='https://github.com/emilyriederer/ghtrackr/blob/master/R/plan-todo.R'><code>R/plan-todo.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/emilyriederer/projmgr/blob/master/R/plan-todo.R'><code>R/plan-todo.R</code></a></small>
     <div class="hidden name"><code>read_plan.Rd</code></div>
     </div>
 
@@ -157,7 +157,7 @@ and assumes string otherwise.</p></td>
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='co'># This example uses example file included in pkg</span>
 <span class='co'># You should be able to run example as-is after creating your own repo reference</span>
-<span class='no'>file_path</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='st'>"plan.yml"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"ghtrackr"</span>, <span class='kw'>mustWork</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='no'>file_path</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='st'>"plan.yml"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"projmgr"</span>, <span class='kw'>mustWork</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 <span class='no'>my_plan</span> <span class='kw'>&lt;-</span> <span class='fu'>read_plan</span>(<span class='no'>file_path</span>)
 <span class='fu'><a href='post_plan.html'>post_plan</a></span>(<span class='no'>ref</span>, <span class='no'>my_plan</span>)
 <span class='co'># }</span></pre>

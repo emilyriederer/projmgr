@@ -4,9 +4,9 @@ Throughout development of this package, I drew much inspiration from a variety o
 
 ## Package Design
 
-`ghtrackr`'s emphasis on project management means that it aspires to the class of workflow enhancing packages. Such packages don't take center stage in data analysis but instead attempt to improve rote processes and reduce the mental overhead of switching contexts between one's analysis and other ancillary tasks. 
+`projmgr`'s emphasis on project management means that it aspires to the class of workflow enhancing packages. Such packages don't take center stage in data analysis but instead attempt to improve rote processes and reduce the mental overhead of switching contexts between one's analysis and other ancillary tasks. 
 
-Two packages that exemplify workflow enhancement are `pkgdown` and `usethis`. They inspired me to think broadly about this type of package and also specifically inspired certain functionality and implementation within `ghtrackr`. In particular, `pkgdown` inspired my use of YAML templates for project plans and the inclusion of `template_` functions to demonstrate how that YAML should be structured. `usethis` includes many `browse_` functions to help users navigate to various websites easily, and I borrowed this concept and implementation for `ghtrackr`'s set of `browse_` functions.
+Two packages that exemplify workflow enhancement are `pkgdown` and `usethis`. They inspired me to think broadly about this type of package and also specifically inspired certain functionality and implementation within `projmgr`. In particular, `pkgdown` inspired my use of YAML templates for project plans and the inclusion of `template_` functions to demonstrate how that YAML should be structured. `usethis` includes many `browse_` functions to help users navigate to various websites easily, and I borrowed this concept and implementation for `projmgr`'s set of `browse_` functions.
 
 ## Using APIs in R
 

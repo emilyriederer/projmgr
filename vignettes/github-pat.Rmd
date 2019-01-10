@@ -17,9 +17,9 @@ knitr::opts_chunk$set(
 )
 ```
 
-Functions in `ghtrackr` that pull information from GitHub (e.g. `get_issues`) or send information to GitHub (e.g. `post_issue`) require credentials for authentication. Just like users are asked to provide a username and password when logging in to the GitHub's website, these credentials identify you, protect your information security, and prevent unauthorized parties from altering your information (among other API-specific purposes.) However, there are many reasons you won't want to send your username and password through these functions. First of all, it's inconvenient to type your credentials over and over. More importantly, it's generally a bad idea to hardcode your password; you might accidentally sharing a script that has your password in it. 
+Functions in `projmgr` that pull information from GitHub (e.g. `get_issues`) or send information to GitHub (e.g. `post_issue`) require credentials for authentication. Just like users are asked to provide a username and password when logging in to the GitHub's website, these credentials identify you, protect your information security, and prevent unauthorized parties from altering your information (among other API-specific purposes.) However, there are many reasons you won't want to send your username and password through these functions. First of all, it's inconvenient to type your credentials over and over. More importantly, it's generally a bad idea to hardcode your password; you might accidentally sharing a script that has your password in it. 
 
-An easier and safer approach to authentication is the personal access token (PAT). At a high level, this is a random string of characters GitHub assigns to you and you alone. By saving this in your R environment, `ghtrackr` can automatically provide this variable to GitHub instead of your login for better safety and efficiency. 
+An easier and safer approach to authentication is the personal access token (PAT). At a high level, this is a random string of characters GitHub assigns to you and you alone. By saving this in your R environment, `projmgr` can automatically provide this variable to GitHub instead of your login for better safety and efficiency. 
 
 For more information beyond this vignette, check out the relevant section of Jenny Bryan's [Happy Git with R](http://happygitwithr.com/github-pat.html) ebook.
 

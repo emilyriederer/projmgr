@@ -1,4 +1,4 @@
 library(testthat)
-library(ghtrackr)
+library(projmgr)
 
-test_check("ghtrackr")
+test_check("projmgr")

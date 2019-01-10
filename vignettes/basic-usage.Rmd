@@ -16,20 +16,20 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 
-dplyr_issues_list <- readRDS(system.file("extdata", "dplyr-issues-list.rds", package = "ghtrackr", mustWork = TRUE))
+dplyr_issues_list <- readRDS(system.file("extdata", "dplyr-issues-list.rds", package = "projmgr", mustWork = TRUE))
 
 ```
 
-This vignette illustrates basic `ghtrackr` codeflows.
+This vignette illustrates basic `projmgr` codeflows.
 
 ```{r eval = TRUE}
-library(ghtrackr)
+library(projmgr)
 ```
 
 
 ## Creating a Repo Reference
 
-The first step to interacting with a GitHub repository is creating a repository reference. Repository references are "first class citizens" in `ghtrackr` and contain all authorization credentials. These references are passed as the first argument in all `get_` functions and `post_` functions.
+The first step to interacting with a GitHub repository is creating a repository reference. Repository references are "first class citizens" in `projmgr` and contain all authorization credentials. These references are passed as the first argument in all `get_` functions and `post_` functions.
 
 Suppose, for example, we are interested in pulling data about issues in the `dplyr` repository. We would start off by creating a repository reference with the `create_repo_ref()` function.
 

@@ -15,16 +15,16 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 
-library(ghtrackr)
+library(projmgr)
 library(dplyr)
 ```
 
 ```{r echo = FALSE, message = FALSE}
-dplyr_milestones <- readRDS(system.file("extdata", "dplyr-milestones.rds", package = "ghtrackr", mustWork = TRUE))
-pkg_issues <- readRDS(system.file("extdata", "viz-issues-data.rds", package = "ghtrackr", mustWork = TRUE))
+dplyr_milestones <- readRDS(system.file("extdata", "dplyr-milestones.rds", package = "projmgr", mustWork = TRUE))
+pkg_issues <- readRDS(system.file("extdata", "viz-issues-data.rds", package = "projmgr", mustWork = TRUE))
 ```
 
-`ghtrackr` has many different ways to visualize project status. Note that all visualization functions are currently experimental and still have some known challenges. All feedback is welcome on these visualizations or other desired visualizations.
+`projmgr` has many different ways to visualize project status. Note that all visualization functions are currently experimental and still have some known challenges. All feedback is welcome on these visualizations or other desired visualizations.
 
 ## Gantt Charts
 
@@ -69,7 +69,7 @@ viz_taskboard(pkg_issues,
 Users specify what logic to use for identifying "in progress" items by passing a function factory to the `in_progress_when` parameter. The above example uses the `is_labeled_with()` option. Other options include:
 
 ```{r}
-ls('package:ghtrackr')[grep("^is_*", ls('package:ghtrackr'))]
+ls('package:projmgr')[grep("^is_*", ls('package:projmgr'))]
 ```
 
 See `?taskboard_helpers` for more details.

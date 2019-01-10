@@ -1,10 +1,10 @@
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![Travis-CI Build Status](https://travis-ci.org/emilyriederer/ghtrackr.svg?branch=master)](https://travis-ci.org/emilyriederer/ghtrackr)
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/emilyriederer/ghtrackr?branch=master&svg=true)](https://ci.appveyor.com/project/emilyriederer/ghtrackr)
+[![Travis-CI Build Status](https://travis-ci.org/emilyriederer/projmgr.svg?branch=master)](https://travis-ci.org/emilyriederer/projmgr)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/emilyriederer/projmgr?branch=master&svg=true)](https://ci.appveyor.com/project/emilyriederer/projmgr)
 
-# ghtrackr <img src="man/figures/logo.png" align="right" height=140/>
+# projmgr <img src="man/figures/logo.png" align="right" height=140/>
 
-`ghtrackr` aims to better integrate project management into your workflow and free up time for more exciting tasks like R coding and data analysis. Since many R users and programmers use GitHub as a home for their analysis, the goal of `ghtrackr` is to streamline project management with these same tools.
+`projmgr` aims to better integrate project management into your workflow and free up time for more exciting tasks like R coding and data analysis. Since many R users and programmers use GitHub as a home for their analysis, the goal of `projmgr` is to streamline project management with these same tools.
 
 Key functionalities include:
 
@@ -16,14 +16,14 @@ Just like communicating analytical results, good process communication is the ke
 
 ## Try before you buy!
 
-Want to find out more about `ghtrackr` before you install? Check out the [package website](https://emilyriederer.github.io/ghtrackr/) for an overview of features and example use cases.
+Want to find out more about `projmgr` before you install? Check out the [package website](https://emilyriederer.github.io/projmgr/) for an overview of features and example use cases.
 
 ## Installation
 
-You can install the current, experimental version of `ghtrackr` with:
+You can install the current, experimental version of `projmgr` with:
 
 ``` r
-devtools::install_github("emilyriederer/ghtrackr")
+devtools::install_github("emilyriederer/projmgr")
 ```
 
 but please note that nearly everything is subject to change at this point.

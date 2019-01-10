@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-`ghtrackr` allows you to collect issues when working offline and easily post them to a repository later. This provides a productivity boost when you're forced offline by travel or a bad internet connection or prefer to be offline to minimize distractions. 
+`projmgr` allows you to collect issues when working offline and easily post them to a repository later. This provides a productivity boost when you're forced offline by travel or a bad internet connection or prefer to be offline to minimize distractions. 
 
 Issues can be collected either as a dataframe (and posted with code similar to that shown in the KPI Tracking vignette) or as a to-do list. For example, as you encounter new issues, you can keep a running list of them as YAML. (This can be done either by assigning to an R variable or by saving a separate .yml file. Please see the vignette on Custom Plans for more details.)
 

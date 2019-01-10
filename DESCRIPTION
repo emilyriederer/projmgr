@@ -1,4 +1,4 @@
-Package: ghtrackr
+Package: projmgr
 Title: Task tracking and project management with GitHub via R
 Version: 0.0.0.9000
 Authors@R:
@@ -13,8 +13,8 @@ Description: Provides programmatic access to GitHub
     GitHub in personal, professional, or academic settings with an
     emphasis on streamlining the workflow of data analysis projects.
 License: MIT + file LICENSE
-URL: https://github.com/emilyriederer/ghtrackr
-BugReports: https://github.com/emilyriederer/ghtrackr/issues
+URL: https://github.com/emilyriederer/projmgr
+BugReports: https://github.com/emilyriederer/projmgr/issues
 Depends: R (>= 3.1.2)
 Imports:
     ggplot2,

@@ -18,7 +18,7 @@
 #' \dontrun{
 #' # This example uses example file included in pkg
 #' # You should be able to run example as-is after creating your own repo reference
-#' file_path <- system.file("extdata", "plan.yml", package = "ghtrackr", mustWork = TRUE)
+#' file_path <- system.file("extdata", "plan.yml", package = "projmgr", mustWork = TRUE)
 #' my_plan <- read_plan(file_path)
 #' post_plan(ref, my_plan)
 #' }
@@ -68,7 +68,7 @@ read_plan <- function(input){
 #' \dontrun{
 #' # This example uses example file included in pkg
 #' # You should be able to run example as-is after creating your own repo reference
-#' file_path <- system.file("extdata", "todo.yml", package = "ghtrackr", mustWork = TRUE)
+#' file_path <- system.file("extdata", "todo.yml", package = "projmgr", mustWork = TRUE)
 #' my_todo <- read_todo(file_path)
 #' post_todo(ref, my_todo)
 #' }
@@ -199,7 +199,7 @@ template_yaml <- function(template = c('plan', 'todo')) {
 
   path <- system.file("extdata",
                       paste0(template, "-ex.yml"),
-                      package = "ghtrackr",
+                      package = "projmgr",
                       mustWork = TRUE)
 
   cat(readLines(path), sep = '\n')
