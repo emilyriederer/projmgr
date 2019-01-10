@@ -61,7 +61,9 @@ viz_linked(g)
 For example, imagine pulling issues from a hypothetical R package into the `pkg_issues` dataframe.
 
 ```{r}
-viz_taskboard(pkg_issues, is_labeled_with("in-progress"), 40)
+viz_taskboard(pkg_issues, 
+              in_progress_when = is_labeled_with("in-progress"), 
+              str_wrap_width = 40)
 ```
 
 Users specify what logic to use for identifying "in progress" items by passing a function factory to the `in_progress_when` parameter. The above example uses the `is_labeled_with()` option. Other options include:
@@ -75,13 +77,17 @@ See `?taskboard_helpers` for more details.
 As a second example, suppose we instead classify issues as in progress once they have been put in a milestone.
 
 ```{r}
-viz_taskboard(pkg_issues, is_in_a_milestone(), 40)
+viz_taskboard(pkg_issues, 
+              in_progress_when = is_in_a_milestone(), 
+              str_wrap_width = 40)
 ```
 
 Or when they were assigned to "emilyriederer".
 
 ```{r}
-viz_taskboard(pkg_issues, is_assigned_to("emilyriederer"), 40)
+viz_taskboard(pkg_issues, 
+              in_progress_when = is_assigned_to("emilyriederer"), 
+              str_wrap_width = 40)
 ```
 
 
@@ -92,5 +98,5 @@ Unfortunately, this function currently suffers from spacing problems when trying
 `viz_waterfall()` creates a waterfall plot showing, for a fixed time-period, the initial open count, newly opened, newly closed, and final open count of issues or milestones. 
 
 ```{r}
-viz_waterfall(pkg_issues, '2018-11-20', '2018-12-15')
+viz_waterfall(pkg_issues, start_date = '2018-11-20', end_date = '2018-12-15')
 ```

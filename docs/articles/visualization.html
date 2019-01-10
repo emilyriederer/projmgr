@@ -123,7 +123,9 @@
 <a href="#task-boards" class="anchor"></a>Task Boards</h2>
 <p><code><a href="../reference/viz_taskboard.html">viz_taskboard()</a></code> creates an Agile-like taskboard of items (e.g. issues, milestones) to be started, in progress, and completed.</p>
 <p>For example, imagine pulling issues from a hypothetical R package into the <code>pkg_issues</code> dataframe.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/viz_taskboard.html">viz_taskboard</a></span>(pkg_issues, <span class="kw"><a href="../reference/taskboard_helpers.html">is_labeled_with</a></span>(<span class="st">"in-progress"</span>), <span class="dv">40</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/viz_taskboard.html">viz_taskboard</a></span>(pkg_issues, 
+              <span class="dt">in_progress_when =</span> <span class="kw"><a href="../reference/taskboard_helpers.html">is_labeled_with</a></span>(<span class="st">"in-progress"</span>), 
+              <span class="dt">str_wrap_width =</span> <span class="dv">40</span>)</code></pre></div>
 <p><img src="visualization_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 <p>Users specify what logic to use for identifying “in progress” items by passing a function factory to the <code>in_progress_when</code> parameter. The above example uses the <code><a href="../reference/taskboard_helpers.html">is_labeled_with()</a></code> option. Other options include:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ls</span>(<span class="st">'package:ghtrackr'</span>)[<span class="kw">grep</span>(<span class="st">"^is_*"</span>, <span class="kw">ls</span>(<span class="st">'package:ghtrackr'</span>))]
@@ -132,10 +134,14 @@
 <span class="co">#&gt; [7] "is_in_milestone"   "is_labeled_with"   "is_part_closed"</span></code></pre></div>
 <p>See <code><a href="../reference/taskboard_helpers.html">?taskboard_helpers</a></code> for more details.</p>
 <p>As a second example, suppose we instead classify issues as in progress once they have been put in a milestone.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/viz_taskboard.html">viz_taskboard</a></span>(pkg_issues, <span class="kw"><a href="../reference/taskboard_helpers.html">is_in_a_milestone</a></span>(), <span class="dv">40</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/viz_taskboard.html">viz_taskboard</a></span>(pkg_issues, 
+              <span class="dt">in_progress_when =</span> <span class="kw"><a href="../reference/taskboard_helpers.html">is_in_a_milestone</a></span>(), 
+              <span class="dt">str_wrap_width =</span> <span class="dv">40</span>)</code></pre></div>
 <p><img src="visualization_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 <p>Or when they were assigned to “emilyriederer”.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/viz_taskboard.html">viz_taskboard</a></span>(pkg_issues, <span class="kw"><a href="../reference/taskboard_helpers.html">is_assigned_to</a></span>(<span class="st">"emilyriederer"</span>), <span class="dv">40</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/viz_taskboard.html">viz_taskboard</a></span>(pkg_issues, 
+              <span class="dt">in_progress_when =</span> <span class="kw"><a href="../reference/taskboard_helpers.html">is_assigned_to</a></span>(<span class="st">"emilyriederer"</span>), 
+              <span class="dt">str_wrap_width =</span> <span class="dv">40</span>)</code></pre></div>
 <p><img src="visualization_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
 <p>Unfortunately, this function currently suffers from spacing problems when trying to show many items or items with very long names. Users can corrently attempt to fix this by experimenting with the <code>str_wrap_width</code> and <code>text_size</code> parameters or by adjusting the <code>fig.width</code> and <code>fig.height</code> RMarkdown options; however, in the long-term, this should be handled in a more sustainable, automated fashion.</p>
 </div>
@@ -143,7 +149,7 @@
 <h2 class="hasAnchor">
 <a href="#waterfall-charts" class="anchor"></a>Waterfall Charts</h2>
 <p><code><a href="../reference/viz_waterfall.html">viz_waterfall()</a></code> creates a waterfall plot showing, for a fixed time-period, the initial open count, newly opened, newly closed, and final open count of issues or milestones.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/viz_waterfall.html">viz_waterfall</a></span>(pkg_issues, <span class="st">'2018-11-20'</span>, <span class="st">'2018-12-15'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/viz_waterfall.html">viz_waterfall</a></span>(pkg_issues, <span class="dt">start_date =</span> <span class="st">'2018-11-20'</span>, <span class="dt">end_date =</span> <span class="st">'2018-12-15'</span>)</code></pre></div>
 <p><img src="visualization_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
 </div>
   </div>
