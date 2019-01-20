@@ -1,7 +1,5 @@
 ---
 title: "Visualizations (Experimental)"
-author: "Emily Riederer"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Visualizations}
@@ -22,6 +20,7 @@ library(dplyr)
 ```{r echo = FALSE, message = FALSE}
 dplyr_milestones <- readRDS(system.file("extdata", "dplyr-milestones.rds", package = "projmgr", mustWork = TRUE))
 pkg_issues <- readRDS(system.file("extdata", "viz-issues-data.rds", package = "projmgr", mustWork = TRUE))
+pkg_issues$url <- ""
 ```
 
 `projmgr` has many different ways to visualize project status. Note that all visualization functions are currently experimental and still have some known challenges. All feedback is welcome on these visualizations or other desired visualizations.
@@ -92,6 +91,25 @@ viz_taskboard(pkg_issues,
 
 
 Unfortunately, this function currently suffers from spacing problems when trying to show many items or items with very long names. Users can corrently attempt to fix this by experimenting with the `str_wrap_width` and `text_size` parameters or by adjusting the `fig.width` and `fig.height` RMarkdown options; however, in the long-term, this should be handled in a more sustainable, automated fashion.
+
+## HTML Task Boards
+
+As an alternative to plot-based taskboards, the `report_taskboard()` function creates a taskboard built with HTML and CSS. 
+
+```{r}
+report_taskboard(pkg_issues, in_progress_when = is_assigned_to("emilyriederer"))
+```
+
+Optional parameters of this function are `include_link` (whether to link back to the relevant GitHub issue), `hover` (for slightly enlarging a task on hover), and `colors` (to provide a character vector of colors to override the defaults.) 
+
+
+```{r}
+report_taskboard(pkg_issues, 
+                 in_progress_when = is_assigned_to("emilyriederer"),
+                 include_link = FALSE,
+                 hover = TRUE,
+                 colors = c('#ff0000', '#00ff00', '#0000ff'))
+```
 
 ## Waterfall Charts
 
