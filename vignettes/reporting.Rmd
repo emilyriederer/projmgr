@@ -1,7 +1,5 @@
 ---
 title: "Reporting with RMarkdown"
-author: "Emily Riederer"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Reporting with RMarkdown}
@@ -50,6 +48,10 @@ issues <-
 ```{r}
 report_progress(issues)
 ```
+
+## Taskboards
+
+Using HTML and CSS grid, the `report_taskboard()` function also offers aesethetic and interactive views of your work. This is shown in the Visualization vignette, as it is analogous to `viz_taskboard()`, which the advantage of better web responsiveness and scaling.
 
 ## Discussions
 
