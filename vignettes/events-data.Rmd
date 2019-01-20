@@ -1,7 +1,5 @@
 ---
 title: "Timestamping with Events Data"
-author: "Emily Riederer"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Timestamping with Events Data}

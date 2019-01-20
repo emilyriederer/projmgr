@@ -111,6 +111,10 @@ report_taskboard(pkg_issues,
                  colors = c('#ff0000', '#00ff00', '#0000ff'))
 ```
 
+To understand the benefits of `report_taskboard()` over `viz_taskboard()`'s reactivity, compare the results on these two outputs as you resize your browser window. 
+
+However, note that unlike other `report_` functions, `report_taskboard()`'s reliance on CSS grid means this it will generally *not* render elegantly within emails (as many major providers do not fully render CSS grid.) Test this before you include it in any emails.
+
 ## Waterfall Charts
 
 `viz_waterfall()` creates a waterfall plot showing, for a fixed time-period, the initial open count, newly opened, newly closed, and final open count of issues or milestones. 
