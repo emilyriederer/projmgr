@@ -1,7 +1,5 @@
 ---
 title: "Basic GitHub API Interaction"
-author: "Emily Riederer"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Basic GitHub API Interaction}

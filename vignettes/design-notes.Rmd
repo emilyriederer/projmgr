@@ -1,7 +1,5 @@
 ---
 title: "Design Notes"
-author: "Emily Riederer"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Design Notes}

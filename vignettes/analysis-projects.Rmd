@@ -1,7 +1,5 @@
 ---
 title: "Use Case: Project Planning & Stakeholder Updates (Posting & reporting custom plans)"
-author: "Emily Riederer"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Analysis Projects}

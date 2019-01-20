@@ -1,7 +1,5 @@
 ---
 title: "Use Case: Bug reporting with reprex (Posting issues from clipboard)"
-author: "Emily Riederer"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Integrating reprex}

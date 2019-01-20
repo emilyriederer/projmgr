@@ -1,7 +1,5 @@
 ---
 title: "Introduction to Git and GitHub"
-author: "Emily Riederer"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Introduction to Git and GitHub}

@@ -1,7 +1,5 @@
 ---
 title: "Use Case: KPI Tracking (Posting Issues from a dataframe)"
-author: "Emily Riederer"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{KPI Tracking}
