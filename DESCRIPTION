@@ -30,7 +30,6 @@ Suggests:
     knitr,
     reprex,
     rmarkdown,
-    roxygen2,
     testthat,
     tidyr,
     xml2,
