@@ -1,3 +1,7 @@
+template:
+  params:
+    ganalytics: UA-132815709-1
+
 navbar:
   title: "projmgr"
   left:

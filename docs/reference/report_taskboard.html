@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Articles • projmgr</title>
+<title>Report HTML-based task board of item status — report_taskboard • projmgr</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,7 +32,10 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Articles" />
+<meta property="og:title" content="Report HTML-based task board of item status — report_taskboard" />
+
+<meta property="og:description" content="Produces three column task board showing any relevant objects (typically issues or milestones)
+as &quot;Not Started&quot;, &quot;In Progress&quot;, or &quot;Done&quot;." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -62,7 +65,7 @@
   </head>
 
   <body>
-    <div class="container template-article-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -120,44 +123,83 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Articles</h1>
+    <h1>Report HTML-based task board of item status</h1>
+    <small class="dont-index">Source: <a href='https://github.com/emilyriederer/projmgr/blob/master/R/report-taskboard.R'><code>R/report-taskboard.R</code></a></small>
+    <div class="hidden name"><code>report_taskboard.Rd</code></div>
     </div>
 
-    <div class="section ">
-      <h3>Getting Started</h3>
-      <p class="section-desc"><p>Introduction to tools, set-up, and design</p></p>
-
-      <ul>
-        <li><a href="git-github-introduction.html">Introduction to Git and GitHub</a></li>
-        <li><a href="github-pat.html">Creating a GitHub Personal Authentication Token</a></li>
-        <li><a href="design-notes.html">Design Notes</a></li>
-      </ul>
+    <div class="ref-description">
+    
+    <p>Produces three column task board showing any relevant objects (typically issues or milestones)
+as "Not Started", "In Progress", or "Done".</p>
+    
     </div>
-    <div class="section ">
-      <h3>Tour by Functionality</h3>
-      <p class="section-desc"><p>A survey of features and codeflows</p></p>
 
-      <ul>
-        <li><a href="basic-usage.html">Basic GitHub API Interaction</a></li>
-        <li><a href="building-custom-plans.html">Generating Milestones &amp; Issues from YAML</a></li>
-        <li><a href="reporting.html">Reporting with RMarkdown</a></li>
-        <li><a href="visualization.html">Visualizations (Experimental)</a></li>
-        <li><a href="events-data.html">Timestamping with Events Data</a></li>
-      </ul>
-    </div>
-    <div class="section ">
-      <h3>Tour by Application</h3>
-      <p class="section-desc"><p>Demo of possible applications for personal projects, academia, and industry</p></p>
+    <pre class="usage"><span class='fu'>report_taskboard</span>(<span class='no'>data</span>, <span class='no'>in_progress_when</span>, <span class='kw'>include_link</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>hover</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>colors</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"#f0e442"</span>, <span class='st'>"#56b4e9"</span>, <span class='st'>"#009e73"</span>))</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>data</th>
+      <td><p>Dataset, such as those representing issues or milestones (i.e. from <code><a href='parse_issues.html'>parse_issues()</a></code>).
+Must have <code>state</code> variable.</p></td>
+    </tr>
+    <tr>
+      <th>in_progress_when</th>
+      <td><p>Function with parameter <code>data</code> that returns Boolean vector. Generally, one of the
+taskboard helper functions. See <code><a href='taskboard_helpers.html'>?taskboard_helpers</a></code> for details.</p></td>
+    </tr>
+    <tr>
+      <th>include_link</th>
+      <td><p>Boolean whether or not to include links back to GitHub</p></td>
+    </tr>
+    <tr>
+      <th>hover</th>
+      <td><p>Boolean whether or not tasks should be animated to slightly enlarge on hover</p></td>
+    </tr>
+    <tr>
+      <th>colors</th>
+      <td><p>Character vector of hex colors for not started, in progress, and complete tasks (respectively)</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-      <ul>
-        <li><a href="tracking-KPIs.html">Use Case: KPI Tracking (Posting Issues from a dataframe)</a></li>
-        <li><a href="analysis-projects.html">Use Case: Project Planning &amp; Stakeholder Updates (Posting &amp; reporting custom plans)</a></li>
-        <li><a href="event-mgt.html">Use Case: Event &amp; Team Management (Postings custom plans to many repos)</a></li>
-        <li><a href="documenting-discussion.html">Use Case: Documenting Discussion (Reporting an issue's comments)</a></li>
-        <li><a href="reprex-clipr.html">Use Case: Bug reporting with reprex (Posting issues from clipboard)</a></li>
-        <li><a href="working-offline.html">Use Case: Working Offline (Posting custom to-do lists)</a></li>
-      </ul>
-    </div>
+    <p>Returns character string of HTML/CSS with class attribute to be correctly shown "as-is" in RMarkdown</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The following logic is used to determine the status of each issue:</p><ul>
+<li><p>Done: Items with a <code>state</code> of "closed"</p></li>
+<li><p>In Progress: Custom logic via <code>in_progress_when</code>. See <code><a href='taskboard_helpers.html'>?taskboard_helpers</a></code> for details.</p></li>
+<li><p>Not Started: Default case for items neither In Progress or Closed</p></li>
+</ul>
+    
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"># NOT RUN {
+# in RMarkdown
+```{r}
+issues <- get_issues(myrepo, milestone = 1) %>% parse_issues()
+report_taskboard(issues, in_progress_when = is_labeled_with('in-progress'))
+````
+# }
+</pre>
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
+
   </div>
 </div>
 
