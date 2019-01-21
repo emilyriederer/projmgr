@@ -44,12 +44,19 @@ viz_linked <- function(g, filepath){
       call. = FALSE)
   }
 
+  if (!requireNamespace("ggplot2", quietly = TRUE)) {
+    message(
+      paste0("Package \"ggplot2\" is needed to save the image.",
+             "Please install \"ggplot2\" or use the non-linked version."),
+      call. = FALSE)
+  }
+
   # create text-link mapping
   links <- get_text_link_map(g)
 
   # save current ggplot at svg
   tf <- tempfile(fileext = ".svg")
-  suppressMessages( ggsave(tf , g ) )
+  suppressMessages( ggplot::ggsave(tf , g ) )
 
   # add links to svg
   xml <- xml2::read_xml(tf)
