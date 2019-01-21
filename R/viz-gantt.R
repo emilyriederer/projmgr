@@ -34,18 +34,6 @@
 
 viz_gantt <- function(data, start = created_at, end = closed_at, str_wrap_width = 30){
 
-  if (!requireNamespace("dplyr", quietly = TRUE)) {
-    message(
-      paste0("Package \"dplyr\" is needed for this function. Please install \"dplyr\" to continue."),
-      call. = FALSE)
-  }
-
-  if (!requireNamespace("rlang", quietly = TRUE)) {
-    message(
-      paste0("Package \"rlang\" is needed for this function. Please install \"rlang\" to continue."),
-      call. = FALSE)
-  }
-
   if (!requireNamespace("ggplot2", quietly = TRUE)) {
     message(
       paste0("Package \"ggplot2\" is needed for this function. Please install."),
@@ -55,18 +43,16 @@ viz_gantt <- function(data, start = created_at, end = closed_at, str_wrap_width 
   start_var <- enquo(start)
   end_var <- enquo(end)
 
-  # filter data to valid values having start and end
-  plot_data <-
-    data %>%
-    dplyr::filter(!is.na(!!start_var)) %>%
-    dplyr::arrange(dplyr::desc(!!start_var)) %>%
-    dplyr::mutate(gantt_y = factor(title, levels = title),
-                  start_var = !!start_var,
-                  end_var = !!end_var,
-                  psuedo_start_var = dplyr::if_else(is.na(start_var), min(start_var, na.rm = TRUE), start_var),
-                  psuedo_end_var = dplyr::if_else(is.na(end_var), max(end_var, na.rm = TRUE), end_var)
-    )
+  # prep data to valid values ----
+  plot_data <- data[!is.na(data[[start]]),]
+  plot_data <- plot_data[order(data[[start]], decreasing = TRUE), ]
+  plot_data$gantt_y <- factor(plot_data$title, levels = plot_data$title)
+  plot_data$start_var <- plot_data[[start]]
+  plot_data$end_var <- plot_data[[end]]
+  plot_data$psuedo_start_var <- ifelse(is.na(plot_data[[start]]), max(plot_data[[start]], na.rm = TRUE), plot_data[[start]])
+  plot_data$psuedo_end_var <- ifelse(is.na(plot_data[[end]]), max(plot_data[[end]], na.rm = TRUE), plot_data[[end]])
 
+  # plot data ----
   aes <- ggplot2::aes
   element_blank <- ggplot2::element_blank
 
@@ -88,7 +74,7 @@ viz_gantt <- function(data, start = created_at, end = closed_at, str_wrap_width 
           axis.title.y = element_blank(),
           legend.position = "none")
 
-  # add metadata to be used with viz_linked
+  # add metadata to be used with viz_linked ----
   class(g) <- c("gantt", class(g))
   g[['str_wrap_width']] <- str_wrap_width
 
