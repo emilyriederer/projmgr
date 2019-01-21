@@ -40,9 +40,6 @@ viz_gantt <- function(data, start = created_at, end = closed_at, str_wrap_width 
       call. = FALSE)
   }
 
-  start_var <- enquo(start)
-  end_var <- enquo(end)
-
   # prep data to valid values ----
   plot_data <- data[!is.na(data[[start]]),]
   plot_data <- plot_data[order(data[[start]], decreasing = TRUE), ]
