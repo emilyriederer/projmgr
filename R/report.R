@@ -34,7 +34,7 @@ report_progress <- function(issues){
                      by= list(df$milestone_title) ,
                      FUN= function(x) sum(x == 'closed'))$x
   issue_count <- vapply( unique(df$milestone_title),
-                         FUN = function(x) nrow(df[df$milestone_title == x,]),
+                         FUN = function(x) sum(df$milestone_title == x),
                          FUN.VALUE = integer(1))
   issue_title <- df$title
   state <- df$state
