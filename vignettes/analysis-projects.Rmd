@@ -41,7 +41,7 @@ As described in the custom plans vignette, this could be added to a GitHub repo 
 ```{r eval = FALSE}
 plan <- read_plan("plan.yml")
 my_repo <- create_repo_ref("emilyriederer", "my_repo_name")
-post_plan(plan, my_repo)
+post_plan(my_repo, plan)
 ```
 
 This can help you keep yourself organized or align priorities with technical collaborators on GitHub.
