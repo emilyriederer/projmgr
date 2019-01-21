@@ -133,7 +133,7 @@
 <p>As described in the custom plans vignette, this could be added to a GitHub repo as issues and milestones with the <code><a href="../reference/post_plan.html">post_plan()</a></code> function, like this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plan &lt;-<span class="st"> </span><span class="kw"><a href="../reference/read_plan.html">read_plan</a></span>(<span class="st">"plan.yml"</span>)
 my_repo &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_repo_ref.html">create_repo_ref</a></span>(<span class="st">"emilyriederer"</span>, <span class="st">"my_repo_name"</span>)
-<span class="kw"><a href="../reference/post_plan.html">post_plan</a></span>(plan, my_repo)</code></pre></div>
+<span class="kw"><a href="../reference/post_plan.html">post_plan</a></span>(my_repo, plan)</code></pre></div>
 <p>This can help you keep yourself organized or align priorities with technical collaborators on GitHub.</p>
 <div class="figure">
 <img src="post_plan.PNG" alt="Milestones posted on GitHub"><p class="caption">Milestones posted on GitHub</p>
