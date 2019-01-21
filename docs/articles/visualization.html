@@ -100,7 +100,6 @@
 <p>Items which are not yet completed are colored in grey since the true time-to-completion value is censored. Additionally, they do not have the terminal half-dot at the end of the bar.</p>
 <p>As an example, let’s plot all of the milestones in <code>dplyr</code>’s GitHub repository, as pulled on January 1, 2019.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/viz_gantt.html">viz_gantt</a></span>(dplyr_milestones)
-<span class="co">#&gt; Warning: package 'bindrcpp' was built under R version 3.4.4</span>
 <span class="co">#&gt; Warning: Removed 4 rows containing missing values (geom_point).</span></code></pre></div>
 <p><img src="visualization_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
 <p>Note that this plot shows some of the risks of black-box functions. At the time of writing, the “bluesky” milestone was open on GitHub yet has no uncompleted issues. It’s important to be precise about your definition of done, or change the <code>start</code> and <code>end</code> parameters to use variables most closely aligned to your definition.</p>
@@ -156,8 +155,8 @@
 <a href="#html-task-boards" class="anchor"></a>HTML Task Boards</h2>
 <p>As an alternative to plot-based taskboards, the <code><a href="../reference/report_taskboard.html">report_taskboard()</a></code> function creates a taskboard built with HTML and CSS.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/report_taskboard.html">report_taskboard</a></span>(pkg_issues, <span class="dt">in_progress_when =</span> <span class="kw"><a href="../reference/taskboard_helpers.html">is_assigned_to</a></span>(<span class="st">"emilyriederer"</span>))</code></pre></div>
-<div class="bwzamubzer">
-<style>.taskboard{display: grid;grid-gap: 1%;grid-template-columns: 1fr 1fr 1fr;margin-bottom: 50px;}.head{background-color: #a9a9a9;border: 1px solid #d3d3d3;text-align: center;font-weight: strong;}.task{text-align: center;padding: 2%;margin: 2%;border: 1px solid #d3d3d3;box-shadow: 2px 2px 5px grey;transition-duration:0.5s;}.bwzamubzer .ns{background-color:#f0e442;}.bwzamubzer .ip{background-color:#56b4e9;}.bwzamubzer .dn{background-color:#009e73;}div.taskboard a, div.taskboard a:visited{color: black;text-decoration: none;}div.taskboard a:hover{color: black;text-decoration: underline;}div.taskboard a:active{color: white;}</style>
+<div class="dbtfiyhfqk">
+<style>.taskboard{display: grid;grid-gap: 1%;grid-template-columns: 1fr 1fr 1fr;margin-bottom: 50px;}.head{background-color: #a9a9a9;border: 1px solid #d3d3d3;text-align: center;font-weight: strong;}.task{text-align: center;padding: 2%;margin: 2%;border: 1px solid #d3d3d3;box-shadow: 2px 2px 5px grey;transition-duration:0.5s;}.dbtfiyhfqk .ns{background-color:#f0e442;}.dbtfiyhfqk .ip{background-color:#56b4e9;}.dbtfiyhfqk .dn{background-color:#009e73;}div.taskboard a, div.taskboard a:visited{color: black;text-decoration: none;}div.taskboard a:hover{color: black;text-decoration: underline;}div.taskboard a:active{color: white;}</style>
 <div class="taskboard">
 <div class="head">
 Not Started
@@ -212,8 +211,8 @@ Add JSON support for plan / todo
                  <span class="dt">include_link =</span> <span class="ot">FALSE</span>,
                  <span class="dt">hover =</span> <span class="ot">TRUE</span>,
                  <span class="dt">colors =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">'#ff0000'</span>, <span class="st">'#00ff00'</span>, <span class="st">'#0000ff'</span>))</code></pre></div>
-<div class="lucuokplha">
-<style>.taskboard{display: grid;grid-gap: 1%;grid-template-columns: 1fr 1fr 1fr;margin-bottom: 50px;}.head{background-color: #a9a9a9;border: 1px solid #d3d3d3;text-align: center;font-weight: strong;}.task{text-align: center;padding: 2%;margin: 2%;border: 1px solid #d3d3d3;box-shadow: 2px 2px 5px grey;transition-duration:0.5s;}.lucuokplha .task:hover{margin: 0%;padding: 4%;}.lucuokplha .ns{background-color:#ff0000;}.lucuokplha .ip{background-color:#00ff00;}.lucuokplha .dn{background-color:#0000ff;}div.taskboard a, div.taskboard a:visited{color: black;text-decoration: none;}div.taskboard a:hover{color: black;text-decoration: underline;}div.taskboard a:active{color: white;}</style>
+<div class="enuovpgcud">
+<style>.taskboard{display: grid;grid-gap: 1%;grid-template-columns: 1fr 1fr 1fr;margin-bottom: 50px;}.head{background-color: #a9a9a9;border: 1px solid #d3d3d3;text-align: center;font-weight: strong;}.task{text-align: center;padding: 2%;margin: 2%;border: 1px solid #d3d3d3;box-shadow: 2px 2px 5px grey;transition-duration:0.5s;}.enuovpgcud .task:hover{margin: 0%;padding: 4%;}.enuovpgcud .ns{background-color:#ff0000;}.enuovpgcud .ip{background-color:#00ff00;}.enuovpgcud .dn{background-color:#0000ff;}div.taskboard a, div.taskboard a:visited{color: black;text-decoration: none;}div.taskboard a:hover{color: black;text-decoration: underline;}div.taskboard a:active{color: white;}</style>
 <div class="taskboard">
 <div class="head">
 Not Started

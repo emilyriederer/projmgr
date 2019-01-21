@@ -97,8 +97,7 @@
 <p>For example, let’s suppose we pull some issues from our repo and visualize their time-to-completion with <code><a href="../reference/viz_gantt.html">viz_gantt()</a></code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_repo &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_repo_ref.html">create_repo_ref</a></span>(<span class="st">'emilyriederer'</span>, <span class="st">'my_repo'</span>)
 issues &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_issues.html">get_issues</a></span>(experigit, <span class="dt">state =</span> <span class="st">'closed'</span>, <span class="dt">milestone =</span> <span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/parse_issues.html">parse_issues</a></span>()</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/viz_gantt.html">viz_gantt</a></span>(issues)
-<span class="co">#&gt; Warning: package 'bindrcpp' was built under R version 3.4.4</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/viz_gantt.html">viz_gantt</a></span>(issues)</code></pre></div>
 <p><img src="events-data_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 <p>Issue 1 stands out as having taken a very long time to complete. However, it’s possible it was created long before anyone started actively working on it. Instead, we might want to consider the start time to be, for example, when an issue was tagged with the “in-progress label”.</p>
 <p>We can get events for a specific issue with the following code. Due to the potentially massive size of this data, the function returns events for a single issue at a time and, thus, has a required <code>number</code> parameter to specify the issue for which events should be returned. As such, to events for multiple issues, we need to use <code><a href="https://purrr.tidyverse.org/reference/map.html">purrr::map()</a></code>.</p>
@@ -119,8 +118,8 @@ issues &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_
 <span class="co">#&gt; 3             NA             NA</span></code></pre></div>
 <p>Next, we can join our datasets together. THe <code>suffix</code> parameter allows us to append <code>_event</code> to all the field names from the events data to distinguished between the issue and event <code>created_at</code> fields.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">issue_with_events &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/join.html">inner_join</a></span>(issues, issue_events, <span class="dt">by =</span> <span class="st">"number"</span>, <span class="dt">suffix =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">""</span>, <span class="st">"_event"</span>))</code></pre></div>
-<p>Finally, we can use this new dataset to remake our plot by specifying the new <code>created_at_event</code> variable as the appropriate issue start date, via the optional <code>start</code> parameter.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/viz_gantt.html">viz_gantt</a></span>(issue_with_events, <span class="dt">start =</span> created_at_event)</code></pre></div>
+<p>Finally, we can use this new dataset to remake our plot by specifying the name of the new <code>created_at_event</code> variable as the appropriate issue start date, via the optional <code>start</code> parameter.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/viz_gantt.html">viz_gantt</a></span>(issue_with_events, <span class="dt">start =</span> <span class="st">"created_at_event"</span>)</code></pre></div>
 <p><img src="events-data_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
   </div>
 
