@@ -41,7 +41,7 @@ viz_taskboard <- function(data, in_progress_when, str_wrap_width = 30, text_size
   # create classification ----
   statuses <- c("Not Started", "In Progress", "Done")
   data$board_group <- statuses[1]
-  data$board_group[in_progress_when(data),] <- statuses[2]
+  data$board_group[in_progress_when(data)] <- statuses[2]
   data$board_group[data$state == 'closed'] <- statuses[3]
   data$board_group <- factor(data$board_group, levels = statuses)
 

@@ -47,7 +47,7 @@ viz_waterfall <- function(data,
          call. = FALSE)
   }
 
-  initial <- sum(data[[start]] < start_date & (data[[end]] > start_date | state == 'open'), na.rm = TRUE)
+  initial <- sum(data[[start]] < start_date & (data[[end]] > start_date | data$state == 'open'), na.rm = TRUE)
   opened <- sum(data[[start]] >= start_date & data[[start]] <= end_date, na.rm = TRUE)
   closed <- sum(data[[end]] >= start_date & data[[start]] <= end_date, na.rm = TRUE)
   final <- sum(data[[start]] < end_date & (data[[end]] > end_date | data$state == 'open'), na.rm = TRUE)
