@@ -26,8 +26,6 @@
 #' @export
 #' @seealso viz_linked
 #'
-#' @import ggplot2
-#'
 #' @examples
 #' \dontrun{
 #' issues <- get_issues(myrepo, state = "closed") %>% parse_issues()
@@ -48,6 +46,12 @@ viz_gantt <- function(data, start = created_at, end = closed_at, str_wrap_width 
       call. = FALSE)
   }
 
+  if (!requireNamespace("ggplot2", quietly = TRUE)) {
+    message(
+      paste0("Package \"ggplot2\" is needed for this function. Please install."),
+      call. = FALSE)
+  }
+
   start_var <- enquo(start)
   end_var <- enquo(end)
 
@@ -63,20 +67,23 @@ viz_gantt <- function(data, start = created_at, end = closed_at, str_wrap_width 
                   psuedo_end_var = dplyr::if_else(is.na(end_var), max(end_var, na.rm = TRUE), end_var)
     )
 
+  aes <- ggplot2::aes
+  element_blank <- ggplot2::element_blank
+
   g <-
-    ggplot(plot_data,
+    ggplot2::ggplot(plot_data,
            aes(x = psuedo_start_var, xend = psuedo_end_var, y = gantt_y, yend = gantt_y,
                col = -1*as.integer(difftime(!!end_var, !!start_var, "days"))
            )) +
-    geom_segment(size = 8) +
-    geom_point(aes(x = start_var), size = 2) +
-    geom_point(aes(x = end_var), size = 2) +
-    labs(title = "Time to Completion") +
-    scale_y_discrete(labels = function(x)
+    ggplot2::geom_segment(size = 8) +
+    ggplot2::geom_point(aes(x = start_var), size = 2) +
+    ggplot2::geom_point(aes(x = end_var), size = 2) +
+    ggplot2::labs(title = "Time to Completion") +
+    ggplot2::scale_y_discrete(labels = function(x)
       purrr::map(x, ~paste(strwrap(., width = str_wrap_width), collapse = "\n"))
     ) +
-    theme_bw() +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1),
+    ggplot2::theme_bw() +
+    ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1),
           axis.title.x = element_blank(),
           axis.title.y = element_blank(),
           legend.position = "none")

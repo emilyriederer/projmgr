@@ -26,8 +26,6 @@
 #' @param start_date Character string in 'YYYY-MM-DD' form for first date to be considered (inclusive)
 #' @param end_date Character string in 'YYYY-MM-DD' form for last date to be considered (inclusive)
 #'
-#' @import ggplot2
-#'
 #' @return ggplot object
 #' @family issues
 #' @export
@@ -46,6 +44,12 @@
 viz_waterfall <- function(data,
                                    start_date, end_date,
                                    start = created_at, end = closed_at){
+
+  if (!requireNamespace("ggplot2", quietly = TRUE)) {
+    message(
+      paste0("Package \"ggplot2\" is needed for this function. Please install."),
+      call. = FALSE)
+  }
 
   if (!requireNamespace("tidyr", quietly = TRUE)) {
     message(
@@ -101,31 +105,35 @@ viz_waterfall <- function(data,
       base = ifelse(status != "Final", cumsum(dplyr::lag(n, 1, default = 0)), 0)
     )
 
-  ggplot(plot_data,
+  aes <- ggplot2::aes
+  element_blank <- ggplot2::element_blank
+
+  ggplot2::ggplot(plot_data,
          aes( xmin = index - 0.25, xmax = index + 0.25,
               ymin = base, ymax = base + sign*n,
               fill = status)
   ) +
-    geom_rect() +
-    geom_text(
+    ggplot2::geom_rect() +
+    ggplot2::geom_text(
       aes( x = index,
            y = (2*base + sign*n)/2,
            label = n),
       color = 'black') +
-    scale_x_continuous(breaks = 1:4, labels = c('Initial', 'Opened', 'Closed', 'Final')) +
-    scale_fill_manual(values =
+    ggplot2::scale_x_continuous(breaks = 1:4, labels = c('Initial', 'Opened', 'Closed', 'Final')) +
+    ggplot2::scale_fill_manual(values =
                         c('Initial' = "#56B4E9",
                           'Opened' = "#F0E442",
                           'Closed' = "#009E73",
                           'Final' = "#56B4E9")
     ) +
-    guides(fill = FALSE) +
-    labs(title = "Issue Progress Waterfall",
+    ggplot2::guides(fill = FALSE) +
+    ggplot2::labs(title = "Issue Progress Waterfall",
          subtitle = paste("From", start_date, "to", end_date)
     ) +
-    theme(panel.grid = element_blank(),
+    ggplot2::theme(
+          panel.grid = element_blank(),
           panel.background = element_blank(),
           axis.title = element_blank(),
-          strip.text.y = element_text(angle = 180),
+          strip.text.y = ggplot2::element_text(angle = 180),
           axis.text.y = element_blank())
 }

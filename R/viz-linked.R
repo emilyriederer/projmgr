@@ -56,7 +56,7 @@ viz_linked <- function(g, filepath){
 
   # save current ggplot at svg
   tf <- tempfile(fileext = ".svg")
-  suppressMessages( ggplot::ggsave(tf , g ) )
+  suppressMessages( ggplot2::ggsave(tf , g ) )
 
   # add links to svg
   xml <- xml2::read_xml(tf)
