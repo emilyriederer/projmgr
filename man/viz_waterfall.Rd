@@ -4,8 +4,8 @@
 \alias{viz_waterfall}
 \title{Visualize waterfall of opened, closed, and pending items over timeframe}
 \usage{
-viz_waterfall(data, start_date, end_date, start = created_at,
-  end = closed_at)
+viz_waterfall(data, start_date, end_date, start = "created_at",
+  end = "closed_at")
 }
 \arguments{
 \item{data}{Dataset, such as those representing issues or milestones (i.e. \code{parse_issues()} or
@@ -40,19 +40,10 @@ The following logic is used to classify issues:
 
 The exact accuracy of the logic depends on filtering that has already been done to the dataset. Think carefully
 about the population you wish to represent when \code{get}ting your data.
-
-Note that this function respects \code{dplyr::group_by()}. If grouped data is passed, it will preserve
-the grouping and separate plots can be made with faceting.
 }
 \examples{
 \dontrun{
 viz_waterfall(milestones, '2017-01-01', '2017-03-31')
-}
-\dontrun{
-issues \%>\%
-dplyr::group_by(milestone) \%>\%
-viz_waterfall('2017-01-01', '2017-03-31') +
-facet_grid(milestone ~ .)
 }
 }
 \seealso{

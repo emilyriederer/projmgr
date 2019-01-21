@@ -16,17 +16,12 @@
 #' The exact accuracy of the logic depends on filtering that has already been done to the dataset. Think carefully
 #' about the population you wish to represent when \code{get}ting your data.
 #'
-#' Note that this function respects \code{dplyr::group_by()}. If grouped data is passed, it will preserve
-#' the grouping and separate plots can be made with faceting.
-#'
 #' @inheritParams viz_gantt
 #' @param data Dataset, such as those representing issues or milestones (i.e. \code{parse_issues()} or
 #'     \code{parse_milestones()}). Must have \code{state} variable and variables to specify for
 #'     \code{start} and \code{end}
 #' @param start_date Character string in 'YYYY-MM-DD' form for first date to be considered (inclusive)
 #' @param end_date Character string in 'YYYY-MM-DD' form for last date to be considered (inclusive)
-#'
-#' @import ggplot2
 #'
 #' @return ggplot object
 #' @family issues
@@ -36,33 +31,14 @@
 #' \dontrun{
 #' viz_waterfall(milestones, '2017-01-01', '2017-03-31')
 #' }
-#' \dontrun{
-#' issues %>%
-#' dplyr::group_by(milestone) %>%
-#' viz_waterfall('2017-01-01', '2017-03-31') +
-#' facet_grid(milestone ~ .)
-#' }
 
 viz_waterfall <- function(data,
                                    start_date, end_date,
-                                   start = created_at, end = closed_at){
+                                   start = "created_at", end = "closed_at"){
 
-  if (!requireNamespace("tidyr", quietly = TRUE)) {
+  if (!requireNamespace("ggplot2", quietly = TRUE)) {
     message(
-      paste0("Package \"tidyr\" is needed for this function. Please install \"tidyr\" to continue."),
-      call. = FALSE)
-  }
-
-  if (!requireNamespace("dplyr", quietly = TRUE)) {
-    message(
-      paste0("Package \"dplyr\" is needed for this function. Please install \"dplyr\" to continue."),
-      call. = FALSE)
-  }
-
-
-  if (!requireNamespace("rlang", quietly = TRUE)) {
-    message(
-      paste0("Package \"rlang\" is needed for this function. Please install \"rlang\" to continue."),
+      paste0("Package \"ggplot2\" is needed for this function. Please install."),
       call. = FALSE)
   }
 
@@ -71,61 +47,49 @@ viz_waterfall <- function(data,
          call. = FALSE)
   }
 
-  start_var <- enquo(start)
-  end_var <- enquo(end)
+  initial <- sum(data[[start]] < start_date & (data[[end]] > start_date | data$state == 'open'), na.rm = TRUE)
+  opened <- sum(data[[start]] >= start_date & data[[start]] <= end_date, na.rm = TRUE)
+  closed <- sum(data[[end]] >= start_date & data[[start]] <= end_date, na.rm = TRUE)
+  final <- sum(data[[start]] < end_date & (data[[end]] > end_date | data$state == 'open'), na.rm = TRUE)
+  plot_data <- data.frame(
+    status = c('Initial', 'Opened', 'Closed', 'Final'),
+    n = c(initial, opened, closed, final),
+    index = 1:4,
+    sign = c(1,1,-1,1),
+    base = c(0, initial, initial + opened, 0)
+  )
 
-  prep_data <-
-    dplyr::mutate(data, dummy_var = 1) %>%
-    dplyr::group_by(dummy_var, add = TRUE)
-  group_vars <- dplyr::group_vars(data)
+  aes <- ggplot2::aes
+  element_blank <- ggplot2::element_blank
 
-  plot_data <-
-   dplyr::summarize(prep_data,
-              Initial = sum(!!start_var < start_date &
-                              (!!end_var > start_date | state == 'open'),
-                            na.rm = TRUE),
-              Opened = sum(!!start_var >= start_date & !!start_var <= end_date,
-                           na.rm = TRUE),
-              Closed = sum(!!end_var >= start_date & !!end_var <= end_date,
-                           na.rm = TRUE),
-              Final = sum(!!start_var < end_date &
-                            (!!end_var > end_date | state == 'open'),
-                          na.rm = TRUE)
-    ) %>%
-    dplyr::select(dplyr::one_of(group_vars), Initial, Opened, Closed, Final) %>%
-    tidyr::gather(status, n, -dplyr::one_of(group_vars)) %>%
-    dplyr::arrange(!!!syms(group_vars)) %>%
-    dplyr::mutate(
-      index = 1:4 ,
-      sign = c(1,1,-1,1) ,
-      base = ifelse(status != "Final", cumsum(dplyr::lag(n, 1, default = 0)), 0)
-    )
-
-  ggplot(plot_data,
+  ggplot2::ggplot(plot_data,
          aes( xmin = index - 0.25, xmax = index + 0.25,
               ymin = base, ymax = base + sign*n,
               fill = status)
   ) +
-    geom_rect() +
-    geom_text(
+    ggplot2::geom_rect() +
+    ggplot2::geom_text(
       aes( x = index,
            y = (2*base + sign*n)/2,
            label = n),
       color = 'black') +
-    scale_x_continuous(breaks = 1:4, labels = c('Initial', 'Opened', 'Closed', 'Final')) +
-    scale_fill_manual(values =
+    ggplot2::scale_x_continuous(
+      breaks = 1:4,
+      labels = c('Initial', 'Opened', 'Closed', 'Final')) +
+    ggplot2::scale_fill_manual(values =
                         c('Initial' = "#56B4E9",
                           'Opened' = "#F0E442",
                           'Closed' = "#009E73",
                           'Final' = "#56B4E9")
     ) +
-    guides(fill = FALSE) +
-    labs(title = "Issue Progress Waterfall",
+    ggplot2::guides(fill = FALSE) +
+    ggplot2::labs(title = "Issue Progress Waterfall",
          subtitle = paste("From", start_date, "to", end_date)
     ) +
-    theme(panel.grid = element_blank(),
+    ggplot2::theme(
+          panel.grid = element_blank(),
           panel.background = element_blank(),
           axis.title = element_blank(),
-          strip.text.y = element_text(angle = 180),
+          strip.text.y = ggplot2::element_text(angle = 180),
           axis.text.y = element_blank())
 }

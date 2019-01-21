@@ -87,10 +87,10 @@ Next, we can join our datasets together. THe `suffix` parameter allows us to app
 issue_with_events <- dplyr::inner_join(issues, issue_events, by = "number", suffix = c("", "_event"))
 ```
 
-Finally, we can use this new dataset to remake our plot by specifying the new `created_at_event` variable as the appropriate issue start date, via the optional `start` parameter.
+Finally, we can use this new dataset to remake our plot by specifying the name of the new `created_at_event` variable as the appropriate issue start date, via the optional `start` parameter.
 
 ```{r}
-viz_gantt(issue_with_events, start = created_at_event)
+viz_gantt(issue_with_events, start = "created_at_event")
 ```
 
 

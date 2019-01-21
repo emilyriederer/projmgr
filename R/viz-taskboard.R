@@ -21,8 +21,6 @@
 #' @export
 #' @seealso viz_linked
 #'
-#' @import ggplot2
-#'
 #' @examples
 #' \dontrun{
 #' issues <- get_issues(myrepo, milestone = 1) %>% parse_issues()
@@ -32,9 +30,9 @@
 
 viz_taskboard <- function(data, in_progress_when, str_wrap_width = 30, text_size = 3){
 
-  if (!requireNamespace("dplyr", quietly = TRUE)) {
+  if (!requireNamespace("ggplot2", quietly = TRUE)) {
     message(
-      paste0("Package \"dplyr\" is needed for this function. Please install \"dplyr\" to continue."),
+      paste0("Package \"ggplot2\" is needed for this function. Please install."),
       call. = FALSE)
   }
 
@@ -42,13 +40,9 @@ viz_taskboard <- function(data, in_progress_when, str_wrap_width = 30, text_size
 
   # create classification ----
   statuses <- c("Not Started", "In Progress", "Done")
-  data <-
-    dplyr::mutate(data,
-                  board_group = dplyr::case_when(
-                    state == 'closed' ~ statuses[3],
-                    in_progress_when(data) ~ statuses[2],
-                    TRUE ~ statuses[1]
-                  ))
+  data$board_group <- statuses[1]
+  data$board_group[in_progress_when(data)] <- statuses[2]
+  data$board_group[data$state == 'closed'] <- statuses[3]
   data$board_group <- factor(data$board_group, levels = statuses)
 
   # create helper aesthetics for size, position, text fmt ----
@@ -60,15 +54,18 @@ viz_taskboard <- function(data, in_progress_when, str_wrap_width = 30, text_size
   height <- max( purrr::map_int(text_components, length) ) * 2
 
   # create ggplot object of task board ----
+  aes <- ggplot2::aes
+  element_blank <- ggplot2::element_blank
+
   g <-
-    ggplot(data, aes(x = 0, y = 0)) +
-    geom_rect(aes(fill = board_group), xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf) +
-    geom_text(aes(label = taskboard_text), size = text_size) +
-    facet_grid(board_pos ~ board_group, drop = FALSE, space = "fixed") +
-    scale_fill_manual(values = c("Not Started" = "#F0E442",
+    ggplot2::ggplot(data, aes(x = 0, y = 0)) +
+    ggplot2::geom_rect(aes(fill = board_group), xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf) +
+    ggplot2::geom_text(aes(label = taskboard_text), size = text_size) +
+    ggplot2::facet_grid(board_pos ~ board_group, drop = FALSE, space = "fixed") +
+    ggplot2::scale_fill_manual(values = c("Not Started" = "#F0E442",
                                  "In Progress" = "#56B4E9",
                                  "Done" = "#009E73")) +
-    theme(
+    ggplot2::theme(
       panel.grid = element_blank(),
       axis.title = element_blank(),
       axis.text = element_blank(),

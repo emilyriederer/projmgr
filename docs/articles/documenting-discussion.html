@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">projmgr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9900</span>
       </span>
     </div>
 
@@ -101,22 +101,28 @@
 comments &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_issue_comments.html">get_issue_comments</a></span>(experigit, <span class="dt">number =</span> <span class="dv">163</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/parse_issue_comments.html">parse_issue_comments</a></span>()</code></pre></div>
 <p>As with all other <code>get-parse</code> codeflows, this produces dataframe output.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(issues)
-<span class="co">#&gt; # A tibble: 1 x 19</span>
-<span class="co">#&gt;   title  body    state created_at closed_at  user_login n_comments url    </span>
-<span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;  </span>
-<span class="co">#&gt; 1 A ver~ This i~ open  2018-12-30 NA         emilyried~          2 https:~</span>
-<span class="co">#&gt; # ... with 11 more variables: number &lt;int&gt;, milestone_title &lt;lgl&gt;,</span>
-<span class="co">#&gt; #   milestone_id &lt;lgl&gt;, milestone_number &lt;lgl&gt;, milestone_state &lt;lgl&gt;,</span>
-<span class="co">#&gt; #   milestone_created_at &lt;date&gt;, milestone_closed_at &lt;date&gt;,</span>
-<span class="co">#&gt; #   milestone_due_on &lt;date&gt;, assignee_login &lt;lgl&gt;, assignees_login &lt;list&gt;,</span>
-<span class="co">#&gt; #   labels_name &lt;list&gt;</span>
+<span class="co">#&gt;                    title                                    body state</span>
+<span class="co">#&gt; 1 A very important issue This is the beginning of a conversation  open</span>
+<span class="co">#&gt;   created_at closed_at    user_login n_comments</span>
+<span class="co">#&gt; 1 2018-12-30      &lt;NA&gt; emilyriederer          2</span>
+<span class="co">#&gt;                                                     url number</span>
+<span class="co">#&gt; 1 https://github.com/emilyriederer/experigit/issues/163    163</span>
+<span class="co">#&gt;   milestone_title milestone_id milestone_number milestone_state</span>
+<span class="co">#&gt; 1              NA           NA               NA              NA</span>
+<span class="co">#&gt;   milestone_created_at milestone_closed_at milestone_due_on assignee_login</span>
+<span class="co">#&gt; 1                 &lt;NA&gt;                &lt;NA&gt;             &lt;NA&gt;             NA</span>
+<span class="co">#&gt;   assignees_login labels_name</span>
+<span class="co">#&gt; 1</span>
 <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(comments)
-<span class="co">#&gt; # A tibble: 2 x 8</span>
-<span class="co">#&gt;   url          id user_login created_at updated_at author_associat~ body  </span>
-<span class="co">#&gt;   &lt;chr&gt;     &lt;int&gt; &lt;chr&gt;      &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;            &lt;chr&gt; </span>
-<span class="co">#&gt; 1 https:/~ 4.51e8 emilyried~ 2018-12-30 2018-12-30 OWNER            I'm j~</span>
-<span class="co">#&gt; 2 https:/~ 4.51e8 emilyried~ 2018-12-30 2018-12-30 OWNER            "Actu~</span>
-<span class="co">#&gt; # ... with 1 more variable: number &lt;dbl&gt;</span></code></pre></div>
+<span class="co">#&gt;                                                                            url</span>
+<span class="co">#&gt; 1 https://github.com/emilyriederer/experigit/issues/163#issuecomment-450574376</span>
+<span class="co">#&gt; 2 https://github.com/emilyriederer/experigit/issues/163#issuecomment-450574387</span>
+<span class="co">#&gt;          id    user_login created_at updated_at author_association</span>
+<span class="co">#&gt; 1 450574376 emilyriederer 2018-12-30 2018-12-30              OWNER</span>
+<span class="co">#&gt; 2 450574387 emilyriederer 2018-12-30 2018-12-30              OWNER</span>
+<span class="co">#&gt;                                             body number</span>
+<span class="co">#&gt; 1   I'm just commenting to add more information.    163</span>
+<span class="co">#&gt; 2 Actually, I disagree. My perspective is this.     163</span></code></pre></div>
 <p>Next, simply pass these into the <code><a href="../reference/report_discussion.html">report_discussion()</a></code> function to generate a formatted RMarkdown report.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/report_discussion.html">report_discussion</a></span>(comments, issues)
 <span class="co">#&gt; Warning in if (!is.na(issue)) {: the condition has length &gt; 1 and only the</span>

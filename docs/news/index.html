@@ -75,7 +75,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">projmgr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9900</span>
       </span>
     </div>
 
@@ -124,6 +124,22 @@
       <small>Source: <a href='https://github.com/emilyriederer/projmgr/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="projmgr-0-0-0-9900" class="section level1">
+<h1 class="page-header">
+<a href="#projmgr-0-0-0-9900" class="anchor"></a>projmgr 0.0.0.9900</h1>
+<ul>
+<li>Added <code><a href="../reference/report_taskboard.html">report_taskboard()</a></code> as HTML / CSS alternative to <code><a href="../reference/viz_taskboard.html">viz_taskboard()</a></code>
+</li>
+<li>Refactored <code>viz</code> functions to reduce dependencies:
+<ul>
+<li>
+<code>ggplot2</code> moved to Suggests and checked for globally</li>
+<li>reverted to standard evaluation since NSE was only used is two places to enable non-quoted variable names</li>
+</ul>
+</li>
+<li>Removed former support in <code><a href="../reference/viz_waterfall.html">viz_waterfall()</a></code> to respect a <code>tibble</code>’s <code>group_vars</code> due to questionable value and inconsistency with other functions</li>
+</ul>
+</div>
     <div id="projmgr-0-0-0-9000" class="section level1">
 <h1 class="page-header">
 <a href="#projmgr-0-0-0-9000" class="anchor"></a>projmgr 0.0.0.9000</h1>
@@ -137,6 +153,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#projmgr-0-0-0-9900">0.0.0.9900</a></li>
         <li><a href="#projmgr-0-0-0-9000">0.0.0.9000</a></li>
       </ul>
     </div>
