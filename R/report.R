@@ -31,7 +31,7 @@ report_progress <- function(issues){
   milestone_title <- unique(df$milestone_title)
   issue_closed_count <-
     stats::aggregate(df$state,
-                     by= list(df$milestone_title) ,
+                     by= list(factor(df$milestone_title, levels = milestone_title)) ,
                      FUN= function(x) sum(x == 'closed'))$x
   issue_count <- vapply( unique(df$milestone_title),
                          FUN = function(x) sum(df$milestone_title == x),
@@ -43,7 +43,7 @@ report_progress <- function(issues){
   milestone_html <- fmt_milestone(milestone_title, issue_closed_count, issue_count)
   issue_html <- fmt_issue( issue_title, state )
   issue_html_grp <- stats::aggregate(issue_html,
-                                     by = list(df$milestone_title),
+                                     by = list(factor(df$milestone_title, levels = milestone_title)),
                                      FUN = function(x) paste(x, collapse = " "))$x
   milestone_issue_html_grp <- paste(milestone_html, "<ul style = 'list-style: none;'>", issue_html_grp, "</ul>")
 
