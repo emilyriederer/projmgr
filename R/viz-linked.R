@@ -37,13 +37,6 @@ viz_linked <- function(g, filepath){
       call. = FALSE)
   }
 
-  if (!requireNamespace("tidyr", quietly = TRUE)) {
-    message(
-      paste0("Package \"tidyr\" is needed to edit SVG.",
-             "Please install \"tidyr\" or use the non-linked version."),
-      call. = FALSE)
-  }
-
   if (!requireNamespace("ggplot2", quietly = TRUE)) {
     message(
       paste0("Package \"ggplot2\" is needed to save the image.",
@@ -111,15 +104,11 @@ get_text_link_map <- function(g){
 #' @keywords internal
 get_text_link_map.gantt <- function(g){
 
-  links <- tibble::tibble(
-    url = g$data$url,
-    name =
-      g$data$title %>%
-      purrr::map(~strwrap(., width = g[['str_wrap_width']] ))
-  ) %>%
-    tidyr::unnest() %>%
-    {stats::setNames(.$url, .$name)}
-
+  link_text_fmt <- g$data$title
+  link_text <- lapply(link_text_fmt, FUN = function(x) strwrap(x, width = g[['str_wrap_width']] ))
+  link_length <- vapply(link_text, FUN = length, FUN.VALUE = integer(1))
+  url_repeat <- rep(g$data$url, link_length)
+  links <- stats::setNames(url_repeat, link_text)
   return(links)
 
 }
@@ -127,15 +116,15 @@ get_text_link_map.gantt <- function(g){
 #' @keywords internal
 get_text_link_map.taskboard <- function(g){
 
-  links <- tibble::tibble(
-    url = g$data$url,
-    name =
-      paste0("#", g$data$number, ": ", g$data$title) %>%
-      purrr::map(~strwrap(., width = g[['str_wrap_width']] ))
-  ) %>%
-    tidyr::unnest() %>%
-    {stats::setNames(.$url, .$name)}
-
+  link_text_fmt <- paste0("#", g$data$number, ": ", g$data$title)
+  link_text <- lapply(link_text_fmt, FUN = function(x) strwrap(x, width = g[['str_wrap_width']] ))
+  link_length <- vapply(link_text, FUN = length, FUN.VALUE = integer(1))
+  url_repeat <- rep(g$data$url, link_length)
+  links <- stats::setNames(url_repeat, link_text)
   return(links)
 
 }
+
+
+
+
