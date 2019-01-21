@@ -21,7 +21,6 @@ Imports:
     gh,
     magrittr,
     purrr,
-    rlang (>= 0.1.2),
     tibble
 Suggests:
     clipr,

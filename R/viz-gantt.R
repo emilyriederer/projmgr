@@ -32,7 +32,7 @@
 #' viz_gantt(issues)
 #' }
 
-viz_gantt <- function(data, start = created_at, end = closed_at, str_wrap_width = 30){
+viz_gantt <- function(data, start = "created_at", end = "closed_at", str_wrap_width = 30){
 
   if (!requireNamespace("ggplot2", quietly = TRUE)) {
     message(
@@ -45,9 +45,18 @@ viz_gantt <- function(data, start = created_at, end = closed_at, str_wrap_width 
   plot_data <- plot_data[order(data[[start]], decreasing = TRUE), ]
   plot_data$gantt_y <- factor(plot_data$title, levels = plot_data$title)
   plot_data$start_var <- plot_data[[start]]
-  plot_data$end_var <- plot_data[[end]]
-  plot_data$psuedo_start_var <- ifelse(is.na(plot_data[[start]]), max(plot_data[[start]], na.rm = TRUE), plot_data[[start]])
-  plot_data$psuedo_end_var <- ifelse(is.na(plot_data[[end]]), max(plot_data[[end]], na.rm = TRUE), plot_data[[end]])
+  plot_data$end_var <-  plot_data[[end]]
+  plot_data$psuedo_start_var <-
+    ifelse(is.na(plot_data[[start]]),
+           max(plot_data[[start]], na.rm = TRUE),
+           plot_data[[start]]) %>%
+    as.Date(origin = '1970-01-01')
+  plot_data$psuedo_end_var <-
+    ifelse(is.na(plot_data[[end]]),
+           max(plot_data[[end]], na.rm = TRUE),
+           plot_data[[end]]) %>%
+    as.Date(origin = '1970-01-01')
+  plot_data$gantt_col <- -1*as.integer(difftime(plot_data$end_var, plot_data$start_var, "days"))
 
   # plot data ----
   aes <- ggplot2::aes
@@ -55,9 +64,10 @@ viz_gantt <- function(data, start = created_at, end = closed_at, str_wrap_width 
 
   g <-
     ggplot2::ggplot(plot_data,
-           aes(x = psuedo_start_var, xend = psuedo_end_var, y = gantt_y, yend = gantt_y,
-               col = -1*as.integer(difftime(!!end_var, !!start_var, "days"))
-           )) +
+           aes(x = psuedo_start_var, xend = psuedo_end_var,
+               y = gantt_y, yend = gantt_y,
+               col = gantt_col)
+           ) +
     ggplot2::geom_segment(size = 8) +
     ggplot2::geom_point(aes(x = start_var), size = 2) +
     ggplot2::geom_point(aes(x = end_var), size = 2) +
