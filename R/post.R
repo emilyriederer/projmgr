@@ -35,7 +35,7 @@ post_issue <- function(ref, title, ..., distinct = TRUE){
 
     issue_titles <-
       if(is.list(open_issues)) {
-        purrr::map_chr( open_issues, "title" )
+        vapply(open_issues, FUNCTION = function(x) x[["title"]], FUN.VALUE = character(1))
       }
     else{""}
 
@@ -91,8 +91,7 @@ post_milestone <- function(ref, title, ...){
   # so not an optional as in post_issues
   open_milestones <- get_milestones(ref, state = 'open')
   milestone_titles <-       if(is.list(open_milestones)) {
-    purrr::map_chr( open_milestones , "title" )
-  }
+    vapply( open_milestones, FUN = function(x) x[["title"]], FUN.VALUE = character(1))  }
   else{""}
   if(any(title == milestone_titles)){ # when title not distinct
     stop("New milestone title is not distinct with current open milestones. Please change title.",
