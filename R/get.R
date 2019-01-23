@@ -74,7 +74,11 @@ get_issue_events <- function(ref, number){
              ref = ref)
 
   # append the relevant issue number to each element
-  res <- purrr::map(res, ~purrr::list_modify(., "number" = number))
+  res <- lapply(res,
+                FUN = function(x){
+                  x[["number"]] = number
+                  return(x)
+                })
 
   res
 
@@ -107,8 +111,11 @@ get_issue_comments <- function(ref, number, ...){
                     ref = ref)
 
   # append the relevant issue number to each element
-  res <- purrr::map(res, ~purrr::list_modify(., "number" = number))
-
+  res <- lapply(res,
+                FUN = function(x){
+                  x[["number"]] = number
+                  return(x)
+                })
   res
 
 }
