@@ -45,17 +45,21 @@ check_rate_limit <- function(ref){
 
 check_credentials <- function(ref){
 
+  # get information of authenticating user
   auth_ref <- ref
   auth_ref[['repo_path']] <- ''
   auth_req <- get_engine("user", auth_ref)
 
+  # get information on repo collaborators
   perm_req <- try(get_engine("/collaborators", ref), silent = TRUE)
   if("try-error" %in% class(perm_req)){
   perm_req <- list(admin = FALSE, push = FALSE, pull = FALSE)
   }
   else{
-  perm_req <- purrr::keep(perm_req, ~.[['login']] == auth_req[[1]]$login)
-  perm_req <- perm_req[[1]]$permissions
+  login_match <- vapply(perm_req,
+                        FUN = function(x) x[["login"]] == auth_req[[1]]$login,
+                        FUN.VALUE = logical(1))
+  perm_req <- perm_req[[which(login_match)]]$permissions
   }
 
   cat("-- With provided credentials -- \n",
