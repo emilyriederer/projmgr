@@ -29,11 +29,10 @@ report_progress <- function(issues){
 
   df <- issues[!is.na(issues$milestone_title),]
   milestone_title <- unique(df$milestone_title)
-  issue_closed_count <-
-    stats::aggregate(df$state,
-                     by= list(factor(df$milestone_title, levels = milestone_title)) ,
-                     FUN= function(x) sum(x == 'closed'))$x
-  issue_count <- vapply( unique(df$milestone_title),
+  issue_closed_count <- vapply(milestone_title,
+                               function(x) sum(df$milestone_title == x & df$state == 'closed'),
+                               integer(1) )
+  issue_count <- vapply( milestone_title ,
                          FUN = function(x) sum(df$milestone_title == x),
                          FUN.VALUE = integer(1))
   issue_title <- df$title
@@ -42,9 +41,9 @@ report_progress <- function(issues){
   # write html ----
   milestone_html <- fmt_milestone(milestone_title, issue_closed_count, issue_count)
   issue_html <- fmt_issue( issue_title, state )
-  issue_html_grp <- stats::aggregate(issue_html,
-                                     by = list(factor(df$milestone_title, levels = milestone_title)),
-                                     FUN = function(x) paste(x, collapse = " "))$x
+  issue_html_grp <- vapply(milestone_title,
+                           FUN = function(x) paste(issue_html[df$milestone_title == x], collapse = " "),
+                           FUN.VALUE = character(1))
   milestone_issue_html_grp <- paste(milestone_html, "<ul style = 'list-style: none;'>", issue_html_grp, "</ul>")
 
   # final output ----
