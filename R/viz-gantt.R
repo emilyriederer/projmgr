@@ -73,8 +73,11 @@ viz_gantt <- function(data, start = "created_at", end = "closed_at", str_wrap_wi
     ggplot2::geom_point(aes(x = end_var), size = 2) +
     ggplot2::labs(title = "Time to Completion") +
     ggplot2::scale_y_discrete(labels = function(x)
-      purrr::map(x, ~paste(strwrap(., width = str_wrap_width), collapse = "\n"))
-    ) +
+      vapply(x,
+             FUN = function(x) paste(strwrap(x, width = str_wrap_width), collapse = "\n"),
+             FUN.VALUE = character(1) ,
+             USE.NAMES = FALSE)
+      ) +
     ggplot2::theme_bw() +
     ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1),
           axis.title.x = element_blank(),
