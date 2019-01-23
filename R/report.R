@@ -81,17 +81,14 @@ report_plan <- function(plan){
   # prep data ----
   milestone_title <- vapply(plan, FUN = function(x) x[["title"]], FUN.VALUE = character(1))
   issue_count <- vapply(plan, FUN = function(x) length(x[["issue"]]), FUN.VALUE = integer(1))
-  issue_title <- unlist(sapply(plan,
-                               FUN = function(x) vapply(x[["issue"]], FUN = function(y) y[["title"]], FUN.VALUE = character(1))
-                               )
-                        )
 
   # write html ----
   milestone_html <- fmt_milestone(milestone_title, 0, issue_count)
-  issue_html <- fmt_issue( issue_title, "open" )
-  issue_html_grp <- stats::aggregate(issue_html,
-                                     by = list( rep(1:length(issue_count), issue_count) ),
-                                     FUN = function(x) paste(x, collapse = " "))$x
+  issue_html_grp <- vapply(plan,
+                           FUN = function(x) paste( vapply(x[["issue"]],
+                                                           FUN = function(y) fmt_issue( y[["title"]], "open" ),
+                                                           FUN.VALUE = character(1)) , collapse = " "),
+                           FUN.VALUE = character(1))
   milestone_issue_html_grp <- paste("<p>",milestone_html, "<ul style = 'list-style: none;'>", issue_html_grp, "</ul>")
 
   # final output ----
