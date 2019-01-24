@@ -167,7 +167,8 @@ get_milestones <- function(ref, ...){
 #'
 #' @examples
 #' \dontrun{
-#' labels <- get_repo_labels(my_repo) %>% parse_repo_labels()
+#' labels_res <- get_repo_labels(my_repo)
+#' labels <- parse_repo_labels(labels_res)
 #' }
 
 get_repo_labels <- function(ref) {
