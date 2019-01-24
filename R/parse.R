@@ -143,17 +143,25 @@ parse_issue_comments <- function(res){
 
   if(is.character(res)){stop("Results object contains no elements to parse.")}
 
-  purrr::map_df(1:length(res),
-                ~tibble::tibble(
-                  url = res[[.]]$html_url,
-                  id = res[[.]]$id,
-                  user_login = res[[.]]$user$login,
-                  created_at = as.Date(substring(res[[.]]$created_at %||% NA, 1, 10)),
-                  updated_at = as.Date(substring(res[[.]]$updated_at %||% NA, 1, 10)),
-                  author_association = res[[.]]$author_association,
-                  body = res[[.]]$body,
-                  number = res[[.]]$number
-                ))
+  mapped_elts <-
+    sapply( res ,
+            FUN = function(x)
+              data.frame(
+                url = fmt_safe_chr( x[["html_url"]] ),
+                id = fmt_safe_int( x[["id"]] ),
+                user_login = fmt_safe_chr( x[["user"]]$login ),
+                created_at = fmt_safe_date( x[["created_at"]] ),
+                updated_at = fmt_safe_date( x[["updated_at"]] ),
+                author_association = fmt_safe_chr( x[["author_association"]] ),
+                body = fmt_safe_chr( x[["body"]] ),
+                number = fmt_safe_chr( x[["number"]] ),
+                stringsAsFactors = FALSE
+              ),
+            simplify = FALSE
+    )
+
+  data <- do.call(rbind, mapped_elts)
+  return(data)
 
 }
 
@@ -191,6 +199,26 @@ parse_milestones <- function(res){
                   due_on = as.Date(substring(res[[.]]$due_on %||% NA,1,10)),
                   closed_at = as.Date(substring(res[[.]]$closed_at %||% NA,1,10))
                 ))
+
+  mapped_elts <-
+    sapply( res ,
+            FUN = function(x)
+              data.frame(
+                url = fmt_safe_chr( x[["url"]] ),
+                id = fmt_safe_int( x[["id"]] ),
+                user_login = fmt_safe_chr( x[["user"]]$login ),
+                created_at = fmt_safe_date( x[["created_at"]] ),
+                updated_at = fmt_safe_date( x[["updated_at"]] ),
+                author_association = fmt_safe_chr( x[["author_association"]] ),
+                body = fmt_safe_chr( x[["body"]] ),
+                number = fmt_safe_chr( x[["number"]] ),
+                stringsAsFactors = FALSE
+              ),
+            simplify = FALSE
+    )
+
+  data <- do.call(rbind, mapped_elts)
+  return(data)
 
 }
 
