@@ -184,34 +184,22 @@ parse_milestones <- function(res){
 
   if(is.character(res)){stop("Results object contains no elements to parse.")}
 
-  purrr::map_df(1:length(res),
-                ~tibble::tibble(
-                  title = res[[.]]$title,
-                  number = res[[.]]$number,
-                  description = res[[.]]$description %||% NA,
-                  creator_login = res[[.]]$creator$login,
-                  n_open_issues = res[[.]]$open_issues,
-                  n_closed_issues = res[[.]]$closed_issues,
-                  state = res[[.]]$state,
-                  url = res[[.]]$html_url,
-                  created_at = as.Date(substring(res[[.]]$created_at %||% NA, 1, 10)),
-                  updated_at = as.Date(substring(res[[.]]$updated_at %||% NA, 1, 10)),
-                  due_on = as.Date(substring(res[[.]]$due_on %||% NA,1,10)),
-                  closed_at = as.Date(substring(res[[.]]$closed_at %||% NA,1,10))
-                ))
-
   mapped_elts <-
     sapply( res ,
             FUN = function(x)
               data.frame(
-                url = fmt_safe_chr( x[["url"]] ),
-                id = fmt_safe_int( x[["id"]] ),
-                user_login = fmt_safe_chr( x[["user"]]$login ),
+                title = fmt_safe_chr( x[["title"]]),
+                number = fmt_safe_chr( x[["number"]] ),
+                description = fmt_safe_chr( x[["description"]] ),
+                creator_login = fmt_safe_chr( x[["creator"]]$login ),
+                n_open_issues = fmt_safe_int( x[["open_issues"]] ),
+                n_closed_issues = fmt_safe_int( x[["closed_issues"]] ),
+                state = fmt_safe_chr( x[["state"]] ),
+                url = fmt_safe_chr( x[["html_url"]] ),
                 created_at = fmt_safe_date( x[["created_at"]] ),
                 updated_at = fmt_safe_date( x[["updated_at"]] ),
-                author_association = fmt_safe_chr( x[["author_association"]] ),
-                body = fmt_safe_chr( x[["body"]] ),
-                number = fmt_safe_chr( x[["number"]] ),
+                closed_at = fmt_safe_date( x[["closed_at"]] ),
+                due_on = fmt_safe_date( x[["due_on"]] ),
                 stringsAsFactors = FALSE
               ),
             simplify = FALSE
