@@ -224,15 +224,22 @@ parse_repo_labels <- function(res){
 
   if(is.character(res)){stop("Results object contains no elements to parse.")}
 
-  purrr::map_df(1:length(res),
-                ~tibble::tibble(
-                  name = res[[.]]$name,
-                  url = res[[.]]$url,
-                  color = res[[.]]$color,
-                  default = res[[.]]$default,
-                  id = res[[.]]$id,
-                  node_id = res[[.]]$node_id
-                ))
+  mapped_elts <-
+    sapply( res ,
+            FUN = function(x)
+              data.frame(
+                name = fmt_safe_chr( x[["name"]]),
+                url = fmt_safe_chr( x[["url"]] ),
+                color = fmt_safe_chr( x[["color"]] ),
+                default = fmt_safe_chr( x[["default"]] ),
+                id = fmt_safe_int( x[["id"]] ),
+                stringsAsFactors = FALSE
+              ),
+            simplify = FALSE
+    )
+
+  data <- do.call(rbind, mapped_elts)
+  return(data)
 
 }
 
