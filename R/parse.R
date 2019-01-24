@@ -1,7 +1,13 @@
+# Define internal helper functions for formatting different datatypes
+fmt_safe_chr <- function(x) {ifelse( is.null(x) , NA_character_, x )}
+fmt_safe_int <- function(x) {ifelse( is.null(x) , NA_integer_, x)}
+fmt_safe_lgl <- function(x) {ifelse( is.null(x), NA, x)}
+fmt_safe_date <- function(x) {ifelse( is.null(x), NA, as.Date( substring(x, 1, 10)))}
+
 #' Parse issues overview from \code{get_issues}
 #'
 #' @param res List returned by corresponding \code{get_} function
-#' @return \code{tibble} datasets with one record / issue
+#' @return data.frame with one record / issue
 #' @export
 #'
 #' @family issues
@@ -13,32 +19,50 @@
 #' issues <- parse_issues(issues_res)
 #' }
 
-parse_issues <- function(res){
+parse_issues <- function( res ) {
 
-  if(is.character(res)){stop("Results object contains no elements to parse.")}
+  mapped_elts <-
+    sapply( res ,
+            FUN = function(x)
+              data.frame( url = fmt_safe_chr( x[["html_url"]] ),
+                          id = fmt_safe_int( x[["id"]] ),
+                          number = fmt_safe_int( x[["number"]] ),
+                          title = fmt_safe_chr( x[["title"]] ),
+                          user_login = fmt_safe_chr( x[["user"]]$login ),
+                          user_id = fmt_safe_int( x[["user"]]$id ),
+                          state = fmt_safe_chr( x[["state"]] ),
+                          locked = fmt_safe_lgl( x[["locked"]] ),
+                          milestone_title = fmt_safe_chr( x[["milestone"]]$title ),
+                          milestone_id = fmt_safe_int( x[["milestone"]]$id ),
+                          milestone_number = fmt_safe_int( x[["milestone"]]$number ),
+                          milestone_state = fmt_safe_chr( x[["milestone"]]$state ),
+                          milestone_created_at = fmt_safe_date( x[["milestone"]]$due_on ),
+                          milestone_closed_at = fmt_safe_date( x[["milestone"]]$due_on ),
+                          milestone_due_on = fmt_safe_date( x[["milestone"]]$due_on ),
+                          n_comments = fmt_safe_int( x[["comments"]] ),
+                          created_at = fmt_safe_date( x[["created_at"]] ),
+                          updated_at = fmt_safe_date( x[["updated_at"]] ),
+                          closed_at = fmt_safe_date( x[["closed_at"]] ),
+                          author_association = fmt_safe_chr( x[["author_association"]] ),
+                          body = fmt_safe_chr( x[["body"]] ),
+                          stringsAsFactors = FALSE
+              ),
+            simplify = FALSE
+    )
 
-  purrr::map_df(1:length(res),
-                ~tibble::tibble(
-                  title = res[[.]]$title,
-                  body = res[[.]]$body %||% NA,
-                  state = res[[.]]$state,
-                  created_at = as.Date(res[[.]]$created_at %>% substring(1,10)),
-                  closed_at = as.Date(substring(res[[.]]$closed_at %||% NA, 1,10)),
-                  user_login = res[[.]]$user$login,
-                  n_comments = res[[.]]$comments,
-                  url = res[[.]]$html_url,
-                  number = res[[.]]$number,
-                  milestone_title = res[[.]]$milestone$title %||% NA,
-                  milestone_id = res[[.]]$milestone$id %||% NA,
-                  milestone_number = res[[.]]$milestone$number %||% NA,
-                  milestone_state = res[[.]]$milestone$state %||% NA,
-                  milestone_created_at = as.Date(substring(res[[.]]$milestone$created_at %||% NA,1,10)),
-                  milestone_closed_at = as.Date(substring(res[[.]]$milestone$closed_at %||% NA,1,10)),
-                  milestone_due_on = as.Date(substring(res[[.]]$milestone$due_on %||% NA,1,10)),
-                  assignee_login = res[[.]]$assignee$login %||% NA,
-                  assignees_login = list(res[[.]]$assignees %>% purrr::map_chr('login')),
-                  labels_name = list(res[[.]]$labels %>% purrr::map_chr('name'))
-                ))
+  # special handling for list columns ----
+  labels_names <- sapply(issues,
+                         FUN = function(y)
+                           vapply(y[["labels"]], FUN = function(x) x$name, FUN.VALUE = character(1) ))
+  assignees_login <- sapply(issues,
+                            FUN = function(y)
+                              vapply(y[["assignees"]], FUN = function(x) x$login, FUN.VALUE = character(1) ))
+
+  data <- do.call(rbind, mapped_elts)
+  data$labels_name <- labels_names
+  data$assignees_login <- assignees_login
+
+  return(data)
 
 }
 
@@ -59,7 +83,7 @@ parse_issues <- function(res){
 #' }
 #'
 #' @inheritParams parse_issues
-#' @return \code{tibble} datasets with one record / issue-event
+#' @return Dataframe with one record / issue-event
 #' @export
 #'
 #' @family issues
@@ -105,7 +129,7 @@ parse_issue_events <- function(res){
 #'
 #' @inheritParams parse_issues
 #' @inherit get_issue_comments examples
-#' @return \code{tibble} datasets with one record / issue-comment
+#' @return Dataframe with one record / issue-comment
 #' @export
 #'
 #' @family issues
@@ -132,7 +156,7 @@ parse_issue_comments <- function(res){
 #' Parse milestones from \code{get_milestones}
 #'
 #' @inheritParams parse_issues
-#' @return `tibble` datasets with one record / milestone
+#' @return Dataframe with one record / milestone
 #' @export
 #'
 #' @family milestones
@@ -169,7 +193,7 @@ parse_milestones <- function(res){
 #' Parse labels from \code{get_repo_labels}
 #'
 #' @inheritParams parse_issues
-#' @return `tibble` datasets with one record / label
+#' @return Dataframe with one record / label
 #' @export
 #'
 #' @family labels
@@ -191,3 +215,4 @@ parse_repo_labels <- function(res){
                 ))
 
 }
+
