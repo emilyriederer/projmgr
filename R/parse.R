@@ -21,6 +21,8 @@ fmt_safe_date <- function(x) {ifelse( is.null(x), NA, as.Date( substring(x, 1, 1
 
 parse_issues <- function( res ) {
 
+  if(is.character(res)){stop("Results object contains no elements to parse.")}
+
   mapped_elts <-
     sapply( res ,
             FUN = function(x)
@@ -100,28 +102,30 @@ parse_issue_events <- function(res){
 
   if(is.character(res)){stop("Results object contains no elements to parse.")}
 
-  purrr::map_df(1:length(res),
-                ~tibble::tibble(
-                  number = res[[.]]$number,
-                  id = res[[.]]$id,
-                  actor_login = res[[.]]$actor$login,
-                  event = res[[.]]$event,
-                  created_at = as.Date(res[[.]]$created_at %>% substring(1,10)),
+  mapped_elts <-
+    sapply( res ,
+            FUN = function(x)
+              data.frame( # guaranteed fields for all events
+                          id = fmt_safe_int( x[["id"]] ),
+                          number = fmt_safe_int( x[["number"]] ),
+                          actor_login = fmt_safe_chr( x[["actor"]]$login ),
+                          event = fmt_safe_chr( x[["event"]] ),
+                          created_at = fmt_safe_date( x[["created_at"]] ),
 
-                  # label events
-                  label_name = res[[.]]$label$name %||% NA,
+                          # possible fields depending on event type
+                          label_name = fmt_safe_chr( x[["label"]]$name ),
+                          milestone_title = fmt_safe_chr( x[["milestone"]]$title ),
+                          assignee_login = fmt_safe_chr( x[["assignee"]]$login ),
+                          assigner_login = fmt_safe_chr( x[["assigner"]]$login ),
+                          rename_from = fmt_safe_chr( x[["rename"]]$from ),
+                          rename_to = fmt_safe_chr( x[["rename"]]$to ),
+                          stringsAsFactors = FALSE
+              ),
+            simplify = FALSE
+    )
 
-                  # milestone events
-                  milestone_title = res[[.]]$milestone$title %||% NA,
-
-                  # assignment events
-                  assignee_login = res[[.]]$assignee$login %||% NA,
-                  assigner_login = res[[.]]$assigner$login %||% NA,
-
-                  # rename events
-                  rename_from = res[[.]]$rename$from %||% NA,
-                  rename_to = res[[.]]$rename$to %||% NA
-                ))
+  data <- do.call(rbind, mapped_elts)
+  return(data)
 
 }
 
