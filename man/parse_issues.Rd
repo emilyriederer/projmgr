@@ -10,7 +10,7 @@ parse_issues(res)
 \item{res}{List returned by corresponding \code{get_} function}
 }
 \value{
-\code{tibble} datasets with one record / issue
+data.frame with one record / issue
 }
 \description{
 Parse issues overview from \code{get_issues}

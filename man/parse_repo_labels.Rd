@@ -10,7 +10,7 @@ parse_repo_labels(res)
 \item{res}{List returned by corresponding \code{get_} function}
 }
 \value{
-`tibble` datasets with one record / label
+Dataframe with one record / label
 }
 \description{
 Parse labels from \code{get_repo_labels}
