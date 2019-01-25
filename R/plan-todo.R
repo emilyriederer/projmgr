@@ -170,8 +170,11 @@ post_plan <- function(ref, plan, distinct = TRUE){
 
 post_todo <- function(ref, todo, distinct = TRUE){
 
-  req <- do.call( function(x) post_issue(ref, x, distinct = distinct), todo)
-  return( unlist(req) )
+  req <- vapply( todo,
+                 FUN = function(y)
+                   do.call( function(...) post_issue(ref, distinct = distinct, ...), y),
+                 FUN.VALUE = character(1) )
+  return( req )
 
 }
 
