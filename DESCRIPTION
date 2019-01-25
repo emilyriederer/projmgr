@@ -20,8 +20,7 @@ Depends:
 Imports:
     gh,
     magrittr,
-    purrr,
-    tibble
+    purrr
 Suggests:
     clipr,
     curl,
