@@ -170,10 +170,8 @@ post_plan <- function(ref, plan, distinct = TRUE){
 
 post_todo <- function(ref, todo, distinct = TRUE){
 
-  # create issues
-  res_issues <- purrr::map(todo, ~purrr::pmap(., ~post_issue(ref, ..., distinct = distinct)))
-
-  return( unlist(res_issues) )
+  req <- do.call( function(x) post_issue(ref, x, distinct = distinct), todo)
+  return( unlist(req) )
 
 }
 
