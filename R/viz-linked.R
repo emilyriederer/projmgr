@@ -44,6 +44,13 @@ viz_linked <- function(g, filepath){
       call. = FALSE)
   }
 
+  if (!requireNamespace("purrr", quietly = TRUE)) {
+    message(
+      paste0("Package \"purrr\" is needed for image conversion.",
+             "Please install \"purrr\" or use the non-linked version."),
+      call. = FALSE)
+  }
+
   # create text-link mapping
   links <- get_text_link_map(g)
 
