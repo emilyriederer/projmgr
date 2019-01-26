@@ -38,7 +38,7 @@ parse_issues <- function( res ) {
                           milestone_id = fmt_safe_int( x[["milestone"]]$id ),
                           milestone_number = fmt_safe_int( x[["milestone"]]$number ),
                           milestone_state = fmt_safe_chr( x[["milestone"]]$state ),
-                          milestone_created_at = fmt_safe_date( x[["milestone"]]$due_on ),
+                          milestone_created_at = fmt_safe_date( x[["milestone"]]$created_at ),
                           milestone_closed_at = fmt_safe_date( x[["milestone"]]$due_on ),
                           milestone_due_on = fmt_safe_date( x[["milestone"]]$due_on ),
                           n_comments = fmt_safe_int( x[["comments"]] ),
