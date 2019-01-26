@@ -35,7 +35,7 @@ post_issue <- function(ref, title, ..., distinct = TRUE){
 
     issue_titles <-
       if(is.list(open_issues)) {
-        vapply(open_issues, FUNCTION = function(x) x[["title"]], FUN.VALUE = character(1))
+        vapply(open_issues, FUN = function(x) x[["title"]], FUN.VALUE = character(1))
       }
     else{""}
 
