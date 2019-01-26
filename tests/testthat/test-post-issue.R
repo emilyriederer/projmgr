@@ -1,6 +1,9 @@
 context("POST ISSUES functions")
 
-skip_if_not(interactive())
+skip_if_not(interactive(), "This set of tests should only be run manually")
+skip_on_os("windows")
+skip_on_os("mac")
+skip_on_os("linux")
 skip_on_cran()
 skip_on_travis()
 skip_on_appveyor()
