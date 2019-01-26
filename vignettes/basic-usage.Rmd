@@ -120,11 +120,18 @@ Results are returned as a list, closely mirror the JSON output from the actual A
 str(dplyr_issues_list[[1]], max.level = 1)
 ```
 
-It's likely you may prefer to work with them as dataframes instead. The `parse_` family of functions converts "raw" list output from `get_` into tibbles.
+It's likely you may prefer to work with them as dataframes instead. The `parse_` family of functions converts "raw" list output from `get_` into a dataframe. 
 
 ```{r eval = TRUE}
 dplyr_issues <- parse_issues(dplyr_issues_list)
 head(dplyr_issues)
+```
+
+Columns that can contain multiple values (e.g. multiple label names or assignees) appear as lists.
+
+```{r eval = TRUE}
+head( dplyr_issues[,c("labels_name", "assignees_login")] )
+dplyr_issues$assignees_login
 ```
 
 In summary, the general process is calling a `get_` function followed by a `parse_` function. We will get milestones for a second example.
@@ -140,7 +147,7 @@ dplyr_milestones <-
 
 The `report_` function family offers an alternative to visualizations. These functions generate HTML for aethetic output in RMarkdown reports. Output is automatically tagged so `knitr` knows to interpret it as HTML, so it is not necessary to manually add the `results = 'asis'` chunk option. (Don't worry if you don't know what this means. You don't need to do anything!) 
 
-```{r}
+```{r eval = TRUE}
 report_progress(dplyr_issues)
 ```
 
