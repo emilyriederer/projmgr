@@ -134,6 +134,16 @@ head( dplyr_issues[,c("labels_name", "assignees_login")] )
 dplyr_issues$assignees_login
 ```
 
+Dataframes can be "expanded" to the issue-assignee or issue-label granulariy using the `tidyr::unnest()` function. For example, the following code expands the dataframe to one row per issue-assignee. For example, after running that command, you can see the first two rows refer to the same assign but different assignees.
+
+```{r}
+dplyr_issues %>%
+  tidyr::unnest(assignees_login) %>%
+  dplyr::select(number, title, assignees_login) %>%
+  head()
+```
+
+
 In summary, the general process is calling a `get_` function followed by a `parse_` function. We will get milestones for a second example.
 
 ```{r}
