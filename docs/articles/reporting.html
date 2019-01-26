@@ -187,7 +187,112 @@
 <div id="taskboards" class="section level2">
 <h2 class="hasAnchor">
 <a href="#taskboards" class="anchor"></a>Taskboards</h2>
-<p>Using HTML and CSS grid, the <code><a href="../reference/report_taskboard.html">report_taskboard()</a></code> function also offers aesethetic and interactive views of your work. This is shown in the Visualization vignette, as it is analogous to <code><a href="../reference/viz_taskboard.html">viz_taskboard()</a></code>, which the advantage of better web responsiveness and scaling.</p>
+<p>Using HTML and CSS grid, the <code><a href="../reference/report_taskboard.html">report_taskboard()</a></code> function also offers aesethetic and interactive views of your work.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/report_taskboard.html">report_taskboard</a></span>(pkg_issues, <span class="dt">in_progress_when =</span> <span class="kw"><a href="../reference/taskboard_helpers.html">is_assigned_to</a></span>(<span class="st">"emilyriederer"</span>))</code></pre></div>
+<div class="zwnmvrfxzx">
+<style>.taskboard{display: grid;grid-gap: 1%;grid-template-columns: 1fr 1fr 1fr;margin-bottom: 50px;}.head{background-color: #a9a9a9;border: 1px solid #d3d3d3;text-align: center;font-weight: strong;}.task{text-align: center;padding: 2%;margin: 2%;border: 1px solid #d3d3d3;box-shadow: 2px 2px 5px grey;transition-duration:0.5s;}.zwnmvrfxzx .ns{background-color:#f0e442;}.zwnmvrfxzx .ip{background-color:#56b4e9;}.zwnmvrfxzx .dn{background-color:#009e73;}div.taskboard a, div.taskboard a:visited{color: black;text-decoration: none;}div.taskboard a:hover{color: black;text-decoration: underline;}div.taskboard a:active{color: white;}</style>
+<div class="taskboard">
+<div class="head">
+Not Started
+</div>
+<div class="head">
+In Progress
+</div>
+<div class="head">
+Done
+</div>
+<div class="task ns">
+Extend report() support to LaTeX
+</div>
+<div class="task ip">
+Add get for events data
+</div>
+<div class="task dn">
+Add parse for events data
+</div>
+<div class="task ns">
+API mocking for testing
+</div>
+<div class="task ip">
+Validate YAML read from read fxs
+</div>
+<div class="task dn">
+Add browse and help functions
+</div>
+<div class="task ns">
+Write vignette to demo visualization
+</div>
+<div>
+
+</div>
+<div class="task dn">
+Add metadata function examples to vignettes
+</div>
+<div class="task ns">
+Add JSON support for plan / todo
+</div>
+<div>
+
+</div>
+<div>
+
+</div>
+</div>
+</div>
+<p>Users specify what logic to use for identifying “in progress” items by passing a function factory to the <code>in_progress_when</code> parameter. The above example uses the <code><a href="../reference/taskboard_helpers.html">is_labeled_with()</a></code> option. Other options include:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/ls">ls</a></span>(<span class="st">'package:projmgr'</span>)[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/grep">grep</a></span>(<span class="st">"^is_*"</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/ls">ls</a></span>(<span class="st">'package:projmgr'</span>))]
+<span class="co">#&gt; [1] "is_assigned"       "is_assigned_to"    "is_created_before"</span>
+<span class="co">#&gt; [4] "is_due"            "is_due_before"     "is_in_a_milestone"</span>
+<span class="co">#&gt; [7] "is_in_milestone"   "is_labeled_with"   "is_part_closed"</span></code></pre></div>
+<p>See <code><a href="../reference/taskboard_helpers.html">?taskboard_helpers</a></code> for more details.</p>
+<p>Optional parameters of this function are <code>include_link</code> (whether to link back to the relevant GitHub issue), <code>hover</code> (for slightly enlarging a task on hover), and <code>colors</code> (to provide a character vector of colors to override the defaults.)</p>
+<p>As a second example, suppose we instead classify issues as in progress once they have been put in a milestone.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/report_taskboard.html">report_taskboard</a></span>(pkg_issues, 
+                 <span class="dt">in_progress_when =</span> <span class="kw"><a href="../reference/taskboard_helpers.html">is_in_a_milestone</a></span>(),
+                 <span class="dt">include_link =</span> <span class="ot">FALSE</span>,
+                 <span class="dt">hover =</span> <span class="ot">TRUE</span>,
+                 <span class="dt">colors =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">'#ff0000'</span>, <span class="st">'#00ff00'</span>, <span class="st">'#0000ff'</span>))</code></pre></div>
+<div class="kzwnosvyfc">
+<style>.taskboard{display: grid;grid-gap: 1%;grid-template-columns: 1fr 1fr 1fr;margin-bottom: 50px;}.head{background-color: #a9a9a9;border: 1px solid #d3d3d3;text-align: center;font-weight: strong;}.task{text-align: center;padding: 2%;margin: 2%;border: 1px solid #d3d3d3;box-shadow: 2px 2px 5px grey;transition-duration:0.5s;}.kzwnosvyfc .task:hover{margin: 0%;padding: 4%;}.kzwnosvyfc .ns{background-color:#ff0000;}.kzwnosvyfc .ip{background-color:#00ff00;}.kzwnosvyfc .dn{background-color:#0000ff;}div.taskboard a, div.taskboard a:visited{color: black;text-decoration: none;}div.taskboard a:hover{color: black;text-decoration: underline;}div.taskboard a:active{color: white;}</style>
+<div class="taskboard">
+<div class="head">
+Not Started
+</div>
+<div class="head">
+In Progress
+</div>
+<div class="head">
+Done
+</div>
+<div class="task ns">
+Extend report() support to LaTeX
+</div>
+<div class="task ip">
+Add get for events data
+</div>
+<div class="task dn">
+Add parse for events data
+</div>
+<div class="task ns">
+API mocking for testing
+</div>
+<div class="task ip">
+Validate YAML read from read fxs
+</div>
+<div class="task dn">
+Add browse and help functions
+</div>
+<div class="task ns">
+Write vignette to demo visualization
+</div>
+<div class="task ip">
+Add JSON support for plan / todo
+</div>
+<div class="task dn">
+Add metadata function examples to vignettes
+</div>
+</div>
+</div>
 </div>
 <div id="discussions" class="section level2">
 <h2 class="hasAnchor">
