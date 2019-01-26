@@ -123,29 +123,28 @@ post_plan <- function(ref, plan, distinct = TRUE){
 
   ## extract milestone-related variables
   milestones <- lapply(plan,
-                       FUN = function(x) x[intersect( names(x), help_post_milestone() )])
+                       FUN = function(x) x[intersect( names(x), c("title", help_post_milestone()) )])
   req_milestones <- lapply(milestones,
                        FUN = function(x) do.call( function(...) post_milestone(ref, ...), x))
 
   # wrangle list elements ----
 
   ## convert key milestone info to issue-length vectors
-  issues_per_milestone <- vapply(ref, FUN = length, FUN.VALUE = integer(1), USE.NAMES = FALSE )
-  milestone_num <- vapply( req_milestones, FUN = function(x) x[["number"]], FUN.VALUE = integer(1) )
-  milestone_title <- vapply(milestones, FUN = function(x) x[["title"]], FUN.VALUE = characer(1))
+  issues_per_milestone <- vapply(plan, FUN = function(x) length(x[["issue"]]), FUN.VALUE = integer(1), USE.NAMES = FALSE )
+  milestone_num <- unlist( req_milestones )
+  milestone_title <- vapply(milestones, FUN = function(x) x[["title"]], FUN.VALUE = character(1))
   milestone_num_rep <- rep(milestone_num, issues_per_milestone)
   milestone_title_rep <- rep(milestone_title, issues_per_milestone)
 
   ## wrangle milestone nums into issue data
-  issues <- unlist( sapply(z, FUN = function(x) x[["issue"]]) )
+  issues <- unlist( sapply(plan, FUN = function(x) x[["issue"]]), recursive = FALSE )
   issues <- mapply( FUN = function(x,y){
                             x[["milestone"]] <- y
                             return(x)
-                          }, issues, milestone_ids)
+                          }, issues, milestone_num_rep)
 
   # create issues ----
-  req_issues <- lapply(issues,
-                       FUN = function(x) do.call(function(...) post_issue(ref, distinct = distinct, ...), x))
+  req_issues <- post_todo(ref, issues)
 
   # return dataframe of identifiers ----
   results <-
@@ -155,6 +154,8 @@ post_plan <- function(ref, plan, distinct = TRUE){
       issue_number = req_issues,
       issue_title = vapply( issues, FUN = function(x) x[["title"]], FUN.VALUE = character(1) )
     )
+
+  return(results)
 
 
 }
@@ -178,10 +179,8 @@ post_plan <- function(ref, plan, distinct = TRUE){
 
 post_todo <- function(ref, todo, distinct = TRUE){
 
-  req <- vapply( todo,
-                 FUN = function(y)
-                   do.call( function(...) post_issue(ref, distinct = distinct, ...), y),
-                 FUN.VALUE = character(1) )
+  post_local <- function(...) {post_issue(ref, ..., distinct = distinct)}
+  req <- vapply( todo, FUN = function(x) do.call( post_local, x), FUN.VALUE = integer(1) )
   return( req )
 
 }
