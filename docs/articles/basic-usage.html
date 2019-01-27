@@ -172,23 +172,127 @@
 <span class="co">#&gt;  $ closed_at         : chr "2017-02-02T21:10:56Z"</span>
 <span class="co">#&gt;  $ author_association: chr "NONE"</span>
 <span class="co">#&gt;  $ body              : chr "Right now, you're limited in column selection when using select() and magrittr.\n\nConsider the situation where"| __truncated__</span></code></pre></div>
-<p>It’s likely you may prefer to work with them as dataframes instead. The <code>parse_</code> family of functions converts “raw” list output from <code>get_</code> into tibbles.</p>
+<p>It’s likely you may prefer to work with them as dataframes instead. The <code>parse_</code> family of functions converts “raw” list output from <code>get_</code> into a dataframe.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dplyr_issues &lt;-<span class="st"> </span><span class="kw"><a href="../reference/parse_issues.html">parse_issues</a></span>(dplyr_issues_list)
 <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(dplyr_issues)
-<span class="co">#&gt; # A tibble: 6 x 19</span>
-<span class="co">#&gt;   title  body      state created_at closed_at  user_login n_comments url  </span>
-<span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt; &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;</span>
-<span class="co">#&gt; 1 Pass ~ "Right n~ clos~ 2015-06-19 2017-02-02 msjgriffi~          1 http~</span>
-<span class="co">#&gt; 2 "hybr~ "It woul~ clos~ 2015-05-30 2017-02-02 matthieug~          4 http~</span>
-<span class="co">#&gt; 3 Shoul~ "It woul~ clos~ 2015-03-25 2017-03-24 rpruim              7 http~</span>
-<span class="co">#&gt; 4 Anton~ "It woul~ clos~ 2014-11-02 2017-02-02 matthieug~          3 http~</span>
-<span class="co">#&gt; 5 equiv~ "pig has~ clos~ 2014-08-18 2017-02-02 jhofman            10 http~</span>
-<span class="co">#&gt; 6 SQL e~ "When fi~ clos~ 2014-07-28 2017-02-14 vzemlys            16 http~</span>
-<span class="co">#&gt; # ... with 11 more variables: number &lt;int&gt;, milestone_title &lt;chr&gt;,</span>
-<span class="co">#&gt; #   milestone_id &lt;int&gt;, milestone_number &lt;int&gt;, milestone_state &lt;chr&gt;,</span>
-<span class="co">#&gt; #   milestone_created_at &lt;date&gt;, milestone_closed_at &lt;date&gt;,</span>
-<span class="co">#&gt; #   milestone_due_on &lt;date&gt;, assignee_login &lt;chr&gt;, assignees_login &lt;list&gt;,</span>
-<span class="co">#&gt; #   labels_name &lt;list&gt;</span></code></pre></div>
+<span class="co">#&gt;                                              url       id number</span>
+<span class="co">#&gt; 1 https://github.com/tidyverse/dplyr/issues/1229 89591755   1229</span>
+<span class="co">#&gt; 2 https://github.com/tidyverse/dplyr/issues/1183 82642129   1183</span>
+<span class="co">#&gt; 3 https://github.com/tidyverse/dplyr/issues/1039 64353442   1039</span>
+<span class="co">#&gt; 4  https://github.com/tidyverse/dplyr/issues/741 47540964    741</span>
+<span class="co">#&gt; 5  https://github.com/tidyverse/dplyr/issues/549 40514628    549</span>
+<span class="co">#&gt; 6  https://github.com/tidyverse/dplyr/issues/511 38883873    511</span>
+<span class="co">#&gt;                                                                    title</span>
+<span class="co">#&gt; 1                                      Pass custom functions to select()</span>
+<span class="co">#&gt; 2                                           hybrid handler for quantile </span>
+<span class="co">#&gt; 3                      Should dplyr commands gobble empty last argument?</span>
+<span class="co">#&gt; 4                                                      Antonym to filter</span>
+<span class="co">#&gt; 5                                         equivalent of pig's ILLUSTRATE</span>
+<span class="co">#&gt; 6 SQL error, when the right hand side of %in% is of length one in filter</span>
+<span class="co">#&gt;      user_login user_id  state locked milestone_title milestone_id</span>
+<span class="co">#&gt; 1  msjgriffiths 1093821 closed   TRUE         bluesky       491295</span>
+<span class="co">#&gt; 2 matthieugomez 6223837 closed   TRUE         bluesky       491295</span>
+<span class="co">#&gt; 3        rpruim  722231 closed   TRUE         bluesky       491295</span>
+<span class="co">#&gt; 4 matthieugomez 6223837 closed   TRUE         bluesky       491295</span>
+<span class="co">#&gt; 5       jhofman   79563 closed   TRUE         bluesky       491295</span>
+<span class="co">#&gt; 6       vzemlys  320871 closed   TRUE         bluesky       491295</span>
+<span class="co">#&gt;   milestone_number milestone_state milestone_created_at</span>
+<span class="co">#&gt; 1                1            open           2013-11-20</span>
+<span class="co">#&gt; 2                1            open           2013-11-20</span>
+<span class="co">#&gt; 3                1            open           2013-11-20</span>
+<span class="co">#&gt; 4                1            open           2013-11-20</span>
+<span class="co">#&gt; 5                1            open           2013-11-20</span>
+<span class="co">#&gt; 6                1            open           2013-11-20</span>
+<span class="co">#&gt;   milestone_closed_at milestone_due_on n_comments created_at updated_at</span>
+<span class="co">#&gt; 1                &lt;NA&gt;             &lt;NA&gt;          1 2015-06-19 2018-06-08</span>
+<span class="co">#&gt; 2                &lt;NA&gt;             &lt;NA&gt;          4 2015-05-30 2018-06-08</span>
+<span class="co">#&gt; 3                &lt;NA&gt;             &lt;NA&gt;          7 2015-03-25 2018-06-08</span>
+<span class="co">#&gt; 4                &lt;NA&gt;             &lt;NA&gt;          3 2014-11-02 2018-06-08</span>
+<span class="co">#&gt; 5                &lt;NA&gt;             &lt;NA&gt;         10 2014-08-18 2018-06-08</span>
+<span class="co">#&gt; 6                &lt;NA&gt;             &lt;NA&gt;         16 2014-07-28 2018-06-08</span>
+<span class="co">#&gt;    closed_at author_association</span>
+<span class="co">#&gt; 1 2017-02-02               NONE</span>
+<span class="co">#&gt; 2 2017-02-02               NONE</span>
+<span class="co">#&gt; 3 2017-03-24               NONE</span>
+<span class="co">#&gt; 4 2017-02-02               NONE</span>
+<span class="co">#&gt; 5 2017-02-02               NONE</span>
+<span class="co">#&gt; 6 2017-02-14               NONE</span>
+<span class="co">#&gt;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 body</span>
+<span class="co">#&gt; 1                                                                                                                                                                                                                                                                                                                                                             Right now, you're limited in column selection when using select() and magrittr.\n\nConsider the situation where you have a table, and you want to select certain columns at an intermediate point in a transformation pipeline, but don't want to (i) use fixed column indexes and (ii) don't want to save out an intermediary variable and identify column names separately.\n\nIt would make sense to be able to define a custom function in the same format as `everything()` or `one_of()`, and have `select()` and `gather()` and other functions use a custom function for selection variables.\n\nIn principle the function you take in a list of column names (e.g. `names(data)`) and then output a list of integer positions (e.g. `c(1, 2, 7)`. \n\nExample usage:\n\n``` r\n\n# Pass in column that expects the first parameter to be a list of column names.\ndata %&gt;% gather(key, value, function(vars) {\n    vars[-grep("Drop", vars, fixed = TRUE)]\n})\n\n# Define a function that expect the first parameter to be column names, second to be matches.\nnot_contains &lt;- function(vars, match){\n    vars[-grep(match, vars, fixed = TRUE)]\n}\ndata %&gt;% select(not_contains("avoid"))\n```\n\nLess ideally, allow custom functions to be registered as [part of `select_funs`](https://github.com/hadley/dplyr/blob/master/R/select-vars.R#L67), e.g. something like:\n\n``` r\nnot_contains &lt;- function(vars, match){\n    vars[-grep(match, vars, fixed = TRUE)]\n}\n\ndplyr::register_select_funs(not_contains)\n\ndata %&gt;% select(not_contains("avoid"))\n```\n</span>
+<span class="co">#&gt; 2                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         It would be great to have an hybrid hander for quantile. For now it is orders of magnitude slower than mean:\n\n``` R\ndf &lt;- data_frame(\n         id =  sample(1e5, 1e6, TRUE),                      \n         v =  sample(5, 1e6, TRUE)                        \n    )\ndf1 &lt;- df %&gt;% group_by(id)\nsystem.time(summarize(df1,  mean(v)))\n# user  system elapsed \n#  0.041   0.001   0.056 \nsystem.time(summarize(df1,  quantile(v, 0.50, type = 1)))\n#   user  system elapsed \n#15.080   0.060  15.157 \n```\n\nSince quantile has so many options, maybe a function called `qtile` which implements only one kind (the kind used for `ntile`).\n</span>
+<span class="co">#&gt; 3                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       It would be nice to allow a trailing comma in commands like the example below.  That would make it easier to rearrange the order or to comment out lines without needing to figure out whether the commas need adjusting.\n\n```\ndiamonds %&gt;%\n  group_by(color, clarity) %&gt;%\n  summarise(\n    depth = mean(depth),\n    price = mean(price),\n    carat = mean(carat),  #  &lt;-- trailing comma here currently causes errors\n  )\n```\n\nI'm imaging a function that could be called at the top of a function definition that would gobble this empty argument.  Or perhaps a wrapper function a la `Vectorize()` that could be used to convert any function into a function with this behavior.  Seems like this could be useful for many functions both within `dplyr` and elsewhere.\n</span>
+<span class="co">#&gt; 4                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    It would be useful to have a function, say `discard`, that discards rows where the condition evaluates to TRUE. This function would be different from `filter(!condition)` when condition evaluates to NA. Example below\n\n``` R\nx &lt;- data.frame(v1 = c(1, 2, NA))\n#&gt;  v1\n#&gt;1  1\n#&gt;2  2\n#&gt;3 NA\nfilter(x, !(v1 == 1))\n#&gt;  v1\n#&gt;1  2\ndiscard(x, v1 == 1)\n#&gt;  v1\n#&gt;1  2\n#&gt;2 NA\n```\n</span>
+<span class="co">#&gt; 5                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   pig has a great command called ILLUSTRATE that demonstrates how a sample of data will be transformed through a series of commands. it's very useful for debugging, and a great educational tool to generate example data transformations.\n\nneedless to say, it'd be awesome if dplyr had a similar function.\n\nmore info here:\n\nhttp://pig.apache.org/docs/r0.7.0/piglatin_ref2.html#ILLUSTRATE\nhttp://wiki.apache.org/pig/PigIllustrate\n</span>
+<span class="co">#&gt; 6 When filtering the table from the database the error is produced if `%in%` is used and the right hand side fo it is of length one:\n\n```\nlibrary(dplyr)\nlibrary(DBI)\nlibrary(RSQLite)\nlibrary(RPostgreSQL)\nlibrary(RMySQL)\nlibrary(magrittr)\n\ndt &lt;- expand.grid(Year=as.integer(1990:2014),Product=LETTERS[1:8],Country=paste0(LETTERS,"I")) %&gt;% select(Product,Country,Year)\ndt$value &lt;- rnorm(nrow(dt))\n\ndt &lt;- dt %&gt;% group_by(Product) %&gt;% mutate(value=value+as.numeric(Product)/10)\ndt &lt;- dt %&gt;% group_by(Country) %&gt;% mutate(value=value+as.numeric(Country)/10)\ndriver = dbDriver("SQLite")\ncon = dbConnect(driver, dbname = "test.db")\ndbWriteTable(con, c("dummy_test"), value=dt %&gt;% data.frame,overwrite=TRUE,row.names=FALSE)\ndbDisconnect(con)\n\nmy_db &lt;- src_sqlite("test.db")\nprint(my_db)\ndbdt &lt;- tbl(my_db,"dummy_test")\n\n##test1\ndbdt %&gt;% filter(Product %in% "A" &amp; Country %in% "AI" &amp; Year %in% 1990 )\n##test2\ndbdt %&gt;% filter(Product == "A" &amp; Country == "AI" &amp; Year == 1990 )\n##test3\ndbdt %&gt;% filter(Product %in% c("A", "B") &amp; Country %in% c("AI", "AJ") &amp; Year %in% c(1990, 1991) )\n\n\n```\n\nThe `test1` produces error, while the `test2` and `test3` pass without the problem. In R `test1` and `test2` should produce identical results. The same error is given with PostgreSQL and MySQL databases. Here is my sessionInfo:\n\n```\n&gt; sessionInfo()\nR version 3.1.1 (2014-07-10)\nPlatform: x86_64-apple-darwin13.1.0 (64-bit)\n\nlocale:\n[1] fr_FR.UTF-8/fr_FR.UTF-8/fr_FR.UTF-8/C/fr_FR.UTF-8/C\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base     \n\nother attached packages:\n[1] magrittr_1.0.1  RPostgreSQL_0.4 RSQLite_0.11.4  dplyr_0.2      \n[5] RMySQL_0.9-3    DBI_0.2-7      \n\nloaded via a namespace (and not attached):\n[1] assertthat_0.1 compiler_3.1.1 parallel_3.1.1 Rcpp_0.11.2    tools_3.1.1   \n```\n</span>
+<span class="co">#&gt;   labels_name assignees_login</span>
+<span class="co">#&gt; 1     feature                </span>
+<span class="co">#&gt; 2                            </span>
+<span class="co">#&gt; 3     feature hadley, lionel-</span>
+<span class="co">#&gt; 4                            </span>
+<span class="co">#&gt; 5     feature          hadley</span>
+<span class="co">#&gt; 6  bug :bomb:          hadley</span></code></pre></div>
+<p>Columns that can contain multiple values (e.g. multiple label names or assignees) appear as lists.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>( dplyr_issues[,<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"labels_name"</span>, <span class="st">"assignees_login"</span>)] )
+<span class="co">#&gt;   labels_name assignees_login</span>
+<span class="co">#&gt; 1     feature                </span>
+<span class="co">#&gt; 2                            </span>
+<span class="co">#&gt; 3     feature hadley, lionel-</span>
+<span class="co">#&gt; 4                            </span>
+<span class="co">#&gt; 5     feature          hadley</span>
+<span class="co">#&gt; 6  bug :bomb:          hadley</span>
+dplyr_issues<span class="op">$</span>assignees_login
+<span class="co">#&gt; [[1]]</span>
+<span class="co">#&gt; character(0)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[2]]</span>
+<span class="co">#&gt; character(0)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[3]]</span>
+<span class="co">#&gt; [1] "hadley"  "lionel-"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[4]]</span>
+<span class="co">#&gt; character(0)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[5]]</span>
+<span class="co">#&gt; [1] "hadley"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[6]]</span>
+<span class="co">#&gt; [1] "hadley"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[7]]</span>
+<span class="co">#&gt; [1] "hadley"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[8]]</span>
+<span class="co">#&gt; [1] "hadley"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[9]]</span>
+<span class="co">#&gt; character(0)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[10]]</span>
+<span class="co">#&gt; character(0)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[11]]</span>
+<span class="co">#&gt; character(0)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[12]]</span>
+<span class="co">#&gt; [1] "hadley"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[13]]</span>
+<span class="co">#&gt; character(0)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[14]]</span>
+<span class="co">#&gt; character(0)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[15]]</span>
+<span class="co">#&gt; character(0)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[16]]</span>
+<span class="co">#&gt; character(0)</span></code></pre></div>
+<p>Dataframes can be “expanded” to the issue-assignee or issue-label granulariy using the <code><a href="https://tidyr.tidyverse.org/reference/unnest.html">tidyr::unnest()</a></code> function. For example, the following code expands the dataframe to one row per issue-assignee. For example, after running that command, you can see the first two rows refer to the same assign but different assignees.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dplyr_issues <span class="op">%&gt;%</span>
+<span class="st">  </span>tidyr<span class="op">::</span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/unnest.html">unnest</a></span>(assignees_login) <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(number, title, assignees_login) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>()</code></pre></div>
 <p>In summary, the general process is calling a <code>get_</code> function followed by a <code>parse_</code> function. We will get milestones for a second example.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dplyr_milestones &lt;-
 <span class="st">  </span><span class="kw"><a href="../reference/get_milestones.html">get_milestones</a></span>(dplyr, <span class="dt">state =</span> <span class="st">'all'</span>) <span class="op">%&gt;%</span>
@@ -199,6 +303,59 @@
 <a href="#reporting-on-issue-status" class="anchor"></a>Reporting On Issue Status</h2>
 <p>The <code>report_</code> function family offers an alternative to visualizations. These functions generate HTML for aethetic output in RMarkdown reports. Output is automatically tagged so <code>knitr</code> knows to interpret it as HTML, so it is not necessary to manually add the <code>results = 'asis'</code> chunk option. (Don’t worry if you don’t know what this means. You don’t need to do anything!)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/report_progress.html">report_progress</a></span>(dplyr_issues)</code></pre></div>
+<p></p>
+<strong> bluesky </strong> <em> ( 100 % Complete - 16 / 16 Issues) </em>
+<ul style="list-style: none;">
+<li>
+☑ Pass custom functions to select()
+</li>
+<li>
+☑ hybrid handler for quantile
+</li>
+<li>
+☑ Should dplyr commands gobble empty last argument?
+</li>
+<li>
+☑ Antonym to filter
+</li>
+<li>
+☑ equivalent of pig’s ILLUSTRATE
+</li>
+<li>
+☑ SQL error, when the right hand side of %in% is of length one in filter
+</li>
+<li>
+☑ Granular class
+</li>
+<li>
+☑ Think about how to incorporate matrixUtils with tbl_cube
+</li>
+<li>
+☑ Rolling join
+</li>
+<li>
+☑ take advantage of chaining
+</li>
+<li>
+☑ parallel execution
+</li>
+<li>
+☑ Need ability to register custom sql functions?
+</li>
+<li>
+☑ Big data bottlenecks
+</li>
+<li>
+☑ Should tbl_dt be lazy?
+</li>
+<li>
+☑ Implement ganalytics backend
+</li>
+<li>
+☑ MonetDB backend
+</li>
+</ul>
+<p></p>
 </div>
 <div id="posting-issues" class="section level2">
 <h2 class="hasAnchor">

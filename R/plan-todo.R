@@ -119,35 +119,44 @@ read_todo <- function(input){
 
 post_plan <- function(ref, plan, distinct = TRUE){
 
-  # create milestones
-  milestone_num_dist <-
-    purrr::map(plan, ~purrr::list_modify(., "issue" = NULL)) %>%
-    purrr::map(., ~purrr::pmap(., ~post_milestone(ref, ...))) %>%
-    unlist()
+  # create milestones ----
 
-  # extract issue info from plan and append milestone identifiers
-  milestone_num <-
-    purrr::map(plan, "issue") %>%
-    purrr::map(length) %>%
-    purrr::map2(milestone_num_dist, ~rep(.y, .x)) %>%
-    unlist() %>%
-    as.integer()
+  ## extract milestone-related variables
+  milestones <- lapply(plan,
+                       FUN = function(x) x[intersect( names(x), c("title", help_post_milestone()) )])
+  req_milestones <- lapply(milestones,
+                       FUN = function(x) do.call( function(...) post_milestone(ref, ...), x))
 
-  # create issues
-  issues_prep <-
-    purrr::map(plan, "issue") %>%
-    purrr::flatten() %>%
-    purrr::map2(milestone_num, ~c(.x, milestone = .y))
+  # wrangle list elements ----
 
-  # post issues
-  issue_num <- purrr::map_chr(issues_prep,
-                                ~do.call(function(...) post_issue(ref, ..., distinct = distinct), .x))
+  ## convert key milestone info to issue-length vectors
+  issues_per_milestone <- vapply(plan, FUN = function(x) length(x[["issue"]]), FUN.VALUE = integer(1), USE.NAMES = FALSE )
+  milestone_num <- unlist( req_milestones )
+  milestone_title <- vapply(milestones, FUN = function(x) x[["title"]], FUN.VALUE = character(1))
+  milestone_num_rep <- rep(milestone_num, issues_per_milestone)
+  milestone_title_rep <- rep(milestone_title, issues_per_milestone)
 
-  return(
-    data.frame(milestone_number = purrr::map_int(issues_prep, "milestone"),
-                      issue_number = issue_num,
-                      issue_title = purrr::map_chr(issues_prep, "title"))
+  ## wrangle milestone nums into issue data
+  issues <- unlist( sapply(plan, FUN = function(x) x[["issue"]]), recursive = FALSE )
+  issues <- mapply( FUN = function(x,y){
+                            x[["milestone"]] <- y
+                            return(x)
+                          }, issues, milestone_num_rep)
+
+  # create issues ----
+  req_issues <- post_todo(ref, issues)
+
+  # return dataframe of identifiers ----
+  results <-
+    data.frame(
+      milestone_number = milestone_num_rep,
+      milestone_title = milestone_title_rep,
+      issue_number = req_issues,
+      issue_title = vapply( issues, FUN = function(x) x[["title"]], FUN.VALUE = character(1) )
     )
+
+  return(results)
+
 
 }
 
@@ -170,10 +179,9 @@ post_plan <- function(ref, plan, distinct = TRUE){
 
 post_todo <- function(ref, todo, distinct = TRUE){
 
-  # create issues
-  res_issues <- purrr::map(todo, ~purrr::pmap(., ~post_issue(ref, ..., distinct = distinct)))
-
-  return( unlist(res_issues) )
+  post_local <- function(...) {post_issue(ref, ..., distinct = distinct)}
+  req <- vapply( todo, FUN = function(x) do.call( post_local, x), FUN.VALUE = integer(1) )
+  return( req )
 
 }
 

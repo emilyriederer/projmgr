@@ -4,9 +4,11 @@
 ^CREDITS\.md$
 ^projmgr\.Rproj$
 ^\.Rproj\.user$
-^pkgdown
-^docs
+^pkgdown$
+^docs$
+^data-raw$
 ^vignettes
 ^R\draft
 ^TODO\.md$
 ^\.travis\.yml$
+

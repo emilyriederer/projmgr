@@ -10,7 +10,7 @@ parse_issue_comments(res)
 \item{res}{List returned by corresponding \code{get_} function}
 }
 \value{
-\code{tibble} datasets with one record / issue-comment
+Dataframe with one record / issue-comment
 }
 \description{
 Parse issue comments from \code{get_issues_comments}

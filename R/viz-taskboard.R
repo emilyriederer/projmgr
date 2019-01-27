@@ -47,11 +47,19 @@ viz_taskboard <- function(data, in_progress_when, str_wrap_width = 30, text_size
 
   # create helper aesthetics for size, position, text fmt ----
   data$board_pos <- stats::ave(data$number, data$board_group, FUN = seq_along)
-  text_components <-
-    purrr::map2(data$number, data$title,
-                ~strwrap(paste0("#", .x, ": ", .y), width = str_wrap_width))
-  data$taskboard_text <- purrr::map_chr(text_components, ~paste(., collapse = "\n"))
-  height <- max( purrr::map_int(text_components, length) ) * 2
+  text_components <- mapply(
+    FUN = function(x,y) strwrap(paste0("#", x, ": ", y), width = str_wrap_width),
+    x = data$number, y = data$title,
+    USE.NAMES = FALSE,
+    SIMPLIFY = FALSE
+  )
+  data$taskboard_text <- vapply(
+    text_components,
+    FUN = function(x) paste(x, collapse = "\n"),
+    FUN.VALUE = character(1),
+    USE.NAMES = FALSE
+  )
+  height <- max( vapply( text_components, FUN = length, FUN.VALUE = integer(1) )) * 2
 
   # create ggplot object of task board ----
   aes <- ggplot2::aes

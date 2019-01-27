@@ -19,15 +19,14 @@ Depends:
     R (>= 3.1.2)
 Imports:
     gh,
-    magrittr,
-    purrr,
-    tibble
+    magrittr
 Suggests:
     clipr,
     curl,
     dplyr,
     ggplot2,
     knitr,
+    purrr,
     reprex,
     rmarkdown,
     testthat,

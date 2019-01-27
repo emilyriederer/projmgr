@@ -10,7 +10,7 @@ parse_milestones(res)
 \item{res}{List returned by corresponding \code{get_} function}
 }
 \value{
-`tibble` datasets with one record / milestone
+Dataframe with one record / milestone
 }
 \description{
 Parse milestones from \code{get_milestones}

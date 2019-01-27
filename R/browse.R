@@ -125,23 +125,9 @@ browse_docs <- function(
   }
 
   url_prefix <- "https://developer.github.com/v3"
+  url_suffix <- browse_data$url_suffix[browse_data$action == action & browse_data$object == object]
 
-  # url mapping
-  urls <- tibble::tribble(
-    ~action, ~object, ~url_suffix,
-    'get', 'milestone', "issues/milestones/#list-milestones-for-a-repository",
-    'get', 'issue', "issues/#list-issues-for-a-repository",
-    'get', 'issue event', "issues/events/#list-events-for-an-issue",
-    'get', 'repo labels', 'issues/labels/#list-all-labels-for-this-repository',
-    'get', 'issue comment', 'issues/comments/#list-comments-on-an-issue',
-    'post', 'milestone', "issues/milestones/#create-a-milestone",
-    'post', 'issue', "issues/#create-an-issue",
-    'post', 'issue event', NA_character_,
-    'post', 'repo labels', 'issues/labels/#create-a-label',
-    'post', 'issue comment', 'issues/comments/#create-a-comment'
-  )
-
-  view_url(url_prefix, urls$url_suffix[urls$action == action & urls$object == object])
+  view_url(url_prefix, url_suffix)
 
 }
 

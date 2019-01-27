@@ -10,7 +10,7 @@ parse_issue_events(res)
 \item{res}{List returned by corresponding \code{get_} function}
 }
 \value{
-\code{tibble} datasets with one record / issue-event
+Dataframe with one record / issue-event
 }
 \description{
 This function convert list output returned by get into a dataframe. Due to the diverse
