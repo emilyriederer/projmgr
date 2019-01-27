@@ -74,12 +74,13 @@ get_issue_events <- function(ref, number){
              ref = ref)
 
   # append the relevant issue number to each element
-  res <- lapply(res,
-                FUN = function(x){
-                  x[["number"]] = number
-                  return(x)
-                })
-
+  if( res != "" ){
+    res <- lapply(res,
+                  FUN = function(x){
+                    x[["number"]] = number
+                    return(x)
+                  })
+  }
   res
 
 }
@@ -111,11 +112,13 @@ get_issue_comments <- function(ref, number, ...){
                     ref = ref)
 
   # append the relevant issue number to each element
+  if( res != "" ){
   res <- lapply(res,
                 FUN = function(x){
-                  x[["number"]] = number
+                    x[["number"]] = number
                   return(x)
                 })
+  }
   res
 
 }
