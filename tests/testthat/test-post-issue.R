@@ -1,9 +1,6 @@
 context("POST ISSUES functions")
 
 skip_if_not(interactive(), "This set of tests should only be run manually")
-skip_on_os("windows")
-skip_on_os("mac")
-skip_on_os("linux")
 skip_on_cran()
 skip_on_travis()
 skip_on_appveyor()
@@ -20,6 +17,13 @@ issue4 <- post_issue(experigit, title = "2 labels, 0 assignees", distinct = FALS
 issue1_res <- get_issues(experigit, number = issue1)
 issue2_res <- get_issues(experigit, number = issue2)
 issue3_res <- get_issues(experigit, number = issue3)
+
+# clean-up environment
+projmgr:::patch_engine(paste0("/issues/", issue1), ref = experigit, state = 'closed')
+projmgr:::patch_engine(paste0("/issues/", issue2), ref = experigit, state = 'closed')
+projmgr:::patch_engine(paste0("/issues/", issue3), ref = experigit, state = 'closed')
+projmgr:::patch_engine(paste0("/issues/", issue4), ref = experigit, state = 'closed')
+
 
 test_that( "Multifield values (labels / assignees) are handles correctly for any number of inputs", {
 
@@ -45,10 +49,4 @@ test_that( "distinct parameter behavior controls duplication correctly", {
   expect_type( issue4, "integer" )
 
 })
-
-# clean-up environment
-projmgr:::patch_engine(paste0("/issues/", issue1), ref = experigit, state = 'closed')
-projmgr:::patch_engine(paste0("/issues/", issue2), ref = experigit, state = 'closed')
-projmgr:::patch_engine(paste0("/issues/", issue3), ref = experigit, state = 'closed')
-projmgr:::patch_engine(paste0("/issues/", issue4), ref = experigit, state = 'closed')
 
