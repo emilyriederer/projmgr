@@ -48,6 +48,15 @@ NULL
 is_labeled_with <- function(label){
   function(data){
     stopifnot("labels_name" %in% names(data))
+    vapply(data$labels_name, FUN = function(x) length(x) > 0, FUN.VALUE = logical(1))
+  }
+}
+
+#' @export
+#' @name taskboard_helpers
+is_labeled <- function(){
+  function(data){
+    stopifnot("labels_name" %in% names(data))
     vapply(data$labels_name, FUN = function(x) label %in% x, FUN.VALUE = logical(1))
   }
 }

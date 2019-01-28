@@ -3,6 +3,7 @@
 \name{taskboard_helpers}
 \alias{taskboard_helpers}
 \alias{is_labeled_with}
+\alias{is_labeled}
 \alias{is_assigned}
 \alias{is_assigned_to}
 \alias{is_in_a_milestone}
@@ -14,6 +15,8 @@
 \title{Tag "in-progress" items for taskboard visualization}
 \usage{
 is_labeled_with(label)
+
+is_labeled()
 
 is_assigned()
 
