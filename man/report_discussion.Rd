@@ -23,6 +23,9 @@ attractive way. Resulting object returned is a character vector of HTML code wit
 class of \code{'knit_asis'} so that when included in an RMarkdown document knitting to HTML,
 the results will be correctly rendered as HTML.
 }
+\details{
+HTML output is wrapped in a <div> of class 'report_disccusion' for custom CSS styling.
+}
 \examples{
 \dontrun{
 In RMarkdown:
