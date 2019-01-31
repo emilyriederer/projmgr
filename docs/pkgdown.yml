@@ -16,4 +16,7 @@ articles:
   tracking-KPIs: tracking-KPIs.html
   visualization: visualization.html
   working-offline: working-offline.html
+urls:
+  reference: https://emilyriederer.github.io/projmgr//reference
+  article: https://emilyriederer.github.io/projmgr//articles
 

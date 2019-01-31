@@ -9,10 +9,12 @@
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
+<script src="../pkgdown.js"></script><!-- docsearch --><script src="../docsearch.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous">
+<link href="../docsearch.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Visualizations (Experimental)">
 <meta property="og:description" content="">
-<meta property="og:image" content="/logo.png">
+<meta property="og:image" content="https://emilyriederer.github.io/projmgr/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -71,7 +73,13 @@
   </a>
 </li>
       </ul>
+<form class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="search" class="form-control" name="search-input" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off">
 </div>
+      </form>
+      
+    </div>
 <!--/.nav-collapse -->
   </div>
 <!--/.container -->
@@ -134,9 +142,10 @@
 <p><img src="visualization_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 <p>Users specify what logic to use for identifying “in progress” items by passing a function factory to the <code>in_progress_when</code> parameter. The above example uses the <code><a href="../reference/taskboard_helpers.html">is_labeled_with()</a></code> option. Other options include:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/ls">ls</a></span>(<span class="st">'package:projmgr'</span>)[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/grep">grep</a></span>(<span class="st">"^is_*"</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/ls">ls</a></span>(<span class="st">'package:projmgr'</span>))]
-<span class="co">#&gt; [1] "is_assigned"       "is_assigned_to"    "is_created_before"</span>
-<span class="co">#&gt; [4] "is_due"            "is_due_before"     "is_in_a_milestone"</span>
-<span class="co">#&gt; [7] "is_in_milestone"   "is_labeled_with"   "is_part_closed"</span></code></pre></div>
+<span class="co">#&gt;  [1] "is_assigned"       "is_assigned_to"    "is_created_before"</span>
+<span class="co">#&gt;  [4] "is_due"            "is_due_before"     "is_in_a_milestone"</span>
+<span class="co">#&gt;  [7] "is_in_milestone"   "is_labeled"        "is_labeled_with"  </span>
+<span class="co">#&gt; [10] "is_part_closed"</span></code></pre></div>
 <p>See <code><a href="../reference/taskboard_helpers.html">?taskboard_helpers</a></code> for more details.</p>
 <p>As a second example, suppose we instead classify issues as in progress once they have been put in a milestone.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/viz_taskboard.html">viz_taskboard</a></span>(pkg_issues, 
@@ -155,8 +164,8 @@
 <a href="#html-task-boards" class="anchor"></a>HTML Task Boards</h2>
 <p>As an alternative to plot-based taskboards, the <code><a href="../reference/report_taskboard.html">report_taskboard()</a></code> function creates a taskboard built with HTML and CSS.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/report_taskboard.html">report_taskboard</a></span>(pkg_issues, <span class="dt">in_progress_when =</span> <span class="kw"><a href="../reference/taskboard_helpers.html">is_assigned_to</a></span>(<span class="st">"emilyriederer"</span>))</code></pre></div>
-<div class="rcipbsfdfq">
-<style>.taskboard{display: grid;grid-gap: 1%;grid-template-columns: 1fr 1fr 1fr;margin-bottom: 50px;}.head{background-color: #a9a9a9;border: 1px solid #d3d3d3;text-align: center;font-weight: strong;}.task{text-align: center;padding: 2%;margin: 2%;border: 1px solid #d3d3d3;box-shadow: 2px 2px 5px grey;transition-duration:0.5s;}.rcipbsfdfq .ns{background-color:#f0e442;}.rcipbsfdfq .ip{background-color:#56b4e9;}.rcipbsfdfq .dn{background-color:#009e73;}div.taskboard a, div.taskboard a:visited{color: black;text-decoration: none;}div.taskboard a:hover{color: black;text-decoration: underline;}div.taskboard a:active{color: white;}</style>
+<div class="uhgtundztm">
+<style>.taskboard{display: grid;grid-gap: 1%;grid-template-columns: 1fr 1fr 1fr;margin-bottom: 50px;}.head{background-color: #a9a9a9;border: 1px solid #d3d3d3;text-align: center;font-weight: strong;}.task{text-align: center;padding: 2%;margin: 2%;border: 1px solid #d3d3d3;box-shadow: 2px 2px 5px grey;transition-duration:0.5s;}.uhgtundztm .ns{background-color:#f0e442;}.uhgtundztm .ip{background-color:#56b4e9;}.uhgtundztm .dn{background-color:#009e73;}div.taskboard a, div.taskboard a:visited{color: black;text-decoration: none;}div.taskboard a:hover{color: black;text-decoration: underline;}div.taskboard a:active{color: white;}</style>
 <div class="taskboard">
 <div class="head">
 Not Started
@@ -211,8 +220,8 @@ Add JSON support for plan / todo
                  <span class="dt">include_link =</span> <span class="ot">FALSE</span>,
                  <span class="dt">hover =</span> <span class="ot">TRUE</span>,
                  <span class="dt">colors =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">'#ff0000'</span>, <span class="st">'#00ff00'</span>, <span class="st">'#0000ff'</span>))</code></pre></div>
-<div class="jbpetsehkm">
-<style>.taskboard{display: grid;grid-gap: 1%;grid-template-columns: 1fr 1fr 1fr;margin-bottom: 50px;}.head{background-color: #a9a9a9;border: 1px solid #d3d3d3;text-align: center;font-weight: strong;}.task{text-align: center;padding: 2%;margin: 2%;border: 1px solid #d3d3d3;box-shadow: 2px 2px 5px grey;transition-duration:0.5s;}.jbpetsehkm .task:hover{margin: 0%;padding: 4%;}.jbpetsehkm .ns{background-color:#ff0000;}.jbpetsehkm .ip{background-color:#00ff00;}.jbpetsehkm .dn{background-color:#0000ff;}div.taskboard a, div.taskboard a:visited{color: black;text-decoration: none;}div.taskboard a:hover{color: black;text-decoration: underline;}div.taskboard a:active{color: white;}</style>
+<div class="xrjipxnrus">
+<style>.taskboard{display: grid;grid-gap: 1%;grid-template-columns: 1fr 1fr 1fr;margin-bottom: 50px;}.head{background-color: #a9a9a9;border: 1px solid #d3d3d3;text-align: center;font-weight: strong;}.task{text-align: center;padding: 2%;margin: 2%;border: 1px solid #d3d3d3;box-shadow: 2px 2px 5px grey;transition-duration:0.5s;}.xrjipxnrus .task:hover{margin: 0%;padding: 4%;}.xrjipxnrus .ns{background-color:#ff0000;}.xrjipxnrus .ip{background-color:#00ff00;}.xrjipxnrus .dn{background-color:#0000ff;}div.taskboard a, div.taskboard a:visited{color: black;text-decoration: none;}div.taskboard a:hover{color: black;text-decoration: underline;}div.taskboard a:active{color: white;}</style>
 <div class="taskboard">
 <div class="head">
 Not Started
@@ -300,6 +309,20 @@ Add JSON support for plan / todo
 </div>
 
   
-
-  </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.js" integrity="sha256-GKvGqXDznoRYHCwKXGnuchvKSwmx9SRMrZOTh2g4Sb0=" crossorigin="anonymous"></script><script>
+  docsearch({
+    
+    
+    apiKey: 'ebfdcb314b81d897faab364541561384',
+    indexName: 'projmgr',
+    inputSelector: 'input#search-input.form-control',
+    transformData: function(hits) {
+      return hits.map(function (hit) {
+        hit.url = updateHitURL(hit);
+        return hit;
+      });
+    }
+  });
+</script>
+</body>
 </html>
