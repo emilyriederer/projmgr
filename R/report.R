@@ -6,6 +6,8 @@
 #' class of \code{'knit_asis'} so that when included in an RMarkdown document knitting to HTML,
 #' the results will be correctly rendered as HTML.
 #'
+#' The resulting HTML unordered list (<ul>) is tagged with class 'report_progress' for custom CSS styling.
+#'
 #' @param issues Dataframe or tibble of issues and milestones, as returned by
 #'     \code{get_issues()} and \code{parse_issues()}
 #'
@@ -44,7 +46,7 @@ report_progress <- function(issues){
   issue_html_grp <- vapply(milestone_title,
                            FUN = function(x) paste(issue_html[df$milestone_title == x], collapse = " "),
                            FUN.VALUE = character(1))
-  milestone_issue_html_grp <- paste(milestone_html, "<ul style = 'list-style: none;'>", issue_html_grp, "</ul>")
+  milestone_issue_html_grp <- paste(milestone_html, "<ul  class = 'report_progress' style = 'list-style: none;'>", issue_html_grp, "</ul>")
 
   # final output ----
   html <- paste("<p/>", paste(milestone_issue_html_grp, collapse = " "), "<p/>")
@@ -59,6 +61,8 @@ report_progress <- function(issues){
 #' attractive way. Resulting object returned is a character vector of HTML code with the added
 #' class of \code{'knit_asis'} so that when included in an RMarkdown document knitting to HTML,
 #' the results will be correctly rendered as HTML.
+#'
+#' The resulting HTML unordered list (<ul>) is tagged with class 'report_plan' for custom CSS styling.
 #'
 #' @param plan List of project plan, as returned by \code{read_plan()}
 #'
@@ -88,7 +92,7 @@ report_plan <- function(plan){
                                                            FUN = function(y) fmt_issue( y[["title"]], "open" ),
                                                            FUN.VALUE = character(1)) , collapse = " "),
                            FUN.VALUE = character(1))
-  milestone_issue_html_grp <- paste("<p>",milestone_html, "<ul style = 'list-style: none;'>", issue_html_grp, "</ul>")
+  milestone_issue_html_grp <- paste("<p>",milestone_html, "<ul class = 'report_plan' style = 'list-style: none;'>", issue_html_grp, "</ul>")
 
   # final output ----
   html <- paste("<p/>", paste(milestone_issue_html_grp, collapse = " "), "<p/>")
@@ -103,6 +107,8 @@ report_plan <- function(plan){
 #' attractive way. Resulting object returned is a character vector of HTML code with the added
 #' class of \code{'knit_asis'} so that when included in an RMarkdown document knitting to HTML,
 #' the results will be correctly rendered as HTML.
+#'
+#' The resulting HTML unordered list (<ul>) is tagged with class 'report_todo' for custom CSS styling.
 #'
 #' @param todo List of to-do list, as returned by \code{read_todo()}
 #'
@@ -128,7 +134,7 @@ report_todo <- function(todo){
   milestone_html <- fmt_milestone("To Do", 0, length(issue_title))
   issue_html <- fmt_issue( issue_title, "open" )
   issue_html_grp <- paste(issue_html, collapse = " ")
-  milestone_issue_html_grp <- paste("<p>",milestone_html, "<ul style = 'list-style: none;'>", issue_html_grp, "</ul>")
+  milestone_issue_html_grp <- paste("<p>",milestone_html, "<ul class = 'report_todo' style = 'list-style: none;'>", issue_html_grp, "</ul>")
 
   # final output ----
   html <- paste("<p/>", paste(milestone_issue_html_grp, collapse = " "), "<p/>")
@@ -145,6 +151,8 @@ report_todo <- function(todo){
 #' attractive way. Resulting object returned is a character vector of HTML code with the added
 #' class of \code{'knit_asis'} so that when included in an RMarkdown document knitting to HTML,
 #' the results will be correctly rendered as HTML.
+#'
+#' HTML output is wrapped in a <div> of class 'report_disccusion' for custom CSS styling.
 #'
 #' @param comments Dataframe or tibble of comments for a single issue, as returned by \code{get_issue_comments()}
 #' @param issue Optional dataframe or tibble of issues, as returned by \code{get_issues()}. If provided,
@@ -190,7 +198,7 @@ report_discussion <- function(comments, issue = NA){
 
     # write html ----
     issue_html <- do.call(fmt_issue_desc, issue)
-    html <- paste(issue_html, html)
+    html <- paste("<div class = 'report_discussion'>", issue_html, html,"</div>")
   }
 
   # final output ----
