@@ -13,6 +13,7 @@ articles:
   github-pat: github-pat.html
   reporting: reporting.html
   reprex-clipr: reprex-clipr.html
+  sending-emails: sending-emails.html
   tracking-KPIs: tracking-KPIs.html
   visualization: visualization.html
   working-offline: working-offline.html
