@@ -29,12 +29,18 @@
 <script src="../pkgdown.js"></script>
 
 
+<!-- docsearch -->
+<script src="../docsearch.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous" />
+<link href="../docsearch.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+
 
   <link href="../extra.css" rel="stylesheet">
   
 <meta property="og:title" content="Function reference" />
 
-<meta property="og:image" content="/logo.png" />
+<meta property="og:image" content="https://emilyriederer.github.io/projmgr/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -109,6 +115,12 @@
   </a>
 </li>
       </ul>
+      
+      <form class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="search" class="form-control" name="search-input" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off">
+        </div>
+      </form>
       
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -401,7 +413,7 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="taskboard_helpers.html">is_labeled_with()</a></code> <code><a href="taskboard_helpers.html">is_assigned()</a></code> <code><a href="taskboard_helpers.html">is_assigned_to()</a></code> <code><a href="taskboard_helpers.html">is_in_a_milestone()</a></code> <code><a href="taskboard_helpers.html">is_in_milestone()</a></code> <code><a href="taskboard_helpers.html">is_created_before()</a></code> <code><a href="taskboard_helpers.html">is_part_closed()</a></code> <code><a href="taskboard_helpers.html">is_due()</a></code> <code><a href="taskboard_helpers.html">is_due_before()</a></code> </p>
+          <p><code><a href="taskboard_helpers.html">is_labeled()</a></code> <code><a href="taskboard_helpers.html">is_labeled_with()</a></code> <code><a href="taskboard_helpers.html">is_assigned()</a></code> <code><a href="taskboard_helpers.html">is_assigned_to()</a></code> <code><a href="taskboard_helpers.html">is_in_a_milestone()</a></code> <code><a href="taskboard_helpers.html">is_in_milestone()</a></code> <code><a href="taskboard_helpers.html">is_created_before()</a></code> <code><a href="taskboard_helpers.html">is_part_closed()</a></code> <code><a href="taskboard_helpers.html">is_due()</a></code> <code><a href="taskboard_helpers.html">is_due_before()</a></code> </p>
         </td>
         <td><p>Tag "in-progress" items for taskboard visualization</p></td>
       </tr><tr>
@@ -442,6 +454,23 @@
    </div>
 
   
+<script src="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.js" integrity="sha256-GKvGqXDznoRYHCwKXGnuchvKSwmx9SRMrZOTh2g4Sb0=" crossorigin="anonymous"></script>
+<script>
+  docsearch({
+    
+    
+    apiKey: 'ebfdcb314b81d897faab364541561384',
+    indexName: 'projmgr',
+    inputSelector: 'input#search-input.form-control',
+    transformData: function(hits) {
+      return hits.map(function (hit) {
+        hit.url = updateHitURL(hit);
+        return hit;
+      });
+    }
+  });
+</script>
+
 
   </body>
 </html>

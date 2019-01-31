@@ -1,6 +1,11 @@
+url: https://emilyriederer.github.io/projmgr/
+
 template:
   params:
     ganalytics: UA-132815709-1
+    docsearch:
+      api_key: ebfdcb314b81d897faab364541561384
+      index_name: projmgr
 
 navbar:
   title: "projmgr"
