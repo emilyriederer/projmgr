@@ -4,6 +4,7 @@
 * Added new arguments to `report_progress()` 
     - `group_var` allows issues to do be grouped by variables than `milestone_title` (which remains the default)
     - `show_stats` allows for suppression of count/percent output in group titles
+* Improved documentation for using `create_repo_ref()` without authentication
 
 # projmgr 0.0.0.9900
 
