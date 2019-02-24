@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tag "in-progress" items for taskboard visualization — taskboard_helpers • projmgr</title>
+<title>Filter dataframe by list-column elements — listcol_filter • projmgr</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -38,13 +38,11 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Tag "in-progress" items for taskboard visualization — taskboard_helpers" />
+<meta property="og:title" content="Filter dataframe by list-column elements — listcol_filter" />
 
-<meta property="og:description" content="The viz_taskboard() function creates a three-column layout of entities that are
-not started, in progress, or done. Objects are classified as done when they have a
-state of &quot;closed&quot;. Object are classified as &quot;To-Do&quot; when they are neither &quot;Closed&quot;
-or &quot;In Progress&quot;. However, what constistutes &quot;In Progress&quot; is user and project dependent.
-Thus, these functions let users specify what they mean." />
+<meta property="og:description" content="Some outputs of the get_ and parse_ functions contain list-columns (e.g. the labels column in the issues dataframe).
+This is an efficient way to represent the provided information, but may make certain information seem slightly inaccessible. This
+function allows users to filter list columns by the presence of one or more values or a regular expression." />
 
 <meta property="og:image" content="https://emilyriederer.github.io/projmgr/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -138,100 +136,73 @@ Thus, these functions let users specify what they mean." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Tag "in-progress" items for taskboard visualization</h1>
-    <small class="dont-index">Source: <a href='https://github.com/emilyriederer/projmgr/blob/master/R/taskboard-helpers.R'><code>R/taskboard-helpers.R</code></a></small>
-    <div class="hidden name"><code>taskboard_helpers.Rd</code></div>
+    <h1>Filter dataframe by list-column elements</h1>
+    <small class="dont-index">Source: <a href='https://github.com/emilyriederer/projmgr/blob/master/R/listcol.R'><code>R/listcol.R</code></a></small>
+    <div class="hidden name"><code>listcol_filter.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>The <code><a href='viz_taskboard.html'>viz_taskboard()</a></code> function creates a three-column layout of entities that are
-not started, in progress, or done. Objects are classified as done when they have a
-<code>state</code> of "closed". Object are classified as "To-Do" when they are neither "Closed"
-or "In Progress". However, what constistutes "In Progress" is user and project dependent.
-Thus, these functions let users specify what they mean.</p>
+    <p>Some outputs of the <code>get_</code> and <code>parse_</code> functions contain list-columns (e.g. the labels column in the issues dataframe).
+This is an efficient way to represent the provided information, but may make certain information seem slightly inaccessible. This
+function allows users to filter list columns by the presence of one or more values or a regular expression.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>is_labeled</span>()
-
-<span class='fu'>is_labeled_with</span>(<span class='no'>label</span>)
-
-<span class='fu'>is_assigned</span>()
-
-<span class='fu'>is_assigned_to</span>(<span class='no'>login</span>)
-
-<span class='fu'>is_in_a_milestone</span>()
-
-<span class='fu'>is_in_milestone</span>(<span class='no'>number</span>)
-
-<span class='fu'>is_created_before</span>(<span class='no'>created_date</span>)
-
-<span class='fu'>is_part_closed</span>()
-
-<span class='fu'>is_due</span>()
-
-<span class='fu'>is_due_before</span>(<span class='no'>due_date</span>)</pre>
+    <pre class="usage"><span class='fu'>listcol_filter</span>(<span class='no'>data</span>, <span class='no'>col_name</span>, <span class='no'>matches</span>, <span class='kw'>is_regex</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>any</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>label</th>
-      <td><p>Label name as character</p></td>
+      <th>data</th>
+      <td><p>Dataframe containing a list column (e.g. an issues dataframe)</p></td>
     </tr>
     <tr>
-      <th>login</th>
-      <td><p>User login as character</p></td>
+      <th>col_name</th>
+      <td><p>Character string containing column name of list column (e.g. <code>labels_name</code> or <code>assignees_login</code>)</p></td>
     </tr>
     <tr>
-      <th>number</th>
-      <td><p>Milestone number</p></td>
+      <th>matches</th>
+      <td><p>A character vector containing a regular expression or one or more exact-match values. An observation will be kept
+in the returned data if any of the</p></td>
     </tr>
     <tr>
-      <th>created_date</th>
-      <td><p>Date as character in "YYYY-MM-DD" format</p></td>
+      <th>is_regex</th>
+      <td><p>Logical to indicate whether charalcter indicates a regular expression or specific values</p></td>
     </tr>
     <tr>
-      <th>due_date</th>
-      <td><p>Date as character in "YYYY-MM-DD" format</p></td>
+      <th>any</th>
+      <td><p>Logical to indicate whether rows should be kept if list-column contains any of elements in <code>matches</code>
+(defaults to <code>TRUE</code>) or if it must contain all of the elements in <code>matches</code> (<code>FALSE</code>). Only respected
+when <code>matches</code> contains exact</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Function to be passed as <code>in_progress_when</code> argument in <code><a href='viz_taskboard.html'>viz_taskboard()</a></code></p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>General options:</p>
-<ul>
-<li><p>is_created_before: Was created before a user-specified data (as "YYYY-MM-DD" character string)</p></li>
-</ul>
-    <p>Issue-specific options:</p>
-<ul>
-<li><p>is_labeled_with: User-specified label (as character string) exists</p></li>
-<li><p>is_assigned: Has been assigned to anyone</p></li>
-<li><p>is_assigned_to: Has been assigned to specific user-specified login (as character string)</p></li>
-<li><p>is_in_a_milestone: Has been put into any milestone</p></li>
-<li><p>is_in_milestone: Has been put into a specific milestone</p></li>
-</ul>
-    <p>Milestone-specific options:</p>
-<ul>
-<li><p>is_part_closed: Has any of its issues closed</p></li>
-<li><p>is_due: Has a due date</p></li>
-<li><p>is_due_before: Has a due data by or before a user-specified date (as "YYYY-MM-DD" character string)</p></li>
-</ul>
+    <p>Dataframe containing only rows in which list-column contains element matching provided criteria</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'><a href='viz_taskboard.html'>viz_taskboard</a></span>(<span class='no'>issues</span>, <span class='kw'>in_progress_when</span> <span class='kw'>=</span> <span class='fu'>is_labeled_with</span>(<span class='st'>'in-progress'</span>))
-<span class='fu'><a href='viz_taskboard.html'>viz_taskboard</a></span>(<span class='no'>milestones</span>, <span class='kw'>in_progress_when</span> <span class='kw'>=</span> <span class='fu'>is_created_before</span>(<span class='st'>'2018-12-31'</span>))
-<span class='fu'><a href='viz_taskboard.html'>viz_taskboard</a></span>(<span class='no'>issues</span>, <span class='kw'>in_progress_when</span> <span class='kw'>=</span> <span class='fu'>is_in_milestone</span>())
-<span class='fu'><a href='report_taskboard.html'>report_taskboard</a></span>(<span class='no'>issues</span>, <span class='kw'>in_progress_when</span> <span class='kw'>=</span> <span class='fu'>is_labeled_with</span>(<span class='st'>'in-progress'</span>))
-<span class='fu'><a href='report_taskboard.html'>report_taskboard</a></span>(<span class='no'>milestones</span>, <span class='kw'>in_progress_when</span> <span class='kw'>=</span> <span class='fu'>is_created_before</span>(<span class='st'>'2018-12-31'</span>))
-<span class='fu'><a href='report_taskboard.html'>report_taskboard</a></span>(<span class='no'>issues</span>, <span class='kw'>in_progress_when</span> <span class='kw'>=</span> <span class='fu'>is_in_milestone</span>())
+<span class='co'># keep observation containing a label of either "bug" or "feature"</span>
+<span class='no'>issues</span> <span class='kw'>&lt;-</span>
+  <span class='fu'><a href='get_issues.html'>get_issues</a></span>(<span class='no'>repo</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='parse_issues.html'>parse_issues</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'>listcol_filter</span>(<span class='kw'>col_name</span> <span class='kw'>=</span> <span class='st'>"labels_name"</span>, <span class='kw'>matches</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"bug"</span>, <span class='st'>"feature"</span>))
+
+<span class='co'># keep observation containing a label of both "bug" and "feature"</span>
+<span class='no'>issues</span> <span class='kw'>&lt;-</span>
+  <span class='fu'><a href='get_issues.html'>get_issues</a></span>(<span class='no'>repo</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='parse_issues.html'>parse_issues</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'>listcol_filter</span>(<span class='kw'>col_name</span> <span class='kw'>=</span> <span class='st'>"labels_name"</span>, <span class='kw'>matches</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"bug"</span>, <span class='st'>"feature"</span>), <span class='kw'>any</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+<span class='co'># keep observation containing a label that starts with "region"</span>
+<span class='no'>issues</span> <span class='kw'>&lt;-</span>
+  <span class='fu'><a href='get_issues.html'>get_issues</a></span>(<span class='no'>repo</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='parse_issues.html'>parse_issues</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'>listcol_filter</span>(<span class='kw'>col_name</span> <span class='kw'>=</span> <span class='st'>"labels_name"</span>, <span class='kw'>matches</span> <span class='kw'>=</span> <span class='st'>"^region:"</span>, <span class='kw'>is_regex</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -240,8 +211,6 @@ Thus, these functions let users specify what they mean.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

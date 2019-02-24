@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tag "in-progress" items for taskboard visualization — taskboard_helpers • projmgr</title>
+<title>Extract new dataframe column from list-column matching pattern — listcol_extract • projmgr</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -38,13 +38,12 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Tag "in-progress" items for taskboard visualization — taskboard_helpers" />
+<meta property="og:title" content="Extract new dataframe column from list-column matching pattern — listcol_extract" />
 
-<meta property="og:description" content="The viz_taskboard() function creates a three-column layout of entities that are
-not started, in progress, or done. Objects are classified as done when they have a
-state of &quot;closed&quot;. Object are classified as &quot;To-Do&quot; when they are neither &quot;Closed&quot;
-or &quot;In Progress&quot;. However, what constistutes &quot;In Progress&quot; is user and project dependent.
-Thus, these functions let users specify what they mean." />
+<meta property="og:description" content="Creaes a new column in your dataframe based on a subset of list-column values following a certain patten. For example,
+this is useful if you have labels you always apply to a repository with a set structure, e.g. key-value pairs like &quot;priority:high&quot;,
+&quot;priority:medium&quot;, and &quot;priority:low&quot; or other structures like &quot;engagement-team&quot;, &quot;teaching-team&quot;, etc. This function could
+create a new variable (e.g. &quot;priority&quot;, &quot;team&quot;) with the values encoded within the labels." />
 
 <meta property="og:image" content="https://emilyriederer.github.io/projmgr/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -138,100 +137,64 @@ Thus, these functions let users specify what they mean." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Tag "in-progress" items for taskboard visualization</h1>
-    <small class="dont-index">Source: <a href='https://github.com/emilyriederer/projmgr/blob/master/R/taskboard-helpers.R'><code>R/taskboard-helpers.R</code></a></small>
-    <div class="hidden name"><code>taskboard_helpers.Rd</code></div>
+    <h1>Extract new dataframe column from list-column matching pattern</h1>
+    <small class="dont-index">Source: <a href='https://github.com/emilyriederer/projmgr/blob/master/R/listcol.R'><code>R/listcol.R</code></a></small>
+    <div class="hidden name"><code>listcol_extract.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>The <code><a href='viz_taskboard.html'>viz_taskboard()</a></code> function creates a three-column layout of entities that are
-not started, in progress, or done. Objects are classified as done when they have a
-<code>state</code> of "closed". Object are classified as "To-Do" when they are neither "Closed"
-or "In Progress". However, what constistutes "In Progress" is user and project dependent.
-Thus, these functions let users specify what they mean.</p>
+    <p>Creaes a new column in your dataframe based on a subset of list-column values following a certain patten. For example,
+this is useful if you have labels you always apply to a repository with a set structure, e.g. key-value pairs like "priority:high",
+"priority:medium", and "priority:low" or other structures like "engagement-team", "teaching-team", etc. This function could
+create a new variable (e.g. "priority", "team") with the values encoded within the labels.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>is_labeled</span>()
-
-<span class='fu'>is_labeled_with</span>(<span class='no'>label</span>)
-
-<span class='fu'>is_assigned</span>()
-
-<span class='fu'>is_assigned_to</span>(<span class='no'>login</span>)
-
-<span class='fu'>is_in_a_milestone</span>()
-
-<span class='fu'>is_in_milestone</span>(<span class='no'>number</span>)
-
-<span class='fu'>is_created_before</span>(<span class='no'>created_date</span>)
-
-<span class='fu'>is_part_closed</span>()
-
-<span class='fu'>is_due</span>()
-
-<span class='fu'>is_due_before</span>(<span class='no'>due_date</span>)</pre>
+    <pre class="usage"><span class='fu'>listcol_extract</span>(<span class='no'>data</span>, <span class='no'>col_name</span>, <span class='no'>regex</span>, <span class='kw'>new_col_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>keep_regex</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>label</th>
-      <td><p>Label name as character</p></td>
+      <th>data</th>
+      <td><p>Dataframe containing a list column (e.g. an issues dataframe)</p></td>
     </tr>
     <tr>
-      <th>login</th>
-      <td><p>User login as character</p></td>
+      <th>col_name</th>
+      <td><p>Character string containing column name of list column (e.g. <code>labels_name</code> or <code>assignees_login</code>)</p></td>
     </tr>
     <tr>
-      <th>number</th>
-      <td><p>Milestone number</p></td>
+      <th>regex</th>
+      <td><p>Character string of regular expression to identify list items of interest (e.g. <code>"^priority:", "^(bug|feature)$"</code>)</p></td>
     </tr>
     <tr>
-      <th>created_date</th>
-      <td><p>Date as character in "YYYY-MM-DD" format</p></td>
+      <th>new_col_name</th>
+      <td><p>Optional name of new column. Otherwise <code>regex</code> is used, stripped of any leading or trailing punctuation</p></td>
     </tr>
     <tr>
-      <th>due_date</th>
-      <td><p>Date as character in "YYYY-MM-DD" format</p></td>
+      <th>keep_regex</th>
+      <td><p>Optional logical denoting whether to keep regex part of matched item in value. Defaults to <code>FALSE</code></p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Function to be passed as <code>in_progress_when</code> argument in <code><a href='viz_taskboard.html'>viz_taskboard()</a></code></p>
+    <p>Dataframe with new column taking values extracted from list column</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>General options:</p>
-<ul>
-<li><p>is_created_before: Was created before a user-specified data (as "YYYY-MM-DD" character string)</p></li>
-</ul>
-    <p>Issue-specific options:</p>
-<ul>
-<li><p>is_labeled_with: User-specified label (as character string) exists</p></li>
-<li><p>is_assigned: Has been assigned to anyone</p></li>
-<li><p>is_assigned_to: Has been assigned to specific user-specified login (as character string)</p></li>
-<li><p>is_in_a_milestone: Has been put into any milestone</p></li>
-<li><p>is_in_milestone: Has been put into a specific milestone</p></li>
-</ul>
-    <p>Milestone-specific options:</p>
-<ul>
-<li><p>is_part_closed: Has any of its issues closed</p></li>
-<li><p>is_due: Has a due date</p></li>
-<li><p>is_due_before: Has a due data by or before a user-specified date (as "YYYY-MM-DD" character string)</p></li>
-</ul>
+    <p>This function works only if each observatino contains at most one instance of a given patterns. When multiple labels match the
+same pattern, one is returned at random.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'><a href='viz_taskboard.html'>viz_taskboard</a></span>(<span class='no'>issues</span>, <span class='kw'>in_progress_when</span> <span class='kw'>=</span> <span class='fu'>is_labeled_with</span>(<span class='st'>'in-progress'</span>))
-<span class='fu'><a href='viz_taskboard.html'>viz_taskboard</a></span>(<span class='no'>milestones</span>, <span class='kw'>in_progress_when</span> <span class='kw'>=</span> <span class='fu'>is_created_before</span>(<span class='st'>'2018-12-31'</span>))
-<span class='fu'><a href='viz_taskboard.html'>viz_taskboard</a></span>(<span class='no'>issues</span>, <span class='kw'>in_progress_when</span> <span class='kw'>=</span> <span class='fu'>is_in_milestone</span>())
-<span class='fu'><a href='report_taskboard.html'>report_taskboard</a></span>(<span class='no'>issues</span>, <span class='kw'>in_progress_when</span> <span class='kw'>=</span> <span class='fu'>is_labeled_with</span>(<span class='st'>'in-progress'</span>))
-<span class='fu'><a href='report_taskboard.html'>report_taskboard</a></span>(<span class='no'>milestones</span>, <span class='kw'>in_progress_when</span> <span class='kw'>=</span> <span class='fu'>is_created_before</span>(<span class='st'>'2018-12-31'</span>))
-<span class='fu'><a href='report_taskboard.html'>report_taskboard</a></span>(<span class='no'>issues</span>, <span class='kw'>in_progress_when</span> <span class='kw'>=</span> <span class='fu'>is_in_milestone</span>())
+<span class='no'>issues</span> <span class='kw'>&lt;-</span>
+    <span class='fu'><a href='get_issues.html'>get_issues</a></span>(<span class='no'>repo</span>) <span class='kw'>%&gt;%</span>
+    <span class='fu'><a href='parse_issues.html'>parse_issues</a></span>() <span class='kw'>%&gt;%</span>
+    <span class='fu'>listcol_extract</span>(<span class='st'>"labels_name"</span>, <span class='st'>"-team$"</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

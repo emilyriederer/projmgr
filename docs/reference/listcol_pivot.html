@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tag "in-progress" items for taskboard visualization — taskboard_helpers • projmgr</title>
+<title>Pivot list-column elements to indicator variables — listcol_pivot • projmgr</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -38,13 +38,12 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Tag "in-progress" items for taskboard visualization — taskboard_helpers" />
+<meta property="og:title" content="Pivot list-column elements to indicator variables — listcol_pivot" />
 
-<meta property="og:description" content="The viz_taskboard() function creates a three-column layout of entities that are
-not started, in progress, or done. Objects are classified as done when they have a
-state of &quot;closed&quot;. Object are classified as &quot;To-Do&quot; when they are neither &quot;Closed&quot;
-or &quot;In Progress&quot;. However, what constistutes &quot;In Progress&quot; is user and project dependent.
-Thus, these functions let users specify what they mean." />
+<meta property="og:description" content="Some outputs of the get_ and parse_ functions contain list-columns (e.g. the labels column in the issues dataframe).
+This is an efficient way to represent the provided information, but may make certain information seem slightly inaccessible. This
+function allows users to &quot;pivot&quot; these list columns and instead create a seperate indicator variable to represent the presence
+or absence of matches within the list column." />
 
 <meta property="og:image" content="https://emilyriederer.github.io/projmgr/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -138,101 +137,70 @@ Thus, these functions let users specify what they mean." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Tag "in-progress" items for taskboard visualization</h1>
-    <small class="dont-index">Source: <a href='https://github.com/emilyriederer/projmgr/blob/master/R/taskboard-helpers.R'><code>R/taskboard-helpers.R</code></a></small>
-    <div class="hidden name"><code>taskboard_helpers.Rd</code></div>
+    <h1>Pivot list-column elements to indicator variables</h1>
+    <small class="dont-index">Source: <a href='https://github.com/emilyriederer/projmgr/blob/master/R/listcol.R'><code>R/listcol.R</code></a></small>
+    <div class="hidden name"><code>listcol_pivot.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>The <code><a href='viz_taskboard.html'>viz_taskboard()</a></code> function creates a three-column layout of entities that are
-not started, in progress, or done. Objects are classified as done when they have a
-<code>state</code> of "closed". Object are classified as "To-Do" when they are neither "Closed"
-or "In Progress". However, what constistutes "In Progress" is user and project dependent.
-Thus, these functions let users specify what they mean.</p>
+    <p>Some outputs of the <code>get_</code> and <code>parse_</code> functions contain list-columns (e.g. the labels column in the issues dataframe).
+This is an efficient way to represent the provided information, but may make certain information seem slightly inaccessible. This
+function allows users to "pivot" these list columns and instead create a seperate indicator variable to represent the presence
+or absence of matches within the list column.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>is_labeled</span>()
-
-<span class='fu'>is_labeled_with</span>(<span class='no'>label</span>)
-
-<span class='fu'>is_assigned</span>()
-
-<span class='fu'>is_assigned_to</span>(<span class='no'>login</span>)
-
-<span class='fu'>is_in_a_milestone</span>()
-
-<span class='fu'>is_in_milestone</span>(<span class='no'>number</span>)
-
-<span class='fu'>is_created_before</span>(<span class='no'>created_date</span>)
-
-<span class='fu'>is_part_closed</span>()
-
-<span class='fu'>is_due</span>()
-
-<span class='fu'>is_due_before</span>(<span class='no'>due_date</span>)</pre>
+    <pre class="usage"><span class='fu'>listcol_pivot</span>(<span class='no'>data</span>, <span class='no'>col_name</span>, <span class='kw'>regex</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>transform_fx</span> <span class='kw'>=</span> <span class='no'>identity</span>,
+  <span class='kw'>delete_orig</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>label</th>
-      <td><p>Label name as character</p></td>
+      <th>data</th>
+      <td><p>Dataframe containing a list column (e.g. an issues dataframe)</p></td>
     </tr>
     <tr>
-      <th>login</th>
-      <td><p>User login as character</p></td>
+      <th>col_name</th>
+      <td><p>Character string containing column name of list column (e.g. <code>labels_name</code> or <code>assignees_login</code>)</p></td>
     </tr>
     <tr>
-      <th>number</th>
-      <td><p>Milestone number</p></td>
+      <th>regex</th>
+      <td><p>Character string of regular expression to identify list items of interest (e.g. <code>"^priority:", "^(bug|feature)$"</code>)</p></td>
     </tr>
     <tr>
-      <th>created_date</th>
-      <td><p>Date as character in "YYYY-MM-DD" format</p></td>
+      <th>transform_fx</th>
+      <td><p>Function to transform label name before converting to column (e.g. <code><a href='https://www.rdocumentation.org/packages/base/topics/grep'>sub(":", "_")</a></code>)</p></td>
     </tr>
     <tr>
-      <th>due_date</th>
-      <td><p>Date as character in "YYYY-MM-DD" format</p></td>
+      <th>delete_orig</th>
+      <td><p>Logical denoting whether or not to delete original list column provided by <code>col_name</code></p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Function to be passed as <code>in_progress_when</code> argument in <code><a href='viz_taskboard.html'>viz_taskboard()</a></code></p>
+    <p>Dataframe additional logical columns denoting absence / presence of specified list-column elements</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>General options:</p>
-<ul>
-<li><p>is_created_before: Was created before a user-specified data (as "YYYY-MM-DD" character string)</p></li>
-</ul>
-    <p>Issue-specific options:</p>
-<ul>
-<li><p>is_labeled_with: User-specified label (as character string) exists</p></li>
-<li><p>is_assigned: Has been assigned to anyone</p></li>
-<li><p>is_assigned_to: Has been assigned to specific user-specified login (as character string)</p></li>
-<li><p>is_in_a_milestone: Has been put into any milestone</p></li>
-<li><p>is_in_milestone: Has been put into a specific milestone</p></li>
-</ul>
-    <p>Milestone-specific options:</p>
-<ul>
-<li><p>is_part_closed: Has any of its issues closed</p></li>
-<li><p>is_due: Has a due date</p></li>
-<li><p>is_due_before: Has a due data by or before a user-specified date (as "YYYY-MM-DD" character string)</p></li>
-</ul>
+    <p>For example, if a repository tags issues with "priority:high", "priority:medium", and "priority:low" along with other labels,
+this function could be used to create separate "high", "medium", and "low" columns to denote different issue severities. This
+could be done with <code>listcol_pivot(data, "labels_name", "^priority:", function(x) sub("^priority:", ""))</code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'><a href='viz_taskboard.html'>viz_taskboard</a></span>(<span class='no'>issues</span>, <span class='kw'>in_progress_when</span> <span class='kw'>=</span> <span class='fu'>is_labeled_with</span>(<span class='st'>'in-progress'</span>))
-<span class='fu'><a href='viz_taskboard.html'>viz_taskboard</a></span>(<span class='no'>milestones</span>, <span class='kw'>in_progress_when</span> <span class='kw'>=</span> <span class='fu'>is_created_before</span>(<span class='st'>'2018-12-31'</span>))
-<span class='fu'><a href='viz_taskboard.html'>viz_taskboard</a></span>(<span class='no'>issues</span>, <span class='kw'>in_progress_when</span> <span class='kw'>=</span> <span class='fu'>is_in_milestone</span>())
-<span class='fu'><a href='report_taskboard.html'>report_taskboard</a></span>(<span class='no'>issues</span>, <span class='kw'>in_progress_when</span> <span class='kw'>=</span> <span class='fu'>is_labeled_with</span>(<span class='st'>'in-progress'</span>))
-<span class='fu'><a href='report_taskboard.html'>report_taskboard</a></span>(<span class='no'>milestones</span>, <span class='kw'>in_progress_when</span> <span class='kw'>=</span> <span class='fu'>is_created_before</span>(<span class='st'>'2018-12-31'</span>))
-<span class='fu'><a href='report_taskboard.html'>report_taskboard</a></span>(<span class='no'>issues</span>, <span class='kw'>in_progress_when</span> <span class='kw'>=</span> <span class='fu'>is_in_milestone</span>())
-<span class='co'># }</span></pre>
+    <pre class="examples"># NOT RUN {
+issues <-
+  get_issues(repo) %>%
+  parse_issues() %>%
+  listcol_pivot(col_name = "labels_name",
+                regex = "^priority:",
+                transform_fx = function(x) paste0("label_",x)),
+                delete_orig = TRUE)
+# }
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
