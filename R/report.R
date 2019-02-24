@@ -10,6 +10,7 @@
 #'
 #' @param issues Dataframe or tibble of issues and milestones, as returned by \code{get_issues()} and \code{parse_issues()}
 #' @param group_var Character string variable name by which to group issues. Defaults to \code{"milestone_title"}
+#' @param show_stats Whether or not to show total, completed counts and percent for each group
 #'
 #' @return Returns character string of HTML with class attribute to be correctly
 #'     shown "as-is" in RMarkdown
@@ -25,7 +26,7 @@
 #' ```
 #'}
 
-report_progress <- function(issues, group_var = "milestone_title"){
+report_progress <- function(issues, group_var = "milestone_title", show_stats = TRUE){
 
   # prep data ----
   df <- issues[!is.na(issues[[group_var]]),]
@@ -41,7 +42,9 @@ report_progress <- function(issues, group_var = "milestone_title"){
   state <- df$state
 
   # write html ----
-  title_html <- fmt_milestone(group_title, issue_closed_count, issue_count)
+  title_html <-
+    if(show_stats) fmt_milestone(group_title, issue_closed_count, issue_count)
+    else paste("<strong>", group_title, "</strong>")
   issue_html <- fmt_issue( issue_title, state )
   issue_html_grp <- vapply(group_title,
                            FUN = function(x) paste(issue_html[group_vals == x], collapse = " "),

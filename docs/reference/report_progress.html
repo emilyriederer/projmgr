@@ -87,7 +87,7 @@ the results will be correctly rendered as HTML." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">projmgr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9900</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9901</span>
       </span>
     </div>
 
@@ -153,15 +153,23 @@ the results will be correctly rendered as HTML.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>report_progress</span>(<span class='no'>issues</span>)</pre>
+    <pre class="usage"><span class='fu'>report_progress</span>(<span class='no'>issues</span>, <span class='kw'>group_var</span> <span class='kw'>=</span> <span class='st'>"milestone_title"</span>,
+  <span class='kw'>show_stats</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>issues</th>
-      <td><p>Dataframe or tibble of issues and milestones, as returned by
-<code><a href='get_issues.html'>get_issues()</a></code> and <code><a href='parse_issues.html'>parse_issues()</a></code></p></td>
+      <td><p>Dataframe or tibble of issues and milestones, as returned by <code><a href='get_issues.html'>get_issues()</a></code> and <code><a href='parse_issues.html'>parse_issues()</a></code></p></td>
+    </tr>
+    <tr>
+      <th>group_var</th>
+      <td><p>Character string variable name by which to group issues. Defaults to <code>"milestone_title"</code></p></td>
+    </tr>
+    <tr>
+      <th>show_stats</th>
+      <td><p>Whether or not to show total, completed counts and percent for each group</p></td>
     </tr>
     </table>
     
