@@ -4,11 +4,12 @@
 \alias{report_progress}
 \title{Print issue-milestone progress in RMarkdown friendly way}
 \usage{
-report_progress(issues)
+report_progress(issues, group_var = "milestone_title")
 }
 \arguments{
-\item{issues}{Dataframe or tibble of issues and milestones, as returned by
-\code{get_issues()} and \code{parse_issues()}}
+\item{issues}{Dataframe or tibble of issues and milestones, as returned by \code{get_issues()} and \code{parse_issues()}}
+
+\item{group_var}{Character string variable name by which to group issues. Defaults to \code{"milestone_title"}}
 }
 \value{
 Returns character string of HTML with class attribute to be correctly

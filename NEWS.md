@@ -1,5 +1,10 @@
 # projmgr 0.0.0.9901
 
+* Added `listcol_extract()`, `listcol_pivot()` and `listcol_filter()` functions to work with assignee and label list-columns
+* Added optional `group_var` parameter to `report_progress()` 
+    - Can now group issues by other variables than just `milestone_title`
+    - Defaults to `milestone_title` for backwards compatibility
+
 # projmgr 0.0.0.9900
 
 * Added `report_taskboard()` as HTML / CSS alternative to `viz_taskboard()`

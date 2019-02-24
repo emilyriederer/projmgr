@@ -8,8 +8,8 @@
 #'
 #' The resulting HTML unordered list (<ul>) is tagged with class 'report_progress' for custom CSS styling.
 #'
-#' @param issues Dataframe or tibble of issues and milestones, as returned by
-#'     \code{get_issues()} and \code{parse_issues()}
+#' @param issues Dataframe or tibble of issues and milestones, as returned by \code{get_issues()} and \code{parse_issues()}
+#' @param group_var Character string variable name by which to group issues. Defaults to \code{"milestone_title"}
 #'
 #' @return Returns character string of HTML with class attribute to be correctly
 #'     shown "as-is" in RMarkdown
@@ -25,31 +25,31 @@
 #' ```
 #'}
 
-report_progress <- function(issues){
+report_progress <- function(issues, group_var = "milestone_title"){
 
   # prep data ----
-
-  df <- issues[!is.na(issues$milestone_title),]
-  milestone_title <- unique(df$milestone_title)
-  issue_closed_count <- vapply(milestone_title,
-                               function(x) sum(df$milestone_title == x & df$state == 'closed'),
+  df <- issues[!is.na(issues[[group_var]]),]
+  group_vals <- df[[group_var]]
+  group_title <- unique(group_vals)
+  issue_closed_count <- vapply(group_title,
+                               function(x) sum(group_vals == x & df$state == 'closed'),
                                integer(1) )
-  issue_count <- vapply( milestone_title ,
-                         FUN = function(x) sum(df$milestone_title == x),
+  issue_count <- vapply( group_title ,
+                         FUN = function(x) sum(group_vals == x),
                          FUN.VALUE = integer(1))
   issue_title <- df$title
   state <- df$state
 
   # write html ----
-  milestone_html <- fmt_milestone(milestone_title, issue_closed_count, issue_count)
+  title_html <- fmt_milestone(group_title, issue_closed_count, issue_count)
   issue_html <- fmt_issue( issue_title, state )
-  issue_html_grp <- vapply(milestone_title,
-                           FUN = function(x) paste(issue_html[df$milestone_title == x], collapse = " "),
+  issue_html_grp <- vapply(group_title,
+                           FUN = function(x) paste(issue_html[group_vals == x], collapse = " "),
                            FUN.VALUE = character(1))
-  milestone_issue_html_grp <- paste(milestone_html, "<ul  class = 'report_progress' style = 'list-style: none;'>", issue_html_grp, "</ul>")
+  html_grp <- paste(title_html, "<ul  class = 'report_progress' style = 'list-style: none;'>", issue_html_grp, "</ul>")
 
   # final output ----
-  html <- paste("<p/>", paste(milestone_issue_html_grp, collapse = " "), "<p/>")
+  html <- paste("<p/>", paste(html_grp, collapse = " "), "<p/>")
   class(html) <- c("knit_asis", class(html))
   return(html)
 
