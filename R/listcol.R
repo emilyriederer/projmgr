@@ -103,7 +103,7 @@ listcol_filter <- function(data, col_name, matches, is_regex = FALSE, any = TRUE
 #'
 #' @inheritParams listcol_pivot
 #' @param new_col_name Optional name of new column. Otherwise \code{regex} is used, stripped of any leading or trailing punctuation
-#' @param sep_matches Optional character to use to separate out (e.g. "," or ";"). If \code{NULL}, only one of matches will be kept
+#' @param sep_matches Optional character to use to separate out (e.g. "," or ";"). If \code{NA}, only one of matches will be kept
 #'     arbitrarily (whichever happens to come first in the list columns)
 #' @param keep_regex Optional logical denoting whether to keep regex part of matched item in value. Defaults to \code{FALSE}
 #'
@@ -126,7 +126,7 @@ listcol_extract <- function(data, col_name, regex, new_col_name = NULL, sep_matc
                                    if(!keep_regex) out <- sub(regex, "", out)
                                    if(length(out) == 0) out <- NA_character_
                                    if(length(out) > 1) {
-                                     if(!is.null(sep_matches)) paste(sort(out), collapse = sep_matches)
+                                     if(!is.na(sep_matches)) paste(sort(out), collapse = sep_matches)
                                      else warning(paste("More than one pattern match in single observation.",
                                                   "Results contain one of matches arbitrarily",
                                                   collapse = "\n")) }
