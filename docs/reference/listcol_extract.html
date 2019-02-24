@@ -86,7 +86,7 @@ create a new variable (e.g. &quot;priority&quot;, &quot;team&quot;) with the val
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">projmgr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9900</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9901</span>
       </span>
     </div>
 
@@ -152,7 +152,7 @@ create a new variable (e.g. "priority", "team") with the values encoded within t
     </div>
 
     <pre class="usage"><span class='fu'>listcol_extract</span>(<span class='no'>data</span>, <span class='no'>col_name</span>, <span class='no'>regex</span>, <span class='kw'>new_col_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>keep_regex</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+  <span class='kw'>sep_matches</span> <span class='kw'>=</span> <span class='st'>","</span>, <span class='kw'>keep_regex</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -172,6 +172,11 @@ create a new variable (e.g. "priority", "team") with the values encoded within t
     <tr>
       <th>new_col_name</th>
       <td><p>Optional name of new column. Otherwise <code>regex</code> is used, stripped of any leading or trailing punctuation</p></td>
+    </tr>
+    <tr>
+      <th>sep_matches</th>
+      <td><p>Optional character to use to separate out (e.g. "," or ";"). If <code>NULL</code>, only one of matches will be kept
+arbitrarily (whichever happens to come first in the list columns)</p></td>
     </tr>
     <tr>
       <th>keep_regex</th>
