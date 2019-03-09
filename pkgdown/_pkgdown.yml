@@ -59,7 +59,6 @@ reference:
   desc: "Parse data received from API as dataframe"
   contents:
   - starts_with("parse")
-  - starts_with("listcol")
 - title: Submission functions
   desc: "Send data to API (PUT)"
   contents:
@@ -90,5 +89,4 @@ reference:
   - -starts_with("report")
   - -starts_with("browse")
   - -starts_with("help")
-  - -starts_with("listcol")
   - -projmgr

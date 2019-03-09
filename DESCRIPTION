@@ -1,6 +1,6 @@
 Package: projmgr
 Title: Task tracking and project management with GitHub via R
-Version: 0.0.0.9901
+Version: 0.0.0.9900
 Authors@R:
     person(given = "Emily",
            family = "Riederer",

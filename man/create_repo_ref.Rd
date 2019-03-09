@@ -31,11 +31,6 @@ This function constructs a list of needed information to send API calls to a spe
 GitHub repository. Specifically, it stores information on the repository's name and
 owner, the type (whether or not Enterprise GitHub), and potentially credentials to authenticate.
 }
-\details{
-Note that this package can be used for GET requests on public repositories without any authentication
-(resulting in a lower rate limit.) To do this, simply pass any string into \code{identifier} that is not
-an environment variable already defined for your system (e.g. accessible through \code{Sys.getenv("MY_VAR")})
-}
 \examples{
 \dontrun{
 myrepo <- create_repo_ref('emilyriederer', 'myrepo')

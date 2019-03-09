@@ -21,24 +21,6 @@ An easier and safer approach to authentication is the personal access token (PAT
 
 For more information beyond this vignette, check out the relevant section of Jenny Bryan's [Happy Git with R](http://happygitwithr.com/github-pat.html) ebook.
 
-## Experimenting without a PAT
-
-For basic GET requests on public GitHub repos, a PAT is not strictly neccessay. You can still obtain some information from the GitHub API with no authetitcation; however, you may run into some roadblocks or be allowed fewer total requests per a fixed amount of time (also known as a rate limit).
-
-If you want to try this, simply pass any value into the `identifer` argument of `create_repo_ref()` that is **not** an environment variable on your system. For example, if:
-
-```{r eval = FALSE}
-Sys.getenv("XYZ")
-```
-
-returns an empty string, that means it is not in use. Then,
-
-```{r eval = FALSE}
-ref <- create_repo_ref("my_username", "my_repo", identifier = "XYZ")
-```
-
-will allow you to proceed without authentication.
-
 ## Getting a PAT
 
 Getting a PAT from GitHub is easy! 

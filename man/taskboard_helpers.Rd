@@ -85,8 +85,5 @@ Milestone-specific options:
 viz_taskboard(issues, in_progress_when = is_labeled_with('in-progress'))
 viz_taskboard(milestones, in_progress_when = is_created_before('2018-12-31'))
 viz_taskboard(issues, in_progress_when = is_in_milestone())
-report_taskboard(issues, in_progress_when = is_labeled_with('in-progress'))
-report_taskboard(milestones, in_progress_when = is_created_before('2018-12-31'))
-report_taskboard(issues, in_progress_when = is_in_milestone())
 }
 }
