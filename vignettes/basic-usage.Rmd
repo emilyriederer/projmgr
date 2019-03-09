@@ -39,6 +39,7 @@ Note that this function has many additional parameters that you can specify as n
 
 - if you are using GitHub Enterprise, set `is_enterprise = TRUE` and pass your company's internal GitHub URL in through `hostname`
 - if you personal access tokens are stored in environment variables with a different name than GITHUB_PAT (or GITHUB_PAT_ENT when `is_enterprise = TRUE`), the name you used can be passed through `hostname`
+- `identifier` lets you provide your credentials in different ways if you haven't set up a PAT or it is called something else (see the GitHub PAT vignette or the `create_repo_ref()` documentation for more details)
 
 The `check_` family of functions provide some basic validations that everything is working.
 

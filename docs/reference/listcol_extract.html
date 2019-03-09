@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create reference to a GitHub repository — create_repo_ref • projmgr</title>
+<title>Extract new dataframe column from list-column matching pattern — listcol_extract • projmgr</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -38,11 +38,12 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Create reference to a GitHub repository — create_repo_ref" />
+<meta property="og:title" content="Extract new dataframe column from list-column matching pattern — listcol_extract" />
 
-<meta property="og:description" content="This function constructs a list of needed information to send API calls to a specific
-GitHub repository. Specifically, it stores information on the repository's name and
-owner, the type (whether or not Enterprise GitHub), and potentially credentials to authenticate." />
+<meta property="og:description" content="Creaes a new column in your dataframe based on a subset of list-column values following a certain patten. For example,
+this is useful if you have labels you always apply to a repository with a set structure, e.g. key-value pairs like &quot;priority:high&quot;,
+&quot;priority:medium&quot;, and &quot;priority:low&quot; or other structures like &quot;engagement-team&quot;, &quot;teaching-team&quot;, etc. This function could
+create a new variable (e.g. &quot;priority&quot;, &quot;team&quot;) with the values encoded within the labels." />
 
 <meta property="og:image" content="https://emilyriederer.github.io/projmgr/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -136,70 +137,70 @@ owner, the type (whether or not Enterprise GitHub), and potentially credentials 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create reference to a GitHub repository</h1>
-    <small class="dont-index">Source: <a href='https://github.com/emilyriederer/projmgr/blob/master/R/repo-ref.R'><code>R/repo-ref.R</code></a></small>
-    <div class="hidden name"><code>create_repo_ref.Rd</code></div>
+    <h1>Extract new dataframe column from list-column matching pattern</h1>
+    <small class="dont-index">Source: <a href='https://github.com/emilyriederer/projmgr/blob/master/R/listcol.R'><code>R/listcol.R</code></a></small>
+    <div class="hidden name"><code>listcol_extract.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>This function constructs a list of needed information to send API calls to a specific
-GitHub repository. Specifically, it stores information on the repository's name and
-owner, the type (whether or not Enterprise GitHub), and potentially credentials to authenticate.</p>
+    <p>Creaes a new column in your dataframe based on a subset of list-column values following a certain patten. For example,
+this is useful if you have labels you always apply to a repository with a set structure, e.g. key-value pairs like "priority:high",
+"priority:medium", and "priority:low" or other structures like "engagement-team", "teaching-team", etc. This function could
+create a new variable (e.g. "priority", "team") with the values encoded within the labels.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>create_repo_ref</span>(<span class='no'>repo_owner</span>, <span class='no'>repo_name</span>, <span class='kw'>is_enterprise</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>hostname</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>identifier</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>password</span> <span class='kw'>=</span> <span class='st'>""</span>)</pre>
+    <pre class="usage"><span class='fu'>listcol_extract</span>(<span class='no'>data</span>, <span class='no'>col_name</span>, <span class='no'>regex</span>, <span class='kw'>new_col_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>sep_matches</span> <span class='kw'>=</span> <span class='st'>","</span>, <span class='kw'>keep_regex</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>repo_owner</th>
-      <td><p>Repository owner's username or GitHub Organization name</p></td>
+      <th>data</th>
+      <td><p>Dataframe containing a list column (e.g. an issues dataframe)</p></td>
     </tr>
     <tr>
-      <th>repo_name</th>
-      <td><p>Repository name</p></td>
+      <th>col_name</th>
+      <td><p>Character string containing column name of list column (e.g. <code>labels_name</code> or <code>assignees_login</code>)</p></td>
     </tr>
     <tr>
-      <th>is_enterprise</th>
-      <td><p>Boolean denoting whether or not working with Enterprise GitHub.Defaults to <code>FALSE</code></p></td>
+      <th>regex</th>
+      <td><p>Character string of regular expression to identify list items of interest (e.g. <code>"^priority:", "^(bug|feature)$"</code>)</p></td>
     </tr>
     <tr>
-      <th>hostname</th>
-      <td><p>Host URL stub for Enterprise repositories (e.g. "mycorp.github.com")</p></td>
+      <th>new_col_name</th>
+      <td><p>Optional name of new column. Otherwise <code>regex</code> is used, stripped of any leading or trailing punctuation</p></td>
     </tr>
     <tr>
-      <th>identifier</th>
-      <td><p>Ideally should be left blank and defaults to using <code>GITHUB_PAT</code> or <code>GITHUB_ENT_PAT</code>
-environment variables as Personal Access Tokens. If <code>identifier</code> has a value and <code>password</code> does not,
-this is assumed to be an alternative name of the environment variable to use for your Personal Access Token. If
-<code>password</code> is also provided, this is interpreted as a username.</p></td>
+      <th>sep_matches</th>
+      <td><p>Optional character to use to separate out (e.g. "," or ";"). If <code>NA</code>, only one of matches will be kept
+arbitrarily (whichever happens to come first in the list columns)</p></td>
     </tr>
     <tr>
-      <th>password</th>
-      <td><p>GitHub password. Ideally should be left blank and then defaults to empty string which works in conjunction with personal access tokens. Required if supplying username.</p></td>
+      <th>keep_regex</th>
+      <td><p>Optional logical denoting whether to keep regex part of matched item in value. Defaults to <code>FALSE</code></p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>List of repository reference information and credentials</p>
+    <p>Dataframe with new column taking values extracted from list column</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Note that this package can be used for GET requests on public repositories without any authentication
-(resulting in a lower rate limit.) To do this, simply pass any string into <code>identifier</code> that is not
-an environment variable already defined for your system (e.g. accessible through <code><a href='https://www.rdocumentation.org/packages/base/topics/Sys.getenv'>Sys.getenv("MY_VAR")</a></code>)</p>
+    <p>This function works only if each observatino contains at most one instance of a given patterns. When multiple labels match the
+same pattern, one is returned at random.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='no'>myrepo</span> <span class='kw'>&lt;-</span> <span class='fu'>create_repo_ref</span>(<span class='st'>'emilyriederer'</span>, <span class='st'>'myrepo'</span>)
-<span class='co'># }</span><div class='input'>
-</div></pre>
+<span class='no'>issues</span> <span class='kw'>&lt;-</span>
+    <span class='fu'><a href='get_issues.html'>get_issues</a></span>(<span class='no'>repo</span>) <span class='kw'>%&gt;%</span>
+    <span class='fu'><a href='parse_issues.html'>parse_issues</a></span>() <span class='kw'>%&gt;%</span>
+    <span class='fu'>listcol_extract</span>(<span class='st'>"labels_name"</span>, <span class='st'>"-team$"</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

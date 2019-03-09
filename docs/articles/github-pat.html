@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">projmgr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9900</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9901</span>
       </span>
     </div>
 
@@ -103,6 +103,16 @@
 <p>Functions in <code>projmgr</code> that pull information from GitHub (e.g. <code>get_issues</code>) or send information to GitHub (e.g. <code>post_issue</code>) require credentials for authentication. Just like users are asked to provide a username and password when logging in to the GitHub’s website, these credentials identify you, protect your information security, and prevent unauthorized parties from altering your information (among other API-specific purposes.) However, there are many reasons you won’t want to send your username and password through these functions. First of all, it’s inconvenient to type your credentials over and over. More importantly, it’s generally a bad idea to hardcode your password; you might accidentally sharing a script that has your password in it.</p>
 <p>An easier and safer approach to authentication is the personal access token (PAT). At a high level, this is a random string of characters GitHub assigns to you and you alone. By saving this in your R environment, <code>projmgr</code> can automatically provide this variable to GitHub instead of your login for better safety and efficiency.</p>
 <p>For more information beyond this vignette, check out the relevant section of Jenny Bryan’s <a href="http://happygitwithr.com/github-pat.html">Happy Git with R</a> ebook.</p>
+<div id="experimenting-without-a-pat" class="section level2">
+<h2 class="hasAnchor">
+<a href="#experimenting-without-a-pat" class="anchor"></a>Experimenting without a PAT</h2>
+<p>For basic GET requests on public GitHub repos, a PAT is not strictly neccessay. You can still obtain some information from the GitHub API with no authetitcation; however, you may run into some roadblocks or be allowed fewer total requests per a fixed amount of time (also known as a rate limit).</p>
+<p>If you want to try this, simply pass any value into the <code>identifer</code> argument of <code><a href="../reference/create_repo_ref.html">create_repo_ref()</a></code> that is <strong>not</strong> an environment variable on your system. For example, if:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Sys.getenv">Sys.getenv</a></span>(<span class="st">"XYZ"</span>)</code></pre></div>
+<p>returns an empty string, that means it is not in use. Then,</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ref &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_repo_ref.html">create_repo_ref</a></span>(<span class="st">"my_username"</span>, <span class="st">"my_repo"</span>, <span class="dt">identifier =</span> <span class="st">"XYZ"</span>)</code></pre></div>
+<p>will allow you to proceed without authentication.</p>
+</div>
 <div id="getting-a-pat" class="section level2">
 <h2 class="hasAnchor">
 <a href="#getting-a-pat" class="anchor"></a>Getting a PAT</h2>
@@ -158,7 +168,8 @@ GITHUB_ENT_PAT =<span class="st"> 'djghdu830603jfhdktej3n4aj38090dj'</span></cod
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#getting-a-pat">Getting a PAT</a></li>
+<li><a href="#experimenting-without-a-pat">Experimenting without a PAT</a></li>
+      <li><a href="#getting-a-pat">Getting a PAT</a></li>
       <li><a href="#setting-your-pat">Setting your PAT</a></li>
       <li><a href="#using-multiple-pats">Using multiple PATs</a></li>
       </ul>

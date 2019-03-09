@@ -141,7 +141,8 @@ post_plan <- function(ref, plan, distinct = TRUE){
   issues <- mapply( FUN = function(x,y){
                             x[["milestone"]] <- y
                             return(x)
-                          }, issues, milestone_num_rep)
+                          }, issues, milestone_num_rep,
+                    SIMPLIFY = FALSE)
 
   # create issues ----
   req_issues <- post_todo(ref, issues)

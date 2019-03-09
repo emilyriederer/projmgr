@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create reference to a GitHub repository — create_repo_ref • projmgr</title>
+<title>Pivot list-column elements to indicator variables — listcol_pivot • projmgr</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -38,11 +38,12 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Create reference to a GitHub repository — create_repo_ref" />
+<meta property="og:title" content="Pivot list-column elements to indicator variables — listcol_pivot" />
 
-<meta property="og:description" content="This function constructs a list of needed information to send API calls to a specific
-GitHub repository. Specifically, it stores information on the repository's name and
-owner, the type (whether or not Enterprise GitHub), and potentially credentials to authenticate." />
+<meta property="og:description" content="Some outputs of the get_ and parse_ functions contain list-columns (e.g. the labels column in the issues dataframe).
+This is an efficient way to represent the provided information, but may make certain information seem slightly inaccessible. This
+function allows users to &quot;pivot&quot; these list columns and instead create a seperate indicator variable to represent the presence
+or absence of matches within the list column." />
 
 <meta property="og:image" content="https://emilyriederer.github.io/projmgr/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -85,7 +86,7 @@ owner, the type (whether or not Enterprise GitHub), and potentially credentials 
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">projmgr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9901</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9900</span>
       </span>
     </div>
 
@@ -136,70 +137,70 @@ owner, the type (whether or not Enterprise GitHub), and potentially credentials 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create reference to a GitHub repository</h1>
-    <small class="dont-index">Source: <a href='https://github.com/emilyriederer/projmgr/blob/master/R/repo-ref.R'><code>R/repo-ref.R</code></a></small>
-    <div class="hidden name"><code>create_repo_ref.Rd</code></div>
+    <h1>Pivot list-column elements to indicator variables</h1>
+    <small class="dont-index">Source: <a href='https://github.com/emilyriederer/projmgr/blob/master/R/listcol.R'><code>R/listcol.R</code></a></small>
+    <div class="hidden name"><code>listcol_pivot.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>This function constructs a list of needed information to send API calls to a specific
-GitHub repository. Specifically, it stores information on the repository's name and
-owner, the type (whether or not Enterprise GitHub), and potentially credentials to authenticate.</p>
+    <p>Some outputs of the <code>get_</code> and <code>parse_</code> functions contain list-columns (e.g. the labels column in the issues dataframe).
+This is an efficient way to represent the provided information, but may make certain information seem slightly inaccessible. This
+function allows users to "pivot" these list columns and instead create a seperate indicator variable to represent the presence
+or absence of matches within the list column.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>create_repo_ref</span>(<span class='no'>repo_owner</span>, <span class='no'>repo_name</span>, <span class='kw'>is_enterprise</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>hostname</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>identifier</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>password</span> <span class='kw'>=</span> <span class='st'>""</span>)</pre>
+    <pre class="usage"><span class='fu'>listcol_pivot</span>(<span class='no'>data</span>, <span class='no'>col_name</span>, <span class='kw'>regex</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>transform_fx</span> <span class='kw'>=</span> <span class='no'>identity</span>,
+  <span class='kw'>delete_orig</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>repo_owner</th>
-      <td><p>Repository owner's username or GitHub Organization name</p></td>
+      <th>data</th>
+      <td><p>Dataframe containing a list column (e.g. an issues dataframe)</p></td>
     </tr>
     <tr>
-      <th>repo_name</th>
-      <td><p>Repository name</p></td>
+      <th>col_name</th>
+      <td><p>Character string containing column name of list column (e.g. <code>labels_name</code> or <code>assignees_login</code>)</p></td>
     </tr>
     <tr>
-      <th>is_enterprise</th>
-      <td><p>Boolean denoting whether or not working with Enterprise GitHub.Defaults to <code>FALSE</code></p></td>
+      <th>regex</th>
+      <td><p>Character string of regular expression to identify list items of interest (e.g. <code>"^priority:", "^(bug|feature)$"</code>)</p></td>
     </tr>
     <tr>
-      <th>hostname</th>
-      <td><p>Host URL stub for Enterprise repositories (e.g. "mycorp.github.com")</p></td>
+      <th>transform_fx</th>
+      <td><p>Function to transform label name before converting to column (e.g. <code><a href='https://www.rdocumentation.org/packages/base/topics/grep'>sub(":", "_")</a></code>)</p></td>
     </tr>
     <tr>
-      <th>identifier</th>
-      <td><p>Ideally should be left blank and defaults to using <code>GITHUB_PAT</code> or <code>GITHUB_ENT_PAT</code>
-environment variables as Personal Access Tokens. If <code>identifier</code> has a value and <code>password</code> does not,
-this is assumed to be an alternative name of the environment variable to use for your Personal Access Token. If
-<code>password</code> is also provided, this is interpreted as a username.</p></td>
-    </tr>
-    <tr>
-      <th>password</th>
-      <td><p>GitHub password. Ideally should be left blank and then defaults to empty string which works in conjunction with personal access tokens. Required if supplying username.</p></td>
+      <th>delete_orig</th>
+      <td><p>Logical denoting whether or not to delete original list column provided by <code>col_name</code></p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>List of repository reference information and credentials</p>
+    <p>Dataframe additional logical columns denoting absence / presence of specified list-column elements</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Note that this package can be used for GET requests on public repositories without any authentication
-(resulting in a lower rate limit.) To do this, simply pass any string into <code>identifier</code> that is not
-an environment variable already defined for your system (e.g. accessible through <code><a href='https://www.rdocumentation.org/packages/base/topics/Sys.getenv'>Sys.getenv("MY_VAR")</a></code>)</p>
+    <p>For example, if a repository tags issues with "priority:high", "priority:medium", and "priority:low" along with other labels,
+this function could be used to create separate "high", "medium", and "low" columns to denote different issue severities. This
+could be done with <code>listcol_pivot(data, "labels_name", "^priority:", function(x) sub("^priority:", ""))</code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='no'>myrepo</span> <span class='kw'>&lt;-</span> <span class='fu'>create_repo_ref</span>(<span class='st'>'emilyriederer'</span>, <span class='st'>'myrepo'</span>)
-<span class='co'># }</span><div class='input'>
-</div></pre>
+    <pre class="examples"># NOT RUN {
+issues <-
+  get_issues(repo) %>%
+  parse_issues() %>%
+  listcol_pivot(col_name = "labels_name",
+                regex = "^priority:",
+                transform_fx = function(x) paste0("label_",x)),
+                delete_orig = TRUE)
+# }
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

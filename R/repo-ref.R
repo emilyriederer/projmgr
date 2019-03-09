@@ -4,6 +4,10 @@
 #' GitHub repository. Specifically, it stores information on the repository's name and
 #' owner, the type (whether or not Enterprise GitHub), and potentially credentials to authenticate.
 #'
+#' Note that this package can be used for GET requests on public repositories without any authentication
+#' (resulting in a lower rate limit.) To do this, simply pass any string into \code{identifier} that is not
+#' an environment variable already defined for your system (e.g. accessible through \code{Sys.getenv("MY_VAR")})
+#'
 #' @param repo_owner Repository owner's username or GitHub Organization name
 #' @param repo_name Repository name
 #' @param is_enterprise Boolean denoting whether or not working with Enterprise GitHub.Defaults to \code{FALSE}
@@ -61,7 +65,10 @@ create_repo_ref <-
       message("Requests will authenticate with GITHUB_ENT_PAT")
     }
     else{
-      stop("Insufficient credentials provided. Please see vignette on Personal Access Tokens or provide login information.",
+      stop(paste("Insufficient credentials provided.",
+                 "Please see vignette on Personal Access Tokens or provide login information.",
+                 "Otherwise, enter a meaningless string into the identifier field to attempt to proceed without credentials.",
+                 collapse = "\n"),
            .call = FALSE)
     }
 
