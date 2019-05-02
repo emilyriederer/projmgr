@@ -1,5 +1,6 @@
 ^appveyor\.yml$
 ^CODE_OF_CONDUCT\.md$
+^PRIVACY\.md$
 ^LICENSE\.md$
 ^CREDITS\.md$
 ^projmgr\.Rproj$
