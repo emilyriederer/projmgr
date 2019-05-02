@@ -24,6 +24,11 @@ navbar:
    - icon: fa-github
      href: https://github.com/emilyriederer/projmgr/
 
+home:
+  links:
+  - text: "Site Privacy Policy"
+    href: PRIVACY.html
+
 articles:
   - title: "Getting Started"
     desc: Introduction to tools, set-up, and design
