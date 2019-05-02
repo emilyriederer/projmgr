@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">projmgr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9900</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9901</span>
       </span>
     </div>
 
@@ -112,7 +112,7 @@ issues &lt;-<span class="st"> </span><span class="kw"><a href="../reference/pars
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/report_progress.html">report_progress</a></span>(issues)</code></pre></div>
 <p></p>
 <strong> Data cleaning and validation </strong> <em> ( 100 % Complete - 3 / 3 Issues) </em>
-<ul style="list-style: none;">
+<ul class="report_progress" style="list-style: none;">
 <li>
 ☑ Resolve data quality issues
 </li>
@@ -124,7 +124,7 @@ issues &lt;-<span class="st"> </span><span class="kw"><a href="../reference/pars
 </li>
 </ul>
 <strong> Exploratory data analysis </strong> <em> ( 50 % Complete - 1 / 2 Issues) </em>
-<ul style="list-style: none;">
+<ul class="report_progress" style="list-style: none;">
 <li>
 ☐ Visualizations
 </li>
@@ -137,7 +137,7 @@ issues &lt;-<span class="st"> </span><span class="kw"><a href="../reference/pars
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">html &lt;-<span class="st"> </span><span class="kw"><a href="../reference/report_progress.html">report_progress</a></span>(issues)
 <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/class">class</a></span>(html) &lt;-<span class="st"> "character"</span>
 html
-<span class="co">#&gt; [1] "&lt;p/&gt; &lt;strong&gt; Data cleaning and validation &lt;/strong&gt; &lt;em&gt; ( 100 % Complete -  3 / 3  Issues) &lt;/em&gt; &lt;ul style = 'list-style: none;'&gt; &lt;li&gt;  &amp;#9745; Resolve data quality issues &lt;/li&gt; &lt;li&gt;  &amp;#9745; Assess data quality &lt;/li&gt; &lt;li&gt;  &amp;#9745; Define data quality standards &lt;/li&gt; &lt;/ul&gt; &lt;strong&gt; Exploratory data analysis &lt;/strong&gt; &lt;em&gt; ( 50 % Complete -  1 / 2  Issues) &lt;/em&gt; &lt;ul style = 'list-style: none;'&gt; &lt;li&gt;  &amp;#9744; Visualizations &lt;/li&gt; &lt;li&gt;  &amp;#9745; Summary statistics &lt;/li&gt; &lt;/ul&gt; &lt;p/&gt;"</span></code></pre></div>
+<span class="co">#&gt; [1] "&lt;p/&gt; &lt;strong&gt; Data cleaning and validation &lt;/strong&gt; &lt;em&gt; ( 100 % Complete -  3 / 3  Issues) &lt;/em&gt; &lt;ul  class = 'report_progress' style = 'list-style: none;'&gt; &lt;li&gt;  &amp;#9745; Resolve data quality issues &lt;/li&gt; &lt;li&gt;  &amp;#9745; Assess data quality &lt;/li&gt; &lt;li&gt;  &amp;#9745; Define data quality standards &lt;/li&gt; &lt;/ul&gt; &lt;strong&gt; Exploratory data analysis &lt;/strong&gt; &lt;em&gt; ( 50 % Complete -  1 / 2  Issues) &lt;/em&gt; &lt;ul  class = 'report_progress' style = 'list-style: none;'&gt; &lt;li&gt;  &amp;#9744; Visualizations &lt;/li&gt; &lt;li&gt;  &amp;#9745; Summary statistics &lt;/li&gt; &lt;/ul&gt; &lt;p/&gt;"</span></code></pre></div>
 <p>(Note - this is just for illustration purposes! You do <strong>NOT</strong> have to change the class in order to send emails.)</p>
 </div>
 <div id="sending-emails" class="section level2">

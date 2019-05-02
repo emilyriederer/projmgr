@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">projmgr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9900</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9901</span>
       </span>
     </div>
 
@@ -113,7 +113,7 @@
 <p>Note that this plot shows some of the risks of black-box functions. At the time of writing, the “bluesky” milestone was open on GitHub yet has no uncompleted issues. It’s important to be precise about your definition of done, or change the <code>start</code> and <code>end</code> parameters to use variables most closely aligned to your definition.</p>
 <p>As a <code>ggplot</code>, standard <code>ggplot2</code> features and styling can be added to the output.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/viz_gantt.html">viz_gantt</a></span>(dplyr_milestones) <span class="op">+</span>
-<span class="st">  </span>ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(<span class="dt">subtitle =</span> <span class="st">'Milestones in the dplyr repository'</span>)
+<span class="st">  </span>ggplot2<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/labs">labs</a></span>(<span class="dt">subtitle =</span> <span class="st">'Milestones in the dplyr repository'</span>)
 <span class="co">#&gt; Warning: Removed 4 rows containing missing values (geom_point).</span></code></pre></div>
 <p><img src="visualization_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 <p>Either gantt charts or task boards (next section) can also be passed through <code>viz_linked</code> to add links to their text back to the relevant GitHub milestones. This only works in RMarkdown with the <code>results = "asis"</code> chunk option or saved to a file.</p>
@@ -164,8 +164,8 @@
 <a href="#html-task-boards" class="anchor"></a>HTML Task Boards</h2>
 <p>As an alternative to plot-based taskboards, the <code><a href="../reference/report_taskboard.html">report_taskboard()</a></code> function creates a taskboard built with HTML and CSS.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/report_taskboard.html">report_taskboard</a></span>(pkg_issues, <span class="dt">in_progress_when =</span> <span class="kw"><a href="../reference/taskboard_helpers.html">is_assigned_to</a></span>(<span class="st">"emilyriederer"</span>))</code></pre></div>
-<div class="xkwowvpsxi">
-<style>.taskboard{display: grid;grid-gap: 1%;grid-template-columns: 1fr 1fr 1fr;margin-bottom: 50px;}.head{background-color: #a9a9a9;border: 1px solid #d3d3d3;text-align: center;font-weight: strong;}.task{text-align: center;padding: 2%;margin: 2%;border: 1px solid #d3d3d3;box-shadow: 2px 2px 5px grey;transition-duration:0.5s;}.xkwowvpsxi .ns{background-color:#f0e442;}.xkwowvpsxi .ip{background-color:#56b4e9;}.xkwowvpsxi .dn{background-color:#009e73;}div.taskboard a, div.taskboard a:visited{color: black;text-decoration: none;}div.taskboard a:hover{color: black;text-decoration: underline;}div.taskboard a:active{color: white;}</style>
+<div class="hchwcgzlnw">
+<style>.taskboard{display: grid;grid-gap: 1%;grid-template-columns: 1fr 1fr 1fr;margin-bottom: 50px;}.head{background-color: #a9a9a9;border: 1px solid #d3d3d3;text-align: center;font-weight: strong;}.task{text-align: center;padding: 2%;margin: 2%;border: 1px solid #d3d3d3;box-shadow: 2px 2px 5px grey;transition-duration:0.5s;}.hchwcgzlnw .ns{background-color:#f0e442;}.hchwcgzlnw .ip{background-color:#56b4e9;}.hchwcgzlnw .dn{background-color:#009e73;}div.taskboard a, div.taskboard a:visited{color: black;text-decoration: none;}div.taskboard a:hover{color: black;text-decoration: underline;}div.taskboard a:active{color: white;}</style>
 <div class="taskboard">
 <div class="head">
 Not Started
@@ -220,8 +220,8 @@ Add JSON support for plan / todo
                  <span class="dt">include_link =</span> <span class="ot">FALSE</span>,
                  <span class="dt">hover =</span> <span class="ot">TRUE</span>,
                  <span class="dt">colors =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">'#ff0000'</span>, <span class="st">'#00ff00'</span>, <span class="st">'#0000ff'</span>))</code></pre></div>
-<div class="eufigojxjl">
-<style>.taskboard{display: grid;grid-gap: 1%;grid-template-columns: 1fr 1fr 1fr;margin-bottom: 50px;}.head{background-color: #a9a9a9;border: 1px solid #d3d3d3;text-align: center;font-weight: strong;}.task{text-align: center;padding: 2%;margin: 2%;border: 1px solid #d3d3d3;box-shadow: 2px 2px 5px grey;transition-duration:0.5s;}.eufigojxjl .task:hover{margin: 0%;padding: 4%;}.eufigojxjl .ns{background-color:#ff0000;}.eufigojxjl .ip{background-color:#00ff00;}.eufigojxjl .dn{background-color:#0000ff;}div.taskboard a, div.taskboard a:visited{color: black;text-decoration: none;}div.taskboard a:hover{color: black;text-decoration: underline;}div.taskboard a:active{color: white;}</style>
+<div class="nunvztvpyt">
+<style>.taskboard{display: grid;grid-gap: 1%;grid-template-columns: 1fr 1fr 1fr;margin-bottom: 50px;}.head{background-color: #a9a9a9;border: 1px solid #d3d3d3;text-align: center;font-weight: strong;}.task{text-align: center;padding: 2%;margin: 2%;border: 1px solid #d3d3d3;box-shadow: 2px 2px 5px grey;transition-duration:0.5s;}.nunvztvpyt .task:hover{margin: 0%;padding: 4%;}.nunvztvpyt .ns{background-color:#ff0000;}.nunvztvpyt .ip{background-color:#00ff00;}.nunvztvpyt .dn{background-color:#0000ff;}div.taskboard a, div.taskboard a:visited{color: black;text-decoration: none;}div.taskboard a:hover{color: black;text-decoration: underline;}div.taskboard a:active{color: white;}</style>
 <div class="taskboard">
 <div class="head">
 Not Started
