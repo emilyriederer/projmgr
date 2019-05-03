@@ -137,7 +137,7 @@ post_plan <- function(ref, plan, distinct = TRUE){
   milestone_title_rep <- rep(milestone_title, issues_per_milestone)
 
   ## wrangle milestone nums into issue data
-  issues <- unlist( sapply(plan, FUN = function(x) x[["issue"]]), recursive = FALSE )
+  issues <- unlist( lapply(plan, FUN = function(x) x[["issue"]]), recursive = FALSE )
   issues <- mapply( FUN = function(x,y){
                             x[["milestone"]] <- y
                             return(x)

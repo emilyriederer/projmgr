@@ -7,7 +7,7 @@
       body: Describe this step
       assignees: [emilyriederer]
       labels: [a, b, c]
-    - title: Title of task 2 to comple
+    - title: Title of task 2 to complete
       body: Describe this step
       labels: [low]
 
@@ -15,7 +15,7 @@
   description: >
     Enter a longer description of the objectives
   issue:
-    - title: Title of task 1 to complete
+    - title: Title of task 1 to complete for step 2
       body: Describe this step
-    - title: Title of task 2 to complete
+    - title: Title of task 2 to complete for step 2
       body: Describe this step
