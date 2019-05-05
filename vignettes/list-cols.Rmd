@@ -1,0 +1,150 @@
+---
+title: "Wrangling Label and Assignee List Columns"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Wrangling Label and Assignee List Columns}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+library(projmgr)
+```
+
+Most of the information provided by the GitHub API is well-suited for a tabular data structure. Entities like issues and milestones can easily be represented as a row of a dataset, and characteristics about them (e.g. date created, open / closed status) each fit one column. 
+
+The main exception to this rule is assignees and labels as these potentially have a "one-to-many" relationship with issues. (That is, one issue can have multiple assignees or multiple labels.) One way this could have been represented is to create separate key tables for issues-assignees and issues-milestones. However, this seemed like a bulky solution that would result in many unneccesary joins and API calls.
+
+Instead, `parse_issues()` uses [list columns](https://jennybc.github.io/purrr-tutorial/ls13_list-columns.html) to represent assignees and labels. Essentially, the `labels_name` and `assignees_name` columns do not contain character *values* but instead, each row contains its own *list of values*. This may seem unintuitive at first, but list columns are a neat way to rectangularize nested data structures. 
+
+However, wrangling list columns is slightly different than wrangling values due to the extra level of containment. To help effectively work with these list columns, `projmgr` offers three helper functions: `listcol_extract`, `listcol_filter`, and `listcol_pivot`. These are particularly well-suited to help in cases where labels are used to encode issue metadata in some sort of key-value pair. For example, one might use a format like `"priority:high"` to denote importance or `"blue-team"` to denote responsibility.
+
+To see these in action, we will take a snapshot of issues from the RForwards repo.
+
+```{r eval = FALSE}
+forwards <- create_repo_ref("forwards", "tasks")
+issues <- get_issues(forwards) %>% parse_issues()
+```
+
+```{r echo = FALSE}
+issues <- readRDS(system.file("extdata", "forwards_issues.rds", package = "projmgr", mustWork = TRUE))
+```
+
+As we can see, the `labels_name` column contains lists of entries. 
+
+```{r message = FALSE, warning = FALSE}
+library(dplyr)
+select(issues, labels_name, number, title) %>% head()
+```
+
+One common use of labels in this repo is to denote the team responsible for completing a task, denoted by the tag `"{name}-team"`.
+
+```{r}
+unique(unlist(issues$labels_name))
+```
+
+
+## Filter List Column
+
+The `listcol_filter()` lets us filter our data only to the isues relevant to a certain list column entry. For example, the data currently contains 26 issues.
+
+```{r}
+nrow(issues)
+```
+
+If we are only interested in issues that have been designated for a certain task force, we can filter to those ending with "-team". 
+
+```{r}
+listcol_filter(issues, "labels_name", matches = "-team$", is_regex = TRUE) %>% nrow()
+```
+
+Even more specifically, if we are members of the teaching team and want to find issues we are responsible for, we can search for an exact match.
+
+```{r}
+listcol_filter(issues, "labels_name", matches = "teaching-team") %>% nrow()
+```
+
+
+## Extract List Column
+
+The `listcol_extract()` function creates a new column in the data by checking each element of the list column for a certain structure. For example, we can create a `team` column in our dataset by extracting the labels ending in `"-team"`.
+
+```{r}
+select(issues, labels_name, number) %>%
+  listcol_extract("labels_name", regex = "-team$") %>%
+  head()
+```
+
+By default, the function names the new column a "cleaned-up" form of the regex used for matching, but this can be overridden with the `new_col_name` argument. 
+
+```{r}
+select(issues, labels_name, number) %>%
+  listcol_extract("labels_name", regex = "-team$", new_col_name = "team_name") %>%
+  head()
+```
+
+By default, the function also drops the regex from the values. This is controlled by the `keep_regex` argument.
+
+```{r}
+select(issues, labels_name, number) %>%
+  listcol_extract("labels_name", regex = "-team$", keep_regex = TRUE) %>%
+  head()
+```
+
+## Pivot List Column
+
+Finally, the `listcol_pivot()` helped function identifies all labels matching a regex, extract all the "values" from the key-value pair, and pivots these into boolean columns. For example, the following code makes a widened dataframe with a separate column for each team. `TRUE` denotes the fact that that team is responsible for that issue.
+
+```{r}
+issues_by_team <-
+select(issues, number, labels_name) %>%
+  listcol_pivot("labels_name", 
+                regex = "-team$",
+                transform_fx = function(x) sub("-team", "", x), 
+                delete_orig = TRUE) 
+
+head(issues_by_team)
+```
+
+This has many convenient use-cases, including being able to quickly see the number falling into each category.
+
+```{r}
+issues_by_team %>% select(-number) %>% summarize_all(sum)
+```
+
+## A tidyr alternative
+
+Besides these helper columns, another convenient way to work with these list columns is by using `tidyr::unnest()` to create key tables mapping issue numbers (`number`) to the label names (`labels_name`) or assignees (`assignees_login`).
+
+```{r message = FALSE, warning = FALSE}
+library(tidyr)
+```
+
+For example, below we select only the issue number and the labels name columns.
+
+```{r}
+issues_labels <-
+  issues %>%
+  select(number, labels_name) %>%
+  unnest()
+
+head(issues_labels)
+```
+
+The same can be done to map between issue numbers and assignees.
+
+```{r}
+issues_assignees <-
+  issues %>%
+  select(number, assignees_login) %>%
+  unnest()
+
+head(issues_assignees)
+```
+
+Logic could then be done on these key tables to identify relevant issue numbers and joined / filtered back on to the complete issues dataframe.
