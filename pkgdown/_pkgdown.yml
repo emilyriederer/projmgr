@@ -44,6 +44,7 @@ articles:
     - reporting
     - visualization
     - events-data
+    - list-cols
   - title: "Tour by Application"
     desc: Demo of possible applications for personal projects, academia, and industry
     contents:
