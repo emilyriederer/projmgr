@@ -47,6 +47,8 @@ parse_issues <- function( res ) {
                           closed_at = fmt_safe_date( x[["closed_at"]] ),
                           author_association = fmt_safe_chr( x[["author_association"]] ),
                           body = fmt_safe_chr( x[["body"]] ),
+                          repo_owner = fmt_safe_chr( x[["repo_owner"]] ),
+                          repo_name = fmt_safe_chr( x[["repo_name"]] ),
                           stringsAsFactors = FALSE
               ),
             simplify = FALSE
@@ -112,6 +114,8 @@ parse_issue_events <- function(res){
                           actor_login = fmt_safe_chr( x[["actor"]]$login ),
                           event = fmt_safe_chr( x[["event"]] ),
                           created_at = fmt_safe_date( x[["created_at"]] ),
+                          repo_owner = fmt_safe_chr( x[["repo_owner"]] ),
+                          repo_name = fmt_safe_chr( x[["repo_name"]] ),
 
                           # possible fields depending on event type
                           label_name = fmt_safe_chr( x[["label"]]$name ),
@@ -156,6 +160,8 @@ parse_issue_comments <- function(res){
                 author_association = fmt_safe_chr( x[["author_association"]] ),
                 body = fmt_safe_chr( x[["body"]] ),
                 number = fmt_safe_chr( x[["number"]] ),
+                repo_owner = fmt_safe_chr( x[["repo_owner"]] ),
+                repo_name = fmt_safe_chr( x[["repo_name"]] ),
                 stringsAsFactors = FALSE
               ),
             simplify = FALSE
@@ -201,6 +207,8 @@ parse_milestones <- function(res){
                 updated_at = fmt_safe_date( x[["updated_at"]] ),
                 closed_at = fmt_safe_date( x[["closed_at"]] ),
                 due_on = fmt_safe_date( x[["due_on"]] ),
+                repo_owner = fmt_safe_chr( x[["repo_owner"]] ),
+                repo_name = fmt_safe_chr( x[["repo_name"]] ),
                 stringsAsFactors = FALSE
               ),
             simplify = FALSE
@@ -234,6 +242,8 @@ parse_repo_labels <- function(res){
                 color = fmt_safe_chr( x[["color"]] ),
                 default = fmt_safe_chr( x[["default"]] ),
                 id = fmt_safe_int( x[["id"]] ),
+                repo_owner = fmt_safe_chr( x[["repo_owner"]] ),
+                repo_name = fmt_safe_chr( x[["repo_name"]] ),
                 stringsAsFactors = FALSE
               ),
             simplify = FALSE
