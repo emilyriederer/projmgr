@@ -24,7 +24,10 @@ get_engine <- function(api_endpoint, ref, limit = Inf, ...){
   if( !is.null( names(res) ) ){ res <- list(res) }
 
   # attach fields for the repo owner and name ----
-  add_fields <- function(elt){
+  ## only if results are non-empty
+  if (length(res) == 1 & res[1] == "") { return(res) }
+
+  add_fields <- function(elt) {
     elt[["repo_owner"]] <- ref$repo_owner
     elt[["repo_name"]] <- ref$repo_name
     return(elt)

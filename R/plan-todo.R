@@ -145,7 +145,7 @@ post_plan <- function(ref, plan, distinct = TRUE){
                     SIMPLIFY = FALSE)
 
   # create issues ----
-  req_issues <- post_todo(ref, issues)
+  req_issues <- post_todo(ref, issues, distinct)
 
   # return dataframe of identifiers ----
   results <-
