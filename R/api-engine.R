@@ -11,7 +11,7 @@
 
 get_engine <- function(api_endpoint, ref, limit = Inf, ...){
 
-    gh::gh(
+    res <- gh::gh(
     endpoint = paste0(ref$base_url, ref$repo_path, api_endpoint),
     ...,
     .token = Sys.getenv(ref$id),
