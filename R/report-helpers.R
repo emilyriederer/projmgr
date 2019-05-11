@@ -93,8 +93,8 @@ fmt_issue_desc <- function(title, body, state, created_at, closed_at, user_login
 
   title <- paste0("<strong>Issue: #", number, ": ", add_encoding(title), "</strong>")
   meta <- paste("Created by", user_login, "on", created_at)
-  status <- ifelse(state == 'Open', '', paste("Closed on", closed_at))
-  url <- paste("<a href =' ", url, "'> Visit on GitHub </a>")
+  status <- ifelse(is.na(closed_at), '', paste("Closed on", closed_at))
+  url <- add_link("Visit on GitHub", url)
   combined_header <- paste(title, meta, status, url, sep = "<br>")
 
   body <- paste("<em>Issue Description: </em><br><blockquote>", add_encoding(body), "</blockquote>")
