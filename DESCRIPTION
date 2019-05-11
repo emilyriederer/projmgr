@@ -32,7 +32,8 @@ Suggests:
     testthat,
     tidyr,
     xml2,
-    yaml
+    yaml,
+    htmltools
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
