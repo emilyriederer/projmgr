@@ -30,7 +30,7 @@ but please note that nearly everything is subject to change at this point.
 
 ## Contributors
 
-Thanks to contributors. Most notably, thanks to [Konrad Mayer](https://github.com/konradmayer) for proactive reporting and debugging of issues.
+Thanks to contributors. Most notably, thanks to [Konrad Mayer](https://github.com/konradmayer) and [Sam Tyner](https://github.com/sctyner) for proactive reporting and debugging of issues.
 
 Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
 By participating in this project you agree to abide by its terms.
