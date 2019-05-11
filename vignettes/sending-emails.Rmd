@@ -39,6 +39,8 @@ issues <- parse_issues(issues_res)
 report_progress(issues)
 ```
 
+By default, the `link_url` argument is set to `TRUE`, so each item is linked to its corresponding GitHub issue.
+
 In RMarkdown, the rendered HTML is shown because the `report` functions append the class `"knit_asis"` to the output, which tells `knitr` to directly insert the output into the final document instead of interpreting it as character output. However, to prove that this function is simply writing HTML, we can see the underlying HTML in RMarkdown by wiping that class:
 
 ```{r}
