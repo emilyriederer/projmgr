@@ -308,7 +308,47 @@ my_todo &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rea
 </li>
 </ul>
 <p></p>
-<p>These plans looks thematically similar to the output of <code><a href="../reference/report_progress.html">report_progress()</a></code> for consistency in reporting of planned or in-progress work.</p>
+<p>These plans looks thematically similar to the output of <code><a href="../reference/report_progress.html">report_progress()</a></code> for consistency in reporting of planned or in-progress work. The <code>(0 / {Number of issues})</code> information is provided by default, for consistency with the <code><a href="../reference/report_progress.html">report_progress()</a></code> function. However, this can also be disabled by settings <code>show_ratio = FALSE</code> for a cleaner and less distracting look.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/report_plan.html">report_plan</a></span>(my_plan, <span class="dt">show_ratio =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<p></p>
+<p></p>
+<strong> Data cleaning and validation </strong>
+<ul class="report_plan" style="list-style: none;">
+<li>
+☐ Define data quality standards
+</li>
+<li>
+☐ Assess data quality
+</li>
+<li>
+☐ Resolve data quality issues
+</li>
+</ul>
+<p></p>
+<strong> Exploratory data analysis </strong>
+<ul class="report_plan" style="list-style: none;">
+<li>
+☐ Summary statistics
+</li>
+<li>
+☐ Visualizations
+</li>
+</ul>
+<p></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/report_todo.html">report_todo</a></span>(my_todo, <span class="dt">show_ratio =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<p></p>
+<p>
+<strong> To Do </strong>
+</p>
+<ul class="report_todo" style="list-style: none;">
+<li>
+☐ Consider renaming my_very_long_function_name
+</li>
+<li>
+☐ Make sure documentation links right pages of API docs
+</li>
+</ul>
+<p></p>
 </div>
 <div id="create-a-plan-or-to-do-list-with-r" class="section level2">
 <h2 class="hasAnchor">

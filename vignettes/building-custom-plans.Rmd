@@ -132,7 +132,16 @@ report_plan(my_plan)
 report_todo(my_todo)
 ```
 
-These plans looks thematically similar to the output of `report_progress()` for consistency in reporting of planned or in-progress work.
+These plans looks thematically similar to the output of `report_progress()` for consistency in reporting of planned or in-progress work. The `(0 / {Number of issues})` information is provided by default, for consistency with the `report_progress()` function. However, this can also be disabled by settings `show_ratio = FALSE` for a cleaner and less distracting look.
+
+```{r}
+report_plan(my_plan, show_ratio = FALSE)
+```
+
+
+```{r}
+report_todo(my_todo, show_ratio = FALSE)
+```
 
 ## Create a Plan or To-Do List with R
 
