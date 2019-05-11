@@ -1,16 +1,21 @@
 #' Print issue-milestone progress in RMarkdown friendly way
 #'
-#' Interprets dataframe or tibble of issues by breaking apart milestones and listing each
-#' issue title as open or closed, and uses HTML to format results in a highly readable and
+#' Interprets dataframe or tibble of items (e.g. issues) by breaking apart groups (e.g. milestones), listing each
+#' item title as open or closed, and using HTML to format results in a highly readable and
 #' attractive way. Resulting object returned is a character vector of HTML code with the added
 #' class of \code{'knit_asis'} so that when included in an RMarkdown document knitting to HTML,
 #' the results will be correctly rendered as HTML.
 #'
-#' The resulting HTML unordered list (<ul>) is tagged with class 'report_progress' for custom CSS styling.
+#' The resulting HTML unordered list (\code{<ul>}) is tagged with class 'report_progress' for custom CSS styling.
+#'
+#' Items without a related group are put into an "Ungrouped" category. Filter these out before using this function if
+#' you wish to only show items that are in a group.
 #'
 #' @param issues Dataframe or tibble of issues and milestones, as returned by \code{get_issues()} and \code{parse_issues()}
 #' @param group_var Character string variable name by which to group issues. Defaults to \code{"milestone_title"}
-#' @param show_stats Whether or not to show total, completed counts and percent for each group
+#' @param link_url Boolean. Whether or not to provide link to each item, as provided by \code{url} column in dataset
+#' @param show_ratio Boolean. Whether or not to report (# Closed Items / # Total Items) for each group as a ratio
+#' @param show_pct Boolean. Whether or not to report (# Closed Items / # Total Items) for each group as a percent
 #'
 #' @return Returns character string of HTML with class attribute to be correctly
 #'     shown "as-is" in RMarkdown
@@ -80,6 +85,7 @@ report_progress <- function(issues, group_var = "milestone_title",
 #' The resulting HTML unordered list (<ul>) is tagged with class 'report_plan' for custom CSS styling.
 #'
 #' @param plan List of project plan, as returned by \code{read_plan()}
+#' @inheritParams report_progress
 #'
 #' @inherit report_progress return
 #' @export
@@ -129,9 +135,10 @@ report_plan <- function(plan, show_ratio = TRUE){
 #' class of \code{'knit_asis'} so that when included in an RMarkdown document knitting to HTML,
 #' the results will be correctly rendered as HTML.
 #'
-#' The resulting HTML unordered list (<ul>) is tagged with class 'report_todo' for custom CSS styling.
+#' The resulting HTML unordered list (\code{<ul>}) is tagged with class 'report_todo' for custom CSS styling.
 #'
 #' @param todo List of to-do list, as returned by \code{read_todo()}
+#' @inheritParams report_progress
 #'
 #' @inherit report_progress return
 #' @export

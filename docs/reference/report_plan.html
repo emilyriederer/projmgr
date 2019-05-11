@@ -151,7 +151,7 @@ the results will be correctly rendered as HTML.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>report_plan</span>(<span class='no'>plan</span>)</pre>
+    <pre class="usage"><span class='fu'>report_plan</span>(<span class='no'>plan</span>, <span class='kw'>show_ratio</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -159,6 +159,10 @@ the results will be correctly rendered as HTML.</p>
     <tr>
       <th>plan</th>
       <td><p>List of project plan, as returned by <code><a href='read_plan.html'>read_plan()</a></code></p></td>
+    </tr>
+    <tr>
+      <th>show_ratio</th>
+      <td><p>Boolean. Whether or not to report (# Closed Items / # Total Items) for each group as a ratio</p></td>
     </tr>
     </table>
     

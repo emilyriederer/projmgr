@@ -40,8 +40,8 @@
   
 <meta property="og:title" content="Print issue-milestone progress in RMarkdown friendly way — report_progress" />
 
-<meta property="og:description" content="Interprets dataframe or tibble of issues by breaking apart milestones and listing each
-issue title as open or closed, and uses HTML to format results in a highly readable and
+<meta property="og:description" content="Interprets dataframe or tibble of items (e.g. issues) by breaking apart groups (e.g. milestones), listing each
+item title as open or closed, and using HTML to format results in a highly readable and
 attractive way. Resulting object returned is a character vector of HTML code with the added
 class of 'knit_asis' so that when included in an RMarkdown document knitting to HTML,
 the results will be correctly rendered as HTML." />
@@ -145,16 +145,16 @@ the results will be correctly rendered as HTML." />
 
     <div class="ref-description">
     
-    <p>Interprets dataframe or tibble of issues by breaking apart milestones and listing each
-issue title as open or closed, and uses HTML to format results in a highly readable and
+    <p>Interprets dataframe or tibble of items (e.g. issues) by breaking apart groups (e.g. milestones), listing each
+item title as open or closed, and using HTML to format results in a highly readable and
 attractive way. Resulting object returned is a character vector of HTML code with the added
 class of <code>'knit_asis'</code> so that when included in an RMarkdown document knitting to HTML,
 the results will be correctly rendered as HTML.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>report_progress</span>(<span class='no'>issues</span>, <span class='kw'>group_var</span> <span class='kw'>=</span> <span class='st'>"milestone_title"</span>,
-  <span class='kw'>show_stats</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>report_progress</span>(<span class='no'>issues</span>, <span class='kw'>group_var</span> <span class='kw'>=</span> <span class='st'>"milestone_title"</span>, <span class='kw'>link_url</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>show_ratio</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show_pct</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -168,8 +168,16 @@ the results will be correctly rendered as HTML.</p>
       <td><p>Character string variable name by which to group issues. Defaults to <code>"milestone_title"</code></p></td>
     </tr>
     <tr>
-      <th>show_stats</th>
-      <td><p>Whether or not to show total, completed counts and percent for each group</p></td>
+      <th>link_url</th>
+      <td><p>Boolean. Whether or not to provide link to each item, as provided by <code>url</code> column in dataset</p></td>
+    </tr>
+    <tr>
+      <th>show_ratio</th>
+      <td><p>Boolean. Whether or not to report (# Closed Items / # Total Items) for each group as a ratio</p></td>
+    </tr>
+    <tr>
+      <th>show_pct</th>
+      <td><p>Boolean. Whether or not to report (# Closed Items / # Total Items) for each group as a percent</p></td>
     </tr>
     </table>
     
@@ -180,7 +188,9 @@ the results will be correctly rendered as HTML.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The resulting HTML unordered list (&lt;ul&gt;) is tagged with class 'report_progress' for custom CSS styling.</p>
+    <p>The resulting HTML unordered list (<code>&lt;ul&gt;</code>) is tagged with class 'report_progress' for custom CSS styling.</p>
+<p>Items without a related group are put into an "Ungrouped" category. Filter these out before using this function if
+you wish to only show items that are in a group.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 

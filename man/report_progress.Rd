@@ -4,29 +4,36 @@
 \alias{report_progress}
 \title{Print issue-milestone progress in RMarkdown friendly way}
 \usage{
-report_progress(issues, group_var = "milestone_title",
-  show_stats = TRUE)
+report_progress(issues, group_var = "milestone_title", link_url = TRUE,
+  show_ratio = TRUE, show_pct = TRUE)
 }
 \arguments{
 \item{issues}{Dataframe or tibble of issues and milestones, as returned by \code{get_issues()} and \code{parse_issues()}}
 
 \item{group_var}{Character string variable name by which to group issues. Defaults to \code{"milestone_title"}}
 
-\item{show_stats}{Whether or not to show total, completed counts and percent for each group}
+\item{link_url}{Boolean. Whether or not to provide link to each item, as provided by \code{url} column in dataset}
+
+\item{show_ratio}{Boolean. Whether or not to report (# Closed Items / # Total Items) for each group as a ratio}
+
+\item{show_pct}{Boolean. Whether or not to report (# Closed Items / # Total Items) for each group as a percent}
 }
 \value{
 Returns character string of HTML with class attribute to be correctly
     shown "as-is" in RMarkdown
 }
 \description{
-Interprets dataframe or tibble of issues by breaking apart milestones and listing each
-issue title as open or closed, and uses HTML to format results in a highly readable and
+Interprets dataframe or tibble of items (e.g. issues) by breaking apart groups (e.g. milestones), listing each
+item title as open or closed, and using HTML to format results in a highly readable and
 attractive way. Resulting object returned is a character vector of HTML code with the added
 class of \code{'knit_asis'} so that when included in an RMarkdown document knitting to HTML,
 the results will be correctly rendered as HTML.
 }
 \details{
-The resulting HTML unordered list (<ul>) is tagged with class 'report_progress' for custom CSS styling.
+The resulting HTML unordered list (\code{<ul>}) is tagged with class 'report_progress' for custom CSS styling.
+
+Items without a related group are put into an "Ungrouped" category. Filter these out before using this function if
+you wish to only show items that are in a group.
 }
 \examples{
 \dontrun{
