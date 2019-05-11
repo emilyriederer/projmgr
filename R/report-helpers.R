@@ -80,9 +80,9 @@ fmt_item <- function(text, state, url = NULL) {
 fmt_comment <- function(user_login, author_association, body, created_at, updated_at, ...){
 
   header <- paste("<p/><hr><strong>", user_login, "(", author_association, ") wrote at", created_at, ": </strong>")
-  text <- paste("<p/><blockquote>", body, "</blockquote><p/>")
-  bottom <- ifelse(is.na(updated_at) | created_at == updated_at,
-                   "", paste("<em> This comment was last updated at", updated_at, "</em>") )
+  text <- paste("<p/><blockquote>", add_encoding(body), "</blockquote><p/>")
+  bottom <- ifelse(is.na(updated_at) | created_at == updated_at,"",
+                   paste("<em> This comment was last updated at", updated_at, "</em>") )
 
   return( paste(header, text, bottom) )
 
