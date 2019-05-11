@@ -26,30 +26,42 @@
 #' ```
 #'}
 
-report_progress <- function(issues, group_var = "milestone_title", show_stats = TRUE){
+report_progress <- function(issues, group_var = "milestone_title",
+                            link_url = TRUE, show_ratio = TRUE, show_pct = TRUE){
 
   # prep data ----
-  df <- issues[!is.na(issues[[group_var]]),]
+  df <- issues
+  df[[group_var]][is.na(df[[group_var]])] <- "Ungrouped"
   group_vals <- df[[group_var]]
   group_title <- unique(group_vals)
-  issue_closed_count <- vapply(group_title,
+  item_closed_count <- vapply(group_title,
                                function(x) sum(group_vals == x & df$state == 'closed'),
                                integer(1) )
-  issue_count <- vapply( group_title ,
+  item_count <- vapply( group_title ,
                          FUN = function(x) sum(group_vals == x),
                          FUN.VALUE = integer(1))
-  issue_title <- df$title
+  item_title <- df$title
   state <- df$state
 
   # write html ----
-  title_html <-
-    if(show_stats) fmt_milestone(group_title, issue_closed_count, issue_count)
-    else paste("<strong>", group_title, "</strong>")
-  issue_html <- fmt_issue( issue_title, state )
-  issue_html_grp <- vapply(group_title,
-                           FUN = function(x) paste(issue_html[group_vals == x], collapse = " "),
+  title_html <- fmt_group(group_title, item_closed_count, item_count, show_ratio, show_pct)
+  item_html <- fmt_item(item_title, state, if (link_url) df$url else NULL)
+  item_html_grp <- vapply(group_title,
+                           FUN = function(x) paste(item_html[group_vals == x], collapse = " "),
                            FUN.VALUE = character(1))
-  html_grp <- paste(title_html, "<ul  class = 'report_progress' style = 'list-style: none;'>", issue_html_grp, "</ul>")
+
+  # combine across groups ----
+  html <- paste(
+    title_html,
+    "<ul  class = 'report_progress' style = 'list-style: none;'>",
+    item_html_grp,
+    "</ul>"
+    )
+  html_grp <- paste(
+    title_html,
+    "<ul  class = 'report_progress' style = 'list-style: none;'>",
+    item_html_grp,
+    "</ul>")
 
   # final output ----
   html <- paste("<p/>", paste(html_grp, collapse = " "), "<p/>")
@@ -82,20 +94,26 @@ report_progress <- function(issues, group_var = "milestone_title", show_stats = 
 #' ```
 #'}
 
-report_plan <- function(plan){
+report_plan <- function(plan, show_ratio = TRUE){
 
   # prep data ----
   milestone_title <- vapply(plan, FUN = function(x) x[["title"]], FUN.VALUE = character(1))
   issue_count <- vapply(plan, FUN = function(x) length(x[["issue"]]), FUN.VALUE = integer(1))
 
   # write html ----
-  milestone_html <- fmt_milestone(milestone_title, 0, issue_count)
+  title_html <- fmt_group(milestone_title, 0, sum(issue_count), show_ratio = show_ratio, show_pct = FALSE)
   issue_html_grp <- vapply(plan,
-                           FUN = function(x) paste( vapply(x[["issue"]],
-                                                           FUN = function(y) fmt_issue( y[["title"]], "open" ),
-                                                           FUN.VALUE = character(1)) , collapse = " "),
+                           FUN = function(x)
+                             paste( vapply(x[["issue"]],
+                                      FUN = function(y) fmt_item( y[["title"]], "open" ),
+                                      FUN.VALUE = character(1)) ,
+                                    collapse = " "),
                            FUN.VALUE = character(1))
-  milestone_issue_html_grp <- paste("<p>",milestone_html, "<ul class = 'report_plan' style = 'list-style: none;'>", issue_html_grp, "</ul>")
+  milestone_issue_html_grp <- paste("<p/>",
+                                    title_html,
+                                    "<ul class = 'report_plan' style = 'list-style: none;'>",
+                                    issue_html_grp,
+                                    "</ul>")
 
   # final output ----
   html <- paste("<p/>", paste(milestone_issue_html_grp, collapse = " "), "<p/>")
@@ -128,14 +146,14 @@ report_plan <- function(plan){
 #' ```
 #'}
 
-report_todo <- function(todo){
+report_todo <- function(todo, show_ratio = TRUE){
 
   # prep data ----
   issue_title <- vapply(todo, FUN = function(x) x[["title"]], FUN.VALUE = character(1))
 
   # write html ----
-  milestone_html <- fmt_milestone("To Do", 0, length(issue_title))
-  issue_html <- fmt_issue( issue_title, "open" )
+  milestone_html <- fmt_group("To Do", 0, length(issue_title), show_ratio = show_ratio, show_pct = FALSE)
+  issue_html <- fmt_item( issue_title, state = "open" )
   issue_html_grp <- paste(issue_html, collapse = " ")
   milestone_issue_html_grp <- paste("<p>",milestone_html, "<ul class = 'report_todo' style = 'list-style: none;'>", issue_html_grp, "</ul>")
 
