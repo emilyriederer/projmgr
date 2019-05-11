@@ -234,13 +234,13 @@
 <span class="co">#&gt; 4                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    It would be useful to have a function, say `discard`, that discards rows where the condition evaluates to TRUE. This function would be different from `filter(!condition)` when condition evaluates to NA. Example below\n\n``` R\nx &lt;- data.frame(v1 = c(1, 2, NA))\n#&gt;  v1\n#&gt;1  1\n#&gt;2  2\n#&gt;3 NA\nfilter(x, !(v1 == 1))\n#&gt;  v1\n#&gt;1  2\ndiscard(x, v1 == 1)\n#&gt;  v1\n#&gt;1  2\n#&gt;2 NA\n```\n</span>
 <span class="co">#&gt; 5                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   pig has a great command called ILLUSTRATE that demonstrates how a sample of data will be transformed through a series of commands. it's very useful for debugging, and a great educational tool to generate example data transformations.\n\nneedless to say, it'd be awesome if dplyr had a similar function.\n\nmore info here:\n\nhttp://pig.apache.org/docs/r0.7.0/piglatin_ref2.html#ILLUSTRATE\nhttp://wiki.apache.org/pig/PigIllustrate\n</span>
 <span class="co">#&gt; 6 When filtering the table from the database the error is produced if `%in%` is used and the right hand side fo it is of length one:\n\n```\nlibrary(dplyr)\nlibrary(DBI)\nlibrary(RSQLite)\nlibrary(RPostgreSQL)\nlibrary(RMySQL)\nlibrary(magrittr)\n\ndt &lt;- expand.grid(Year=as.integer(1990:2014),Product=LETTERS[1:8],Country=paste0(LETTERS,"I")) %&gt;% select(Product,Country,Year)\ndt$value &lt;- rnorm(nrow(dt))\n\ndt &lt;- dt %&gt;% group_by(Product) %&gt;% mutate(value=value+as.numeric(Product)/10)\ndt &lt;- dt %&gt;% group_by(Country) %&gt;% mutate(value=value+as.numeric(Country)/10)\ndriver = dbDriver("SQLite")\ncon = dbConnect(driver, dbname = "test.db")\ndbWriteTable(con, c("dummy_test"), value=dt %&gt;% data.frame,overwrite=TRUE,row.names=FALSE)\ndbDisconnect(con)\n\nmy_db &lt;- src_sqlite("test.db")\nprint(my_db)\ndbdt &lt;- tbl(my_db,"dummy_test")\n\n##test1\ndbdt %&gt;% filter(Product %in% "A" &amp; Country %in% "AI" &amp; Year %in% 1990 )\n##test2\ndbdt %&gt;% filter(Product == "A" &amp; Country == "AI" &amp; Year == 1990 )\n##test3\ndbdt %&gt;% filter(Product %in% c("A", "B") &amp; Country %in% c("AI", "AJ") &amp; Year %in% c(1990, 1991) )\n\n\n```\n\nThe `test1` produces error, while the `test2` and `test3` pass without the problem. In R `test1` and `test2` should produce identical results. The same error is given with PostgreSQL and MySQL databases. Here is my sessionInfo:\n\n```\n&gt; sessionInfo()\nR version 3.1.1 (2014-07-10)\nPlatform: x86_64-apple-darwin13.1.0 (64-bit)\n\nlocale:\n[1] fr_FR.UTF-8/fr_FR.UTF-8/fr_FR.UTF-8/C/fr_FR.UTF-8/C\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base     \n\nother attached packages:\n[1] magrittr_1.0.1  RPostgreSQL_0.4 RSQLite_0.11.4  dplyr_0.2      \n[5] RMySQL_0.9-3    DBI_0.2-7      \n\nloaded via a namespace (and not attached):\n[1] assertthat_0.1 compiler_3.1.1 parallel_3.1.1 Rcpp_0.11.2    tools_3.1.1   \n```\n</span>
-<span class="co">#&gt;   labels_name assignees_login</span>
-<span class="co">#&gt; 1     feature                </span>
-<span class="co">#&gt; 2                            </span>
-<span class="co">#&gt; 3     feature hadley, lionel-</span>
-<span class="co">#&gt; 4                            </span>
-<span class="co">#&gt; 5     feature          hadley</span>
-<span class="co">#&gt; 6  bug :bomb:          hadley</span></code></pre></div>
+<span class="co">#&gt;   repo_owner repo_name labels_name assignees_login</span>
+<span class="co">#&gt; 1       &lt;NA&gt;      &lt;NA&gt;     feature                </span>
+<span class="co">#&gt; 2       &lt;NA&gt;      &lt;NA&gt;                            </span>
+<span class="co">#&gt; 3       &lt;NA&gt;      &lt;NA&gt;     feature hadley, lionel-</span>
+<span class="co">#&gt; 4       &lt;NA&gt;      &lt;NA&gt;                            </span>
+<span class="co">#&gt; 5       &lt;NA&gt;      &lt;NA&gt;     feature          hadley</span>
+<span class="co">#&gt; 6       &lt;NA&gt;      &lt;NA&gt;  bug :bomb:          hadley</span></code></pre></div>
 <p>Columns that can contain multiple values (e.g. multiple label names or assignees) appear as lists.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>( dplyr_issues[,<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"labels_name"</span>, <span class="st">"assignees_login"</span>)] )
 <span class="co">#&gt;   labels_name assignees_login</span>
@@ -314,55 +314,55 @@ dplyr_issues<span class="op">$</span>assignees_login
 <p>The <code>report_</code> function family offers an alternative to visualizations. These functions generate HTML for aethetic output in RMarkdown reports. Output is automatically tagged so <code>knitr</code> knows to interpret it as HTML, so it is not necessary to manually add the <code>results = 'asis'</code> chunk option. (Don’t worry if you don’t know what this means. You don’t need to do anything!)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/report_progress.html">report_progress</a></span>(dplyr_issues)</code></pre></div>
 <p></p>
-<strong> bluesky </strong> <em> ( 100 % Complete - 16 / 16 Issues) </em>
+<strong> bluesky </strong> <em>( 100 % Complete - 16 / 16 )</em>
 <ul class="report_progress" style="list-style: none;">
 <li>
-☑ Pass custom functions to select()
+☑ <a href="https://github.com/tidyverse/dplyr/issues/1229">Pass custom functions to select()</a>
 </li>
 <li>
-☑ hybrid handler for quantile
+☑ <a href="https://github.com/tidyverse/dplyr/issues/1183">hybrid handler for quantile </a>
 </li>
 <li>
-☑ Should dplyr commands gobble empty last argument?
+☑ <a href="https://github.com/tidyverse/dplyr/issues/1039">Should dplyr commands gobble empty last argument?</a>
 </li>
 <li>
-☑ Antonym to filter
+☑ <a href="https://github.com/tidyverse/dplyr/issues/741">Antonym to filter</a>
 </li>
 <li>
-☑ equivalent of pig’s ILLUSTRATE
+☑ <a href="https://github.com/tidyverse/dplyr/issues/549">equivalent of pig’s ILLUSTRATE</a>
 </li>
 <li>
-☑ SQL error, when the right hand side of %in% is of length one in filter
+☑ <a href="https://github.com/tidyverse/dplyr/issues/511">SQL error, when the right hand side of %in% is of length one in filter</a>
 </li>
 <li>
-☑ Granular class
+☑ <a href="https://github.com/tidyverse/dplyr/issues/449">Granular class</a>
 </li>
 <li>
-☑ Think about how to incorporate matrixUtils with tbl_cube
+☑ <a href="https://github.com/tidyverse/dplyr/issues/419">Think about how to incorporate matrixUtils with tbl_cube</a>
 </li>
 <li>
-☑ Rolling join
+☑ <a href="https://github.com/tidyverse/dplyr/issues/378">Rolling join</a>
 </li>
 <li>
-☑ take advantage of chaining
+☑ <a href="https://github.com/tidyverse/dplyr/issues/205">take advantage of chaining</a>
 </li>
 <li>
-☑ parallel execution
+☑ <a href="https://github.com/tidyverse/dplyr/issues/145">parallel execution</a>
 </li>
 <li>
-☑ Need ability to register custom sql functions?
+☑ <a href="https://github.com/tidyverse/dplyr/issues/128">Need ability to register custom sql functions?</a>
 </li>
 <li>
-☑ Big data bottlenecks
+☑ <a href="https://github.com/tidyverse/dplyr/issues/120">Big data bottlenecks</a>
 </li>
 <li>
-☑ Should tbl_dt be lazy?
+☑ <a href="https://github.com/tidyverse/dplyr/issues/40">Should tbl_dt be lazy?</a>
 </li>
 <li>
-☑ Implement ganalytics backend
+☑ <a href="https://github.com/tidyverse/dplyr/issues/37">Implement ganalytics backend</a>
 </li>
 <li>
-☑ MonetDB backend
+☑ <a href="https://github.com/tidyverse/dplyr/issues/8">MonetDB backend</a>
 </li>
 </ul>
 <p></p>
