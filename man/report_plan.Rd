@@ -4,10 +4,12 @@
 \alias{report_plan}
 \title{Print plan in RMarkdown friendly way}
 \usage{
-report_plan(plan)
+report_plan(plan, show_ratio = TRUE)
 }
 \arguments{
 \item{plan}{List of project plan, as returned by \code{read_plan()}}
+
+\item{show_ratio}{Boolean. Whether or not to report (# Closed Items / # Total Items) for each group as a ratio}
 }
 \value{
 Returns character string of HTML with class attribute to be correctly

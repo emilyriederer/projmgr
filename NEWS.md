@@ -1,3 +1,7 @@
+# projmgr 0.0.0.9902
+
+* Tweaks to `report` family of functions to exposure more options to end users
+
 # projmgr 0.0.0.9901
 
 * Added `listcol_extract()`, `listcol_pivot()` and `listcol_filter()` functions to work with assignee and label list-columns

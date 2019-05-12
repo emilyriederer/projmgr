@@ -1,6 +1,6 @@
 Package: projmgr
 Title: Task tracking and project management with GitHub via R
-Version: 0.0.0.9901
+Version: 0.0.0.9902
 Authors@R:
     person(given = "Emily",
            family = "Riederer",
@@ -32,7 +32,8 @@ Suggests:
     testthat,
     tidyr,
     xml2,
-    yaml
+    yaml,
+    htmltools
 VignetteBuilder: 
     knitr
 Encoding: UTF-8

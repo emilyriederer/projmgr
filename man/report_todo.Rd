@@ -4,10 +4,12 @@
 \alias{report_todo}
 \title{Print to-do lists in RMarkdown friendly way}
 \usage{
-report_todo(todo)
+report_todo(todo, show_ratio = TRUE)
 }
 \arguments{
 \item{todo}{List of to-do list, as returned by \code{read_todo()}}
+
+\item{show_ratio}{Boolean. Whether or not to report (# Closed Items / # Total Items) for each group as a ratio}
 }
 \value{
 Returns character string of HTML with class attribute to be correctly
@@ -20,7 +22,7 @@ class of \code{'knit_asis'} so that when included in an RMarkdown document knitt
 the results will be correctly rendered as HTML.
 }
 \details{
-The resulting HTML unordered list (<ul>) is tagged with class 'report_todo' for custom CSS styling.
+The resulting HTML unordered list (\code{<ul>}) is tagged with class 'report_todo' for custom CSS styling.
 }
 \examples{
 \dontrun{

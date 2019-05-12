@@ -212,7 +212,7 @@ plan_from_vbl &lt;-<span class="st"> </span><span class="kw"><a href="../referen
 <span class="co">#&gt;       body: Describe this step</span>
 <span class="co">#&gt;       assignees: [emilyriederer]</span>
 <span class="co">#&gt;       labels: [a, b, c]</span>
-<span class="co">#&gt;     - title: Title of task 2 to comple</span>
+<span class="co">#&gt;     - title: Title of task 2 to complete</span>
 <span class="co">#&gt;       body: Describe this step</span>
 <span class="co">#&gt;       labels: [low]</span>
 <span class="co">#&gt; </span>
@@ -220,9 +220,9 @@ plan_from_vbl &lt;-<span class="st"> </span><span class="kw"><a href="../referen
 <span class="co">#&gt;   description: &gt;</span>
 <span class="co">#&gt;     Enter a longer description of the objectives</span>
 <span class="co">#&gt;   issue:</span>
-<span class="co">#&gt;     - title: Title of task 1 to complete</span>
+<span class="co">#&gt;     - title: Title of task 1 to complete for step 2</span>
 <span class="co">#&gt;       body: Describe this step</span>
-<span class="co">#&gt;     - title: Title of task 2 to complete</span>
+<span class="co">#&gt;     - title: Title of task 2 to complete for step 2</span>
 <span class="co">#&gt;       body: Describe this step</span></code></pre></div>
 </div>
 <div id="create-a-to-do-list-with-yaml" class="section level2">
@@ -270,9 +270,8 @@ my_todo &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rea
 <p>For example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/report_plan.html">report_plan</a></span>(my_plan)</code></pre></div>
 <p></p>
-<p>
-<strong> Data cleaning and validation </strong> <em> ( 0 % Complete - 0 / 3 Issues) </em>
-</p>
+<p></p>
+<strong> Data cleaning and validation </strong> <em>( 0 / 5 )</em>
 <ul class="report_plan" style="list-style: none;">
 <li>
 ☐ Define data quality standards
@@ -284,9 +283,8 @@ my_todo &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rea
 ☐ Resolve data quality issues
 </li>
 </ul>
-<p>
-<strong> Exploratory data analysis </strong> <em> ( 0 % Complete - 0 / 2 Issues) </em>
-</p>
+<p></p>
+<strong> Exploratory data analysis </strong> <em>( 0 / 5 )</em>
 <ul class="report_plan" style="list-style: none;">
 <li>
 ☐ Summary statistics
@@ -299,7 +297,7 @@ my_todo &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rea
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/report_todo.html">report_todo</a></span>(my_todo)</code></pre></div>
 <p></p>
 <p>
-<strong> To Do </strong> <em> ( 0 % Complete - 0 / 2 Issues) </em>
+<strong> To Do </strong> <em>( 0 / 2 )</em>
 </p>
 <ul class="report_todo" style="list-style: none;">
 <li>
@@ -310,7 +308,47 @@ my_todo &lt;-<span class="st"> </span><span class="kw"><a href="../reference/rea
 </li>
 </ul>
 <p></p>
-<p>These plans looks thematically similar to the output of <code><a href="../reference/report_progress.html">report_progress()</a></code> for consistency in reporting of planned or in-progress work.</p>
+<p>These plans looks thematically similar to the output of <code><a href="../reference/report_progress.html">report_progress()</a></code> for consistency in reporting of planned or in-progress work. The <code>(0 / {Number of issues})</code> information is provided by default, for consistency with the <code><a href="../reference/report_progress.html">report_progress()</a></code> function. However, this can also be disabled by settings <code>show_ratio = FALSE</code> for a cleaner and less distracting look.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/report_plan.html">report_plan</a></span>(my_plan, <span class="dt">show_ratio =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<p></p>
+<p></p>
+<strong> Data cleaning and validation </strong>
+<ul class="report_plan" style="list-style: none;">
+<li>
+☐ Define data quality standards
+</li>
+<li>
+☐ Assess data quality
+</li>
+<li>
+☐ Resolve data quality issues
+</li>
+</ul>
+<p></p>
+<strong> Exploratory data analysis </strong>
+<ul class="report_plan" style="list-style: none;">
+<li>
+☐ Summary statistics
+</li>
+<li>
+☐ Visualizations
+</li>
+</ul>
+<p></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/report_todo.html">report_todo</a></span>(my_todo, <span class="dt">show_ratio =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<p></p>
+<p>
+<strong> To Do </strong>
+</p>
+<ul class="report_todo" style="list-style: none;">
+<li>
+☐ Consider renaming my_very_long_function_name
+</li>
+<li>
+☐ Make sure documentation links right pages of API docs
+</li>
+</ul>
+<p></p>
 </div>
 <div id="create-a-plan-or-to-do-list-with-r" class="section level2">
 <h2 class="hasAnchor">

@@ -4,13 +4,15 @@
 \alias{report_discussion}
 \title{Print issue comments in RMarkdown friendly way}
 \usage{
-report_discussion(comments, issue = NA)
+report_discussion(comments, issue = NA, link_url = TRUE)
 }
 \arguments{
 \item{comments}{Dataframe or tibble of comments for a single issue, as returned by \code{get_issue_comments()}}
 
 \item{issue}{Optional dataframe or tibble of issues, as returned by \code{get_issues()}. If provided,
 output includes issue-level data such as the title, initial description, creation date, etc.}
+
+\item{link_url}{Boolean. Whether or not to provide link to each item, as provided by \code{url} column in dataset}
 }
 \value{
 Returns character string of HTML with class attribute to be correctly
