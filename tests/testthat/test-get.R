@@ -6,6 +6,7 @@ skip_on_travis()
 skip_on_appveyor()
 
 experigit <- create_repo_ref('emilyriederer', 'experigit')
+projmgr <- create_repo_ref('emilyriederer', 'projmgr')
 
 test_that( "zero item output is returned as type character (vs list)", {
 

@@ -37,3 +37,4 @@ test_that( "Length 0, 1, or 2 labels and assignees are converted to appropriatel
   expect_length( issues$assignees_login[[6]], 1)
 
 })
+

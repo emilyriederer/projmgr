@@ -18,12 +18,6 @@ issue1_res <- get_issues(experigit, number = issue1)
 issue2_res <- get_issues(experigit, number = issue2)
 issue3_res <- get_issues(experigit, number = issue3)
 
-# clean-up environment
-projmgr:::patch_engine(paste0("/issues/", issue1), ref = experigit, state = 'closed')
-projmgr:::patch_engine(paste0("/issues/", issue2), ref = experigit, state = 'closed')
-projmgr:::patch_engine(paste0("/issues/", issue3), ref = experigit, state = 'closed')
-projmgr:::patch_engine(paste0("/issues/", issue4), ref = experigit, state = 'closed')
-
 
 test_that( "Multifield values (labels / assignees) are handles correctly for any number of inputs", {
 
@@ -50,3 +44,8 @@ test_that( "distinct parameter behavior controls duplication correctly", {
 
 })
 
+# clean-up environment
+projmgr:::patch_engine(paste0("/issues/", issue1), ref = experigit, state = 'closed')
+projmgr:::patch_engine(paste0("/issues/", issue2), ref = experigit, state = 'closed')
+projmgr:::patch_engine(paste0("/issues/", issue3), ref = experigit, state = 'closed')
+projmgr:::patch_engine(paste0("/issues/", issue4), ref = experigit, state = 'closed')
