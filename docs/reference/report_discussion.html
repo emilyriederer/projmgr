@@ -87,7 +87,7 @@ the results will be correctly rendered as HTML." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">projmgr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9901</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9902</span>
       </span>
     </div>
 
@@ -153,7 +153,7 @@ the results will be correctly rendered as HTML.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>report_discussion</span>(<span class='no'>comments</span>, <span class='kw'>issue</span> <span class='kw'>=</span> <span class='fl'>NA</span>)</pre>
+    <pre class="usage"><span class='fu'>report_discussion</span>(<span class='no'>comments</span>, <span class='kw'>issue</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>link_url</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -166,6 +166,10 @@ the results will be correctly rendered as HTML.</p>
       <th>issue</th>
       <td><p>Optional dataframe or tibble of issues, as returned by <code><a href='get_issues.html'>get_issues()</a></code>. If provided,
 output includes issue-level data such as the title, initial description, creation date, etc.</p></td>
+    </tr>
+    <tr>
+      <th>link_url</th>
+      <td><p>Boolean. Whether or not to provide link to each item, as provided by <code>url</code> column in dataset</p></td>
     </tr>
     </table>
     
