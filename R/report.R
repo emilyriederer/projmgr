@@ -185,6 +185,7 @@ report_todo <- function(todo, show_ratio = TRUE){
 #' @param comments Dataframe or tibble of comments for a single issue, as returned by \code{get_issue_comments()}
 #' @param issue Optional dataframe or tibble of issues, as returned by \code{get_issues()}. If provided,
 #'     output includes issue-level data such as the title, initial description, creation date, etc.
+#' @inheritParams report_progress
 #'
 #' @inherit report_progress return
 #' @export
@@ -201,11 +202,11 @@ report_todo <- function(todo, show_ratio = TRUE){
 #' ```
 #'}
 
-report_discussion <- function(comments, issue = NA){
+report_discussion <- function(comments, issue = NA, link_url = TRUE){
 
   # validate inputs ----
   comments_number <- unique(comments$number)
-  if(length( unique(comments$number )) != 1){
+  if (length( unique(comments$number )) != 1) {
     stop("Comments dataframe contains comments for more than 1 issue. Please limit data to a single issue.")
   }
 
@@ -213,20 +214,27 @@ report_discussion <- function(comments, issue = NA){
   html <- paste( do.call(fmt_comment, comments) , collapse = " ")
 
   # include issue-level data if provided ----
-  if(!is.na(issue)){
+  if (!is.na(issue)) {
 
     # validate inputs ----
     issue_number <- unique(issue$number)
-    if(!any(comments_number == issue_number)){
+    if (!any(comments_number == issue_number)) {
       stop("Issues dataframe does not contain same issue number as comments dataframe.")
     }
-    if( length(issue_number) > 1){
+    if ( length(issue_number) > 1) {
       issue <- issue[issue$number == comments_number, ]
     }
 
     # write html ----
     issue_html <- do.call(fmt_issue_desc, issue)
-    html <- paste("<div class = 'report_discussion'>", issue_html, html,"</div>")
+    issue_link <- if (link_url) add_link("Visit on GitHub", issue$url) else ""
+    html <-
+      paste(
+        "<div class = 'report_discussion'>",
+        issue_html,
+        issue_link,
+        html,
+        "</div>")
   }
 
   # final output ----
