@@ -59,7 +59,6 @@ viz_taskboard <- function(data, in_progress_when, str_wrap_width = 30, text_size
     FUN.VALUE = character(1),
     USE.NAMES = FALSE
   )
-  height <- max( vapply( text_components, FUN = length, FUN.VALUE = integer(1) )) * 2
 
   # create ggplot object of task board ----
   aes <- ggplot2::aes
@@ -67,9 +66,9 @@ viz_taskboard <- function(data, in_progress_when, str_wrap_width = 30, text_size
 
   g <-
     ggplot2::ggplot(data, aes(x = 0, y = 0)) +
-    ggplot2::geom_rect(aes(fill = board_group), xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf) +
-    ggplot2::geom_text(aes(label = taskboard_text), size = text_size) +
-    ggplot2::facet_grid(board_pos ~ board_group, drop = FALSE, space = "fixed") +
+    ggplot2::geom_rect(aes(fill = .data$board_group), xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf) +
+    ggplot2::geom_text(aes(label = .data$taskboard_text), size = text_size) +
+    ggplot2::facet_grid(.data$board_pos ~ .data$board_group, drop = FALSE, space = "fixed") +
     ggplot2::scale_fill_manual(values = c("Not Started" = "#F0E442",
                                  "In Progress" = "#56B4E9",
                                  "Done" = "#009E73")) +
