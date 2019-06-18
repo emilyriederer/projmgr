@@ -70,8 +70,8 @@ viz_taskboard <- function(data, in_progress_when, str_wrap_width = 30, text_size
     ggplot2::geom_text(aes(label = .data$taskboard_text), size = text_size) +
     ggplot2::facet_grid(.data$board_pos ~ .data$board_group, drop = FALSE, space = "fixed") +
     ggplot2::scale_fill_manual(values = c("Not Started" = "#F0E442",
-                                 "In Progress" = "#56B4E9",
-                                 "Done" = "#009E73")) +
+                                          "In Progress" = "#56B4E9",
+                                          "Done" = "#009E73")) +
     ggplot2::theme(
       panel.grid = element_blank(),
       axis.title = element_blank(),

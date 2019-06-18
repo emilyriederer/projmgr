@@ -37,13 +37,13 @@ read_plan <- function(input){
   # check if at least one of filepath or chars in not NA
   if(stub == ".yml"){
     parsed <- yaml::yaml.load_file(input,
-                                        handlers =
-                                          list(expr = function(x) eval(parse(text = x))))
+                                   handlers =
+                                     list(expr = function(x) eval(parse(text = x))))
   }
   else{
     parsed <- yaml::yaml.load(input,
-                                   handlers =
-                                     list(expr = function(x) eval(parse(text = x))))
+                              handlers =
+                                list(expr = function(x) eval(parse(text = x))))
   }
 
   class(parsed) <- c("plan", class(parsed))
@@ -125,7 +125,7 @@ post_plan <- function(ref, plan, distinct = TRUE){
   milestones <- lapply(plan,
                        FUN = function(x) x[intersect( names(x), c("title", help_post_milestone()) )])
   req_milestones <- lapply(milestones,
-                       FUN = function(x) do.call( function(...) post_milestone(ref, ...), x))
+                           FUN = function(x) do.call( function(...) post_milestone(ref, ...), x))
 
   # wrangle list elements ----
 
@@ -139,10 +139,10 @@ post_plan <- function(ref, plan, distinct = TRUE){
   ## wrangle milestone nums into issue data
   issues <- unlist( lapply(plan, FUN = function(x) x[["issue"]]), recursive = FALSE )
   issues <- mapply( FUN = function(x,y){
-                            x[["milestone"]] <- y
-                            return(x)
-                          }, issues, milestone_num_rep,
-                    SIMPLIFY = FALSE)
+    x[["milestone"]] <- y
+    return(x)
+  }, issues, milestone_num_rep,
+  SIMPLIFY = FALSE)
 
   # create issues ----
   req_issues <- post_todo(ref, issues, distinct)

@@ -36,12 +36,12 @@ create_repo_ref <-
            password = ""){
 
     # determine authentication strategy ----
-    if(identifier != "" & password == ""){
+    if (identifier != "" & password == "") {
       id_sys_var <- identifier
       pw_sys_var <- ""
       message(paste("Requests will authenticate with", identifier))
     }
-    else if(identifier != "" & password != ""){
+    else if (identifier != "" & password != "") {
 
       # save credentials to local environment
       id_sys_var <- paste0("GITHUB_USER_", repo_name)
@@ -54,12 +54,12 @@ create_repo_ref <-
                "Please see vignette on Personal Access Tokens for improved security.")
       )
     }
-    else if(!is_enterprise & Sys.getenv("GITHUB_PAT") != ""){
+    else if (!is_enterprise & Sys.getenv("GITHUB_PAT") != "") {
       id_sys_var <- "GITHUB_PAT"
       pw_sys_var <- ""
       message("Requests will authenticate with GITHUB_PAT")
     }
-    else if(is_enterprise & Sys.getenv("GITHUB_ENT_PAT") != ""){
+    else if (is_enterprise & Sys.getenv("GITHUB_ENT_PAT") != "") {
       id_sys_var <- "GITHUB_ENT_PAT"
       pw_sys_var <- ""
       message("Requests will authenticate with GITHUB_ENT_PAT")
@@ -74,17 +74,17 @@ create_repo_ref <-
 
     # assign base url ----
 
-    if(!is_enterprise){
+    if (!is_enterprise) {
       base_url <- "https://api.github.com/"
     }
-    else if(is_enterprise & length(hostname)>0){
+    else if (is_enterprise & length(hostname) > 0) {
       base_url <- paste0("https://",hostname,"/api/v3/")
     }
-    else if(is_enterprise){
+    else if (is_enterprise) {
       stop("hostname argument must be provided",
            call. = FALSE)
     }
-    else{
+    else {
       stop("is_enterprise argument must be TRUE or FALSE with hostname provided if TRUE",
            call. = FALSE)
     }

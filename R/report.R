@@ -40,11 +40,11 @@ report_progress <- function(issues, group_var = "milestone_title",
   group_vals <- df[[group_var]]
   group_title <- unique(group_vals)
   item_closed_count <- vapply(group_title,
-                               function(x) sum(group_vals == x & df$state == 'closed'),
-                               integer(1) )
+                              function(x) sum(group_vals == x & df$state == 'closed'),
+                              integer(1) )
   item_count <- vapply( group_title ,
-                         FUN = function(x) sum(group_vals == x),
-                         FUN.VALUE = integer(1))
+                        FUN = function(x) sum(group_vals == x),
+                        FUN.VALUE = integer(1))
   item_title <- df$title
   state <- df$state
 
@@ -52,8 +52,8 @@ report_progress <- function(issues, group_var = "milestone_title",
   title_html <- fmt_group(group_title, item_closed_count, item_count, show_ratio, show_pct)
   item_html <- fmt_item(item_title, state, if (link_url) df$url else NULL)
   item_html_grp <- vapply(group_title,
-                           FUN = function(x) paste(item_html[group_vals == x], collapse = " "),
-                           FUN.VALUE = character(1))
+                          FUN = function(x) paste(item_html[group_vals == x], collapse = " "),
+                          FUN.VALUE = character(1))
 
   # combine across groups ----
   html <- paste(
@@ -61,7 +61,7 @@ report_progress <- function(issues, group_var = "milestone_title",
     "<ul  class = 'report_progress' style = 'list-style: none;'>",
     item_html_grp,
     "</ul>"
-    )
+  )
   html_grp <- paste(
     title_html,
     "<ul  class = 'report_progress' style = 'list-style: none;'>",
@@ -111,8 +111,8 @@ report_plan <- function(plan, show_ratio = TRUE){
   issue_html_grp <- vapply(plan,
                            FUN = function(x)
                              paste( vapply(x[["issue"]],
-                                      FUN = function(y) fmt_item( y[["title"]], "open" ),
-                                      FUN.VALUE = character(1)) ,
+                                           FUN = function(y) fmt_item( y[["title"]], "open" ),
+                                           FUN.VALUE = character(1)) ,
                                     collapse = " "),
                            FUN.VALUE = character(1))
   milestone_issue_html_grp <- paste("<p/>",

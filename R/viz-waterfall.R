@@ -33,8 +33,8 @@
 #' }
 
 viz_waterfall <- function(data,
-                                   start_date, end_date,
-                                   start = "created_at", end = "closed_at"){
+                          start_date, end_date,
+                          start = "created_at", end = "closed_at"){
 
   if (!requireNamespace("ggplot2", quietly = TRUE)) {
     message(
@@ -63,9 +63,9 @@ viz_waterfall <- function(data,
   element_blank <- ggplot2::element_blank
 
   ggplot2::ggplot(plot_data,
-         aes( xmin = .data$index - 0.25, xmax = .data$index + 0.25,
-              ymin = .data$base, ymax = .data$base + .data$sign*.data$n,
-              fill = .data$status)
+                  aes( xmin = .data$index - 0.25, xmax = .data$index + 0.25,
+                       ymin = .data$base, ymax = .data$base + .data$sign*.data$n,
+                       fill = .data$status)
   ) +
     ggplot2::geom_rect() +
     ggplot2::geom_text(
@@ -77,19 +77,19 @@ viz_waterfall <- function(data,
       breaks = 1:4,
       labels = c('Initial', 'Opened', 'Closed', 'Final')) +
     ggplot2::scale_fill_manual(values =
-                        c('Initial' = "#56B4E9",
-                          'Opened' = "#F0E442",
-                          'Closed' = "#009E73",
-                          'Final' = "#56B4E9")
+                                 c('Initial' = "#56B4E9",
+                                   'Opened' = "#F0E442",
+                                   'Closed' = "#009E73",
+                                   'Final' = "#56B4E9")
     ) +
     ggplot2::guides(fill = FALSE) +
     ggplot2::labs(title = "Issue Progress Waterfall",
-         subtitle = paste("From", start_date, "to", end_date)
+                  subtitle = paste("From", start_date, "to", end_date)
     ) +
     ggplot2::theme(
-          panel.grid = element_blank(),
-          panel.background = element_blank(),
-          axis.title = element_blank(),
-          strip.text.y = ggplot2::element_text(angle = 180),
-          axis.text.y = element_blank())
+      panel.grid = element_blank(),
+      panel.background = element_blank(),
+      axis.title = element_blank(),
+      strip.text.y = ggplot2::element_text(angle = 180),
+      axis.text.y = element_blank())
 }

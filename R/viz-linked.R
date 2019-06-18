@@ -71,7 +71,7 @@ viz_linked <- function(g, filepath){
   }
   else{
     xml2::write_xml(xml, filepath )
-    }
+  }
 
   # clean up environment
   unlink(tf)
@@ -90,7 +90,7 @@ get_text_link_map <- function(g){
       "url column was not included in dataset passed to viz funcion.",
       "Please remake the plot with this field included before passing to viz_linked.",
       sep = "\n"
-      ))
+    ))
   }
 
   # throw more readable error message if type unsupported

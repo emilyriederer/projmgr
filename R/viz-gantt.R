@@ -64,10 +64,10 @@ viz_gantt <- function(data, start = "created_at", end = "closed_at", str_wrap_wi
 
   g <-
     ggplot2::ggplot(plot_data,
-           aes(x = .data$psuedo_start_var, xend = .data$psuedo_end_var,
-               y = .data$gantt_y, yend = .data$gantt_y,
-               col = .data$gantt_col)
-           ) +
+                    aes(x = .data$psuedo_start_var, xend = .data$psuedo_end_var,
+                        y = .data$gantt_y, yend = .data$gantt_y,
+                        col = .data$gantt_col)
+    ) +
     ggplot2::geom_segment(size = 8) +
     ggplot2::geom_point(aes(x = .data$start_var), size = 2) +
     ggplot2::geom_point(aes(x = .data$end_var), size = 2) +
@@ -77,12 +77,12 @@ viz_gantt <- function(data, start = "created_at", end = "closed_at", str_wrap_wi
              FUN = function(x) paste(strwrap(x, width = str_wrap_width), collapse = "\n"),
              FUN.VALUE = character(1) ,
              USE.NAMES = FALSE)
-      ) +
+    ) +
     ggplot2::theme_bw() +
     ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1),
-          axis.title.x = element_blank(),
-          axis.title.y = element_blank(),
-          legend.position = "none")
+                   axis.title.x = element_blank(),
+                   axis.title.y = element_blank(),
+                   legend.position = "none")
 
   # add metadata to be used with viz_linked ----
   class(g) <- c("gantt", class(g))

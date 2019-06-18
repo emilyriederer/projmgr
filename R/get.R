@@ -32,15 +32,15 @@ get_issues <- function(ref, limit = 1000, ...){
   validate_inputs(args, help_get_issues())
 
   res <- get_engine(api_endpoint = "/issues",
-             ref = ref,
-             limit = limit,
-             ...)
+                    ref = ref,
+                    limit = limit,
+                    ...)
 
   # notify user if seem to be hitting record limit
   if(length(res) == limit){
     message(
       paste("Number of results equals max number allowed by limit argument.",
-             "Additional relevant records may be getting excluded.",
+            "Additional relevant records may be getting excluded.",
             "Consider making your query more specific or increasing the limit."),
       sep = "/n")
   }
@@ -71,7 +71,7 @@ get_issues <- function(ref, limit = 1000, ...){
 get_issue_events <- function(ref, number){
 
   res <- get_engine(api_endpoint = paste0("/issues/", number, "/events"),
-             ref = ref)
+                    ref = ref)
 
   # append the relevant issue number to each element
   if( res != "" ){
@@ -106,18 +106,18 @@ get_issue_events <- function(ref, number){
 
 get_issue_comments <- function(ref, number, ...){
 
-    validate_inputs(list(...), help_get_issue_comments())
+  validate_inputs(list(...), help_get_issue_comments())
 
   res <- get_engine(api_endpoint = paste0("/issues/", number, "/comments"),
                     ref = ref)
 
   # append the relevant issue number to each element
   if( res != "" ){
-  res <- lapply(res,
-                FUN = function(x){
+    res <- lapply(res,
+                  FUN = function(x){
                     x[["number"]] = number
-                  return(x)
-                })
+                    return(x)
+                  })
   }
   res
 
@@ -144,12 +144,10 @@ get_milestones <- function(ref, ...){
 
   args <- list(...)
 
-  if("number" %in% names(args)){
-
+  if ("number" %in% names(args)) {
     message("'number' parameter supercedes all other options passed to get_milestones")
     res <- get_engine(api_endpoint = paste("/milestones/", args$number), ref = ref)
     return(res)
-
   }
 
   validate_inputs(list(...), allowed_vars = help_get_milestones())

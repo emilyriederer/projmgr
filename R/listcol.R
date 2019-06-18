@@ -32,7 +32,7 @@
 listcol_pivot <- function(data, col_name, regex = ".", transform_fx = identity, delete_orig = FALSE) {
 
   items <- grep(regex, unlist(data[[col_name]]), value = TRUE)
-  for(i in items) {data[[transform_fx(i)]] <- vapply(data[[col_name]],
+  for (i in items) {data[[transform_fx(i)]] <- vapply(data[[col_name]],
                                                      FUN = function(x) i %in% x,
                                                      FUN.VALUE = logical(1))}
   if (delete_orig) data[[col_name]] <- NULL
@@ -82,8 +82,8 @@ listcol_filter <- function(data, col_name, matches, is_regex = FALSE, any = TRUE
 
   eval_fx <-
     if (is_regex) function(x) {any(grepl(matches, x))}
-    else if(any) function(x) any(matches %in% x)
-    else function(x) all(matches %in% x)
+  else if (any) function(x) any(matches %in% x)
+  else function(x) all(matches %in% x)
   rows <- vapply(data[[col_name]],
                  FUN = eval_fx,
                  FUN.VALUE = logical(1))
@@ -121,23 +121,24 @@ listcol_filter <- function(data, col_name, matches, is_regex = FALSE, any = TRUE
 listcol_extract <- function(data, col_name, regex, new_col_name = NULL, sep_matches = ",", keep_regex = FALSE) {
 
   new_col_vals <- sapply(data[[col_name]],
-                                 FUN = function(x) {
-                                   out <- grep(regex, x, value = TRUE)
-                                   if(!keep_regex) out <- sub(regex, "", out)
-                                   if(length(out) == 0) out <- NA_character_
-                                   if(length(out) > 1) {
-                                     if(!is.na(sep_matches)) paste(sort(out), collapse = sep_matches)
-                                     else warning(paste("More than one pattern match in single observation.",
-                                                  "Results contain one of matches arbitrarily",
-                                                  collapse = "\n")) }
-                                   return(out[1])
-                                 },
-                                 USE.NAMES = TRUE)
+                         FUN = function(x) {
+                           out <- grep(regex, x, value = TRUE)
+                           if (!keep_regex) out <- sub(regex, "", out)
+                           if (length(out) == 0) out <- NA_character_
+                           if (length(out) > 1) {
+                             if(!is.na(sep_matches)) paste(sort(out), collapse = sep_matches)
+                             else warning(paste("More than one pattern match in single observation.",
+                                                "Results contain one of matches arbitrarily",
+                                                collapse = "\n")) }
+                           return(out[1])
+                         },
+                         USE.NAMES = TRUE)
 
-  if(is.null(new_col_name)){
+  if (is.null(new_col_name)) {
     new_col_name <- sub("\\^|\\$","", regex)
     new_col_name <- sub("(^[[:punct:]])|([[:punct:]]$)", "", new_col_name)
   }
+
   data[[new_col_name]] <- new_col_vals
   return(data)
 

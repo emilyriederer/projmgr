@@ -80,13 +80,13 @@ browse_milestones <- function(repo_ref, number = "") {
 
   # base url varies depending on if private/ent or public
   url_prefix <-
-    if(repo_ref$base_url != 'https://api.github.com/'){
+    if (repo_ref$base_url != 'https://api.github.com/') {
       repo_ref$base_url
     }
   else{"https://github.com/"}
 
-  if(number == ""){
-  view_url(url_prefix, repo_ref$repo_owner, repo_ref$repo_name, "milestones")
+  if (number == "") {
+    view_url(url_prefix, repo_ref$repo_owner, repo_ref$repo_name, "milestones")
   }
   else{
     view_url(url_prefix, repo_ref$repo_owner, repo_ref$repo_name, "milestone", number)
@@ -120,7 +120,7 @@ browse_docs <- function(
   action <- match.arg(action)
   object <- match.arg(object)
 
-  if(action == 'post' & object == 'issue event'){
+  if (action == 'post' & object == 'issue event') {
     stop("No relevant documentation for posting an issue event. Issue events are consequences of other actions.")
   }
 

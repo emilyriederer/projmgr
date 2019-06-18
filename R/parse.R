@@ -109,22 +109,22 @@ parse_issue_events <- function(res){
     sapply( res ,
             FUN = function(x)
               data.frame( # guaranteed fields for all events
-                          id = fmt_safe_int( x[["id"]] ),
-                          number = fmt_safe_int( x[["number"]] ),
-                          actor_login = fmt_safe_chr( x[["actor"]]$login ),
-                          event = fmt_safe_chr( x[["event"]] ),
-                          created_at = fmt_safe_date( x[["created_at"]] ),
-                          repo_owner = fmt_safe_chr( x[["repo_owner"]] ),
-                          repo_name = fmt_safe_chr( x[["repo_name"]] ),
+                id = fmt_safe_int( x[["id"]] ),
+                number = fmt_safe_int( x[["number"]] ),
+                actor_login = fmt_safe_chr( x[["actor"]]$login ),
+                event = fmt_safe_chr( x[["event"]] ),
+                created_at = fmt_safe_date( x[["created_at"]] ),
+                repo_owner = fmt_safe_chr( x[["repo_owner"]] ),
+                repo_name = fmt_safe_chr( x[["repo_name"]] ),
 
-                          # possible fields depending on event type
-                          label_name = fmt_safe_chr( x[["label"]]$name ),
-                          milestone_title = fmt_safe_chr( x[["milestone"]]$title ),
-                          assignee_login = fmt_safe_chr( x[["assignee"]]$login ),
-                          assigner_login = fmt_safe_chr( x[["assigner"]]$login ),
-                          rename_from = fmt_safe_chr( x[["rename"]]$from ),
-                          rename_to = fmt_safe_chr( x[["rename"]]$to ),
-                          stringsAsFactors = FALSE
+                # possible fields depending on event type
+                label_name = fmt_safe_chr( x[["label"]]$name ),
+                milestone_title = fmt_safe_chr( x[["milestone"]]$title ),
+                assignee_login = fmt_safe_chr( x[["assignee"]]$login ),
+                assigner_login = fmt_safe_chr( x[["assigner"]]$login ),
+                rename_from = fmt_safe_chr( x[["rename"]]$from ),
+                rename_to = fmt_safe_chr( x[["rename"]]$to ),
+                stringsAsFactors = FALSE
               ),
             simplify = FALSE
     )
@@ -146,7 +146,7 @@ parse_issue_events <- function(res){
 
 parse_issue_comments <- function(res){
 
-  if(is.character(res)){stop("Results object contains no elements to parse.")}
+  if (is.character(res)) {stop("Results object contains no elements to parse.")}
 
   mapped_elts <-
     sapply( res ,
@@ -189,7 +189,7 @@ parse_issue_comments <- function(res){
 
 parse_milestones <- function(res){
 
-  if(is.character(res)){stop("Results object contains no elements to parse.")}
+  if (is.character(res)) {stop("Results object contains no elements to parse.")}
 
   mapped_elts <-
     sapply( res ,
@@ -231,7 +231,7 @@ parse_milestones <- function(res){
 
 parse_repo_labels <- function(res){
 
-  if(is.character(res)){stop("Results object contains no elements to parse.")}
+  if (is.character(res)) {stop("Results object contains no elements to parse.")}
 
   mapped_elts <-
     sapply( res ,
