@@ -46,13 +46,6 @@ viz_gantt(dplyr_milestones) +
   ggplot2::labs(subtitle = 'Milestones in the dplyr repository')
 ```
 
-Either gantt charts or task boards (next section) can also be passed through `viz_linked` to add links to their text back to the relevant GitHub milestones. This only works in RMarkdown with the `results = "asis"` chunk option or saved to a file.
-
-```{r results = 'asis'}
-g <- viz_gantt(dplyr_milestones)
-viz_linked(g)
-```
-
 ## Task Boards
 
 `viz_taskboard()` creates an Agile-like taskboard of items (e.g. issues, milestones) to be started, in progress, and completed.

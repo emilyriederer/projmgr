@@ -10,7 +10,6 @@
 NULL
 
 globalVars <- c(
-  ".", # for viz_linked
   ".data" # for ggplot nse
 )
 
