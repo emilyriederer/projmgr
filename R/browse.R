@@ -117,9 +117,28 @@ browse_docs <- function(
   action = c('get', 'post'),
   object = c('milestone', 'issue', 'issue event', 'issue comment', 'repo labels')){
 
+  # validate inputs ----
   action <- match.arg(action)
   object <- match.arg(object)
 
+  # define mapping ----
+  browse_data <-
+    data.frame(stringsAsFactors = FALSE,
+      action = rep(c("get", "post"), each = 5),
+      object = rep(c("milestone", "issue", "issue event", "repo labels", "issue comment"), 2),
+      url_suffix = c("issues/milestones/#list-milestones-for-a-repository",
+                     "issues/#list-issues-for-a-repository",
+                     "issues/events/#list-events-for-an-issue",
+                     "issues/labels/#list-all-labels-for-this-repository",
+                     "issues/comments/#list-comments-on-an-issue",
+                     "issues/milestones/#create-a-milestone",
+                     "issues/#create-an-issue",
+                     NA,
+                     "issues/labels/#create-a-label",
+                     "issues/comments/#create-a-comment")
+  )
+
+  # create url ----
   if (action == 'post' & object == 'issue event') {
     stop("No relevant documentation for posting an issue event. Issue events are consequences of other actions.")
   }
@@ -127,6 +146,7 @@ browse_docs <- function(
   url_prefix <- "https://developer.github.com/v3"
   url_suffix <- browse_data$url_suffix[browse_data$action == action & browse_data$object == object]
 
+  # render results ----
   view_url(url_prefix, url_suffix)
 
 }
@@ -136,6 +156,7 @@ browse_docs <- function(
 #' @keywords internal
 
 view_url <- function(..., open = interactive()) {
+
   url <- paste(..., sep = "/")
   if (open) {
     cat(paste("Opening URL", url))
@@ -144,4 +165,5 @@ view_url <- function(..., open = interactive()) {
     cat(paste("Open URL", url))
   }
   invisible(url)
+
 }
