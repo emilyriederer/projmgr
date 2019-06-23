@@ -52,14 +52,14 @@ check_credentials <- function(ref){
 
   # get information on repo collaborators
   perm_req <- try(get_engine("/collaborators", ref), silent = TRUE)
-  if("try-error" %in% class(perm_req)){
-  perm_req <- list(admin = FALSE, push = FALSE, pull = FALSE)
+  if ("try-error" %in% class(perm_req)) {
+    perm_req <- list(admin = FALSE, push = FALSE, pull = FALSE)
   }
   else{
-  login_match <- vapply(perm_req,
-                        FUN = function(x) x[["login"]] == auth_req[[1]]$login,
-                        FUN.VALUE = logical(1))
-  perm_req <- perm_req[[which(login_match)]]$permissions
+    login_match <- vapply(perm_req,
+                          FUN = function(x) x[["login"]] == auth_req[[1]]$login,
+                          FUN.VALUE = logical(1))
+    perm_req <- perm_req[[which(login_match)]]$permissions
   }
 
   cat("-- With provided credentials -- \n",

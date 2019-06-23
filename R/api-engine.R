@@ -11,7 +11,7 @@
 
 get_engine <- function(api_endpoint, ref, limit = Inf, ...){
 
-    res <- gh::gh(
+  res <- gh::gh(
     endpoint = paste0(ref$base_url, ref$repo_path, api_endpoint),
     ...,
     .token = Sys.getenv(ref$id),
@@ -21,7 +21,7 @@ get_engine <- function(api_endpoint, ref, limit = Inf, ...){
   )
 
   # handle special case when single item returned ----
-  if( !is.null( names(res) ) ){ res <- list(res) }
+  if (!is.null( names(res))) { res <- list(res) }
 
   # attach fields for the repo owner and name ----
   ## only if results are non-empty
@@ -98,7 +98,7 @@ validate_inputs <- function(input, allowed_vars){
   extra_vars <- setdiff(names(input), allowed_vars)
 
   # no disallowed vars exist
-  if(length(extra_vars) > 0){
+  if (length(extra_vars) > 0) {
     stop(
       paste0(
         "The following user-inputted variables are not relevant to this API request: \n + ",

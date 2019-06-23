@@ -119,16 +119,16 @@ gen_taskboard_css <- function(rand_id, colors, hover){
 
   ## note that paste is used over new-lines to enhance readability while ensuring no encoding issues
   ## rand_id functions to make css unique to each indiv plot versus all taskboards in a document
-    paste0("<style>",
-           ".taskboard{display: grid;grid-gap: 1%;grid-template-columns: 1fr 1fr 1fr;margin-bottom: 50px;}",
-           ".head{background-color: #a9a9a9;border: 1px solid #d3d3d3;text-align: center;font-weight: strong;}",
-           ".task{text-align: center;padding: 2%;margin: 2%;border: 1px solid #d3d3d3;box-shadow: 2px 2px 5px grey;transition-duration:0.5s;}",
-           ifelse(hover, paste0(".", rand_id, " .task:hover{margin: 0%;padding: 4%;}"), ""),
-           ".", rand_id," .ns{background-color:", colors[1], ";}",
-           ".", rand_id," .ip{background-color:", colors[2], ";}",
-           ".", rand_id," .dn{background-color:", colors[3], ";}",
-           "div.taskboard a, div.taskboard a:visited{color: black;text-decoration: none;}",
-           "div.taskboard a:hover{color: black;text-decoration: underline;}",
-           "div.taskboard a:active{color: white;}</style>")
+  paste0("<style>",
+         ".taskboard{display: grid;grid-gap: 1%;grid-template-columns: 1fr 1fr 1fr;margin-bottom: 50px;}",
+         ".head{background-color: #a9a9a9;border: 1px solid #d3d3d3;text-align: center;font-weight: strong;}",
+         ".task{text-align: center;padding: 2%;margin: 2%;border: 1px solid #d3d3d3;box-shadow: 2px 2px 5px grey;transition-duration:0.5s;}",
+         ifelse(hover, paste0(".", rand_id, " .task:hover{margin: 0%;padding: 4%;}"), ""),
+         ".", rand_id," .ns{background-color:", colors[1], ";}",
+         ".", rand_id," .ip{background-color:", colors[2], ";}",
+         ".", rand_id," .dn{background-color:", colors[3], ";}",
+         "div.taskboard a, div.taskboard a:visited{color: black;text-decoration: none;}",
+         "div.taskboard a:hover{color: black;text-decoration: underline;}",
+         "div.taskboard a:active{color: white;}</style>")
 
 }

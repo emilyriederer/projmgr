@@ -29,17 +29,17 @@
 post_issue <- function(ref, title, ..., distinct = TRUE){
 
   # check for unique title if desired ----
-  if(distinct){
+  if (distinct) {
 
     open_issues <- get_issues(ref, state = 'open')
 
     issue_titles <-
-      if(is.list(open_issues)) {
+      if (is.list(open_issues)) {
         vapply(open_issues, FUN = function(x) x[["title"]], FUN.VALUE = character(1))
       }
     else{""}
 
-    if( title %in% issue_titles ){ # when title not distinct
+    if ( title %in% issue_titles ) { # when title not distinct
       stop(
         paste("New issue title is not distinct with current open issues. \n",
               "Please change title or set distinct = FALSE."), call. = FALSE)
@@ -50,14 +50,14 @@ post_issue <- function(ref, title, ..., distinct = TRUE){
   # check that rest of inputs are valid per github api ----
   args <- list(...)
   validate_inputs(args, allowed_vars = help_post_issue() )
-  if(length(args[['labels']] == 1)){args[["labels"]] <- I(args[["labels"]])}
-  if(length(args[['assignees']] == 1)){args[["assignees"]] <- I(args[["assignees"]])}
+  if (length(args[['labels']] == 1)) {args[["labels"]] <- I(args[["labels"]])}
+  if (length(args[['assignees']] == 1)) {args[["assignees"]] <- I(args[["assignees"]])}
 
   # submit request ----
   api_fx <- function(...){ post_engine(api_endpoint = "/issues",
-                              ref = ref,
-                              title = title,
-                              ...)
+                                       ref = ref,
+                                       title = title,
+                                       ...)
   }
 
   res <- do.call(api_fx, args)
@@ -90,10 +90,10 @@ post_milestone <- function(ref, title, ...){
   # github automatically disallows duplicate milestone titles,
   # so not an optional as in post_issues
   open_milestones <- get_milestones(ref, state = 'open')
-  milestone_titles <-       if(is.list(open_milestones)) {
+  milestone_titles <- if (is.list(open_milestones)) {
     vapply( open_milestones, FUN = function(x) x[["title"]], FUN.VALUE = character(1))  }
   else{""}
-  if(any(title == milestone_titles)){ # when title not distinct
+  if (any(title == milestone_titles)) { # when title not distinct
     stop("New milestone title is not distinct with current open milestones. Please change title.",
          call. = FALSE)
   }

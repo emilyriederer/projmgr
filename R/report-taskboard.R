@@ -56,9 +56,9 @@ report_taskboard <- function(data,
   n_ip <- nrow(inprog)
   n_dn <- nrow(done)
   n_max <- max(n_ns, n_ip, n_dn, na.rm = TRUE)
-  if(n_ns < n_max){notstart_html[(n_ns+1):n_max] <- "<div></div>"}
-  if(n_ip < n_max){inprog_html[(n_ip+1):n_max] <- "<div></div>"}
-  if(n_dn < n_max){done_html[(n_dn+1):n_max] <- "<div></div>"}
+  if (n_ns < n_max) {notstart_html[(n_ns + 1):n_max] <- "<div></div>"}
+  if (n_ip < n_max) {inprog_html[(n_ip + 1):n_max] <- "<div></div>"}
+  if (n_dn < n_max) {done_html[(n_dn + 1):n_max] <- "<div></div>"}
   html_tasks <- paste(paste(notstart_html, inprog_html, done_html), collapse = "")
   html <- paste0("<div class = 'taskboard'>",
                  "<div class = 'head'>Not Started</div>",

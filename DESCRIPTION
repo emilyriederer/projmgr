@@ -31,7 +31,6 @@ Suggests:
     rmarkdown,
     testthat,
     tidyr,
-    xml2,
     yaml,
     htmltools
 VignetteBuilder: 
