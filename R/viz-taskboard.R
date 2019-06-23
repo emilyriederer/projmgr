@@ -82,10 +82,6 @@ viz_taskboard <- function(data, in_progress_when, str_wrap_width = 30, text_size
       legend.position = 'none'
     )
 
-  # add metadata to be used with viz_linked ----
-  class(g) <- c(class(g), "taskboard")
-  g[['str_wrap_width']] <- str_wrap_width
-
   return(g)
 
 }

@@ -84,9 +84,5 @@ viz_gantt <- function(data, start = "created_at", end = "closed_at", str_wrap_wi
                    axis.title.y = element_blank(),
                    legend.position = "none")
 
-  # add metadata to be used with viz_linked ----
-  class(g) <- c("gantt", class(g))
-  g[['str_wrap_width']] <- str_wrap_width
-
   return(g)
 }
