@@ -120,18 +120,19 @@ listcol_filter <- function(data, col_name, matches, is_regex = FALSE, any = TRUE
 
 listcol_extract <- function(data, col_name, regex, new_col_name = NULL, sep_matches = ",", keep_regex = FALSE) {
 
-  new_col_vals <- sapply(data[[col_name]],
+  new_col_vals <- vapply(data[[col_name]],
                          FUN = function(x) {
                            out <- grep(regex, x, value = TRUE)
                            if (!keep_regex) out <- sub(regex, "", out)
                            if (length(out) == 0) out <- NA_character_
                            if (length(out) > 1) {
-                             if(!is.na(sep_matches)) paste(sort(out), collapse = sep_matches)
+                             if (!is.na(sep_matches)) paste(sort(out), collapse = sep_matches)
                              else warning(paste("More than one pattern match in single observation.",
                                                 "Results contain one of matches arbitrarily",
                                                 collapse = "\n")) }
                            return(out[1])
                          },
+                         FUN.VALUE = character(1),
                          USE.NAMES = TRUE)
 
   if (is.null(new_col_name)) {
