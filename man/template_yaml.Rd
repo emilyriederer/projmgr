@@ -17,6 +17,11 @@ Prints YAML templates for either a plan or to-do list to the console as an examp
 for developing your own custom plans and to-do lists. Inspired by similar \code{template_}
 functions included in the \code{pkgdown} package.
 }
+\details{
+Note that depending on the console, text editor, and settings you are using, the template may
+or may not preserve the necessary whitespace shown in the output. If you copy-paste the
+template for modification, ensure that it still adheres to traditional YAML indentation.
+}
 \examples{
 template_yaml('plan')
 template_yaml('todo')

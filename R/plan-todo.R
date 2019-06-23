@@ -192,6 +192,10 @@ post_todo <- function(ref, todo, distinct = TRUE){
 #' for developing your own custom plans and to-do lists. Inspired by similar \code{template_}
 #' functions included in the \code{pkgdown} package.
 #'
+#' Note that depending on the console, text editor, and settings you are using, the template may
+#' or may not preserve the necessary whitespace shown in the output. If you copy-paste the
+#' template for modification, ensure that it still adheres to traditional YAML indentation.
+#'
 #' @param template One of \code{"plan"} or \code{"todo"} denoting template desired
 #'
 #' @return Prints template to console
