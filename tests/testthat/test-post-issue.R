@@ -1,9 +1,6 @@
 context("POST ISSUES functions")
 
 skip_if_not(interactive(), "This set of tests should only be run manually")
-skip_on_cran()
-skip_on_travis()
-skip_on_appveyor()
 
 experigit <- create_repo_ref('emilyriederer', 'experigit')
 
@@ -19,7 +16,7 @@ issue2_res <- get_issues(experigit, number = issue2)
 issue3_res <- get_issues(experigit, number = issue3)
 
 
-test_that( "Multifield values (labels / assignees) are handles correctly for any number of inputs", {
+test_that( "Multifield values (labels / assignees) are handled correctly for any number of inputs", {
 
   expect_length( issue1_res[[1]]$labels , 0)
   expect_length( issue2_res[[1]]$labels , 1)
