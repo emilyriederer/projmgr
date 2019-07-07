@@ -30,22 +30,16 @@ function allows users to filter list columns by the presence of one or more valu
 }
 \examples{
 \dontrun{
+issues <- get_issues(repo)
+issues_df <- parse_issues(issues)
+
 # keep observation containing a label of either "bug" or "feature"
-issues <-
-  get_issues(repo) \%>\%
-  parse_issues() \%>\%
-  listcol_filter(col_name = "labels_name", matches = c("bug", "feature"))
+listcol_filter(issues_df, col_name = "labels_name", matches = c("bug", "feature"))
 
 # keep observation containing a label of both "bug" and "feature"
-issues <-
-  get_issues(repo) \%>\%
-  parse_issues() \%>\%
-  listcol_filter(col_name = "labels_name", matches = c("bug", "feature"), any = FALSE)
+listcol_filter(issues_df, col_name = "labels_name", matches = c("bug", "feature"), any = FALSE)
 
 # keep observation containing a label that starts with "region"
-issues <-
-  get_issues(repo) \%>\%
-  parse_issues() \%>\%
-  listcol_filter(col_name = "labels_name", matches = "^region:", is_regex = TRUE)
+listcol_filter(issues_df, col_name = "labels_name", matches = "^region:", is_regex = TRUE)
 }
 }

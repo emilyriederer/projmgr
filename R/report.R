@@ -26,8 +26,9 @@
 #' \dontrun{
 #' In RMarkdown:
 #' ```{r}
-#' issues <- get_issues(repo, state = 'all') %>% parse_issues()
-#' report_progress(issues)
+#' issues <- get_issues(repo, state = 'all')
+#' issues_df <- parse_issues(issues)
+#' report_progress(issues_df)
 #' ```
 #'}
 
@@ -196,9 +197,11 @@ report_todo <- function(todo, show_ratio = TRUE){
 #' \dontrun{
 #' In RMarkdown:
 #' ```{r}
-#' issue <- get_issues(repo, number = 15) %>% parse_issues()
-#' comments <- get_issue_comments(rep, number = 15) %>% parse_issue_comments()
-#' report_discussion(issue, comments)
+#' issue <- get_issues(repo, number = 15)
+#' issue_df <- parse_issues(issue)
+#' comments <- get_issue_comments(repo, number = 15)
+#' comments_df <- parse_issue_comments(comments)
+#' report_discussion(issue_df, comments_df)
 #' ```
 #'}
 

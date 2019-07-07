@@ -32,9 +32,11 @@ HTML output is wrapped in a <div> of class 'report_disccusion' for custom CSS st
 \dontrun{
 In RMarkdown:
 ```{r}
-issue <- get_issues(repo, number = 15) \%>\% parse_issues()
-comments <- get_issue_comments(rep, number = 15) \%>\% parse_issue_comments()
-report_discussion(issue, comments)
+issue <- get_issues(repo, number = 15)
+issue_df <- parse_issues(issue)
+comments <- get_issue_comments(repo, number = 15)
+comments_df <- parse_issue_comments(comments)
+report_discussion(issue_df, comments_df)
 ```
 }
 }

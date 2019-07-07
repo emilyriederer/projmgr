@@ -36,9 +36,8 @@ same pattern, one is returned at random.
 }
 \examples{
 \dontrun{
-issues <-
-    get_issues(repo) \%>\%
-    parse_issues() \%>\%
-    listcol_extract("labels_name", "-team$")
+issues <- get_issues(repo)
+issues_df <- parse_issues(issues)
+listcol_extract(issues_df, "labels_name", "-team$")
 }
 }

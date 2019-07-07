@@ -39,8 +39,9 @@ The following logic is used to determine the status of each issue:
 \dontrun{
 # in RMarkdown
 ```{r}
-issues <- get_issues(myrepo, milestone = 1) \%>\% parse_issues()
-report_taskboard(issues, in_progress_when = is_labeled_with('in-progress'))
+issues <- get_issues(myrepo, milestone = 1)
+issues_df <- parse_issues(issues)
+report_taskboard(issues_df, in_progress_when = is_labeled_with('in-progress'))
 ````
 }
 }

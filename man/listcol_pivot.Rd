@@ -34,12 +34,12 @@ could be done with \code{listcol_pivot(data, "labels_name", "^priority:", functi
 }
 \examples{
 \dontrun{
-issues <-
-  get_issues(repo) \%>\%
-  parse_issues() \%>\%
-  listcol_pivot(col_name = "labels_name",
-                regex = "^priority:",
-                transform_fx = function(x) paste0("label_",x)),
-                delete_orig = TRUE)
+issues <- get_issues(repo)
+issues_df <- parse_issues(issues)
+listcol_pivot(issues_df,
+  col_name = "labels_name",
+  regex = "^priority:",
+  transform_fx = function(x) paste0("label_",x)),
+  delete_orig = TRUE)
 }
 }

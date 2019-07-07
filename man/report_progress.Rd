@@ -39,8 +39,9 @@ you wish to only show items that are in a group.
 \dontrun{
 In RMarkdown:
 ```{r}
-issues <- get_issues(repo, state = 'all') \%>\% parse_issues()
-report_progress(issues)
+issues <- get_issues(repo, state = 'all')
+issues_df <- parse_issues(issues)
+report_progress(issues_df)
 ```
 }
 }

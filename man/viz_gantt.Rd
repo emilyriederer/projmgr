@@ -40,8 +40,9 @@ in that case.
 }
 \examples{
 \dontrun{
-issues <- get_issues(myrepo, state = "closed") \%>\% parse_issues()
-viz_gantt(issues)
+issues <- get_issues(myrepo, state = "closed")
+issues_df <- parse_issues(issues)
+viz_gantt(issues_df)
 }
 }
 \seealso{

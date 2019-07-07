@@ -28,8 +28,9 @@
 #'
 #' @examples
 #' \dontrun{
-#' issues <- get_issues(myrepo, state = "closed") %>% parse_issues()
-#' viz_gantt(issues)
+#' issues <- get_issues(myrepo, state = "closed")
+#' issues_df <- parse_issues(issues)
+#' viz_gantt(issues_df)
 #' }
 
 viz_gantt <- function(data, start = "created_at", end = "closed_at", str_wrap_width = 30){
@@ -46,16 +47,16 @@ viz_gantt <- function(data, start = "created_at", end = "closed_at", str_wrap_wi
   plot_data$gantt_y <- factor(plot_data$title, levels = plot_data$title)
   plot_data$start_var <- plot_data[[start]]
   plot_data$end_var <-  plot_data[[end]]
-  plot_data$psuedo_start_var <-
+  plot_data$psuedo_start_var <- as.Date(
     ifelse(is.na(plot_data[[start]]),
            max(plot_data[[start]], na.rm = TRUE),
-           plot_data[[start]]) %>%
-    as.Date(origin = '1970-01-01')
-  plot_data$psuedo_end_var <-
+           plot_data[[start]])
+    , origin = '1970-01-01')
+  plot_data$psuedo_end_var <- as.Date(
     ifelse(is.na(plot_data[[end]]),
            max(plot_data[[end]], na.rm = TRUE),
-           plot_data[[end]]) %>%
-    as.Date(origin = '1970-01-01')
+           plot_data[[end]])
+    , origin = '1970-01-01')
   plot_data$gantt_col <- -1*as.integer(difftime(plot_data$end_var, plot_data$start_var, "days"))
 
   # plot data ----
