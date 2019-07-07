@@ -1,5 +1,7 @@
 context("REPORT PLAN TODO functions")
 
+skip_if_not_installed("yaml")
+
 plan <- read_plan(plan)
 
 test_that( "The correct number of plan items are captured", {
