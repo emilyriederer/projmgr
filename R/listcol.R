@@ -20,13 +20,13 @@
 #'
 #' @examples
 #' \dontrun{
-#' issues <-
-#'   get_issues(repo) %>%
-#'   parse_issues() %>%
-#'   listcol_pivot(col_name = "labels_name",
-#'                 regex = "^priority:",
-#'                 transform_fx = function(x) paste0("label_",x)),
-#'                 delete_orig = TRUE)
+#' issues <- get_issues(repo)
+#' issues_df <- parse_issues(issues)
+#' listcol_pivot(issues_df,
+#'   col_name = "labels_name",
+#'   regex = "^priority:",
+#'   transform_fx = function(x) paste0("label_",x)),
+#'   delete_orig = TRUE)
 #' }
 
 listcol_pivot <- function(data, col_name, regex = ".", transform_fx = identity, delete_orig = FALSE) {
@@ -59,23 +59,17 @@ listcol_pivot <- function(data, col_name, regex = ".", transform_fx = identity, 
 #'
 #' @examples
 #' \dontrun{
+#' issues <- get_issues(repo)
+#' issues_df <- parse_issues(issues)
+#'
 #' # keep observation containing a label of either "bug" or "feature"
-#' issues <-
-#'   get_issues(repo) %>%
-#'   parse_issues() %>%
-#'   listcol_filter(col_name = "labels_name", matches = c("bug", "feature"))
+#' listcol_filter(issues_df, col_name = "labels_name", matches = c("bug", "feature"))
 #'
 #' # keep observation containing a label of both "bug" and "feature"
-#' issues <-
-#'   get_issues(repo) %>%
-#'   parse_issues() %>%
-#'   listcol_filter(col_name = "labels_name", matches = c("bug", "feature"), any = FALSE)
+#' listcol_filter(issues_df, col_name = "labels_name", matches = c("bug", "feature"), any = FALSE)
 #'
 #' # keep observation containing a label that starts with "region"
-#' issues <-
-#'   get_issues(repo) %>%
-#'   parse_issues() %>%
-#'   listcol_filter(col_name = "labels_name", matches = "^region:", is_regex = TRUE)
+#' listcol_filter(issues_df, col_name = "labels_name", matches = "^region:", is_regex = TRUE)
 #' }
 
 listcol_filter <- function(data, col_name, matches, is_regex = FALSE, any = TRUE) {
@@ -112,10 +106,9 @@ listcol_filter <- function(data, col_name, matches, is_regex = FALSE, any = TRUE
 #'
 #' @examples
 #' \dontrun{
-#' issues <-
-#'     get_issues(repo) %>%
-#'     parse_issues() %>%
-#'     listcol_extract("labels_name", "-team$")
+#' issues <- get_issues(repo)
+#' issues_df <- parse_issues(issues)
+#' listcol_extract(issues_df, "labels_name", "-team$")
 #' }
 
 listcol_extract <- function(data, col_name, regex, new_col_name = NULL, sep_matches = ",", keep_regex = FALSE) {
