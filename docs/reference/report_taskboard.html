@@ -194,8 +194,9 @@ taskboard helper functions. See <code><a href='taskboard_helpers.html'>?taskboar
     <pre class="examples"># NOT RUN {
 # in RMarkdown
 ```{r}
-issues <- get_issues(myrepo, milestone = 1) %>% parse_issues()
-report_taskboard(issues, in_progress_when = is_labeled_with('in-progress'))
+issues <- get_issues(myrepo, milestone = 1)
+issues_df <- parse_issues(issues)
+report_taskboard(issues_df, in_progress_when = is_labeled_with('in-progress'))
 ````
 # }
 </pre>

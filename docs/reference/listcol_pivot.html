@@ -192,13 +192,13 @@ could be done with <code>listcol_pivot(data, "labels_name", "^priority:", functi
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"># NOT RUN {
-issues <-
-  get_issues(repo) %>%
-  parse_issues() %>%
-  listcol_pivot(col_name = "labels_name",
-                regex = "^priority:",
-                transform_fx = function(x) paste0("label_",x)),
-                delete_orig = TRUE)
+issues <- get_issues(repo)
+issues_df <- parse_issues(issues)
+listcol_pivot(issues_df,
+  col_name = "labels_name",
+  regex = "^priority:",
+  transform_fx = function(x) paste0("label_",x)),
+  delete_orig = TRUE)
 # }
 </pre>
   </div>

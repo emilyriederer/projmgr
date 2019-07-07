@@ -186,23 +186,17 @@ when <code>matches</code> contains exact</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='no'>issues</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_issues.html'>get_issues</a></span>(<span class='no'>repo</span>)
+<span class='no'>issues_df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='parse_issues.html'>parse_issues</a></span>(<span class='no'>issues</span>)
+
 <span class='co'># keep observation containing a label of either "bug" or "feature"</span>
-<span class='no'>issues</span> <span class='kw'>&lt;-</span>
-  <span class='fu'><a href='get_issues.html'>get_issues</a></span>(<span class='no'>repo</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='parse_issues.html'>parse_issues</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>listcol_filter</span>(<span class='kw'>col_name</span> <span class='kw'>=</span> <span class='st'>"labels_name"</span>, <span class='kw'>matches</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"bug"</span>, <span class='st'>"feature"</span>))
+<span class='fu'>listcol_filter</span>(<span class='no'>issues_df</span>, <span class='kw'>col_name</span> <span class='kw'>=</span> <span class='st'>"labels_name"</span>, <span class='kw'>matches</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"bug"</span>, <span class='st'>"feature"</span>))
 
 <span class='co'># keep observation containing a label of both "bug" and "feature"</span>
-<span class='no'>issues</span> <span class='kw'>&lt;-</span>
-  <span class='fu'><a href='get_issues.html'>get_issues</a></span>(<span class='no'>repo</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='parse_issues.html'>parse_issues</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>listcol_filter</span>(<span class='kw'>col_name</span> <span class='kw'>=</span> <span class='st'>"labels_name"</span>, <span class='kw'>matches</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"bug"</span>, <span class='st'>"feature"</span>), <span class='kw'>any</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>listcol_filter</span>(<span class='no'>issues_df</span>, <span class='kw'>col_name</span> <span class='kw'>=</span> <span class='st'>"labels_name"</span>, <span class='kw'>matches</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"bug"</span>, <span class='st'>"feature"</span>), <span class='kw'>any</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
 <span class='co'># keep observation containing a label that starts with "region"</span>
-<span class='no'>issues</span> <span class='kw'>&lt;-</span>
-  <span class='fu'><a href='get_issues.html'>get_issues</a></span>(<span class='no'>repo</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='parse_issues.html'>parse_issues</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>listcol_filter</span>(<span class='kw'>col_name</span> <span class='kw'>=</span> <span class='st'>"labels_name"</span>, <span class='kw'>matches</span> <span class='kw'>=</span> <span class='st'>"^region:"</span>, <span class='kw'>is_regex</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>listcol_filter</span>(<span class='no'>issues_df</span>, <span class='kw'>col_name</span> <span class='kw'>=</span> <span class='st'>"labels_name"</span>, <span class='kw'>matches</span> <span class='kw'>=</span> <span class='st'>"^region:"</span>, <span class='kw'>is_regex</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
