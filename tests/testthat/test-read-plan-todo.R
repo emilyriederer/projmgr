@@ -1,5 +1,7 @@
 context("PLAN TODO functions")
 
+skip_if_not_installed("yaml")
+
 plan <- read_plan(plan)
 todo <- read_todo(todo)
 
