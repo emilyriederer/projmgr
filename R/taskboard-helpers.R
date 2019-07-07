@@ -139,3 +139,30 @@ is_due_before <- function(due_date){
     !is.na(data$due_on) & data$due_on < due_date
   }
 }
+
+#' @export
+#' @param events Dataframe containing events for each issue in data
+#' @param n Minimum of commits required to be considered in progress
+#' @name taskboard_helpers
+has_n_commits <- function(events, n = 1) {
+
+  function(data){
+
+  stopifnot("number" %in% names(events))
+  stopifnot("event" %in% names(events))
+
+  ref_events <- events[events$event == "referenced", ]
+  ref_counts <- aggregate(event ~ number, ref_events, length)
+  ref_indices <-
+    vapply(data$number,
+           FUN = function(x) {
+             z <- which(x == ref_counts$number)
+             if (length(z) == 0) 0
+             else z
+             },
+           numeric(1))
+  n_commits <- ref_counts$event[ref_indices]
+  n_commits >= n
+  }
+
+}

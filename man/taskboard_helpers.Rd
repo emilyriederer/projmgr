@@ -12,6 +12,7 @@
 \alias{is_part_closed}
 \alias{is_due}
 \alias{is_due_before}
+\alias{has_n_commits}
 \title{Tag "in-progress" items for taskboard visualization}
 \usage{
 is_labeled()
@@ -33,6 +34,8 @@ is_part_closed()
 is_due()
 
 is_due_before(due_date)
+
+has_n_commits(events, n = 1)
 }
 \arguments{
 \item{label}{Label name as character}
@@ -44,6 +47,10 @@ is_due_before(due_date)
 \item{created_date}{Date as character in "YYYY-MM-DD" format}
 
 \item{due_date}{Date as character in "YYYY-MM-DD" format}
+
+\item{events}{Dataframe containing events for each issue in data}
+
+\item{n}{Minimum of commits required to be considered in progress}
 }
 \value{
 Function to be passed as \code{in_progress_when} argument in \code{viz_taskboard()}
