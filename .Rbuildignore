@@ -1,5 +1,6 @@
 ^cran-comments\.md$
 ^appveyor\.yml$
+^README\.md$
 ^CODE_OF_CONDUCT\.md$
 ^PRIVACY\.md$
 ^LICENSE\.md$
