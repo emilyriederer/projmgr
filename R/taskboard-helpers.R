@@ -56,7 +56,7 @@ is_labeled <- function(){
 
 #' @export
 #' @param label Label name(s) as character vector
-#' @param any When the supplied labels vector has more than one value, should the result return TRUE if
+#' @param any When the supplied vector has more than one value, should the result return TRUE if
 #'   any of those values are present in the dataset (logical OR)
 #' @name taskboard_helpers
 is_labeled_with <- function(label, any = TRUE){
@@ -78,8 +78,6 @@ is_assigned <- function(){
 
 #' @export
 #' @param login User login(s) as character vector
-#' @param any When the supplied login vector has more than one value, should the result return TRUE if
-#'   any of those values are present in the dataset (logical OR)
 #' @name taskboard_helpers
 is_assigned_to <- function(login, any = TRUE){
   function(data){
