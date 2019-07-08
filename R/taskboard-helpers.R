@@ -153,15 +153,14 @@ has_n_commits <- function(events, n = 1) {
 
   ref_events <- events[events$event == "referenced", ]
   ref_counts <- stats::aggregate(event ~ number, ref_events, length)
-  ref_indices <-
+  n_commits <-
     vapply(data$number,
            FUN = function(x) {
-             z <- which(x == ref_counts$number)
+             z <- which(x == ref_counts$event)
              if (length(z) == 0) 0
              else z
              },
            numeric(1))
-  n_commits <- ref_counts$event[ref_indices]
   n_commits >= n
   }
 
