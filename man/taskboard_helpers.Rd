@@ -38,9 +38,9 @@ is_due_before(due_date)
 has_n_commits(events, n = 1)
 }
 \arguments{
-\item{label}{Label name as character}
+\item{label}{Label name(s) as character vector}
 
-\item{login}{User login as character}
+\item{login}{User login(s) as character vector}
 
 \item{number}{Milestone number}
 
@@ -51,6 +51,12 @@ has_n_commits(events, n = 1)
 \item{events}{Dataframe containing events for each issue in data}
 
 \item{n}{Minimum of commits required to be considered in progress}
+
+\item{any}{When the supplied labels vector has more than one value, should the result return TRUE if
+any of those values are present in the dataset (logical OR)}
+
+\item{any}{When the supplied login vector has more than one value, should the result return TRUE if
+any of those values are present in the dataset (logical OR)}
 }
 \value{
 Function to be passed as \code{in_progress_when} argument in \code{viz_taskboard()}

@@ -55,12 +55,15 @@ is_labeled <- function(){
 }
 
 #' @export
-#' @param label Label name as character
+#' @param label Label name(s) as character vector
+#' @param any When the supplied labels vector has more than one value, should the result return TRUE if
+#'   any of those values are present in the dataset (logical OR)
 #' @name taskboard_helpers
-is_labeled_with <- function(label){
+is_labeled_with <- function(label, any = TRUE){
   function(data){
     stopifnot("labels_name" %in% names(data))
-    vapply(data$labels_name, FUN = function(x) label %in% x, FUN.VALUE = logical(1))
+    cutoff <- if (any) 1 else length(label)
+    vapply(data$labels_name, FUN = function(x) length(intersect(label, x)) >= cutoff, FUN.VALUE = logical(1))
   }
 }
 
@@ -74,12 +77,15 @@ is_assigned <- function(){
 }
 
 #' @export
-#' @param login User login as character
+#' @param login User login(s) as character vector
+#' @param any When the supplied login vector has more than one value, should the result return TRUE if
+#'   any of those values are present in the dataset (logical OR)
 #' @name taskboard_helpers
-is_assigned_to <- function(login){
+is_assigned_to <- function(login, any = TRUE){
   function(data){
     stopifnot("assignees_login" %in% names(data))
-    vapply(data$assignees_login, FUN = function(x) login %in% x, FUN.VALUE = logical(1))
+    cutoff <- if (any) 1 else length(login)
+    vapply(data$assignees_login, FUN = function(x) length(intersect(login, x)) >= cutoff, FUN.VALUE = logical(1))
   }
 }
 
