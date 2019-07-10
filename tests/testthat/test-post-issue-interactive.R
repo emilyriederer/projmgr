@@ -1,4 +1,4 @@
-context("POST ISSUES functions")
+context("POST ISSUES functions - integration test")
 
 skip_if_not(interactive(), "This set of tests should only be run manually")
 
