@@ -32,7 +32,8 @@ Suggests:
     testthat,
     tidyr,
     yaml,
-    htmltools
+    htmltools,
+    httr
 Encoding: UTF-8
 Language: en-US
 LazyData: true
