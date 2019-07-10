@@ -1,5 +1,7 @@
 context("VIZ WATERFALL function")
 
+skip_if_not_installed("ggplot2")
+
 all_open <- data.frame(
   state = c("open", "open", "open", "open"),
   created_at = c("2018-01-01", "2018-03-01", "2018-07-01", "2018-12-01"),
