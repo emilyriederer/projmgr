@@ -1,5 +1,5 @@
 Package: projmgr
-Title: Task tracking and project management with GitHub via R
+Title: Task Tracking and Project Management with GitHub via R
 Version: 0.0.0.9902
 Authors@R:
     person(given = "Emily",
@@ -7,9 +7,9 @@ Authors@R:
            role = c("cre", "aut"),
            email = "emilyriederer@gmail.com")
 Description: Provides programmatic access to GitHub API with a
-    focus on project management.  For example, key functionality includes
+    focus on project management.  Key functionality includes
     setting up issues and milestones and reporting the progress of those
-    events. It should be useful for those using GitHub in personal,
+    events. Useful for those using GitHub in personal,
     professional, or academic settings with an emphasis on streamlining
     the workflow of data analysis projects.
 License: MIT + file LICENSE
