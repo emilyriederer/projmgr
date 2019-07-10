@@ -1,5 +1,7 @@
 context("GET ENGINE functions")
 
+skip_if_not_installed("gh")
+
 repo_ref <- list(repo_owner = "abc",
                  repo_name = "xyz",
                  id = "GITHUB_PAT",
