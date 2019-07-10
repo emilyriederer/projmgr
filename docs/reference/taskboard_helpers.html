@@ -155,11 +155,11 @@ Thus, these functions let users specify what they mean.</p>
 
     <pre class="usage"><span class='fu'>is_labeled</span>()
 
-<span class='fu'>is_labeled_with</span>(<span class='no'>label</span>)
+<span class='fu'>is_labeled_with</span>(<span class='no'>label</span>, <span class='kw'>any</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='fu'>is_assigned</span>()
 
-<span class='fu'>is_assigned_to</span>(<span class='no'>login</span>)
+<span class='fu'>is_assigned_to</span>(<span class='no'>login</span>, <span class='kw'>any</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='fu'>is_in_a_milestone</span>()
 
@@ -181,6 +181,11 @@ Thus, these functions let users specify what they mean.</p>
     <tr>
       <th>label</th>
       <td><p>Label name(s) as character vector</p></td>
+    </tr>
+    <tr>
+      <th>any</th>
+      <td><p>When the supplied vector has more than one value, should the result return TRUE if
+any of those values are present in the dataset (logical OR)</p></td>
     </tr>
     <tr>
       <th>login</th>
@@ -205,16 +210,6 @@ Thus, these functions let users specify what they mean.</p>
     <tr>
       <th>n</th>
       <td><p>Minimum of commits required to be considered in progress</p></td>
-    </tr>
-    <tr>
-      <th>any</th>
-      <td><p>When the supplied labels vector has more than one value, should the result return TRUE if
-any of those values are present in the dataset (logical OR)</p></td>
-    </tr>
-    <tr>
-      <th>any</th>
-      <td><p>When the supplied login vector has more than one value, should the result return TRUE if
-any of those values are present in the dataset (logical OR)</p></td>
     </tr>
     </table>
     
