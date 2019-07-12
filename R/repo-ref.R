@@ -13,10 +13,8 @@
 #' @param is_enterprise Boolean denoting whether or not working with Enterprise GitHub.Defaults to \code{FALSE}
 #' @param hostname Host URL stub for Enterprise repositories (e.g. "mycorp.github.com")
 #' @param identifier Ideally should be left blank and defaults to using \code{GITHUB_PAT} or \code{GITHUB_ENT_PAT}
-#'     environment variables as Personal Access Tokens. If \code{identifier} has a value and \code{password} does not,
-#'     this is assumed to be an alternative name of the environment variable to use for your Personal Access Token. If
-#'     \code{password} is also provided, this is interpreted as a username.
-#' @param password GitHub password. Ideally should be left blank and then defaults to empty string which works in conjunction with personal access tokens. Required if supplying username.
+#'     environment variables as Personal Access Tokens. If \code{identifier},
+#'     this is assumed to be an alternative name of the environment variable to use for your Personal Access Token
 #'
 #' @return List of repository reference information and credentials
 #' @export
@@ -32,27 +30,14 @@ create_repo_ref <-
            repo_name,
            is_enterprise = FALSE,
            hostname = "",
-           identifier = "",
-           password = ""){
+           identifier = ""
+           ){
 
     # determine authentication strategy ----
-    if (identifier != "" & password == "") {
+    if (identifier != "") {
       id_sys_var <- identifier
       pw_sys_var <- ""
       message(paste("Requests will authenticate with", identifier))
-    }
-    else if (identifier != "" & password != "") {
-
-      # save credentials to local environment
-      id_sys_var <- paste0("GITHUB_USER_", repo_name)
-      pw_sys_var <- paste0("GITHUB_USER_", repo_name)
-      eval(parse(text = paste(id_sys_var, "=", identifier)))
-      eval(parse(text = paste(pw_sys_var, "=", password)))
-
-      message(
-        paste0("Requests will authenticate with supplied username and password.",
-               "Please see vignette on Personal Access Tokens for improved security.")
-      )
     }
     else if (!is_enterprise & Sys.getenv("GITHUB_PAT") != "") {
       id_sys_var <- "GITHUB_PAT"
@@ -94,7 +79,6 @@ create_repo_ref <-
       repo_owner = repo_owner,
       repo_name = repo_name,
       id = id_sys_var,
-      pw = pw_sys_var,
       base_url = base_url,
       repo_path = paste("repos", repo_owner, repo_name, sep = "/")
     )

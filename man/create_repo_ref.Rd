@@ -5,7 +5,7 @@
 \title{Create reference to a GitHub repository}
 \usage{
 create_repo_ref(repo_owner, repo_name, is_enterprise = FALSE,
-  hostname = "", identifier = "", password = "")
+  hostname = "", identifier = "")
 }
 \arguments{
 \item{repo_owner}{Repository owner's username or GitHub Organization name}
@@ -17,11 +17,8 @@ create_repo_ref(repo_owner, repo_name, is_enterprise = FALSE,
 \item{hostname}{Host URL stub for Enterprise repositories (e.g. "mycorp.github.com")}
 
 \item{identifier}{Ideally should be left blank and defaults to using \code{GITHUB_PAT} or \code{GITHUB_ENT_PAT}
-environment variables as Personal Access Tokens. If \code{identifier} has a value and \code{password} does not,
-this is assumed to be an alternative name of the environment variable to use for your Personal Access Token. If
-\code{password} is also provided, this is interpreted as a username.}
-
-\item{password}{GitHub password. Ideally should be left blank and then defaults to empty string which works in conjunction with personal access tokens. Required if supplying username.}
+environment variables as Personal Access Tokens. If \code{identifier},
+this is assumed to be an alternative name of the environment variable to use for your Personal Access Token}
 }
 \value{
 List of repository reference information and credentials
