@@ -34,7 +34,8 @@ Suggests:
     tidyr,
     yaml,
     htmltools,
-    httr
+    httr,
+    covr
 Encoding: UTF-8
 Language: en-US
 LazyData: true

@@ -15,3 +15,6 @@ matrix:
 
 sudo: false
 cache: packages
+
+after_success:
+  - Rscript -e 'covr::codecov(line_exclusions = c("R/check.R", "R/help.R", "R/browse.R", "R/print.R"))'
