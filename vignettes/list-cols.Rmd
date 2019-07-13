@@ -96,6 +96,23 @@ select(issues, labels_name, number) %>%
   head()
 ```
 
+Unlike the above example, sometimes multiple items will match a given regex. In this case, a list-column is added to the dataset containing any matches. 
+
+For example, the third entry of the `assignees_login` field contains 4 logins. Two contain the letter "d".
+
+```{r}
+issues$assignees_login[[3]]
+```
+
+Now, `listcol_extract()` returns a list-column. For the third entry, this list column has length 2.
+
+```{r}
+select(issues, assignees_login, number) %>%
+  listcol_extract("assignees_login", regex = "d", keep_regex = TRUE) %>%
+  head()
+```
+
+
 ## Pivot List Column
 
 Finally, the `listcol_pivot()` helped function identifies all labels matching a regex, extract all the "values" from the key-value pair, and pivots these into boolean columns. For example, the following code makes a widened dataframe with a separate column for each team. `TRUE` denotes the fact that that team is responsible for that issue.

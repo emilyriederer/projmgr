@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">projmgr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9902</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -178,6 +178,21 @@ issues &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_
 <span class="co">#&gt; 4                              33        &lt;NA&gt;</span>
 <span class="co">#&gt; 5                              32        &lt;NA&gt;</span>
 <span class="co">#&gt; 6                              31        &lt;NA&gt;</span></code></pre></div>
+<p>Unlike the above example, sometimes multiple items will match a given regex. In this case, a list-column is added to the dataset containing any matches.</p>
+<p>For example, the third entry of the <code>assignees_login</code> field contains 4 logins. Two contain the letter “d”.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">issues<span class="op">$</span>assignees_login[[<span class="dv">3</span>]]
+<span class="co">#&gt; character(0)</span></code></pre></div>
+<p>Now, <code><a href="../reference/listcol_extract.html">listcol_extract()</a></code> returns a list-column. For the third entry, this list column has length 2.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">select</span>(issues, assignees_login, number) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/listcol_extract.html">listcol_extract</a></span>(<span class="st">"assignees_login"</span>, <span class="dt">regex =</span> <span class="st">"d"</span>, <span class="dt">keep_regex =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>()
+<span class="co">#&gt;   assignees_login number  d</span>
+<span class="co">#&gt; 1                     41 NA</span>
+<span class="co">#&gt; 2                     40 NA</span>
+<span class="co">#&gt; 3                     35 NA</span>
+<span class="co">#&gt; 4                     33 NA</span>
+<span class="co">#&gt; 5                     32 NA</span>
+<span class="co">#&gt; 6                     31 NA</span></code></pre></div>
 </div>
 <div id="pivot-list-column" class="section level2">
 <h2 class="hasAnchor">

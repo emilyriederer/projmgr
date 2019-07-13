@@ -5,7 +5,7 @@
 \title{Extract new dataframe column from list-column matching pattern}
 \usage{
 listcol_extract(data, col_name, regex, new_col_name = NULL,
-  sep_matches = ",", keep_regex = FALSE)
+  keep_regex = FALSE)
 }
 \arguments{
 \item{data}{Dataframe containing a list column (e.g. an issues dataframe)}
@@ -15,9 +15,6 @@ listcol_extract(data, col_name, regex, new_col_name = NULL,
 \item{regex}{Character string of regular expression to identify list items of interest (e.g. \code{"^priority:", "^(bug|feature)$"})}
 
 \item{new_col_name}{Optional name of new column. Otherwise \code{regex} is used, stripped of any leading or trailing punctuation}
-
-\item{sep_matches}{Optional character to use to separate out (e.g. "," or ";"). If \code{NA}, only one of matches will be kept
-arbitrarily (whichever happens to come first in the list columns)}
 
 \item{keep_regex}{Optional logical denoting whether to keep regex part of matched item in value. Defaults to \code{FALSE}}
 }

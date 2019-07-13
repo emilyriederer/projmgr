@@ -4,7 +4,7 @@
 \alias{listcol_filter}
 \title{Filter dataframe by list-column elements}
 \usage{
-listcol_filter(data, col_name, matches, is_regex = FALSE, any = TRUE)
+listcol_filter(data, col_name, matches, is_regex = FALSE)
 }
 \arguments{
 \item{data}{Dataframe containing a list column (e.g. an issues dataframe)}
@@ -15,10 +15,6 @@ listcol_filter(data, col_name, matches, is_regex = FALSE, any = TRUE)
 in the returned data if any of the}
 
 \item{is_regex}{Logical to indicate whether charalcter indicates a regular expression or specific values}
-
-\item{any}{Logical to indicate whether rows should be kept if list-column contains any of elements in \code{matches}
-(defaults to \code{TRUE}) or if it must contain all of the elements in \code{matches} (\code{FALSE}). Only respected
-when \code{matches} contains exact}
 }
 \value{
 Dataframe containing only rows in which list-column contains element matching provided criteria
@@ -35,9 +31,6 @@ issues_df <- parse_issues(issues)
 
 # keep observation containing a label of either "bug" or "feature"
 listcol_filter(issues_df, col_name = "labels_name", matches = c("bug", "feature"))
-
-# keep observation containing a label of both "bug" and "feature"
-listcol_filter(issues_df, col_name = "labels_name", matches = c("bug", "feature"), any = FALSE)
 
 # keep observation containing a label that starts with "region"
 listcol_filter(issues_df, col_name = "labels_name", matches = "^region:", is_regex = TRUE)

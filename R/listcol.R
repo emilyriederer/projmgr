@@ -49,9 +49,6 @@ listcol_pivot <- function(data, col_name, regex = ".", transform_fx = identity, 
 #' @param matches A character vector containing a regular expression or one or more exact-match values. An observation will be kept
 #'   in the returned data if any of the
 #' @param is_regex Logical to indicate whether charalcter indicates a regular expression or specific values
-#' @param any Logical to indicate whether rows should be kept if list-column contains any of elements in \code{matches}
-#'     (defaults to \code{TRUE}) or if it must contain all of the elements in \code{matches} (\code{FALSE}). Only respected
-#'     when \code{matches} contains exact
 #' @inheritParams listcol_pivot
 #'
 #' @return Dataframe containing only rows in which list-column contains element matching provided criteria
@@ -65,23 +62,28 @@ listcol_pivot <- function(data, col_name, regex = ".", transform_fx = identity, 
 #' # keep observation containing a label of either "bug" or "feature"
 #' listcol_filter(issues_df, col_name = "labels_name", matches = c("bug", "feature"))
 #'
-#' # keep observation containing a label of both "bug" and "feature"
-#' listcol_filter(issues_df, col_name = "labels_name", matches = c("bug", "feature"), any = FALSE)
-#'
 #' # keep observation containing a label that starts with "region"
 #' listcol_filter(issues_df, col_name = "labels_name", matches = "^region:", is_regex = TRUE)
 #' }
 
-listcol_filter <- function(data, col_name, matches, is_regex = FALSE, any = TRUE) {
+listcol_filter <- function(data, col_name, matches, is_regex = FALSE) {
 
-  eval_fx <-
-    if (is_regex) function(x) {any(grepl(matches, x))}
-  else if (any) function(x) any(matches %in% x)
-  else function(x) all(matches %in% x)
-  rows <- vapply(data[[col_name]],
-                 FUN = eval_fx,
-                 FUN.VALUE = logical(1))
+ # prep regex ----
+  regex <- if (is_regex) matches else paste0("^", matches, "$")
+  regex <- paste0(regex, collapse = "|")
+
+  # find rows ----
+  rows <- vapply(data[[col_name]], FUN = function(x) any(grepl(regex, x)), FUN.VALUE = logical(1))
   return(data[rows,])
+
+  # eval_fx <-
+  # if (is_regex) function(x) {grepl(paste(matches, collapse = "|"), x)}
+  # else if (any) function(x) any(matches %in% x)
+  # else function(x) all(matches %in% x)
+  # rows <- vapply(data[[col_name]],
+  #                FUN = eval_fx,
+  #                FUN.VALUE = logical(1))
+  # return(data[rows,])
 
 }
 
@@ -97,8 +99,6 @@ listcol_filter <- function(data, col_name, matches, is_regex = FALSE, any = TRUE
 #'
 #' @inheritParams listcol_pivot
 #' @param new_col_name Optional name of new column. Otherwise \code{regex} is used, stripped of any leading or trailing punctuation
-#' @param sep_matches Optional character to use to separate out (e.g. "," or ";"). If \code{NA}, only one of matches will be kept
-#'     arbitrarily (whichever happens to come first in the list columns)
 #' @param keep_regex Optional logical denoting whether to keep regex part of matched item in value. Defaults to \code{FALSE}
 #'
 #' @return Dataframe with new column taking values extracted from list column
@@ -111,26 +111,17 @@ listcol_filter <- function(data, col_name, matches, is_regex = FALSE, any = TRUE
 #' listcol_extract(issues_df, "labels_name", "-team$")
 #' }
 
-listcol_extract <- function(data, col_name, regex, new_col_name = NULL, sep_matches = ",", keep_regex = FALSE) {
+listcol_extract <- function(data, col_name, regex, new_col_name = NULL, keep_regex = FALSE) {
 
-  new_col_vals <- vapply(data[[col_name]],
-                         FUN = function(x) {
-                           out <- grep(regex, x, value = TRUE)
-                           if (!keep_regex) out <- sub(regex, "", out)
-                           if (length(out) == 0) out <- NA_character_
-                           if (length(out) > 1) {
-                             if (!is.na(sep_matches)) paste(sort(out), collapse = sep_matches)
-                             else warning(paste("More than one pattern match in single observation.",
-                                                "Results contain one of matches arbitrarily",
-                                                collapse = "\n")) }
-                           return(out[1])
-                         },
-                         FUN.VALUE = character(1),
-                         USE.NAMES = TRUE)
+  new_col_vals <- lapply(data[[col_name]], function(x) grep(regex, x, value = TRUE))
+  if (!keep_regex) new_col_vals <- lapply(new_col_vals, function(x) sub(regex, "", x))
+  new_col_vals <- lapply(new_col_vals, function(x) if (length(x) == 0) NA_character_ else x)
+  new_col_vals <-
+    if (max(vapply(new_col_vals, length, numeric(1))) > 1) {new_col_vals}
+    else as.character(new_col_vals)
 
   if (is.null(new_col_name)) {
-    new_col_name <- sub("\\^|\\$","", regex)
-    new_col_name <- sub("(^[[:punct:]])|([[:punct:]]$)", "", new_col_name)
+    new_col_name <- gsub("[[:punct:]]", "_", gsub("(^[[:punct:]]*)|([[:punct:]]*$)", "", regex))
   }
 
   data[[new_col_name]] <- new_col_vals

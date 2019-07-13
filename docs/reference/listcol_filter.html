@@ -85,7 +85,7 @@ function allows users to filter list columns by the presence of one or more valu
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">projmgr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9902</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -149,7 +149,7 @@ function allows users to filter list columns by the presence of one or more valu
     
     </div>
 
-    <pre class="usage"><span class='fu'>listcol_filter</span>(<span class='no'>data</span>, <span class='no'>col_name</span>, <span class='no'>matches</span>, <span class='kw'>is_regex</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>any</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>listcol_filter</span>(<span class='no'>data</span>, <span class='no'>col_name</span>, <span class='no'>matches</span>, <span class='kw'>is_regex</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -171,12 +171,6 @@ in the returned data if any of the</p></td>
       <th>is_regex</th>
       <td><p>Logical to indicate whether charalcter indicates a regular expression or specific values</p></td>
     </tr>
-    <tr>
-      <th>any</th>
-      <td><p>Logical to indicate whether rows should be kept if list-column contains any of elements in <code>matches</code>
-(defaults to <code>TRUE</code>) or if it must contain all of the elements in <code>matches</code> (<code>FALSE</code>). Only respected
-when <code>matches</code> contains exact</p></td>
-    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -191,9 +185,6 @@ when <code>matches</code> contains exact</p></td>
 
 <span class='co'># keep observation containing a label of either "bug" or "feature"</span>
 <span class='fu'>listcol_filter</span>(<span class='no'>issues_df</span>, <span class='kw'>col_name</span> <span class='kw'>=</span> <span class='st'>"labels_name"</span>, <span class='kw'>matches</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"bug"</span>, <span class='st'>"feature"</span>))
-
-<span class='co'># keep observation containing a label of both "bug" and "feature"</span>
-<span class='fu'>listcol_filter</span>(<span class='no'>issues_df</span>, <span class='kw'>col_name</span> <span class='kw'>=</span> <span class='st'>"labels_name"</span>, <span class='kw'>matches</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"bug"</span>, <span class='st'>"feature"</span>), <span class='kw'>any</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
 <span class='co'># keep observation containing a label that starts with "region"</span>
 <span class='fu'>listcol_filter</span>(<span class='no'>issues_df</span>, <span class='kw'>col_name</span> <span class='kw'>=</span> <span class='st'>"labels_name"</span>, <span class='kw'>matches</span> <span class='kw'>=</span> <span class='st'>"^region:"</span>, <span class='kw'>is_regex</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)

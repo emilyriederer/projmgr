@@ -85,7 +85,7 @@ owner, the type (whether or not Enterprise GitHub), and potentially credentials 
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">projmgr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9902</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -150,7 +150,7 @@ owner, the type (whether or not Enterprise GitHub), and potentially credentials 
     </div>
 
     <pre class="usage"><span class='fu'>create_repo_ref</span>(<span class='no'>repo_owner</span>, <span class='no'>repo_name</span>, <span class='kw'>is_enterprise</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>hostname</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>identifier</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>password</span> <span class='kw'>=</span> <span class='st'>""</span>)</pre>
+  <span class='kw'>hostname</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>identifier</span> <span class='kw'>=</span> <span class='st'>""</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -174,13 +174,8 @@ owner, the type (whether or not Enterprise GitHub), and potentially credentials 
     <tr>
       <th>identifier</th>
       <td><p>Ideally should be left blank and defaults to using <code>GITHUB_PAT</code> or <code>GITHUB_ENT_PAT</code>
-environment variables as Personal Access Tokens. If <code>identifier</code> has a value and <code>password</code> does not,
-this is assumed to be an alternative name of the environment variable to use for your Personal Access Token. If
-<code>password</code> is also provided, this is interpreted as a username.</p></td>
-    </tr>
-    <tr>
-      <th>password</th>
-      <td><p>GitHub password. Ideally should be left blank and then defaults to empty string which works in conjunction with personal access tokens. Required if supplying username.</p></td>
+environment variables as Personal Access Tokens. If <code>identifier</code>,
+this is assumed to be an alternative name of the environment variable to use for your Personal Access Token</p></td>
     </tr>
     </table>
     
