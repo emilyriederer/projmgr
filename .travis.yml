@@ -17,4 +17,4 @@ sudo: false
 cache: packages
 
 after_success:
-  - Rscript -e 'covr::codecov(line_exclusions = c("R/check.R", "R/help.R", "R/browse.R", "R/print.R"), token = "e55f1dbf-7835-45a4-ae0a-0d779cc42208")'
+  - Rscript -e 'covr::codecov(line_exclusions = c("R/check.R", "R/help.R", "R/browse.R", "R/print.R"))'
