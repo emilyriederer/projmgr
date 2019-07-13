@@ -1,3 +1,7 @@
+# projmgr 0.1.0
+
+* Enhanced test suite to prepare for official release
+
 # projmgr 0.0.0.9902
 
 * Tweaks to `report` family of functions to exposure more options to end users
