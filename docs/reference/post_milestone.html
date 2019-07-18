@@ -83,7 +83,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">projmgr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9902</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -175,14 +175,13 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"># NOT RUN {
-myrepo <- create_repo_ref('emilyriederer', 'myrepo')
-post_milestone(myrepo,
-  title = 'this is my milestone's title',
-  description = 'this is my milestone's description',
-  due_on = '2018-12-31T12:59:59z')
-# }
-</pre>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='no'>myrepo</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='create_repo_ref.html'>create_repo_ref</a></span>(<span class='st'>'emilyriederer'</span>, <span class='st'>'myrepo'</span>)
+<span class='fu'>post_milestone</span>(<span class='no'>myrepo</span>,
+  <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>'this is the title of the milestone'</span>,
+  <span class='kw'>description</span> <span class='kw'>=</span> <span class='st'>'this is the long and detailed description'</span>,
+  <span class='kw'>due_on</span> <span class='kw'>=</span> <span class='st'>'2018-12-31T12:59:59z'</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

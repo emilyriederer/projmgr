@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">projmgr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9902</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -103,27 +103,27 @@
 <p>The <a href="https://www.tidyverse.org/help/"><code>reprex</code></a> package creates reproducible examples of code bugs to be shared in GitHub issues. <code>projmgr</code> plays nice with <code>reprex</code> to help post reproducible examples and pull them back down for evaluation. ## Posting reprexes</p>
 <p>Much like other types of issues, <code>projmgr</code> make it easy to post issues containing reprexes to GitHub.</p>
 <p>For example, suppose you have the problematic code on your clipboard, open in a file, or somewhere that <code>reprex</code> can find it (refer to the <code>reprex</code> package documentation for details). You could post this as the body of an issue with the following code:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">reprex<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/reprex/topics/reprex">reprex</a></span>(<span class="dt">venue =</span> <span class="st">"gh"</span>)
-<span class="kw"><a href="../reference/post_issue.html">post_issue</a></span>(projmgr,
-           <span class="dt">title =</span> <span class="st">"this is a descriptive title of my issue"</span>,
-           <span class="dt">body =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>( clipr<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/clipr/topics/read_clip">read_clip</a></span>(), <span class="dt">collapse =</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>) )</code></pre></div>
+<pre><code>reprex::reprex(venue = "gh")
+post_issue(projmgr,
+           title = "this is a descriptive title of my issue",
+           body = paste( clipr::read_clip(), collapse = "\n") )</code></pre>
 <div id="getting-and-running-reprexes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#getting-and-running-reprexes" class="anchor"></a>Getting and running reprexes</h2>
-<p>Suppose you see on GitHub that a user posted an issue, say number 82, with a reprex. You can use <code>ghtracker</code> to copy and run their code back in R. (Admittedly, its hard to imagine this has significant benefits over copying from GitHub.)</p>
+<p>Suppose you see on GitHub that a user posted an issue, say number 82, with a reprex. You can use <code>projmgr</code> to copy and run their code back in R. (Admittedly, its hard to imagine this has significant benefits over copying from GitHub.)</p>
 <p>For example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
-<span class="co"># get issue in question from repo</span>
-experigit &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_repo_ref.html">create_repo_ref</a></span>(<span class="st">'emilyriederer'</span>, <span class="st">'experigit'</span>)
-issue &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_issues.html">get_issues</a></span>(experigit, <span class="dt">number =</span> <span class="dv">82</span>)
+<pre><code>
+# get issue in question from repo
+experigit &lt;- create_repo_ref('emilyriederer', 'experigit')
+issue &lt;- get_issues(experigit, number = 82)
 
-<span class="co"># extract the body containing the reprex (code + output as markdown)</span>
-issue[[<span class="dv">1</span>]][[<span class="st">"body"</span>]] <span class="op">%&gt;%</span><span class="st"> </span>clipr<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/clipr/topics/write_clip">write_clip</a></span>()
+# extract the body containing the reprex (code + output as markdown)
+issue[[1]][["body"]] %&gt;% clipr::write_clip()
 
-<span class="co"># strip markdown formatting to revert to initial state</span>
-reprex<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/reprex/topics/un-reprex">reprex_invert</a></span>()
+# strip markdown formatting to revert to initial state
+reprex::reprex_invert()
 
-<span class="co"># then paste to console</span></code></pre></div>
+# then paste to console</code></pre>
 </div>
   </div>
 

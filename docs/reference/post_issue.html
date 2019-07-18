@@ -83,7 +83,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">projmgr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9902</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -186,17 +186,16 @@ as a current open issue should be allowed</p></td>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"># NOT RUN {
-myrepo <- create_repo_ref('emilyriederer', 'myrepo')
-post_issue(myrepo,
-  title = 'this is my issue's title',
-  body = 'this is my issue's body',
-  labels = c('priority:high', 'bug'))
-# }
-<span class='co'># NOT RUN {</span>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='no'>myrepo</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='create_repo_ref.html'>create_repo_ref</a></span>(<span class='st'>'emilyriederer'</span>, <span class='st'>'myrepo'</span>)
+<span class='fu'>post_issue</span>(<span class='no'>myrepo</span>,
+  <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>'this is the issue title'</span>,
+  <span class='kw'>body</span> <span class='kw'>=</span> <span class='st'>'this is the issue body'</span>,
+  <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>'priority:high'</span>, <span class='st'>'bug'</span>))
+<span class='co'># }</span><span class='co'># NOT RUN {</span>
 <span class='co'># can be used in conjunction with reprex pkg</span>
 <span class='co'># example assumes code for reprex is on clipboard</span>
-<span class='kw pkg'>reprex</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/reprex/topics/reprex'>reprex</a></span>(<span class='kw'>venue</span> <span class='kw'>=</span> <span class='st'>"gh"</span>)
+<span class='kw pkg'>reprex</span><span class='kw ns'>::</span><span class='fu'>reprex</span>(<span class='kw'>venue</span> <span class='kw'>=</span> <span class='st'>"gh"</span>)
 <span class='fu'>post_issue</span>(<span class='no'>myrepo</span>,
             <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"something is broken"</span>,
             <span class='kw'>body</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste</a></span>( <span class='kw pkg'>clipr</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/clipr/topics/read_clip'>read_clip</a></span>(), <span class='kw'>collapse</span> <span class='kw'>=</span> <span class='st'>"\n"</span>) )

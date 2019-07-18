@@ -21,7 +21,7 @@ Much like other types of issues, `projmgr` make it easy to post issues containin
 
 For example, suppose you have the problematic code on your clipboard, open in a file, or somewhere that `reprex` can find it (refer to the `reprex` package documentation for details). You could post this as the body of an issue with the following code:
 
-```{r eval = FALSE}
+```
 reprex::reprex(venue = "gh")
 post_issue(projmgr,
            title = "this is a descriptive title of my issue",
@@ -30,11 +30,11 @@ post_issue(projmgr,
 
 ## Getting and running reprexes
 
-Suppose you see on GitHub that a user posted an issue, say number 82, with a reprex. You can use `ghtracker` to copy and run their code back in R. (Admittedly, its hard to imagine this has significant benefits over copying from GitHub.)
+Suppose you see on GitHub that a user posted an issue, say number 82, with a reprex. You can use `projmgr` to copy and run their code back in R. (Admittedly, its hard to imagine this has significant benefits over copying from GitHub.)
 
 For example:
 
-```{r eval = FALSE}
+```
 
 # get issue in question from repo
 experigit <- create_repo_ref('emilyriederer', 'experigit')
