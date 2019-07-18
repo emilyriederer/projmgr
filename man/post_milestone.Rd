@@ -19,15 +19,6 @@ Number (identifier) of posted milestone
 \description{
 Post milestone to GitHub repository
 }
-\examples{
-\dontrun{
-myrepo <- create_repo_ref('emilyriederer', 'myrepo')
-post_milestone(myrepo,
-  title = 'this is my milestone's title',
-  description = 'this is my milestone's description',
-  due_on = '2018-12-31T12:59:59z')
-}
-}
 \seealso{
 Other milestones: \code{\link{get_milestones}},
   \code{\link{parse_milestones}}

@@ -13,8 +13,8 @@
 #' \dontrun{
 #' myrepo <- create_repo_ref('emilyriederer', 'myrepo')
 #' post_issue(myrepo,
-#'   title = 'this is my issue's title',
-#'   body = 'this is my issue's body',
+#'   title = 'this is the issue title',
+#'   body = 'this is the issue body',
 #'   labels = c('priority:high', 'bug'))
 #' }
 #' \dontrun{
@@ -79,7 +79,7 @@ post_issue <- function(ref, title, ..., distinct = TRUE){
 #' \dontrun{
 #' myrepo <- create_repo_ref('emilyriederer', 'myrepo')
 #' post_milestone(myrepo,
-#'   title = 'this is my milestone's title',
+#'   title = 'this is the title of the milestone',
 #'   description = 'this is my milestone's description',
 #'   due_on = '2018-12-31T12:59:59z')
 #' }

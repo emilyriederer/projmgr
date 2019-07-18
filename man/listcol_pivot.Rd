@@ -39,7 +39,7 @@ issues_df <- parse_issues(issues)
 listcol_pivot(issues_df,
   col_name = "labels_name",
   regex = "^priority:",
-  transform_fx = function(x) paste0("label_",x)),
+  transform_fx = function(x) paste0("label_",x),
   delete_orig = TRUE)
 }
 }
