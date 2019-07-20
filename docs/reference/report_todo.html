@@ -86,7 +86,7 @@ the results will be correctly rendered as HTML." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">projmgr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9902</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -184,14 +184,12 @@ the results will be correctly rendered as HTML.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"># NOT RUN {
-In RMarkdown:
-```{r}
-my_todo <- read_todo("my_todo.yml")
-report_todo(my_todo)
-```
-# }
-</pre>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='co'># the following could be run in RMarkdown</span>
+<span class='no'>todo_path</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/system.file'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='st'>"todo-ex.yml"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"projmgr"</span>, <span class='kw'>mustWork</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='no'>my_todo</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='read_todo.html'>read_todo</a></span>(<span class='no'>todo_path</span>)
+<span class='fu'>report_todo</span>(<span class='no'>my_todo</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

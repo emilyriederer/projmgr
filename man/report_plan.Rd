@@ -26,11 +26,10 @@ The resulting HTML unordered list (<ul>) is tagged with class 'report_plan' for 
 }
 \examples{
 \dontrun{
-In RMarkdown:
-```{r}
-my_plan <- read_plan("my_plan.yml")
+# the following could be run in RMarkdown
+plan_path <- system.file("extdata", "plan-ex.yml", package = "projmgr", mustWork = TRUE)
+my_plan <- read_plan(plan_path)
 report_plan(my_plan)
-```
 }
 }
 \seealso{

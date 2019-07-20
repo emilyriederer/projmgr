@@ -24,12 +24,11 @@
 #'
 #' @examples
 #' \dontrun{
-#' In RMarkdown:
-#' ```{r}
+#  # the following could be run in RMarkdown
+#' repo <- create_repo_ref("emilyriederer", "projmgr")
 #' issues <- get_issues(repo, state = 'all')
 #' issues_df <- parse_issues(issues)
 #' report_progress(issues_df)
-#' ```
 #'}
 
 report_progress <- function(issues, group_var = "milestone_title",
@@ -94,11 +93,10 @@ report_progress <- function(issues, group_var = "milestone_title",
 #'
 #' @examples
 #' \dontrun{
-#' In RMarkdown:
-#' ```{r}
-#' my_plan <- read_plan("my_plan.yml")
+#' # the following could be run in RMarkdown
+#' plan_path <- system.file("extdata", "plan-ex.yml", package = "projmgr", mustWork = TRUE)
+#' my_plan <- read_plan(plan_path)
 #' report_plan(my_plan)
-#' ```
 #'}
 
 report_plan <- function(plan, show_ratio = TRUE){
@@ -147,11 +145,10 @@ report_plan <- function(plan, show_ratio = TRUE){
 #'
 #' @examples
 #' \dontrun{
-#' In RMarkdown:
-#' ```{r}
-#' my_todo <- read_todo("my_todo.yml")
+#' # the following could be run in RMarkdown
+#' todo_path <- system.file("extdata", "todo-ex.yml", package = "projmgr", mustWork = TRUE)
+#' my_todo <- read_todo(todo_path)
 #' report_todo(my_todo)
-#' ```
 #'}
 
 report_todo <- function(todo, show_ratio = TRUE){
@@ -195,14 +192,13 @@ report_todo <- function(todo, show_ratio = TRUE){
 #'
 #' @examples
 #' \dontrun{
-#' In RMarkdown:
-#' ```{r}
+#' # the following could be run in RMarkdown
+#' repo <- create_repo_ref("emilyriederer", "projmgr")
 #' issue <- get_issues(repo, number = 15)
 #' issue_df <- parse_issues(issue)
 #' comments <- get_issue_comments(repo, number = 15)
 #' comments_df <- parse_issue_comments(comments)
 #' report_discussion(issue_df, comments_df)
-#' ```
 #'}
 
 report_discussion <- function(comments, issue = NA, link_url = TRUE){

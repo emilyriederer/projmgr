@@ -87,7 +87,7 @@ the results will be correctly rendered as HTML." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">projmgr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9902</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -196,17 +196,15 @@ output includes issue-level data such as the title, initial description, creatio
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"># NOT RUN {
-In RMarkdown:
-```{r}
-issue <- get_issues(repo, number = 15)
-issue_df <- parse_issues(issue)
-comments <- get_issue_comments(repo, number = 15)
-comments_df <- parse_issue_comments(comments)
-report_discussion(issue_df, comments_df)
-```
-# }
-</pre>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='co'># the following could be run in RMarkdown</span>
+<span class='no'>repo</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='create_repo_ref.html'>create_repo_ref</a></span>(<span class='st'>"emilyriederer"</span>, <span class='st'>"projmgr"</span>)
+<span class='no'>issue</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_issues.html'>get_issues</a></span>(<span class='no'>repo</span>, <span class='kw'>number</span> <span class='kw'>=</span> <span class='fl'>15</span>)
+<span class='no'>issue_df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='parse_issues.html'>parse_issues</a></span>(<span class='no'>issue</span>)
+<span class='no'>comments</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_issue_comments.html'>get_issue_comments</a></span>(<span class='no'>repo</span>, <span class='kw'>number</span> <span class='kw'>=</span> <span class='fl'>15</span>)
+<span class='no'>comments_df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='parse_issue_comments.html'>parse_issue_comments</a></span>(<span class='no'>comments</span>)
+<span class='fu'>report_discussion</span>(<span class='no'>issue_df</span>, <span class='no'>comments_df</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

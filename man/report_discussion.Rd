@@ -30,14 +30,13 @@ HTML output is wrapped in a <div> of class 'report_disccusion' for custom CSS st
 }
 \examples{
 \dontrun{
-In RMarkdown:
-```{r}
+# the following could be run in RMarkdown
+repo <- create_repo_ref("emilyriederer", "projmgr")
 issue <- get_issues(repo, number = 15)
 issue_df <- parse_issues(issue)
 comments <- get_issue_comments(repo, number = 15)
 comments_df <- parse_issue_comments(comments)
 report_discussion(issue_df, comments_df)
-```
 }
 }
 \seealso{

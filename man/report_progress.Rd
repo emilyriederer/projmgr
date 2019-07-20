@@ -37,12 +37,10 @@ you wish to only show items that are in a group.
 }
 \examples{
 \dontrun{
-In RMarkdown:
-```{r}
+repo <- create_repo_ref("emilyriederer", "projmgr")
 issues <- get_issues(repo, state = 'all')
 issues_df <- parse_issues(issues)
 report_progress(issues_df)
-```
 }
 }
 \seealso{

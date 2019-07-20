@@ -26,11 +26,10 @@ The resulting HTML unordered list (\code{<ul>}) is tagged with class 'report_tod
 }
 \examples{
 \dontrun{
-In RMarkdown:
-```{r}
-my_todo <- read_todo("my_todo.yml")
+# the following could be run in RMarkdown
+todo_path <- system.file("extdata", "todo-ex.yml", package = "projmgr", mustWork = TRUE)
+my_todo <- read_todo(todo_path)
 report_todo(my_todo)
-```
 }
 }
 \seealso{
