@@ -1,3 +1,12 @@
+## Resubmission
+
+This is a resubmission. 
+
+In this version, I have responded to feedback received July 20:
+
+* Removed text from DESCRIPTION that CRAN suggested was redundant ("via R")
+* Clarified documentation examples for the report_ family of functions
+
 ## Release summary
 
 This is the first release to CRAN
