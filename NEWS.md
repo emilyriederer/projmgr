@@ -1,6 +1,9 @@
+# projmgr (development version)
+
 # projmgr 0.1.0
 
 * Enhanced test suite to prepare for official release
+* First version sent to CRAN
 
 # projmgr 0.0.0.9902
 
