@@ -74,12 +74,19 @@ get_issue_events <- function(ref, number){
                     ref = ref)
 
   # append the relevant issue number to each element
-  if( res != "" ){
+  if (res != "") {
     res <- lapply(res,
                   FUN = function(x){
                     x[["number"]] = number
                     return(x)
                   })
+  }
+  else {# when there were no results, create mock result for easy mapping
+    res <- list(list(
+        id = -9999,
+        number = number,
+        event = "created"
+    ))
   }
   res
 
