@@ -136,6 +136,21 @@
       <small>Source: <a href='https://github.com/emilyriederer/projmgr/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="projmgr-0-1-0-9000" class="section level1">
+<h1 class="page-header">
+<a href="#projmgr-0-1-0-9000" class="anchor"></a>projmgr 0.1.0.9000<small> Unreleased </small>
+</h1>
+<ul>
+<li>Fixed error in <code><a href="../reference/taskboard_helpers.html">has_n_commits()</a></code> taskboard helper and unit test to attribute events to the correct issues</li>
+<li>Changed behavior of <code><a href="../reference/get_issue_events.html">get_issue_events()</a></code> to create minimal dummy event
+<ul>
+<li>Dummy events are identifiable by <code>id = -9999</code> and <code>event = "exists"</code>. Other fields not populated to emphasize non-standard event type.</li>
+<li>This enables easier mapping. For example, users may now write <code><a href="https://purrr.tidyverse.org/reference/map.html">purrr::map_df(issues$number, ~get_issue_events(my_repo, .x) %&gt;% parse_issue_events())</a></code> which would have previously thrown an error</li>
+<li>New behavior can be disabled with new <code>dummy_events</code> argument</li>
+</ul>
+</li>
+</ul>
+</div>
     <div id="projmgr-0-1-0" class="section level1">
 <h1 class="page-header">
 <a href="#projmgr-0-1-0" class="anchor"></a>projmgr 0.1.0<small> 2019-08-05 </small>
@@ -201,6 +216,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#projmgr-0-1-0-9000">0.1.0.9000</a></li>
         <li><a href="#projmgr-0-1-0">0.1.0</a></li>
         <li><a href="#projmgr-0-0-0-9902">0.0.0.9902</a></li>
         <li><a href="#projmgr-0-0-0-9901">0.0.0.9901</a></li>
