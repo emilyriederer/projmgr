@@ -4,12 +4,16 @@
 \alias{get_issue_events}
 \title{Get events for a specific issue from GitHub repository}
 \usage{
-get_issue_events(ref, number)
+get_issue_events(ref, number, dummy_events = TRUE)
 }
 \arguments{
 \item{ref}{Repository reference (list) created by \code{create_repo_ref()}}
 
 \item{number}{Number of issue}
+
+\item{dummy_events}{Logical for whether or not to create a 'dummy' event to denote the
+existence of issues which have no events. Defaults to TRUE (to allow creation). Default
+behavior makes the process of mapping over multiple issues simpler.}
 }
 \value{
 Content of GET request as list
@@ -21,8 +25,15 @@ to which the returned events correspond.
 \examples{
 \dontrun{
 myrepo <- create_repo_ref('emilyriederer', 'myrepo')
+
+# single issue workflow
 events_res <- get_issue_events(myrepo, number = 1)
 events <- parse_issue_events(events_res)
+
+# multi-issue workflow
+issue_res <- get_issues(my_repo, state = 'open')
+issues <- parse_issues(issues_res)
+events <- purrr::map_df(issues$number, ~get_issue_events(myrepo, .x) \%>\% parse_issue_events())
 }
 }
 \seealso{
