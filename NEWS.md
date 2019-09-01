@@ -1,5 +1,13 @@
 # projmgr (development version)
 
+# projmgr 0.1.0.9000
+
+* Fixed error in `has_n_commits()` taskboard helper and unit test to attribute events to the correct issues
+* Changed behavior of `get_issue_events()` to create minimal dummy event 
+    - Dummy events are identifiable by  `id = -9999` and `event = "exists"`. Other fields not populated to emphasize non-standard event type. 
+    - This enables easier mapping. For example, users may now write `purrr::map_df(issues$number, ~get_issue_events(my_repo, .x) %>% parse_issue_events())` which would have previously thrown an error
+    - New behavior can be disabled with new `dummy_events` argument
+
 # projmgr 0.1.0
 
 * Enhanced test suite to prepare for official release
