@@ -1,7 +1,12 @@
+<!-- badges: start -->
+[![CRAN status](https://www.r-pkg.org/badges/version/projmgr)](https://CRAN.R-project.org/package=projmgr)
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![Travis-CI Build Status](https://travis-ci.org/emilyriederer/projmgr.svg?branch=master)](https://travis-ci.org/emilyriederer/projmgr)
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/emilyriederer/projmgr?branch=master&svg=true)](https://ci.appveyor.com/project/emilyriederer/projmgr)
 [![Coverage status](https://codecov.io/gh/emilyriederer/projmgr/branch/master/graph/badge.svg)](https://codecov.io/github/emilyriederer/projmgr?branch=master)
+[![CRAN Downloads](https://cranlogs.r-pkg.org/badges/projmgr)](https://cran.rstudio.com/web/packages/projmgr/index.html)
+<!-- badges: end -->
+
 
 # projmgr <img src="man/figures/logo.png" align="right" height=140/>
 
@@ -21,13 +26,18 @@ Want to find out more about `projmgr` before you install? Check out the [package
 
 ## Installation
 
-You can install the current, experimental version of `projmgr` with:
+You can install `projmgr` on CRAN with:
+```r
+install.packages("projmgr")
+```
+
+Alternatively, you can install the most up-to-ddate development version of `projmgr` with:
 
 ``` r
 devtools::install_github("emilyriederer/projmgr")
 ```
 
-but please note that nearly everything is subject to change at this point.
+Please see the `NEWS.md` file or the [News page](https://emilyriederer.github.io/projmgr/news/index.html) on the website for details of major differences.
 
 ## Contributors
 
