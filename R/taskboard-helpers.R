@@ -160,9 +160,9 @@ has_n_commits <- function(events, n = 1) {
   n_commits <-
     vapply(data$number,
            FUN = function(x) {
-             z <- which(x == ref_counts$event)
+             z <- which(x == ref_counts$number)
              if (length(z) == 0) 0
-             else z
+             else ref_counts$event[z]
              },
            numeric(1))
   n_commits >= n
