@@ -26,6 +26,7 @@ test_that( "Issue-specific taskboard helpers evaluate correctly with expected in
   expect_equal( is_created_before("2020-03-01")(df_issue), c(TRUE, TRUE, TRUE))
 
   expect_equal( has_n_commits(df_events)(df_issue), c(TRUE, TRUE, FALSE))
+  expect_equal( has_n_commits(df_events, n = 1)(df_issue), c(TRUE, TRUE, FALSE))
   expect_equal( has_n_commits(df_events, n = 2)(df_issue), c(TRUE, FALSE, FALSE))
   expect_equal( has_n_commits(df_events, n = 3)(df_issue), c(FALSE, FALSE, FALSE))
 
