@@ -20,8 +20,6 @@ Using git for version control and GitHub for project managmenet and collaboratio
 
 Software Carpentry's self-paced [Version Control with Git](http://swcarpentry.github.io/git-novice/) course website with reading, exercises
 
-DataCamp's free, interactive [Introduction to Git for Data Science](https://www.datacamp.com/courses/introduction-to-git-for-data-science) course
-
 Jenny Bryan's course website [Happy Git and GitHub for the useR](http://happygitwithr.com/)
 
 ## Learning GitHub
