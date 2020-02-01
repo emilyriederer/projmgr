@@ -17,7 +17,7 @@ Parse issues overview from \code{get_issues}
 }
 \examples{
 \dontrun{
-myrepo <- create_repo_reference('emilyriederer', 'myrepo')
+myrepo <- create_repo_ref('emilyriederer', 'myrepo')
 issues_res <- get_issues(myrepo)
 issues <- parse_issues(issues_res)
 }

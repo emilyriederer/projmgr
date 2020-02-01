@@ -14,7 +14,7 @@ fmt_safe_date <- function(x) {as.Date( substring( ifelse( is.null(x), NA, x) , 1
 #'
 #' @examples
 #' \dontrun{
-#' myrepo <- create_repo_reference('emilyriederer', 'myrepo')
+#' myrepo <- create_repo_ref('emilyriederer', 'myrepo')
 #' issues_res <- get_issues(myrepo)
 #' issues <- parse_issues(issues_res)
 #' }
