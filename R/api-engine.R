@@ -54,7 +54,6 @@ post_engine <- function(api_endpoint, ref, ...){
     ...,
     .token = Sys.getenv(ref$id),
     .method = "POST",
-    .limit = Inf,
     .send_headers = c("User-Agent" = "https://github.com/emilyriederer/projmgr")
   )
 
