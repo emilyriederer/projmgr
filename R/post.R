@@ -1,4 +1,4 @@
-#' Post issue to GitHub repository
+#' Piost issue to GitHub repository
 #'
 #' @inherit post_engine params
 #' @param title Issue title (required)
@@ -65,6 +65,48 @@ post_issue <- function(ref, title, ..., distinct = TRUE){
   return( res[['number']] )
 
 }
+
+
+
+#' Update issue in github repository
+#'
+#' @inherit post_engine params
+#' @param issue_number Issue number
+#' @export
+#' @family issues
+#'
+#' @return Number (identifier) of updated issue
+#'
+#' @examples
+#' \dontrun{
+#' myrepo <- create_repo_ref('emilyriederer', 'myrepo')
+#' update_issue(myrepo,
+#'   issue_number = 1,
+#'   labels = c('priority:high', 'bug'))
+#' }
+
+update_issue <- function(ref, issue_number, ...){
+
+  # check that rest of inputs are valid per github api ----
+
+  args <- list(...)
+  validate_inputs(args, allowed_vars = help_update_issue() )
+  if (length(args[['labels']] == 1)) {args[["labels"]] <- I(args[["labels"]])}
+  if (length(args[['assignees']] == 1)) {args[["assignees"]] <- I(args[["assignees"]])}
+
+  # submit request ----
+  api_fx <- function(...){ post_engine(api_endpoint = "/issues/{issue_number}",
+                                       ref = ref,
+                                       issue_number = issue_number,
+                                       ...)
+  }
+
+  res <- do.call(api_fx, args)
+
+  return( res[['number']] )
+
+}
+
 
 #' Post milestone to GitHub repository
 #'
