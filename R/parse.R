@@ -57,18 +57,16 @@ parse_issues <- function( res ) {
     )
 
   # special handling for list columns ----
-  labels_names <- sapply(
-    res,
-    FUN = function(y)
-      vapply(y[["labels"]], FUN = function(x) x$name, FUN.VALUE = character(1) ))
-  assignees_login <- sapply(
-    res,
-    FUN = function(y)
-      vapply(y[["assignees"]], FUN = function(x) x$login, FUN.VALUE = character(1) ))
+  labels_names <- lapply(res,
+                         FUN = function(y)
+                           vapply(y[["labels"]], FUN = function(x) x$name, FUN.VALUE = character(1) ))
+  assignees_login <- sapply(res,
+                            FUN = function(y)
+                              vapply(y[["assignees"]], FUN = function(x) x$login, FUN.VALUE = character(1) ))
 
   # combine components ----
   data <- do.call(rbind, mapped_elts)
-  data$labels_name <- list(labels_names)
+  data$labels_name <- labels_names
   data$assignees_login <- assignees_login
 
   return(data)
