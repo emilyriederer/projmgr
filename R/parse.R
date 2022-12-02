@@ -24,43 +24,47 @@ parse_issues <- function( res ) {
   if(is.character(res)){stop("Results object contains no elements to parse.")}
 
   mapped_elts <-
-    sapply( res ,
-            FUN = function(x)
-              data.frame( url = fmt_safe_chr( x[["html_url"]] ),
-                          id = fmt_safe_int( x[["id"]] ),
-                          number = fmt_safe_int( x[["number"]] ),
-                          title = fmt_safe_chr( x[["title"]] ),
-                          user_login = fmt_safe_chr( x[["user"]]$login ),
-                          user_id = fmt_safe_int( x[["user"]]$id ),
-                          state = fmt_safe_chr( x[["state"]] ),
-                          locked = fmt_safe_lgl( x[["locked"]] ),
-                          milestone_title = fmt_safe_chr( x[["milestone"]]$title ),
-                          milestone_id = fmt_safe_int( x[["milestone"]]$id ),
-                          milestone_number = fmt_safe_int( x[["milestone"]]$number ),
-                          milestone_state = fmt_safe_chr( x[["milestone"]]$state ),
-                          milestone_created_at = fmt_safe_date( x[["milestone"]]$created_at ),
-                          milestone_closed_at = fmt_safe_date( x[["milestone"]]$due_on ),
-                          milestone_due_on = fmt_safe_date( x[["milestone"]]$due_on ),
-                          n_comments = fmt_safe_int( x[["comments"]] ),
-                          created_at = fmt_safe_date( x[["created_at"]] ),
-                          updated_at = fmt_safe_date( x[["updated_at"]] ),
-                          closed_at = fmt_safe_date( x[["closed_at"]] ),
-                          author_association = fmt_safe_chr( x[["author_association"]] ),
-                          body = fmt_safe_chr( x[["body"]] ),
-                          repo_owner = fmt_safe_chr( x[["repo_owner"]] ),
-                          repo_name = fmt_safe_chr( x[["repo_name"]] ),
-                          stringsAsFactors = FALSE
-              ),
-            simplify = FALSE
+    sapply(
+      res ,
+      FUN = function(x)
+        data.frame(
+          url                  = fmt_safe_chr( x[["html_url"]] ),
+          id                   = fmt_safe_int( x[["id"]] ),
+          number               = fmt_safe_int( x[["number"]] ),
+          title                = fmt_safe_chr( x[["title"]] ),
+          user_login           = fmt_safe_chr( x[["user"]]$login ),
+          user_id              = fmt_safe_int( x[["user"]]$id ),
+          state                = fmt_safe_chr( x[["state"]] ),
+          locked               = fmt_safe_lgl( x[["locked"]] ),
+          milestone_title      = fmt_safe_chr( x[["milestone"]]$title ),
+          milestone_id         = fmt_safe_int( x[["milestone"]]$id ),
+          milestone_number     = fmt_safe_int( x[["milestone"]]$number ),
+          milestone_state      = fmt_safe_chr( x[["milestone"]]$state ),
+          milestone_created_at = fmt_safe_date( x[["milestone"]]$created_at ),
+          milestone_closed_at  = fmt_safe_date( x[["milestone"]]$due_on ),
+          milestone_due_on     = fmt_safe_date( x[["milestone"]]$due_on ),
+          n_comments           = fmt_safe_int( x[["comments"]] ),
+          created_at           = fmt_safe_date( x[["created_at"]] ),
+          updated_at           = fmt_safe_date( x[["updated_at"]] ),
+          closed_at            = fmt_safe_date( x[["closed_at"]] ),
+          author_association   = fmt_safe_chr( x[["author_association"]] ),
+          body                 = fmt_safe_chr( x[["body"]] ),
+          repo_owner           = fmt_safe_chr( x[["repo_owner"]] ),
+          repo_name            = fmt_safe_chr( x[["repo_name"]] ),
+          stringsAsFactors = FALSE
+        ),
+      simplify = FALSE
     )
 
   # special handling for list columns ----
-  labels_names <- sapply(res,
-                         FUN = function(y)
-                           vapply(y[["labels"]], FUN = function(x) x$name, FUN.VALUE = character(1) ))
-  assignees_login <- sapply(res,
-                            FUN = function(y)
-                              vapply(y[["assignees"]], FUN = function(x) x$login, FUN.VALUE = character(1) ))
+  labels_names <- sapply(
+    res,
+    FUN = function(y)
+      vapply(y[["labels"]], FUN = function(x) x$name, FUN.VALUE = character(1) ))
+  assignees_login <- sapply(
+    res,
+    FUN = function(y)
+      vapply(y[["assignees"]], FUN = function(x) x$login, FUN.VALUE = character(1) ))
 
   # combine components ----
   data <- do.call(rbind, mapped_elts)
