@@ -64,7 +64,7 @@ parse_issues <- function( res ) {
 
   # combine components ----
   data <- do.call(rbind, mapped_elts)
-  data$labels_name <- labels_names
+  data$labels_name <- list(labels_names)
   data$assignees_login <- assignees_login
 
   return(data)
