@@ -1,23 +1,23 @@
 #' Visualize Gantt-style chart of planned or actual time to completion
 #'
-#' Produces plot with one vertical bar from the specified \code{start} variable's value to the
-#' \code{end} variable's value. Common uses would be to visualize time-to-completion for issues
-#' gotten by (\code{get_issues} and \code{parse_issues}) or milestones. Bars are colored by
+#' Produces plot with one vertical bar from the specified `start` variable's value to the
+#' `end` variable's value. Common uses would be to visualize time-to-completion for issues
+#' gotten by (`get_issues` and `parse_issues`) or milestones. Bars are colored by
 #' duration with longer bars as a darker shade of blue, and start/completion is denoted by
 #' points at the ends of the bars.
 #'
-#' By default, the start date is the issue's \code{created_at} date, and the end date is
-#' the issue's \code{closed_at} date. However, either of these can be altered via the
-#' \code{start} and \code{end} parameters since these dates might not be reflective of the
+#' By default, the start date is the issue's `created_at` date, and the end date is
+#' the issue's `closed_at` date. However, either of these can be altered via the
+#' `start` and `end` parameters since these dates might not be reflective of the
 #' true timeframe (e.g. if issues are posted well in advance of work beginning.)
 #'
-#' Unfinished tasks (where the value of the \code{end} variable is \code{NA}) are colored grey and
+#' Unfinished tasks (where the value of the `end` variable is `NA`) are colored grey and
 #' do not have dots on their bars. Unstarted tasks are dropped because user intent is ambiguous
 #' in that case.
 #'
-#' @param data Dataset, such as those representing issues or milestones (i.e. \code{parse_issues()} or
-#'     \code{parse_milestones()}). Must have unique \code{title} variable and variables  to specify for
-#'     \code{start} and \code{end}
+#' @param data Dataset, such as those representing issues or milestones (i.e. `parse_issues()` or
+#'     `parse_milestones()`). Must have unique `title` variable and variables  to specify for
+#'     `start` and `end`
 #' @param start Unquoted variable name denoting issue start date
 #' @param end Unquoted variable name denoting issue end date
 #' @param str_wrap_width Number of characters before text of issue title begins to wrap

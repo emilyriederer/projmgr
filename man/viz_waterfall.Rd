@@ -4,8 +4,13 @@
 \alias{viz_waterfall}
 \title{Visualize waterfall of opened, closed, and pending items over timeframe}
 \usage{
-viz_waterfall(data, start_date, end_date, start = "created_at",
-  end = "closed_at")
+viz_waterfall(
+  data,
+  start_date,
+  end_date,
+  start = "created_at",
+  end = "closed_at"
+)
 }
 \arguments{
 \item{data}{Dataset, such as those representing issues or milestones (i.e. \code{parse_issues()} or
@@ -32,10 +37,10 @@ as obtained by the \code{get} and \code{parse} functions.
 The following logic is used to classify issues:
 
 \itemize{
-  \item Initial: \code{start < start_date and (end > start_date or state == 'open')}
-  \item Open: \code{start >= start_date and start <= end_date}
-  \item Closed: \code{end >= start_date and end <= end_date}
-  \item Final: \code{start < end_date and (end > end_date or state == 'open')}
+\item Initial: \verb{start < start_date and (end > start_date or state == 'open')}
+\item Open: \verb{start >= start_date and start <= end_date}
+\item Closed: \verb{end >= start_date and end <= end_date}
+\item Final: \verb{start < end_date and (end > end_date or state == 'open')}
 }
 
 The exact accuracy of the logic depends on filtering that has already been done to the dataset. Think carefully
@@ -47,12 +52,16 @@ viz_waterfall(milestones, '2017-01-01', '2017-03-31')
 }
 }
 \seealso{
-Other issues: \code{\link{get_issue_comments}},
-  \code{\link{get_issue_events}}, \code{\link{get_issues}},
-  \code{\link{parse_issue_comments}},
-  \code{\link{parse_issue_events}},
-  \code{\link{parse_issues}}, \code{\link{post_issue}},
-  \code{\link{report_discussion}},
-  \code{\link{report_progress}}
+Other issues: 
+\code{\link{get_issue_comments}()},
+\code{\link{get_issue_events}()},
+\code{\link{get_issues}()},
+\code{\link{parse_issue_comments}()},
+\code{\link{parse_issue_events}()},
+\code{\link{parse_issues}()},
+\code{\link{post_issue}()},
+\code{\link{report_discussion}()},
+\code{\link{report_progress}()},
+\code{\link{update_issue}()}
 }
 \concept{issues}

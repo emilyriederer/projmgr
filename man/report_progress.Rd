@@ -4,8 +4,13 @@
 \alias{report_progress}
 \title{Print issue-milestone progress in RMarkdown friendly way}
 \usage{
-report_progress(issues, group_var = "milestone_title", link_url = TRUE,
-  show_ratio = TRUE, show_pct = TRUE)
+report_progress(
+  issues,
+  group_var = "milestone_title",
+  link_url = TRUE,
+  show_ratio = TRUE,
+  show_pct = TRUE
+)
 }
 \arguments{
 \item{issues}{Dataframe or tibble of issues and milestones, as returned by \code{get_issues()} and \code{parse_issues()}}
@@ -20,7 +25,7 @@ report_progress(issues, group_var = "milestone_title", link_url = TRUE,
 }
 \value{
 Returns character string of HTML with class attribute to be correctly
-    shown "as-is" in RMarkdown
+shown "as-is" in RMarkdown
 }
 \description{
 Interprets dataframe or tibble of items (e.g. issues) by breaking apart groups (e.g. milestones), listing each
@@ -30,7 +35,7 @@ class of \code{'knit_asis'} so that when included in an RMarkdown document knitt
 the results will be correctly rendered as HTML.
 }
 \details{
-The resulting HTML unordered list (\code{<ul>}) is tagged with class 'report_progress' for custom CSS styling.
+The resulting HTML unordered list (\verb{<ul>}) is tagged with class 'report_progress' for custom CSS styling.
 
 Items without a related group are put into an "Ungrouped" category. Filter these out before using this function if
 you wish to only show items that are in a group.
@@ -44,12 +49,16 @@ report_progress(issues_df)
 }
 }
 \seealso{
-Other issues: \code{\link{get_issue_comments}},
-  \code{\link{get_issue_events}}, \code{\link{get_issues}},
-  \code{\link{parse_issue_comments}},
-  \code{\link{parse_issue_events}},
-  \code{\link{parse_issues}}, \code{\link{post_issue}},
-  \code{\link{report_discussion}},
-  \code{\link{viz_waterfall}}
+Other issues: 
+\code{\link{get_issue_comments}()},
+\code{\link{get_issue_events}()},
+\code{\link{get_issues}()},
+\code{\link{parse_issue_comments}()},
+\code{\link{parse_issue_events}()},
+\code{\link{parse_issues}()},
+\code{\link{post_issue}()},
+\code{\link{report_discussion}()},
+\code{\link{update_issue}()},
+\code{\link{viz_waterfall}()}
 }
 \concept{issues}

@@ -16,7 +16,7 @@ output includes issue-level data such as the title, initial description, creatio
 }
 \value{
 Returns character string of HTML with class attribute to be correctly
-    shown "as-is" in RMarkdown
+shown "as-is" in RMarkdown
 }
 \description{
 Interprets dataframe or tibble of issues by breaking apart milestones and listing each
@@ -26,7 +26,7 @@ class of \code{'knit_asis'} so that when included in an RMarkdown document knitt
 the results will be correctly rendered as HTML.
 }
 \details{
-HTML output is wrapped in a <div> of class 'report_disccusion' for custom CSS styling.
+HTML output is wrapped in a \verb{<div>} of class 'report_disccusion' for custom CSS styling.
 }
 \examples{
 \dontrun{
@@ -40,16 +40,21 @@ report_discussion(issue_df, comments_df)
 }
 }
 \seealso{
-Other issues: \code{\link{get_issue_comments}},
-  \code{\link{get_issue_events}}, \code{\link{get_issues}},
-  \code{\link{parse_issue_comments}},
-  \code{\link{parse_issue_events}},
-  \code{\link{parse_issues}}, \code{\link{post_issue}},
-  \code{\link{report_progress}},
-  \code{\link{viz_waterfall}}
+Other issues: 
+\code{\link{get_issue_comments}()},
+\code{\link{get_issue_events}()},
+\code{\link{get_issues}()},
+\code{\link{parse_issue_comments}()},
+\code{\link{parse_issue_events}()},
+\code{\link{parse_issues}()},
+\code{\link{post_issue}()},
+\code{\link{report_progress}()},
+\code{\link{update_issue}()},
+\code{\link{viz_waterfall}()}
 
-Other comments: \code{\link{get_issue_comments}},
-  \code{\link{parse_issue_comments}}
+Other comments: 
+\code{\link{get_issue_comments}()},
+\code{\link{parse_issue_comments}()}
 }
 \concept{comments}
 \concept{issues}

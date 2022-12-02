@@ -23,6 +23,7 @@ check_rate_limit(experigit)
 }
 }
 \seealso{
-Other check: \code{\link{check_internet}}
+Other check: 
+\code{\link{check_internet}()}
 }
 \concept{check}

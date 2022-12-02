@@ -29,7 +29,8 @@ post_milestone(myrepo,
 }
 }
 \seealso{
-Other milestones: \code{\link{get_milestones}},
-  \code{\link{parse_milestones}}
+Other milestones: 
+\code{\link{get_milestones}()},
+\code{\link{parse_milestones}()}
 }
 \concept{milestones}

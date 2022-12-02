@@ -4,8 +4,13 @@
 \alias{create_repo_ref}
 \title{Create reference to a GitHub repository}
 \usage{
-create_repo_ref(repo_owner, repo_name, is_enterprise = FALSE,
-  hostname = "", identifier = "")
+create_repo_ref(
+  repo_owner,
+  repo_name,
+  is_enterprise = FALSE,
+  hostname = "",
+  identifier = ""
+)
 }
 \arguments{
 \item{repo_owner}{Repository owner's username or GitHub Organization name}

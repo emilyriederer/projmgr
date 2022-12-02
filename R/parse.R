@@ -4,9 +4,9 @@ fmt_safe_int <- function(x) {ifelse( is.null(x) , NA_integer_, x)}
 fmt_safe_lgl <- function(x) {ifelse( is.null(x), NA, x)}
 fmt_safe_date <- function(x) {as.Date( substring( ifelse( is.null(x), NA, x) , 1, 10)) }
 
-#' Parse issues overview from \code{get_issues}
+#' Parse issues overview from `get_issues`
 #'
-#' @param res List returned by corresponding \code{get_} function
+#' @param res List returned by corresponding `get_` function
 #' @return data.frame with one record / issue
 #' @export
 #'
@@ -75,7 +75,7 @@ parse_issues <- function( res ) {
 
 }
 
-#' Parse issue events from \code{get_issues_events}
+#' Parse issue events from `get_issues_events`
 #'
 #' This function convert list output returned by get into a dataframe. Due to the diverse
 #' fields for different types of events, many fields in the dataframe may be NA.
@@ -138,7 +138,7 @@ parse_issue_events <- function(res){
 
 }
 
-#' Parse issue comments from \code{get_issues_comments}
+#' Parse issue comments from `get_issues_comments`
 #'
 #' @inheritParams parse_issues
 #' @inherit get_issue_comments examples
@@ -176,7 +176,7 @@ parse_issue_comments <- function(res){
 
 }
 
-#' Parse milestones from \code{get_milestones}
+#' Parse milestones from `get_milestones`
 #'
 #' @inheritParams parse_issues
 #' @return Dataframe with one record / milestone
@@ -223,7 +223,7 @@ parse_milestones <- function(res){
 
 }
 
-#' Parse labels from \code{get_repo_labels}
+#' Parse labels from `get_repo_labels`
 #'
 #' @inheritParams parse_issues
 #' @return Dataframe with one record / label

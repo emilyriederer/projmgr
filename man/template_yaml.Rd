@@ -27,9 +27,12 @@ template_yaml('plan')
 template_yaml('todo')
 }
 \seealso{
-Other plans and todos: \code{\link{post_plan}},
-  \code{\link{post_todo}}, \code{\link{read_plan}},
-  \code{\link{read_todo}}, \code{\link{report_plan}},
-  \code{\link{report_todo}}
+Other plans and todos: 
+\code{\link{post_plan}()},
+\code{\link{post_todo}()},
+\code{\link{read_plan}()},
+\code{\link{read_todo}()},
+\code{\link{report_plan}()},
+\code{\link{report_todo}()}
 }
 \concept{plans and todos}

@@ -3,7 +3,6 @@
 \docType{package}
 \name{projmgr}
 \alias{projmgr}
-\alias{projmgr-package}
 \title{\code{projmgr} package}
 \description{
 A quick and easy wrapper for working with GitHub and other project management tools

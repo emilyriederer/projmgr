@@ -22,6 +22,7 @@ labels <- parse_repo_labels(labels_res)
 }
 }
 \seealso{
-Other labels: \code{\link{get_repo_labels}}
+Other labels: 
+\code{\link{get_repo_labels}()}
 }
 \concept{labels}

@@ -5,8 +5,8 @@
 #'
 #' The following logic is used to determine the status of each issue:
 #' \itemize{
-#'   \item Done: Items with a \code{state} of "closed"
-#'   \item In Progress: Custom logic via \code{in_progress_when}. See \code{?taskboard_helpers} for details.
+#'   \item Done: Items with a `state` of "closed"
+#'   \item In Progress: Custom logic via `in_progress_when`. See `?taskboard_helpers` for details.
 #'   \item Not Started: Default case for items neither In Progress or Closed
 #' }
 #'

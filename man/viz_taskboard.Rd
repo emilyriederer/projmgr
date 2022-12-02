@@ -4,8 +4,7 @@
 \alias{viz_taskboard}
 \title{Visualize Agile-style task board of item status}
 \usage{
-viz_taskboard(data, in_progress_when, str_wrap_width = 30,
-  text_size = 3)
+viz_taskboard(data, in_progress_when, str_wrap_width = 30, text_size = 3)
 }
 \arguments{
 \item{data}{Dataset, such as those representing issues or milestones (i.e. from \code{parse_issues()}).
@@ -28,9 +27,9 @@ as "Not Started", "In Progress", or "Done".
 \details{
 The following logic is used to determine the status of each issue:
 \itemize{
-  \item Done: Items with a \code{state} of "closed"
-  \item In Progress: Custom logic via \code{in_progress_when}. See \code{?taskboard_helpers} for details.
-  \item Not Started: Default case for items neither In Progress or Closed
+\item Done: Items with a \code{state} of "closed"
+\item In Progress: Custom logic via \code{in_progress_when}. See \code{?taskboard_helpers} for details.
+\item Not Started: Default case for items neither In Progress or Closed
 }
 }
 \examples{

@@ -2,7 +2,7 @@
 % Please edit documentation in R/post.R
 \name{post_issue}
 \alias{post_issue}
-\title{Post issue to GitHub repository}
+\title{Piost issue to GitHub repository}
 \usage{
 post_issue(ref, title, ..., distinct = TRUE)
 }
@@ -20,7 +20,7 @@ as a current open issue should be allowed}
 Number (identifier) of posted issue
 }
 \description{
-Post issue to GitHub repository
+Piost issue to GitHub repository
 }
 \examples{
 \dontrun{
@@ -36,17 +36,20 @@ post_issue(myrepo,
 reprex::reprex(venue = "gh")
 post_issue(myrepo,
             title = "something is broken",
-            body = paste( clipr::read_clip(), collapse = "\\n") )
+            body = paste( clipr::read_clip(), collapse = "\n") )
 }
 }
 \seealso{
-Other issues: \code{\link{get_issue_comments}},
-  \code{\link{get_issue_events}}, \code{\link{get_issues}},
-  \code{\link{parse_issue_comments}},
-  \code{\link{parse_issue_events}},
-  \code{\link{parse_issues}},
-  \code{\link{report_discussion}},
-  \code{\link{report_progress}},
-  \code{\link{viz_waterfall}}
+Other issues: 
+\code{\link{get_issue_comments}()},
+\code{\link{get_issue_events}()},
+\code{\link{get_issues}()},
+\code{\link{parse_issue_comments}()},
+\code{\link{parse_issue_events}()},
+\code{\link{parse_issues}()},
+\code{\link{report_discussion}()},
+\code{\link{report_progress}()},
+\code{\link{update_issue}()},
+\code{\link{viz_waterfall}()}
 }
 \concept{issues}

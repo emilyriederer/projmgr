@@ -12,7 +12,7 @@ only authentication credentials are validated.}
 }
 \value{
 Prints GitHub username as determined by credentials (if valid) and repo-level permissions (if any),
-    else throws 401 Unauthorized error.
+else throws 401 Unauthorized error.
 }
 \description{
 Check for valid credentials and repo permissions
