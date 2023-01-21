@@ -55,7 +55,7 @@ parse_issues <- function( res ) {
     )
 
   # special handling for list columns ----
-  labels_names <- sapply(res,
+  labels_names <- lapply(res,
                          FUN = function(y)
                            vapply(y[["labels"]], FUN = function(x) x$name, FUN.VALUE = character(1) ))
   assignees_login <- sapply(res,
