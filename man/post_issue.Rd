@@ -2,7 +2,7 @@
 % Please edit documentation in R/post.R
 \name{post_issue}
 \alias{post_issue}
-\title{Piost issue to GitHub repository}
+\title{Post issue to GitHub repository}
 \usage{
 post_issue(ref, title, ..., distinct = TRUE)
 }
@@ -20,7 +20,7 @@ as a current open issue should be allowed}
 Number (identifier) of posted issue
 }
 \description{
-Piost issue to GitHub repository
+Post issue to GitHub repository
 }
 \examples{
 \dontrun{
@@ -47,9 +47,9 @@ Other issues:
 \code{\link{parse_issue_comments}()},
 \code{\link{parse_issue_events}()},
 \code{\link{parse_issues}()},
+\code{\link{post_issue_update}()},
 \code{\link{report_discussion}()},
 \code{\link{report_progress}()},
-\code{\link{update_issue}()},
 \code{\link{viz_waterfall}()}
 }
 \concept{issues}

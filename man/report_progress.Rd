@@ -56,9 +56,9 @@ Other issues:
 \code{\link{parse_issue_comments}()},
 \code{\link{parse_issue_events}()},
 \code{\link{parse_issues}()},
+\code{\link{post_issue_update}()},
 \code{\link{post_issue}()},
 \code{\link{report_discussion}()},
-\code{\link{update_issue}()},
 \code{\link{viz_waterfall}()}
 }
 \concept{issues}
