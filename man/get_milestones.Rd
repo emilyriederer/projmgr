@@ -26,7 +26,8 @@ milestones <- parse_milestones(milestones_res)
 }
 }
 \seealso{
-Other milestones: \code{\link{parse_milestones}},
-  \code{\link{post_milestone}}
+Other milestones: 
+\code{\link{parse_milestones}()},
+\code{\link{post_milestone}()}
 }
 \concept{milestones}

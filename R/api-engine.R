@@ -1,10 +1,10 @@
 #' Core code for all GET calls
 #'
 #' @param api_endpoint API endpoint
-#' @param ref Repository reference (list) created by \code{create_repo_ref()}
-#' @param limit Number of records to return, passed directly to \code{gh} documentation. Defaults to
-#'     \code{Inf} which requests all records but may required multiple API calls
-#' @param ... Additional user-defined query parameters. Use \code{browse_docs()} to learn more.
+#' @param ref Repository reference (list) created by `create_repo_ref()`
+#' @param limit Number of records to return, passed directly to `gh` documentation. Defaults to
+#'     `Inf` which requests all records but may required multiple API calls
+#' @param ... Additional user-defined query parameters. Use `browse_docs()` to learn more.
 #'
 #' @keywords internal
 #' @return Content of GET request as list
@@ -41,8 +41,8 @@ get_engine <- function(api_endpoint, ref, limit = Inf, ...){
 #' Core code for all POST calls
 #'
 #' @param api_endpoint API endpoint
-#' @param ref Repository reference (list) created by \code{create_repo_ref()}
-#' @param ... Additional user-defined body parameters. Use \code{browse_docs()} to learn more.
+#' @param ref Repository reference (list) created by `create_repo_ref()`
+#' @param ... Additional user-defined body parameters. Use `browse_docs()` to learn more.
 #'
 #' @keywords internal
 #' @return Content of POST request as list
@@ -63,7 +63,7 @@ post_engine <- function(api_endpoint, ref, ...){
 #' Core code for all PATCH calls
 #'
 #' @param api_endpoint API endpoint
-#' @param ref Repository reference (list) created by \code{create_repo_ref()}
+#' @param ref Repository reference (list) created by `create_repo_ref()`
 #' @param ... Additional user-defined body parameters
 #'
 #' @keywords internal

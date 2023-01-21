@@ -4,8 +4,7 @@
 \alias{viz_gantt}
 \title{Visualize Gantt-style chart of planned or actual time to completion}
 \usage{
-viz_gantt(data, start = "created_at", end = "closed_at",
-  str_wrap_width = 30)
+viz_gantt(data, start = "created_at", end = "closed_at", str_wrap_width = 30)
 }
 \arguments{
 \item{data}{Dataset, such as those representing issues or milestones (i.e. \code{parse_issues()} or

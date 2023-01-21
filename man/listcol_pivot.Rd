@@ -4,15 +4,20 @@
 \alias{listcol_pivot}
 \title{Pivot list-column elements to indicator variables}
 \usage{
-listcol_pivot(data, col_name, regex = ".", transform_fx = identity,
-  delete_orig = FALSE)
+listcol_pivot(
+  data,
+  col_name,
+  regex = ".",
+  transform_fx = identity,
+  delete_orig = FALSE
+)
 }
 \arguments{
 \item{data}{Dataframe containing a list column (e.g. an issues dataframe)}
 
 \item{col_name}{Character string containing column name of list column (e.g. \code{labels_name} or \code{assignees_login})}
 
-\item{regex}{Character string of regular expression to identify list items of interest (e.g. \code{"^priority:", "^(bug|feature)$"})}
+\item{regex}{Character string of regular expression to identify list items of interest (e.g. \verb{"^priority:", "^(bug|feature)$"})}
 
 \item{transform_fx}{Function to transform label name before converting to column (e.g. \code{sub(":", "_")})}
 

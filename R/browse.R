@@ -2,10 +2,10 @@
 
 #' Browse a given GitHub repo
 #'
-#' Opens browser to a given GitHub repo. Inspired by similar \code{browse_} functions included in
-#' the \code{usethis} package.
+#' Opens browser to a given GitHub repo. Inspired by similar `browse_` functions included in
+#' the `usethis` package.
 #'
-#' @param repo_ref Repository reference as created by \code{create_repo_ref()}
+#' @param repo_ref Repository reference as created by `create_repo_ref()`
 #'
 #' @return Returns URL in non-interactive session or launches browser to docs in interactive session
 #' @export
@@ -31,8 +31,8 @@ browse_repo <- function(repo_ref) {
 
 #' Browse issues for given GitHub repo
 #'
-#' Opens browser to GitHub issues for a given repo. Inspired by similar \code{browse_} functions included in
-#' the \code{usethis} package.
+#' Opens browser to GitHub issues for a given repo. Inspired by similar `browse_` functions included in
+#' the `usethis` package.
 #'
 #' @inheritParams browse_repo
 #' @param number Optional argument of issue number, if opening page for specific issue is desired
@@ -61,8 +61,8 @@ browse_issues <- function(repo_ref, number = "") {
 
 #' Browse milestones for given GitHub repo
 #'
-#' Opens browser to GitHub milestones for a given repo. Inspired by similar \code{browse_} functions included in
-#' the \code{usethis} package.
+#' Opens browser to GitHub milestones for a given repo. Inspired by similar `browse_` functions included in
+#' the `usethis` package.
 #'
 #' @inheritParams browse_repo
 #' @param number Optional argument of milestone ID, if opening page for specific milestone is desired
@@ -98,8 +98,8 @@ browse_milestones <- function(repo_ref, number = "") {
 #' View GitHub API documentation
 #'
 #' Opens browser to relevant parts of GitHub API documentation to learn more about field
-#' definitions and formatting. Inspired by similar \code{browse_} functions included in
-#' the \code{usethis} package.
+#' definitions and formatting. Inspired by similar `browse_` functions included in
+#' the `usethis` package.
 #'
 #' @param action Character string denoting action you wish to complete: "get" (list existing) or "post" (creating new)
 #' @param object Character string denoting object on wish you want to apply an action. Supports

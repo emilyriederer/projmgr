@@ -2,14 +2,14 @@
 #'
 #' This function reads a carefully constructed YAML file representing a project plan (of
 #' milestones and issues). YAML is converted into an R list structure which can then be passed
-#' to \code{post_plan()} to build infrastructure for your repository.
+#' to `post_plan()` to build infrastructure for your repository.
 #'
 #' Please see the "Building Custom Plans" vignette for more details.
 #'
 #' @param input Either filepath to YAML file or character string. Assumes filepath if ends in ".yml"
 #'     and assumes string otherwise.
 #'
-#' @return List containing plan compatible with \code{post_plan()} or \code{post_todo()}
+#' @return List containing plan compatible with `post_plan()` or `post_todo()`
 #' @export
 #'
 #' @family plans and todos
@@ -54,7 +54,7 @@ read_plan <- function(input){
 #' Read to-do list from YAML
 #'
 #' This function reads a carefully constructed YAML file representing a to-do list (of issues).
-#' YAML is converted into an R list structure which can then be passed to  \code{post_todo()}
+#' YAML is converted into an R list structure which can then be passed to  `post_todo()`
 #' to build infrastructure for your repository.
 #'
 #' Please see the "Building Custom Plans" vignette for more details.
@@ -104,13 +104,13 @@ read_todo <- function(input){
 #' Post plan (milestones + issues) to GitHub repository
 #'
 #' Post custom plans (i.e. create milestones and issues) based on yaml read in by
-#' \code{read_plan}. Please see the "Building Custom Plans" vignette for details.
+#' `read_plan`. Please see the "Building Custom Plans" vignette for details.
 #'
 #' @inherit post_engine params
 #' @param distinct Logical value to denote whether issues with the same title
-#'     as a current open issue should be allowed. Passed to \code{get_issues()}
+#'     as a current open issue should be allowed. Passed to `get_issues()`
 #' @inherit read_plan examples
-#' @param plan Plan list as read with \code{read_plan()}
+#' @param plan Plan list as read with `read_plan()`
 #' @export
 #'
 #' @return Dataframe with numbers (identifiers) of posted milestones and issues and issue title
@@ -163,7 +163,7 @@ post_plan <- function(ref, plan, distinct = TRUE){
 
 #' Post to-do list (issues) to GitHub repository
 #'
-#' Post custom to-do lists (i.e. issues) based on yaml read in by \code{read_todo}.
+#' Post custom to-do lists (i.e. issues) based on yaml read in by `read_todo`.
 #' Please see the "Building Custom Plans" vignette for details.
 #'
 #' Currently has know bug in that cannot be used to introduce new labels.
@@ -171,9 +171,9 @@ post_plan <- function(ref, plan, distinct = TRUE){
 #' @inherit post_engine params
 #' @inherit post_issue return
 #' @inherit read_todo examples
-#' @param todo To-do R list structure as read with \code{read_todo()}
+#' @param todo To-do R list structure as read with `read_todo()`
 #' @param distinct Logical value to denote whether issues with the same title
-#'     as a current open issue should be allowed. Passed to \code{get_issues()}
+#'     as a current open issue should be allowed. Passed to `get_issues()`
 #' @export
 #'
 #' @family plans and todos
@@ -189,14 +189,14 @@ post_todo <- function(ref, todo, distinct = TRUE){
 #' Print YAML template to console
 #'
 #' Prints YAML templates for either a plan or to-do list to the console as an example
-#' for developing your own custom plans and to-do lists. Inspired by similar \code{template_}
-#' functions included in the \code{pkgdown} package.
+#' for developing your own custom plans and to-do lists. Inspired by similar `template_`
+#' functions included in the `pkgdown` package.
 #'
 #' Note that depending on the console, text editor, and settings you are using, the template may
 #' or may not preserve the necessary whitespace shown in the output. If you copy-paste the
 #' template for modification, ensure that it still adheres to traditional YAML indentation.
 #'
-#' @param template One of \code{"plan"} or \code{"todo"} denoting template desired
+#' @param template One of `"plan"` or `"todo"` denoting template desired
 #'
 #' @return Prints template to console
 #' @export

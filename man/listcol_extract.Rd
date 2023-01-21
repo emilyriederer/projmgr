@@ -4,15 +4,14 @@
 \alias{listcol_extract}
 \title{Extract new dataframe column from list-column matching pattern}
 \usage{
-listcol_extract(data, col_name, regex, new_col_name = NULL,
-  keep_regex = FALSE)
+listcol_extract(data, col_name, regex, new_col_name = NULL, keep_regex = FALSE)
 }
 \arguments{
 \item{data}{Dataframe containing a list column (e.g. an issues dataframe)}
 
 \item{col_name}{Character string containing column name of list column (e.g. \code{labels_name} or \code{assignees_login})}
 
-\item{regex}{Character string of regular expression to identify list items of interest (e.g. \code{"^priority:", "^(bug|feature)$"})}
+\item{regex}{Character string of regular expression to identify list items of interest (e.g. \verb{"^priority:", "^(bug|feature)$"})}
 
 \item{new_col_name}{Optional name of new column. Otherwise \code{regex} is used, stripped of any leading or trailing punctuation}
 

@@ -18,6 +18,7 @@ check_internet()
 }
 }
 \seealso{
-Other check: \code{\link{check_rate_limit}}
+Other check: 
+\code{\link{check_rate_limit}()}
 }
 \concept{check}

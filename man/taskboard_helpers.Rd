@@ -69,25 +69,25 @@ Thus, these functions let users specify what they mean.
 General options:
 
 \itemize{
-  \item is_created_before: Was created before a user-specified data (as "YYYY-MM-DD" character string)
+\item is_created_before: Was created before a user-specified data (as "YYYY-MM-DD" character string)
 }
 
 Issue-specific options:
 
 \itemize{
-  \item is_labeled_with: User-specified label (as character string) exists
-  \item is_assigned: Has been assigned to anyone
-  \item is_assigned_to: Has been assigned to specific user-specified login (as character string)
-  \item is_in_a_milestone: Has been put into any milestone
-  \item is_in_milestone: Has been put into a specific milestone
+\item is_labeled_with: User-specified label (as character string) exists
+\item is_assigned: Has been assigned to anyone
+\item is_assigned_to: Has been assigned to specific user-specified login (as character string)
+\item is_in_a_milestone: Has been put into any milestone
+\item is_in_milestone: Has been put into a specific milestone
 }
 
 Milestone-specific options:
 
 \itemize{
-  \item is_part_closed: Has any of its issues closed
-  \item is_due: Has a due date
-  \item is_due_before: Has a due data by or before a user-specified date (as "YYYY-MM-DD" character string)
+\item is_part_closed: Has any of its issues closed
+\item is_due: Has a due date
+\item is_due_before: Has a due data by or before a user-specified date (as "YYYY-MM-DD" character string)
 }
 }
 \examples{

@@ -1,10 +1,10 @@
 #' Get issues from GitHub repository
 #'
-#' A single issue can be obtained by identification number of \code{number} is passed through \code{...}s.
+#' A single issue can be obtained by identification number of `number` is passed through `...`s.
 #' In this case, all other query parameters will be ignored.
 #'
 #' @inherit get_engine return params
-#' @param limit Number of records to return, passed directly to \code{gh} documentation. Defaults to
+#' @param limit Number of records to return, passed directly to `gh` documentation. Defaults to
 #'     1000 and provides message if number of records returned equals the limit
 #'
 #' @export
@@ -56,7 +56,7 @@ get_issues <- function(ref, limit = 1000, ...){
 #'
 #' @inherit get_engine return params
 #'
-#' @param ref
+#' @inheritParams get_issues
 #' @param dummy_events Logical for whether or not to create a 'dummy' event to denote the
 #'     existence of issues which have no events. Defaults to TRUE (to allow creation). Default
 #'     behavior makes the process of mapping over multiple issues simpler.
@@ -145,7 +145,7 @@ get_issue_comments <- function(ref, number, ...){
 
 #' Get milestones from GitHub repository
 #'
-#' A single milestone can be obtained by identification number of \code{number} is passed through \code{...}s.
+#' A single milestone can be obtained by identification number of `number` is passed through `...`s.
 #' In this case, all other query parameters will be ignored.
 #'
 #' @inherit get_engine return params

@@ -2,24 +2,24 @@
 #'
 #' Creates a four-bar waterfall diagram. Within the specified timeframe, shows initial,
 #' newly opened, newly closed, and final open counts. Works with either issues or milestones,
-#' as obtained by the \code{get} and \code{parse} functions.
+#' as obtained by the `get` and `parse` functions.
 #'
 #' The following logic is used to classify issues:
 #'
 #' \itemize{
-#'   \item Initial: \code{start < start_date and (end > start_date or state == 'open')}
-#'   \item Open: \code{start >= start_date and start <= end_date}
-#'   \item Closed: \code{end >= start_date and end <= end_date}
-#'   \item Final: \code{start < end_date and (end > end_date or state == 'open')}
+#'   \item Initial: `start < start_date and (end > start_date or state == 'open')`
+#'   \item Open: `start >= start_date and start <= end_date`
+#'   \item Closed: `end >= start_date and end <= end_date`
+#'   \item Final: `start < end_date and (end > end_date or state == 'open')`
 #' }
 #'
 #' The exact accuracy of the logic depends on filtering that has already been done to the dataset. Think carefully
-#' about the population you wish to represent when \code{get}ting your data.
+#' about the population you wish to represent when `get`ting your data.
 #'
 #' @inheritParams viz_gantt
-#' @param data Dataset, such as those representing issues or milestones (i.e. \code{parse_issues()} or
-#'     \code{parse_milestones()}). Must have \code{state} variable and variables to specify for
-#'     \code{start} and \code{end}
+#' @param data Dataset, such as those representing issues or milestones (i.e. `parse_issues()` or
+#'     `parse_milestones()`). Must have `state` variable and variables to specify for
+#'     `start` and `end`
 #' @param start_date Character string in 'YYYY-MM-DD' form for first date to be considered (inclusive)
 #' @param end_date Character string in 'YYYY-MM-DD' form for last date to be considered (inclusive)
 #'

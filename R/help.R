@@ -1,10 +1,10 @@
 #' Learn about optional fields for related get_ functions
 #'
-#' The \code{help} family of functions lists the optional query parameters available
-#' for each of the related \code{get_} functions. When no optional arguments are
+#' The `help` family of functions lists the optional query parameters available
+#' for each of the related `get_` functions. When no optional arguments are
 #' available, a blank character vector is returned.
 #'
-#' For more details on these parameters, please use the \code{browse_docs()} function
+#' For more details on these parameters, please use the `browse_docs()` function
 #' to navigate to the appropriate part of the GitHub API documentation.
 #'
 #' @return Character string of optional field names

@@ -23,13 +23,16 @@ issues <- parse_issues(issues_res)
 }
 }
 \seealso{
-Other issues: \code{\link{get_issue_comments}},
-  \code{\link{get_issue_events}}, \code{\link{get_issues}},
-  \code{\link{parse_issue_comments}},
-  \code{\link{parse_issue_events}},
-  \code{\link{post_issue}},
-  \code{\link{report_discussion}},
-  \code{\link{report_progress}},
-  \code{\link{viz_waterfall}}
+Other issues: 
+\code{\link{get_issue_comments}()},
+\code{\link{get_issue_events}()},
+\code{\link{get_issues}()},
+\code{\link{parse_issue_comments}()},
+\code{\link{parse_issue_events}()},
+\code{\link{post_issue_update}()},
+\code{\link{post_issue}()},
+\code{\link{report_discussion}()},
+\code{\link{report_progress}()},
+\code{\link{viz_waterfall}()}
 }
 \concept{issues}

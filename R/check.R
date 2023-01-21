@@ -1,6 +1,6 @@
 #' Find requests remaining and reset time
 #'
-#' Source: copied from \code{httr} vignette "Best practices for API packages" by Hadley Wickham
+#' Source: copied from `httr` vignette "Best practices for API packages" by Hadley Wickham
 #'
 #' @param ref Any repository reference being used. Repository information is stripped out and
 #'     only authentication credentials are used to determine the rate limit.
@@ -76,7 +76,7 @@ check_credentials <- function(ref){
 
 #' Check internet connection (re-export of curl::has_internet())
 #'
-#' Basic wrapper around \code{curl::has_internet()}
+#' Basic wrapper around `curl::has_internet()`
 #'
 #' @return Returns TRUE is connected to internet and false otherwise
 #' @export

@@ -5,15 +5,15 @@
 #' owner, the type (whether or not Enterprise GitHub), and potentially credentials to authenticate.
 #'
 #' Note that this package can be used for GET requests on public repositories without any authentication
-#' (resulting in a lower rate limit.) To do this, simply pass any string into \code{identifier} that is not
-#' an environment variable already defined for your system (e.g. accessible through \code{Sys.getenv("MY_VAR")})
+#' (resulting in a lower rate limit.) To do this, simply pass any string into `identifier` that is not
+#' an environment variable already defined for your system (e.g. accessible through `Sys.getenv("MY_VAR")`)
 #'
 #' @param repo_owner Repository owner's username or GitHub Organization name
 #' @param repo_name Repository name
-#' @param is_enterprise Boolean denoting whether or not working with Enterprise GitHub.Defaults to \code{FALSE}
+#' @param is_enterprise Boolean denoting whether or not working with Enterprise GitHub.Defaults to `FALSE`
 #' @param hostname Host URL stub for Enterprise repositories (e.g. "mycorp.github.com")
-#' @param identifier Ideally should be left blank and defaults to using \code{GITHUB_PAT} or \code{GITHUB_ENT_PAT}
-#'     environment variables as Personal Access Tokens. If \code{identifier},
+#' @param identifier Ideally should be left blank and defaults to using `GITHUB_PAT` or `GITHUB_ENT_PAT`
+#'     environment variables as Personal Access Tokens. If `identifier`,
 #'     this is assumed to be an alternative name of the environment variable to use for your Personal Access Token
 #'
 #' @return List of repository reference information and credentials

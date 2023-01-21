@@ -13,7 +13,7 @@ report_todo(todo, show_ratio = TRUE)
 }
 \value{
 Returns character string of HTML with class attribute to be correctly
-    shown "as-is" in RMarkdown
+shown "as-is" in RMarkdown
 }
 \description{
 Interprets list representation of to-do list, using HTML to format results in a highly readable and
@@ -22,7 +22,7 @@ class of \code{'knit_asis'} so that when included in an RMarkdown document knitt
 the results will be correctly rendered as HTML.
 }
 \details{
-The resulting HTML unordered list (\code{<ul>}) is tagged with class 'report_todo' for custom CSS styling.
+The resulting HTML unordered list (\verb{<ul>}) is tagged with class 'report_todo' for custom CSS styling.
 }
 \examples{
 \dontrun{
@@ -33,9 +33,12 @@ report_todo(my_todo)
 }
 }
 \seealso{
-Other plans and todos: \code{\link{post_plan}},
-  \code{\link{post_todo}}, \code{\link{read_plan}},
-  \code{\link{read_todo}}, \code{\link{report_plan}},
-  \code{\link{template_yaml}}
+Other plans and todos: 
+\code{\link{post_plan}()},
+\code{\link{post_todo}()},
+\code{\link{read_plan}()},
+\code{\link{read_todo}()},
+\code{\link{report_plan}()},
+\code{\link{template_yaml}()}
 }
 \concept{plans and todos}

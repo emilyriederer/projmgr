@@ -4,9 +4,9 @@ fmt_safe_int <- function(x) {ifelse( is.null(x) , NA_integer_, x)}
 fmt_safe_lgl <- function(x) {ifelse( is.null(x), NA, x)}
 fmt_safe_date <- function(x) {as.Date( substring( ifelse( is.null(x), NA, x) , 1, 10)) }
 
-#' Parse issues overview from \code{get_issues}
+#' Parse issues overview from `get_issues`
 #'
-#' @param res List returned by corresponding \code{get_} function
+#' @param res List returned by corresponding `get_` function
 #' @return data.frame with one record / issue
 #' @export
 #'
@@ -24,34 +24,36 @@ parse_issues <- function( res ) {
   if(is.character(res)){stop("Results object contains no elements to parse.")}
 
   mapped_elts <-
-    sapply( res ,
-            FUN = function(x)
-              data.frame( url = fmt_safe_chr( x[["html_url"]] ),
-                          id = fmt_safe_int( x[["id"]] ),
-                          number = fmt_safe_int( x[["number"]] ),
-                          title = fmt_safe_chr( x[["title"]] ),
-                          user_login = fmt_safe_chr( x[["user"]]$login ),
-                          user_id = fmt_safe_int( x[["user"]]$id ),
-                          state = fmt_safe_chr( x[["state"]] ),
-                          locked = fmt_safe_lgl( x[["locked"]] ),
-                          milestone_title = fmt_safe_chr( x[["milestone"]]$title ),
-                          milestone_id = fmt_safe_int( x[["milestone"]]$id ),
-                          milestone_number = fmt_safe_int( x[["milestone"]]$number ),
-                          milestone_state = fmt_safe_chr( x[["milestone"]]$state ),
-                          milestone_created_at = fmt_safe_date( x[["milestone"]]$created_at ),
-                          milestone_closed_at = fmt_safe_date( x[["milestone"]]$due_on ),
-                          milestone_due_on = fmt_safe_date( x[["milestone"]]$due_on ),
-                          n_comments = fmt_safe_int( x[["comments"]] ),
-                          created_at = fmt_safe_date( x[["created_at"]] ),
-                          updated_at = fmt_safe_date( x[["updated_at"]] ),
-                          closed_at = fmt_safe_date( x[["closed_at"]] ),
-                          author_association = fmt_safe_chr( x[["author_association"]] ),
-                          body = fmt_safe_chr( x[["body"]] ),
-                          repo_owner = fmt_safe_chr( x[["repo_owner"]] ),
-                          repo_name = fmt_safe_chr( x[["repo_name"]] ),
-                          stringsAsFactors = FALSE
-              ),
-            simplify = FALSE
+    sapply(
+      res ,
+      FUN = function(x)
+        data.frame(
+          url                  = fmt_safe_chr( x[["html_url"]] ),
+          id                   = fmt_safe_int( x[["id"]] ),
+          number               = fmt_safe_int( x[["number"]] ),
+          title                = fmt_safe_chr( x[["title"]] ),
+          user_login           = fmt_safe_chr( x[["user"]]$login ),
+          user_id              = fmt_safe_int( x[["user"]]$id ),
+          state                = fmt_safe_chr( x[["state"]] ),
+          locked               = fmt_safe_lgl( x[["locked"]] ),
+          milestone_title      = fmt_safe_chr( x[["milestone"]]$title ),
+          milestone_id         = fmt_safe_int( x[["milestone"]]$id ),
+          milestone_number     = fmt_safe_int( x[["milestone"]]$number ),
+          milestone_state      = fmt_safe_chr( x[["milestone"]]$state ),
+          milestone_created_at = fmt_safe_date( x[["milestone"]]$created_at ),
+          milestone_closed_at  = fmt_safe_date( x[["milestone"]]$due_on ),
+          milestone_due_on     = fmt_safe_date( x[["milestone"]]$due_on ),
+          n_comments           = fmt_safe_int( x[["comments"]] ),
+          created_at           = fmt_safe_date( x[["created_at"]] ),
+          updated_at           = fmt_safe_date( x[["updated_at"]] ),
+          closed_at            = fmt_safe_date( x[["closed_at"]] ),
+          author_association   = fmt_safe_chr( x[["author_association"]] ),
+          body                 = fmt_safe_chr( x[["body"]] ),
+          repo_owner           = fmt_safe_chr( x[["repo_owner"]] ),
+          repo_name            = fmt_safe_chr( x[["repo_name"]] ),
+          stringsAsFactors = FALSE
+        ),
+      simplify = FALSE
     )
 
   # special handling for list columns ----
@@ -71,7 +73,7 @@ parse_issues <- function( res ) {
 
 }
 
-#' Parse issue events from \code{get_issues_events}
+#' Parse issue events from `get_issues_events`
 #'
 #' This function convert list output returned by get into a dataframe. Due to the diverse
 #' fields for different types of events, many fields in the dataframe may be NA.
@@ -134,7 +136,7 @@ parse_issue_events <- function(res){
 
 }
 
-#' Parse issue comments from \code{get_issues_comments}
+#' Parse issue comments from `get_issues_comments`
 #'
 #' @inheritParams parse_issues
 #' @inherit get_issue_comments examples
@@ -172,7 +174,7 @@ parse_issue_comments <- function(res){
 
 }
 
-#' Parse milestones from \code{get_milestones}
+#' Parse milestones from `get_milestones`
 #'
 #' @inheritParams parse_issues
 #' @return Dataframe with one record / milestone
@@ -219,7 +221,7 @@ parse_milestones <- function(res){
 
 }
 
-#' Parse labels from \code{get_repo_labels}
+#' Parse labels from `get_repo_labels`
 #'
 #' @inheritParams parse_issues
 #' @return Dataframe with one record / label

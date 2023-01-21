@@ -28,17 +28,21 @@ comments <- parse_issue_comments(comments_res)
 }
 }
 \seealso{
-Other issues: \code{\link{get_issue_events}},
-  \code{\link{get_issues}},
-  \code{\link{parse_issue_comments}},
-  \code{\link{parse_issue_events}},
-  \code{\link{parse_issues}}, \code{\link{post_issue}},
-  \code{\link{report_discussion}},
-  \code{\link{report_progress}},
-  \code{\link{viz_waterfall}}
+Other issues: 
+\code{\link{get_issue_events}()},
+\code{\link{get_issues}()},
+\code{\link{parse_issue_comments}()},
+\code{\link{parse_issue_events}()},
+\code{\link{parse_issues}()},
+\code{\link{post_issue_update}()},
+\code{\link{post_issue}()},
+\code{\link{report_discussion}()},
+\code{\link{report_progress}()},
+\code{\link{viz_waterfall}()}
 
-Other comments: \code{\link{parse_issue_comments}},
-  \code{\link{report_discussion}}
+Other comments: 
+\code{\link{parse_issue_comments}()},
+\code{\link{report_discussion}()}
 }
 \concept{comments}
 \concept{issues}

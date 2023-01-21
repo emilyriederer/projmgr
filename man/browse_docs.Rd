@@ -4,8 +4,10 @@
 \alias{browse_docs}
 \title{View GitHub API documentation}
 \usage{
-browse_docs(action = c("get", "post"), object = c("milestone", "issue",
-  "issue event", "issue comment", "repo labels"))
+browse_docs(
+  action = c("get", "post"),
+  object = c("milestone", "issue", "issue event", "issue comment", "repo labels")
+)
 }
 \arguments{
 \item{action}{Character string denoting action you wish to complete: "get" (list existing) or "post" (creating new)}

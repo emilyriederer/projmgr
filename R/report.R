@@ -3,17 +3,17 @@
 #' Interprets dataframe or tibble of items (e.g. issues) by breaking apart groups (e.g. milestones), listing each
 #' item title as open or closed, and using HTML to format results in a highly readable and
 #' attractive way. Resulting object returned is a character vector of HTML code with the added
-#' class of \code{'knit_asis'} so that when included in an RMarkdown document knitting to HTML,
+#' class of `'knit_asis'` so that when included in an RMarkdown document knitting to HTML,
 #' the results will be correctly rendered as HTML.
 #'
-#' The resulting HTML unordered list (\code{<ul>}) is tagged with class 'report_progress' for custom CSS styling.
+#' The resulting HTML unordered list (`<ul>`) is tagged with class 'report_progress' for custom CSS styling.
 #'
 #' Items without a related group are put into an "Ungrouped" category. Filter these out before using this function if
 #' you wish to only show items that are in a group.
 #'
-#' @param issues Dataframe or tibble of issues and milestones, as returned by \code{get_issues()} and \code{parse_issues()}
-#' @param group_var Character string variable name by which to group issues. Defaults to \code{"milestone_title"}
-#' @param link_url Boolean. Whether or not to provide link to each item, as provided by \code{url} column in dataset
+#' @param issues Dataframe or tibble of issues and milestones, as returned by `get_issues()` and `parse_issues()`
+#' @param group_var Character string variable name by which to group issues. Defaults to `"milestone_title"`
+#' @param link_url Boolean. Whether or not to provide link to each item, as provided by `url` column in dataset
 #' @param show_ratio Boolean. Whether or not to report (# Closed Items / # Total Items) for each group as a ratio
 #' @param show_pct Boolean. Whether or not to report (# Closed Items / # Total Items) for each group as a percent
 #'
@@ -79,12 +79,12 @@ report_progress <- function(issues, group_var = "milestone_title",
 #'
 #' Interprets list representation of plan, using HTML to format results in a highly readable and
 #' attractive way. Resulting object returned is a character vector of HTML code with the added
-#' class of \code{'knit_asis'} so that when included in an RMarkdown document knitting to HTML,
+#' class of `'knit_asis'` so that when included in an RMarkdown document knitting to HTML,
 #' the results will be correctly rendered as HTML.
 #'
-#' The resulting HTML unordered list (<ul>) is tagged with class 'report_plan' for custom CSS styling.
+#' The resulting HTML unordered list (`<ul>`) is tagged with class 'report_plan' for custom CSS styling.
 #'
-#' @param plan List of project plan, as returned by \code{read_plan()}
+#' @param plan List of project plan, as returned by `read_plan()`
 #' @inheritParams report_progress
 #'
 #' @inherit report_progress return
@@ -131,12 +131,12 @@ report_plan <- function(plan, show_ratio = TRUE){
 #'
 #' Interprets list representation of to-do list, using HTML to format results in a highly readable and
 #' attractive way. Resulting object returned is a character vector of HTML code with the added
-#' class of \code{'knit_asis'} so that when included in an RMarkdown document knitting to HTML,
+#' class of `'knit_asis'` so that when included in an RMarkdown document knitting to HTML,
 #' the results will be correctly rendered as HTML.
 #'
-#' The resulting HTML unordered list (\code{<ul>}) is tagged with class 'report_todo' for custom CSS styling.
+#' The resulting HTML unordered list (`<ul>`) is tagged with class 'report_todo' for custom CSS styling.
 #'
-#' @param todo List of to-do list, as returned by \code{read_todo()}
+#' @param todo List of to-do list, as returned by `read_todo()`
 #' @inheritParams report_progress
 #'
 #' @inherit report_progress return
@@ -175,13 +175,13 @@ report_todo <- function(todo, show_ratio = TRUE){
 #' Interprets dataframe or tibble of issues by breaking apart milestones and listing each
 #' issue title as open or closed, and uses HTML to format results in a highly readable and
 #' attractive way. Resulting object returned is a character vector of HTML code with the added
-#' class of \code{'knit_asis'} so that when included in an RMarkdown document knitting to HTML,
+#' class of `'knit_asis'` so that when included in an RMarkdown document knitting to HTML,
 #' the results will be correctly rendered as HTML.
 #'
-#' HTML output is wrapped in a <div> of class 'report_disccusion' for custom CSS styling.
+#' HTML output is wrapped in a `<div>` of class 'report_disccusion' for custom CSS styling.
 #'
-#' @param comments Dataframe or tibble of comments for a single issue, as returned by \code{get_issue_comments()}
-#' @param issue Optional dataframe or tibble of issues, as returned by \code{get_issues()}. If provided,
+#' @param comments Dataframe or tibble of comments for a single issue, as returned by `get_issue_comments()`
+#' @param issue Optional dataframe or tibble of issues, as returned by `get_issues()`. If provided,
 #'     output includes issue-level data such as the title, initial description, creation date, etc.
 #' @inheritParams report_progress
 #'
