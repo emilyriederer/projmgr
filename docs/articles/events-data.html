@@ -6,16 +6,23 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Timestamping with Events Data • projmgr</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><!-- docsearch --><script src="../docsearch.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous">
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script><!-- docsearch --><script src="../docsearch.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.3/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous">
 <link href="../docsearch.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Timestamping with Events Data">
-<meta property="og:description" content="">
+<meta property="og:description" content="projmgr">
 <meta property="og:image" content="https://emilyriederer.github.io/projmgr/logo.png">
-<meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -27,7 +34,7 @@
   gtag('config', 'UA-132815709-1');
 </script>
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -40,7 +47,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">projmgr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9902</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9001</span>
       </span>
     </div>
 
@@ -73,7 +80,7 @@
   </a>
 </li>
       </ul>
-<form class="navbar-form navbar-right" role="search">
+<form class="navbar-form navbar-right hidden-xs hidden-sm" role="search">
         <div class="form-group">
           <input type="search" class="form-control" name="search-input" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off">
 </div>
@@ -87,10 +94,11 @@
 <!--/.navbar -->
 
       
-      </header><div class="row">
+
+      </header><script src="events-data_files/header-attrs-2.17/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Timestamping with Events Data</h1>
+      <h1 data-toc-skip>Timestamping with Events Data</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/emilyriederer/projmgr/blob/master/vignettes/events-data.Rmd"><code>vignettes/events-data.Rmd</code></a></small>
@@ -100,22 +108,46 @@
 
     
     
-<p>Events data, as returned by <code><a href="../reference/get_issue_events.html">get_issue_events()</a></code>, provides a granular view of issues in your GitHub repository. As opposed to the issue-level data returned by <code><a href="../reference/get_issues.html">get_issues()</a></code>, <code><a href="../reference/get_issue_events.html">get_issue_events()</a></code> provides timestamped event-level data for each issue, such as the addition and deletion of labels and milestones. See the <a href="https://developer.github.com/v3/issues/events/">Issue Events GitHub API documentation</a> for a more comprehensive list.</p>
-<p>This detailed information has many potential uses. One use in reporting and visualization is if if the <code>created_at</code> date for your issues does not have an intrinsic meaning and does not represent when work on an issue was started.</p>
-<p>For example, let’s suppose we pull some issues from our repo and visualize their time-to-completion with <code><a href="../reference/viz_gantt.html">viz_gantt()</a></code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_repo &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_repo_ref.html">create_repo_ref</a></span>(<span class="st">'emilyriederer'</span>, <span class="st">'my_repo'</span>)
-issues &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_issues.html">get_issues</a></span>(experigit, <span class="dt">state =</span> <span class="st">'closed'</span>, <span class="dt">milestone =</span> <span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/parse_issues.html">parse_issues</a></span>()</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/viz_gantt.html">viz_gantt</a></span>(issues)</code></pre></div>
+<p>Events data, as returned by <code><a href="../reference/get_issue_events.html">get_issue_events()</a></code>, provides
+a granular view of issues in your GitHub repository. As opposed to the
+issue-level data returned by <code><a href="../reference/get_issues.html">get_issues()</a></code>,
+<code><a href="../reference/get_issue_events.html">get_issue_events()</a></code> provides timestamped event-level data
+for each issue, such as the addition and deletion of labels and
+milestones. See the <a href="https://developer.github.com/v3/issues/events/">Issue Events
+GitHub API documentation</a> for a more comprehensive list.</p>
+<p>This detailed information has many potential uses. One use in
+reporting and visualization is if if the <code>created_at</code> date
+for your issues does not have an intrinsic meaning and does not
+represent when work on an issue was started.</p>
+<p>For example, let’s suppose we pull some issues from our repo and
+visualize their time-to-completion with <code><a href="../reference/viz_gantt.html">viz_gantt()</a></code>.</p>
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="no">my_repo</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/create_repo_ref.html">create_repo_ref</a></span>(<span class="st">'emilyriederer'</span>, <span class="st">'my_repo'</span>)
+<span class="no">issues</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_issues.html">get_issues</a></span>(<span class="no">experigit</span>, <span class="kw">state</span> <span class="kw">=</span> <span class="st">'closed'</span>, <span class="kw">milestone</span> <span class="kw">=</span> <span class="fl">1</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/parse_issues.html">parse_issues</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="../reference/viz_gantt.html">viz_gantt</a></span>(<span class="no">issues</span>)</pre></body></html></div>
 <p><img src="events-data_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
-<p>Issue 1 stands out as having taken a very long time to complete. However, it’s possible it was created long before anyone started actively working on it. Instead, we might want to consider the start time to be, for example, when an issue was tagged with the “in-progress label”.</p>
-<p>We can get events for a specific issue with the following code. Due to the potentially massive size of this data, the function returns events for a single issue at a time and, thus, has a required <code>number</code> parameter to specify the issue for which events should be returned. As such, to events for multiple issues, we need to use <code><a href="https://purrr.tidyverse.org/reference/map.html">purrr::map()</a></code>.</p>
-<p>Since events can also include adding assignees or milestones, we filter our dataset to <code>'labeled'</code> events where the <code>label_name</code> is “in-progress”.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">issue_events &lt;-<span class="st"> </span>
-<span class="st">  </span>purrr<span class="op">::</span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="op">~</span><span class="kw"><a href="../reference/get_issue_events.html">get_issue_events</a></span>(experigit, <span class="dt">number =</span> .)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>purrr<span class="op">::</span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map_df</a></span>(parse_issue_events) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(event <span class="op">==</span><span class="st"> 'labeled'</span> <span class="op">&amp;</span><span class="st"> </span>label_name <span class="op">==</span><span class="st"> 'in-progress'</span>)</code></pre></div>
-<p>The fields of the resulting dataframe are shown below. Note that in this dataset, the <code>created_at</code> field refers to when the <em>event</em> was created (i.e. when the issue was labelled in this case) and not when the <em>issue</em> was created.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(issue_events)
+<p>Issue 1 stands out as having taken a very long time to complete.
+However, it’s possible it was created long before anyone started
+actively working on it. Instead, we might want to consider the start
+time to be, for example, when an issue was tagged with the “in-progress
+label”.</p>
+<p>We can get events for a specific issue with the following code. Due
+to the potentially massive size of this data, the function returns
+events for a single issue at a time and, thus, has a required
+<code>number</code> parameter to specify the issue for which events
+should be returned. As such, to events for multiple issues, we need to
+use <code><a href="https://purrr.tidyverse.org/reference/map.html">purrr::map()</a></code>.</p>
+<p>Since events can also include adding assignees or milestones, we
+filter our dataset to <code>'labeled'</code> events where the
+<code>label_name</code> is “in-progress”.</p>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">issue_events</span> <span class="kw">&lt;-</span>
+  <span class="kw pkg">purrr</span><span class="kw ns">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(<span class="fl">1</span>:<span class="fl">3</span>, ~<span class="fu"><a href="../reference/get_issue_events.html">get_issue_events</a></span>(<span class="no">experigit</span>, <span class="kw">number</span> <span class="kw">=</span> <span class="no">.</span>)) <span class="kw">%&gt;%</span>
+  <span class="kw pkg">purrr</span><span class="kw ns">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_df</a></span>(<span class="no">parse_issue_events</span>) <span class="kw">%&gt;%</span>
+  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">event</span> <span class="kw">==</span> <span class="st">'labeled'</span> <span class="kw">&amp;</span> <span class="no">label_name</span> <span class="kw">==</span> <span class="st">'in-progress'</span>)</pre></body></html></div>
+<p>The fields of the resulting dataframe are shown below. Note that in
+this dataset, the <code>created_at</code> field refers to when the
+<em>event</em> was created (i.e. when the issue was labelled in this
+case) and not when the <em>issue</em> was created.</p>
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">issue_events</span>)
 <span class="co">#&gt;   number  id   actor_login   event created_at  label_name milestone_title</span>
 <span class="co">#&gt; 1      1 123 emilyriederer labeled 2018-04-15 in-progress              NA</span>
 <span class="co">#&gt; 2      2 124 emilyriederer labeled 2018-04-02 in-progress              NA</span>
@@ -123,18 +155,26 @@ issues &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_
 <span class="co">#&gt;   assignee_login assigner_login</span>
 <span class="co">#&gt; 1             NA             NA</span>
 <span class="co">#&gt; 2             NA             NA</span>
-<span class="co">#&gt; 3             NA             NA</span></code></pre></div>
-<p>Next, we can join our datasets together. THe <code>suffix</code> parameter allows us to append <code>_event</code> to all the field names from the events data to distinguished between the issue and event <code>created_at</code> fields.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">issue_with_events &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/join.html">inner_join</a></span>(issues, issue_events, <span class="dt">by =</span> <span class="st">"number"</span>, <span class="dt">suffix =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">""</span>, <span class="st">"_event"</span>))</code></pre></div>
-<p>Finally, we can use this new dataset to remake our plot by specifying the name of the new <code>created_at_event</code> variable as the appropriate issue start date, via the optional <code>start</code> parameter.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/viz_gantt.html">viz_gantt</a></span>(issue_with_events, <span class="dt">start =</span> <span class="st">"created_at_event"</span>)</code></pre></div>
+<span class="co">#&gt; 3             NA             NA</span></pre></body></html></div>
+<p>Next, we can join our datasets together. THe <code>suffix</code>
+parameter allows us to append <code>_event</code> to all the field names
+from the events data to distinguished between the issue and event
+<code>created_at</code> fields.</p>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">issue_with_events</span> <span class="kw">&lt;-</span> <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span>(<span class="no">issues</span>, <span class="no">issue_events</span>, <span class="kw">by</span> <span class="kw">=</span> <span class="st">"number"</span>, <span class="kw">suffix</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">""</span>, <span class="st">"_event"</span>))</pre></body></html></div>
+<p>Finally, we can use this new dataset to remake our plot by specifying
+the name of the new <code>created_at_event</code> variable as the
+appropriate issue start date, via the optional <code>start</code>
+parameter.</p>
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="../reference/viz_gantt.html">viz_gantt</a></span>(<span class="no">issue_with_events</span>, <span class="kw">start</span> <span class="kw">=</span> <span class="st">"created_at_event"</span>)</pre></body></html></div>
 <p><img src="events-data_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+
       </div>
 
 </div>
+
 
 
       <footer><div class="copyright">
@@ -142,8 +182,9 @@ issues &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
+
       </footer>
 </div>
 

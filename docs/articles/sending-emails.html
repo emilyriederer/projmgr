@@ -6,16 +6,23 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Use Case: Sending reports with gmailr • projmgr</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><!-- docsearch --><script src="../docsearch.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous">
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script><!-- docsearch --><script src="../docsearch.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.3/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous">
 <link href="../docsearch.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Use Case: Sending reports with gmailr">
-<meta property="og:description" content="">
+<meta property="og:description" content="projmgr">
 <meta property="og:image" content="https://emilyriederer.github.io/projmgr/logo.png">
-<meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -27,7 +34,7 @@
   gtag('config', 'UA-132815709-1');
 </script>
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -40,7 +47,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">projmgr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9902</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9001</span>
       </span>
     </div>
 
@@ -73,7 +80,7 @@
   </a>
 </li>
       </ul>
-<form class="navbar-form navbar-right" role="search">
+<form class="navbar-form navbar-right hidden-xs hidden-sm" role="search">
         <div class="form-group">
           <input type="search" class="form-control" name="search-input" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off">
 </div>
@@ -87,10 +94,11 @@
 <!--/.navbar -->
 
       
-      </header><div class="row">
+
+      </header><script src="sending-emails_files/header-attrs-2.17/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Use Case: Sending reports with gmailr</h1>
+      <h1 data-toc-skip>Use Case: Sending reports with gmailr</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/emilyriederer/projmgr/blob/master/vignettes/sending-emails.Rmd"><code>vignettes/sending-emails.Rmd</code></a></small>
@@ -100,83 +108,112 @@
 
     
     
-<p>Just like the <code>report</code> family of functions makes it easy to share project updates in an HTML RMarkdown, these reporters can also help create and send well-formatted email reminders to colleagues.</p>
-<p>Note that this will work with all <code>report</code> functions <em>except</em> <code><a href="../reference/report_taskboard.html">report_taskboard()</a></code> because most eail clients do not yet support CSS grid.</p>
+<p>Just like the <code>report</code> family of functions makes it easy
+to share project updates in an HTML RMarkdown, these reporters can also
+help create and send well-formatted email reminders to colleagues.</p>
+<p>Note that this will work with all <code>report</code> functions
+<em>except</em> <code><a href="../reference/report_taskboard.html">report_taskboard()</a></code> because most eail
+clients do not yet support CSS grid.</p>
 <div id="report-overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#report-overview" class="anchor"></a>Report Overview</h2>
-<p>The <code>report</code> functions are discussed in more detial in the “Reporting” vignette. As a brief overview, they generally take the output of a <code>parse</code> function and rewrite the output with HTML.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_repo &lt;-<span class="st"> </span><span class="kw"><a href="../reference/create_repo_ref.html">create_repo_ref</a></span>(<span class="st">"emilyriederer"</span>, <span class="st">"my_repo"</span>)
-issues_res &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_issues.html">get_issues</a></span>( my_repo , <span class="dt">state =</span> <span class="st">"all"</span> )
-issues &lt;-<span class="st"> </span><span class="kw"><a href="../reference/parse_issues.html">parse_issues</a></span>(issues_res)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/report_progress.html">report_progress</a></span>(issues)</code></pre></div>
+<p>The <code>report</code> functions are discussed in more detial in the
+“Reporting” vignette. As a brief overview, they generally take the
+output of a <code>parse</code> function and rewrite the output with
+HTML.</p>
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="no">my_repo</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/create_repo_ref.html">create_repo_ref</a></span>(<span class="st">"emilyriederer"</span>, <span class="st">"my_repo"</span>)
+<span class="no">issues_res</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_issues.html">get_issues</a></span>( <span class="no">my_repo</span> , <span class="kw">state</span> <span class="kw">=</span> <span class="st">"all"</span> )
+<span class="no">issues</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/parse_issues.html">parse_issues</a></span>(<span class="no">issues_res</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="../reference/report_progress.html">report_progress</a></span>(<span class="no">issues</span>)</pre></body></html></div>
 <p></p>
-<strong> Data cleaning and validation </strong> <em>( 100 % Complete - 3 / 3 )</em>
+<strong> Data cleaning and validation </strong> <em>( 100 % Complete - 3
+/ 3 )</em>
 <ul class="report_progress" style="list-style: none;">
 <li>
-☑ <a href="https://github.com/emilyriederer/experigit/issues/147">Resolve data quality issues</a>
+☑
+<a href="https://github.com/emilyriederer/experigit/issues/147">Resolve
+data quality issues</a>
 </li>
 <li>
-☑ <a href="https://github.com/emilyriederer/experigit/issues/146">Assess data quality</a>
+☑
+<a href="https://github.com/emilyriederer/experigit/issues/146">Assess
+data quality</a>
 </li>
 <li>
-☑ <a href="https://github.com/emilyriederer/experigit/issues/145">Define data quality standards</a>
+☑
+<a href="https://github.com/emilyriederer/experigit/issues/145">Define
+data quality standards</a>
 </li>
 </ul>
-<strong> Exploratory data analysis </strong> <em>( 50 % Complete - 1 / 2 )</em>
+<strong> Exploratory data analysis </strong> <em>( 50 % Complete - 1 / 2
+)</em>
 <ul class="report_progress" style="list-style: none;">
 <li>
-☐ <a href="https://github.com/emilyriederer/experigit/issues/149">Visualizations</a>
+☐
+<a href="https://github.com/emilyriederer/experigit/issues/149">Visualizations</a>
 </li>
 <li>
-☑ <a href="https://github.com/emilyriederer/experigit/issues/148">Summary statistics</a>
+☑
+<a href="https://github.com/emilyriederer/experigit/issues/148">Summary
+statistics</a>
 </li>
 </ul>
 <p></p>
-<p>By default, the <code>link_url</code> argument is set to <code>TRUE</code>, so each item is linked to its corresponding GitHub issue.</p>
-<p>In RMarkdown, the rendered HTML is shown because the <code>report</code> functions append the class <code>"knit_asis"</code> to the output, which tells <code>knitr</code> to directly insert the output into the final document instead of interpreting it as character output. However, to prove that this function is simply writing HTML, we can see the underlying HTML in RMarkdown by wiping that class:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">html &lt;-<span class="st"> </span><span class="kw"><a href="../reference/report_progress.html">report_progress</a></span>(issues)
-<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/class">class</a></span>(html) &lt;-<span class="st"> "character"</span>
-html
-<span class="co">#&gt; [1] "&lt;p/&gt; &lt;strong&gt; Data cleaning and validation &lt;/strong&gt; &lt;em&gt;( 100 % Complete - 3 / 3 )&lt;/em&gt; &lt;ul  class = 'report_progress' style = 'list-style: none;'&gt; &lt;li&gt;  &amp;#9745; &lt;a href = 'https://github.com/emilyriederer/experigit/issues/147'&gt;Resolve data quality issues&lt;/a&gt; &lt;/li&gt; &lt;li&gt;  &amp;#9745; &lt;a href = 'https://github.com/emilyriederer/experigit/issues/146'&gt;Assess data quality&lt;/a&gt; &lt;/li&gt; &lt;li&gt;  &amp;#9745; &lt;a href = 'https://github.com/emilyriederer/experigit/issues/145'&gt;Define data quality standards&lt;/a&gt; &lt;/li&gt; &lt;/ul&gt; &lt;strong&gt; Exploratory data analysis &lt;/strong&gt; &lt;em&gt;( 50 % Complete - 1 / 2 )&lt;/em&gt; &lt;ul  class = 'report_progress' style = 'list-style: none;'&gt; &lt;li&gt;  &amp;#9744; &lt;a href = 'https://github.com/emilyriederer/experigit/issues/149'&gt;Visualizations&lt;/a&gt; &lt;/li&gt; &lt;li&gt;  &amp;#9745; &lt;a href = 'https://github.com/emilyriederer/experigit/issues/148'&gt;Summary statistics&lt;/a&gt; &lt;/li&gt; &lt;/ul&gt; &lt;p/&gt;"</span></code></pre></div>
-<p>(Note - this is just for illustration purposes! You do <strong>NOT</strong> have to change the class in order to send emails.)</p>
+<p>By default, the <code>link_url</code> argument is set to
+<code>TRUE</code>, so each item is linked to its corresponding GitHub
+issue.</p>
+<p>In RMarkdown, the rendered HTML is shown because the
+<code>report</code> functions append the class <code>"knit_asis"</code>
+to the output, which tells <code>knitr</code> to directly insert the
+output into the final document instead of interpreting it as character
+output. However, to prove that this function is simply writing HTML, we
+can see the underlying HTML in RMarkdown by wiping that class:</p>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">html</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/report_progress.html">report_progress</a></span>(<span class="no">issues</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span>(<span class="no">html</span>) <span class="kw">&lt;-</span> <span class="st">"character"</span>
+<span class="no">html</span>
+<span class="co">#&gt; [1] "&lt;p/&gt; &lt;strong&gt; Data cleaning and validation &lt;/strong&gt; &lt;em&gt;( 100 % Complete - 3 / 3 )&lt;/em&gt; &lt;ul  class = 'report_progress' style = 'list-style: none;'&gt; &lt;li&gt;  &amp;#9745; &lt;a href = 'https://github.com/emilyriederer/experigit/issues/147'&gt;Resolve data quality issues&lt;/a&gt; &lt;/li&gt; &lt;li&gt;  &amp;#9745; &lt;a href = 'https://github.com/emilyriederer/experigit/issues/146'&gt;Assess data quality&lt;/a&gt; &lt;/li&gt; &lt;li&gt;  &amp;#9745; &lt;a href = 'https://github.com/emilyriederer/experigit/issues/145'&gt;Define data quality standards&lt;/a&gt; &lt;/li&gt; &lt;/ul&gt; &lt;strong&gt; Exploratory data analysis &lt;/strong&gt; &lt;em&gt;( 50 % Complete - 1 / 2 )&lt;/em&gt; &lt;ul  class = 'report_progress' style = 'list-style: none;'&gt; &lt;li&gt;  &amp;#9744; &lt;a href = 'https://github.com/emilyriederer/experigit/issues/149'&gt;Visualizations&lt;/a&gt; &lt;/li&gt; &lt;li&gt;  &amp;#9745; &lt;a href = 'https://github.com/emilyriederer/experigit/issues/148'&gt;Summary statistics&lt;/a&gt; &lt;/li&gt; &lt;/ul&gt; &lt;p/&gt;"</span></pre></body></html></div>
+<p>(Note - this is just for illustration purposes! You do
+<strong>NOT</strong> have to change the class in order to send
+emails.)</p>
 </div>
 <div id="sending-emails" class="section level2">
 <h2 class="hasAnchor">
 <a href="#sending-emails" class="anchor"></a>Sending Emails</h2>
-<p>HTML output is convenient since most modern email clients support HTML-based email. We will show an example with <code>gmailr</code>, but a similar concept should work with <code>mailR</code> (with the <code>html = TRUE</code> option) and other email packages.</p>
-<p>First, as before, simply assign the results of the <code>report</code> function to a variable.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">html &lt;-<span class="st"> </span><span class="kw"><a href="../reference/report_progress.html">report_progress</a></span>(issues)</code></pre></div>
-<p>Next, we can construct an email message using <code>gmailr</code>, and pass our <code>html</code> object into the <code><a href="https://www.rdocumentation.org/packages/gmailr/topics/mime">gmailr::html_body()</a></code> function.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(gmailr)
+<p>HTML output is convenient since most modern email clients support
+HTML-based email. We will show an example with <code>gmailr</code>, but
+a similar concept should work with <code>mailR</code> (with the
+<code>html = TRUE</code> option) and other email packages.</p>
+<p>First, as before, simply assign the results of the
+<code>report</code> function to a variable.</p>
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">html</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/report_progress.html">report_progress</a></span>(<span class="no">issues</span>)</pre></body></html></div>
+<p>Next, we can construct an email message using <code>gmailr</code>,
+and pass our <code>html</code> object into the
+<code><a href="https://rdrr.io/pkg/gmailr/man/gmailr-deprecated.html">gmailr::html_body()</a></code> function.</p>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">gmailr</span>)
 
-html_msg &lt;-
-<span class="kw">mime</span>() <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">to</span>(<span class="st">"you@somewhere.com"</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">from</span>(<span class="st">"me@somewhere.com"</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">subject</span>(<span class="st">"Project status update"</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">html_body</span>( html )
+<span class="no">html_msg</span> <span class="kw">&lt;-</span>
+<span class="fu"><a href="https://rdrr.io/pkg/gmailr/man/gmailr-deprecated.html">mime</a></span>() <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/gmailr/man/gmailr-deprecated.html">to</a></span>(<span class="st">"you@somewhere.com"</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/gmailr/man/gmailr-deprecated.html">from</a></span>(<span class="st">"me@somewhere.com"</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/gmailr/man/gmailr-deprecated.html">subject</a></span>(<span class="st">"Project status update"</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/gmailr/man/gmailr-deprecated.html">html_body</a></span>( <span class="no">html</span> )
 
-<span class="kw">send_message</span>(html_msg)</code></pre></div>
+<span class="fu"><a href="https://rdrr.io/pkg/gmailr/man/gmailr-deprecated.html">send_message</a></span>(<span class="no">html_msg</span>)</pre></body></html></div>
 <p>The resulting email looks like this:</p>
 <div class="figure">
-<img src="send_email.PNG" alt="Email sent with gmailr"><p class="caption">Email sent with gmailr</p>
+<img src="send_email.PNG" alt=""><p class="caption">Email sent with gmailr</p>
 </div>
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-        <div id="tocnav">
-      <h2 class="hasAnchor">
-<a href="#tocnav" class="anchor"></a>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-<li><a href="#report-overview">Report Overview</a></li>
-      <li><a href="#sending-emails">Sending Emails</a></li>
-      </ul>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
 </div>
-      </div>
 
 </div>
+
 
 
       <footer><div class="copyright">
@@ -184,8 +221,9 @@ html_msg &lt;-
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
+
       </footer>
 </div>
 

@@ -5,17 +5,24 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Use Case: Documenting Discussion (Reporting an issue’s comments) • projmgr</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><!-- docsearch --><script src="../docsearch.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous">
+<title>Use Case: Documenting Discussion (Reporting an issue's comments) • projmgr</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script><!-- docsearch --><script src="../docsearch.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.3/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous">
 <link href="../docsearch.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script><link href="../extra.css" rel="stylesheet">
-<meta property="og:title" content="Use Case: Documenting Discussion (Reporting an issue’s comments)">
-<meta property="og:description" content="">
+<meta property="og:title" content="Use Case: Documenting Discussion (Reporting an issue's comments)">
+<meta property="og:description" content="projmgr">
 <meta property="og:image" content="https://emilyriederer.github.io/projmgr/logo.png">
-<meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -27,7 +34,7 @@
   gtag('config', 'UA-132815709-1');
 </script>
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -40,7 +47,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">projmgr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9902</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9001</span>
       </span>
     </div>
 
@@ -73,7 +80,7 @@
   </a>
 </li>
       </ul>
-<form class="navbar-form navbar-right" role="search">
+<form class="navbar-form navbar-right hidden-xs hidden-sm" role="search">
         <div class="form-group">
           <input type="search" class="form-control" name="search-input" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off">
 </div>
@@ -87,10 +94,12 @@
 <!--/.navbar -->
 
       
-      </header><div class="row">
+
+      </header><script src="documenting-discussion_files/header-attrs-2.17/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Use Case: Documenting Discussion (Reporting an issue’s comments)</h1>
+      <h1 data-toc-skip>Use Case: Documenting Discussion (Reporting an
+issue’s comments)</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/emilyriederer/projmgr/blob/master/vignettes/documenting-discussion.Rmd"><code>vignettes/documenting-discussion.Rmd</code></a></small>
@@ -100,28 +109,34 @@
 
     
     
-<p>If the comments of a GitHub issue contain an important discussions regarding your analysis, you may wish to save an immutable copy of this conversation for documentation. For example, consider this important discussion:</p>
+<p>If the comments of a GitHub issue contain an important discussions
+regarding your analysis, you may wish to save an immutable copy of this
+conversation for documentation. For example, consider this important
+discussion:</p>
 <div class="figure">
-<img src="report_discussion.PNG" alt="GitHub issue with comments"><p class="caption">GitHub issue with comments</p>
+<img src="report_discussion.PNG" alt=""><p class="caption">GitHub issue with comments</p>
 </div>
-<p>You can do this in two steps. First, <code>get</code> the issue metadata and comments from GitHub with <code><a href="../reference/get_issues.html">get_issues()</a></code> and <code><a href="../reference/get_issue_comments.html">get_issue_comments()</a></code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">issues &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_issues.html">get_issues</a></span>(experigit, <span class="dt">number =</span> <span class="dv">163</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/parse_issues.html">parse_issues</a></span>()
-comments &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_issue_comments.html">get_issue_comments</a></span>(experigit, <span class="dt">number =</span> <span class="dv">163</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/parse_issue_comments.html">parse_issue_comments</a></span>()</code></pre></div>
-<p>As with all other <code>get-parse</code> codeflows, this produces dataframe output.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(issues)
+<p>You can do this in two steps. First, <code>get</code> the issue
+metadata and comments from GitHub with <code><a href="../reference/get_issues.html">get_issues()</a></code> and
+<code><a href="../reference/get_issue_comments.html">get_issue_comments()</a></code>.</p>
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="no">issues</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_issues.html">get_issues</a></span>(<span class="no">experigit</span>, <span class="kw">number</span> <span class="kw">=</span> <span class="fl">163</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/parse_issues.html">parse_issues</a></span>()
+<span class="no">comments</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_issue_comments.html">get_issue_comments</a></span>(<span class="no">experigit</span>, <span class="kw">number</span> <span class="kw">=</span> <span class="fl">163</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/parse_issue_comments.html">parse_issue_comments</a></span>()</pre></body></html></div>
+<p>As with all other <code>get-parse</code> codeflows, this produces
+dataframe output.</p>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">issues</span>)
 <span class="co">#&gt;                    title                                    body state</span>
 <span class="co">#&gt; 1 A very important issue This is the beginning of a conversation  open</span>
 <span class="co">#&gt;   created_at closed_at    user_login n_comments</span>
 <span class="co">#&gt; 1 2018-12-30      &lt;NA&gt; emilyriederer          2</span>
-<span class="co">#&gt;                                                     url number</span>
-<span class="co">#&gt; 1 https://github.com/emilyriederer/experigit/issues/163    163</span>
-<span class="co">#&gt;   milestone_title milestone_id milestone_number milestone_state</span>
-<span class="co">#&gt; 1              NA           NA               NA              NA</span>
-<span class="co">#&gt;   milestone_created_at milestone_closed_at milestone_due_on assignee_login</span>
-<span class="co">#&gt; 1                 &lt;NA&gt;                &lt;NA&gt;             &lt;NA&gt;             NA</span>
-<span class="co">#&gt;   assignees_login labels_name</span>
+<span class="co">#&gt;                                                     url number milestone_title</span>
+<span class="co">#&gt; 1 https://github.com/emilyriederer/experigit/issues/163    163              NA</span>
+<span class="co">#&gt;   milestone_id milestone_number milestone_state milestone_created_at</span>
+<span class="co">#&gt; 1           NA               NA              NA                 &lt;NA&gt;</span>
+<span class="co">#&gt;   milestone_closed_at milestone_due_on assignee_login assignees_login</span>
+<span class="co">#&gt; 1                &lt;NA&gt;             &lt;NA&gt;             NA                </span>
+<span class="co">#&gt;   labels_name</span>
 <span class="co">#&gt; 1</span>
-<span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(comments)
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">comments</span>)
 <span class="co">#&gt;                                                                            url</span>
 <span class="co">#&gt; 1 https://github.com/emilyriederer/experigit/issues/163#issuecomment-450574376</span>
 <span class="co">#&gt; 2 https://github.com/emilyriederer/experigit/issues/163#issuecomment-450574387</span>
@@ -130,18 +145,21 @@ comments &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ge
 <span class="co">#&gt; 2 450574387 emilyriederer 2018-12-30 2018-12-30              OWNER</span>
 <span class="co">#&gt;                                             body number</span>
 <span class="co">#&gt; 1   I'm just commenting to add more information.    163</span>
-<span class="co">#&gt; 2 Actually, I disagree. My perspective is this.     163</span></code></pre></div>
-<p>Next, simply pass these into the <code><a href="../reference/report_discussion.html">report_discussion()</a></code> function to generate a formatted RMarkdown report.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/report_discussion.html">report_discussion</a></span>(comments, issues)
-<span class="co">#&gt; Warning in if (!is.na(issue)) {: the condition has length &gt; 1 and only the</span>
-<span class="co">#&gt; first element will be used</span></code></pre></div>
+<span class="co">#&gt; 2 Actually, I disagree. My perspective is this.     163</span></pre></body></html></div>
+<p>Next, simply pass these into the <code><a href="../reference/report_discussion.html">report_discussion()</a></code>
+function to generate a formatted RMarkdown report.</p>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../reference/report_discussion.html">report_discussion</a></span>(<span class="no">comments</span>, <span class="no">issues</span>)
+<span class="co">#&gt; Warning in if (!is.na(issue)) {: the condition has length &gt; 1 and only the first</span>
+<span class="co">#&gt; element will be used</span></pre></body></html></div>
 <div class="report_discussion">
-<strong>Issue: #163: A very important issue</strong><br>Created by emilyriederer on 2018-12-30<br><p></p>
+<strong>Issue: #163: A very important issue</strong><br>Created by
+emilyriederer on 2018-12-30<br><p></p>
 <em>Issue Description: </em><br><blockquote>
 This is the beginning of a conversation
 </blockquote>
 <p></p>
-<a href="https://github.com/emilyriederer/experigit/issues/163">Visit on GitHub</a>
+<a href="https://github.com/emilyriederer/experigit/issues/163">Visit
+on GitHub</a>
 <p></p>
 <hr>
 <strong> emilyriederer ( OWNER ) wrote at 2018-12-30 : </strong>
@@ -159,8 +177,10 @@ Actually, I disagree. My perspective is this.
 </blockquote>
 <p></p>
 </div>
-<p>Note that the <code>issues</code> dataframe is optional. You can pass only the comments in for documentation, but you do risk missing out on important context from the issue description and metadata.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/report_discussion.html">report_discussion</a></span>(comments)</code></pre></div>
+<p>Note that the <code>issues</code> dataframe is optional. You can pass
+only the comments in for documentation, but you do risk missing out on
+important context from the issue description and metadata.</p>
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="../reference/report_discussion.html">report_discussion</a></span>(<span class="no">comments</span>)</pre></body></html></div>
 <p></p>
 <hr>
 <strong> emilyriederer ( OWNER ) wrote at 2018-12-30 : </strong>
@@ -179,10 +199,12 @@ Actually, I disagree. My perspective is this.
 <p></p>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+
       </div>
 
 </div>
+
 
 
       <footer><div class="copyright">
@@ -190,8 +212,9 @@ Actually, I disagree. My perspective is this.
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
+
       </footer>
 </div>
 
