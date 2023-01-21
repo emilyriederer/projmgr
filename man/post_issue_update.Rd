@@ -2,7 +2,7 @@
 % Please edit documentation in R/post.R
 \name{post_issue_update}
 \alias{post_issue_update}
-\title{Update issue in github repository}
+\title{Post updates to existing issue in GitHub repository}
 \usage{
 post_issue_update(ref, issue_number, ...)
 }
@@ -17,7 +17,7 @@ post_issue_update(ref, issue_number, ...)
 Number (identifier) of updated issue
 }
 \description{
-Update issue in github repository
+Post updates to existing issue in GitHub repository
 }
 \examples{
 \dontrun{

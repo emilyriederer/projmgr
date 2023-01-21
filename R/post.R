@@ -1,4 +1,4 @@
-#' Piost issue to GitHub repository
+#' Post issue to GitHub repository
 #'
 #' @inherit post_engine params
 #' @param title Issue title (required)
@@ -68,7 +68,7 @@ post_issue <- function(ref, title, ..., distinct = TRUE){
 
 
 
-#' Update issue in github repository
+#' Post updates to existing issue in GitHub repository
 #'
 #' @inherit post_engine params
 #' @param issue_number Issue number
