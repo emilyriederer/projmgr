@@ -1,6 +1,6 @@
 Package: projmgr
 Title: Task Tracking and Project Management with GitHub
-Version: 0.1.0.9000
+Version: 0.1.0.9001
 Authors@R:
     person(given = "Emily",
            family = "Riederer",
@@ -39,5 +39,5 @@ Suggests:
 Encoding: UTF-8
 Language: en-US
 LazyData: true
-RoxygenNote: 7.2.2
+RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
