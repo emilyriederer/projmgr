@@ -69,6 +69,16 @@ help_post_issue <- function(){
 
 #' @export
 #' @name help
+help_post_issue_update <- function(){
+
+  c("title", help_post_issue(), "state")
+
+}
+
+
+
+#' @export
+#' @name help
 help_post_milestone <- function(){
 
   c("state", "description", "due_on")
