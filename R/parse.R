@@ -81,13 +81,12 @@ parse_issues <- function( res ) {
 #' Currently, the following event types are unsupported (with regard to processing all
 #' of their fields) due to their additional bulk and limited utility with respect to
 #' this packages functionality. Please file an issue if you disagree:
-#' \itemize{
-#'  \item{"(removed_from/moved_columns_in/added_to)_project"}{Since this package has limited value with GitHub projects}
-#'  \item{"converted_note_to_issue"}{Since issue lineage is not a key concern}
-#'  \item{"head_ref_(deleted/restored)"}{Since future support for pull requests would likely be handled separately}
-#'  \item{"merged"}{Same justification as head_ref}
-#'  \item{"review_(requested/dismissed/request_removed)}{Same justification as head_ref}
-#' }
+#'
+#'  - (removed_from/moved_columns_in/added_to)_project: Since this package has limited value with GitHub projects
+#'  - converted_note_to_issue: Since issue lineage is not a key concern
+#'  - head_ref_(deleted/restored): Since future support for pull requests would likely be handled separately
+#'  - merged: Same justification as head_ref
+#'  - review_(requested/dismissed/request_removed): Same justification as head_ref
 #'
 #' @inheritParams parse_issues
 #' @return Dataframe with one record / issue-event

@@ -7,6 +7,7 @@
 #'
 #' @docType package
 #' @name projmgr
+#' @keywords internal
 NULL
 
 globalVars <- c(
