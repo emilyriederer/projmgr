@@ -11,3 +11,4 @@ A quick and easy wrapper for working with GitHub and other project management to
 See the README on
 \href{https://github.com/emilyriederer/projmgr}{GitHub}
 }
+\keyword{internal}
