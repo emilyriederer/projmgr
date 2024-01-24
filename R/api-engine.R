@@ -87,7 +87,6 @@ patch_engine <- function(api_endpoint, ref, ...){
 #' Validate that all user-defined inputs (GET query, POST body, etc.) are valid
 #'
 #' @param input List of user-provided input parameters
-#' @param required_vars Character vector of required variables
 #' @param allowed_vars Character vector of allowed but not required variables
 #'
 #' @return No return. Throws errors if user-defined inputs are invalid.

@@ -10,8 +10,6 @@ validate_inputs(input, allowed_vars)
 \item{input}{List of user-provided input parameters}
 
 \item{allowed_vars}{Character vector of allowed but not required variables}
-
-\item{required_vars}{Character vector of required variables}
 }
 \value{
 No return. Throws errors if user-defined inputs are invalid.

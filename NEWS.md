@@ -1,5 +1,9 @@
 # projmgr (development version)
 
+# projmgr 0.1.1
+
+* Fixed documentation error in `parse_issue_events()` causing a new CRAN note
+
 # projmgr 0.1.0.9000
 
 * Fixed error in `has_n_commits()` taskboard helper and unit test to attribute events to the correct issues
