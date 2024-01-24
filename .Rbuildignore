@@ -16,3 +16,4 @@
 ^TODO\.md$
 ^\.travis\.yml$
 ^CRAN-RELEASE$
+^CRAN-SUBMISSION$
