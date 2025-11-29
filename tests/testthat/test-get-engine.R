@@ -11,7 +11,9 @@ repo_ref <- list(repo_owner = "abc",
 
 test_that(
   "Single item results are wrapped as list of lists",
-  with_mock( "gh::gh" = function(...) list(a = 1L, b = 2L, c = 3L), {
+  with_mocked_bindings( gh = function(...) list(a = 1L, b = 2L, c = 3L), 
+    .package = "gh",
+  {
     expect_type(gh::gh(), "list")
     expect_type(gh::gh()[[1]], "integer")
     expect_type(projmgr:::get_engine("issues/", repo_ref), "list")
@@ -21,7 +23,9 @@ test_that(
 
 test_that(
   "Empty results are wrapped as empty character",
-  with_mock( "gh::gh" = function(...) structure("", class = c("gh_response", "list")), {
+  with_mocked_bindings( gh = function(...) structure("", class = c("gh_response", "list")), 
+    .package = "gh",
+  {
     expect_type(gh::gh(), "character")
     expect_equivalent(gh::gh(), "")
     expect_type(projmgr:::get_engine("issues/", repo_ref), "character")
@@ -32,7 +36,9 @@ test_that(
 
 test_that(
   "Repo metadata is added for non-empty results",
-  with_mock( "gh::gh" = function(...) list(a = 1L, b = 2L, c = 3L), {
+  with_mocked_bindings( gh = function(...) list(a = 1L, b = 2L, c = 3L), 
+    .package = "gh",
+  {
     expect_equal(projmgr:::get_engine("issues/", repo_ref)[[1]]$repo_owner, "abc")
     expect_equal(projmgr:::get_engine("issues/", repo_ref)[[1]]$repo_name, "xyz")
   } )
@@ -40,7 +46,9 @@ test_that(
 
 test_that(
   "Repo metadata is not added for non-empty results",
-  with_mock( "gh::gh" = function(...) structure("", class = c("gh_response", "list")), {
+  with_mocked_bindings( gh = function(...) structure("", class = c("gh_response", "list")), 
+    .package = "gh",
+  {
     expect_false("repo_owner" %in% names(projmgr:::get_engine("issues/", repo_ref)[[1]]))
     expect_false("repo_name" %in% names(projmgr:::get_engine("issues/", repo_ref)[[1]]))
   } )
