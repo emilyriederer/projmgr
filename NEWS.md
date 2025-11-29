@@ -1,4 +1,6 @@
-# projmgr (development version)
+# projmgr 0.1.2
+
+* Fixed test mocking for latest `testthat` release, per issue [#53](https://github.com/emilyriederer/projmgr/issues/53)
 
 # projmgr 0.1.1
 
